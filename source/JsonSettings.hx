@@ -50,7 +50,7 @@ class JsonSettings
                 antiMash = antiMashTEMPLATE;
                 divider = dividerTEMPLATE;
 
-                trace(antiMash + divider + letterGrader);
+                //trace(antiMash + divider + letterGrader);
 
                 if (dividerTEMPLATE != null && dividerTEMPLATE.length > 6)
                 {

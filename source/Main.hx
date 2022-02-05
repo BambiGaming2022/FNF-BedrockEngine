@@ -11,7 +11,6 @@ import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.display.StageScaleMode;
 import haxe.Timer;
-import openfl.display.FPS;
 import openfl.events.Event;
 import openfl.system.System;
 import openfl.text.TextField;
@@ -28,12 +27,12 @@ class FPS_Mem extends TextField
 		x = inX;
 		y = inY;
 		selectable = false;
-		defaultTextFormat = new TextFormat("_sans", 12, inCol);
+		defaultTextFormat = new TextFormat("VCR OSD Mono", 16, inCol);
 		text = "FPS: ";
 		times = [];
 		addEventListener(Event.ENTER_FRAME, onEnter);
-		width = 150;
-		height = 70;
+		width = 1280;
+		height = 720;
 	}
 
 	private function onEnter(_)
@@ -47,7 +46,13 @@ class FPS_Mem extends TextField
 			memPeak = mem;
 		if (visible)
 		{
-			text = "FPS: " + times.length + "\nMEM: " + mem + " MB\nMEM peak: " + memPeak + " MB";
+			text = "FPS: " + times.length;
+
+			if(ClientPrefs.memCounter)
+				text = "FPS: " + times.length + "\nMEM: " + mem + " MB\nMEM peak: " + memPeak + " MB";
+
+			if(!ClientPrefs.showFPS)
+				text = ""; //nothing lol
 		}
 	}
 }
@@ -123,27 +128,17 @@ class Main extends Sprite
 		addChild(new FlxGame(gameWidth, gameHeight, initialState, zoom, framerate, framerate, skipSplash, startFullscreen));
 
 		#if !mobile
-		fpsVar = new FPS(10, 3, 0xFFFFFF);
+		var fps_mem:FPS_Mem = new FPS_Mem(10, 3, 0xFFFFFF);
 		Lib.current.stage.align = "tl";
 		Lib.current.stage.scaleMode = StageScaleMode.NO_SCALE;
 		#end
 
 		#if !debug
-		addChild(fpsVar);
-		if (fpsVar != null)
-		{
-			fpsVar.visible = ClientPrefs.showFPS;
-		}
-		#end
-
-		#if debug
-		var fps_mem:FPS_Mem = new FPS_Mem(10, 10, 0xffffff);
 		addChild(fps_mem);
-		#end
-
-		#if html5
-		FlxG.autoPause = false;
-		FlxG.mouse.visible = false;
+		if (fps_mem != null)
+		{
+			fps_mem.visible = ClientPrefs.showFPS;
+		}
 		#end
 	}
 }
