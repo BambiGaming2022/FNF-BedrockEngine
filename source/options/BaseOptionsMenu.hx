@@ -122,37 +122,11 @@ class BaseOptionsMenu extends MusicBeatSubstate
 			{
 				reloadBoyfriend();
 			}
-			if(optionsArray[i].showNotes && previewNotes == null)
-			{
-				var colorSwap:ColorSwap = new ColorSwap();
-				colorSwap.hue = ClientPrefs.arrowHSV[2][0] / 360;
-				colorSwap.saturation = ClientPrefs.arrowHSV[2][1] / 100;
-				colorSwap.brightness = ClientPrefs.arrowHSV[2][2] / 100;
-
-				previewNotes = new AttachedSprite();
-				previewNotes.loadGraphic(Paths.image('noteGrid'), true, 164, 164);
-				previewNotes.shader = colorSwap.shader;
-				previewNotes.animation.add('frames', [0, 1, 2, 3], 0);
-				previewNotes.animation.play('frames');
-				previewNotes.sprTracker = textChild;
-				previewNoteOption = optionsArray[i];
-				previewNotes.setGraphicSize(Std.int(previewNotes.width * 0.7));
-				previewNotes.updateHitbox();
-				previewNotes.yAdd = 20;
-				add(previewNotes);
-				updateNotes();
-			}
 			updateTextFrom(optionsArray[i]);
 		}
 
 		changeSelection();
 		reloadCheckboxes();
-	}
-
-	public function updateNotes()
-	{
-		previewNotes.animation.curAnim.curFrame = previewNoteOption.curOption;
-		previewNotes.xAdd = previewNotes.sprTracker.width + 20;
 	}
 
 	public function addOption(option:Option) {
