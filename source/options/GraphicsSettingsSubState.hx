@@ -37,23 +37,18 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 		rpcTitle = 'Tweaking the Graphics'; //for Discord Rich Presence
 
 		var option:Option = new Option('Anti-Aliasing', 'If unchecked, disables anti-aliasing, increases performance\nat the cost of sharper visuals.', 'globalAntialiasing', 'bool', true);
-		option.showBoyfriend = false; // this crashes for whatever reason
+		//option.showBoyfriend = true;
 		option.onChange = onChangeAntiAliasing; //Changing onChange is only needed if you want to make a special interaction after it changes the value
 		addOption(option);
+		//need to rewrite showBoyfriend to avoid crash maybe
 
 		var option:Option = new Option('Auto Pause',
-		"Whether or not to pause the game automatically",
+		"Whether or not to pause the game automatically when the window is unfocused",
 		'autoPause',
 		'bool',
 		true);
-		//addOption(option);
-
-		var option:Option = new Option('Disable Characters',
-		'If checked, disable stage characters in order to improve performance, may not improve as much as other options.',
-		'disableChars',
-		'bool',
-		true);
-		//addOption(option);
+		option.onChange = onChangeAutoPause;
+		addOption(option);
 
 		#if !mobile
 		var option:Option = new Option('FPS Counter',
@@ -80,7 +75,7 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 		#end
 
 		var option:Option = new Option('Hide Girlfriend',
-		"If checked, this will hide Girlfriend from Stages, improving performance, this does not apply if she's the Opponent",
+		"Whether to Hide or Show Girlfriend on Stages, this does not apply if GF is the opponent",
 		'hideGf',
 		'bool',
 		false);
@@ -88,37 +83,32 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 
 		//I'd suggest using "Low Quality" as an example for making your own option since it is the simplest here
 		var option:Option = new Option('Low Quality', //Name
-			'If checked, disables some background details,\ndecreases loading times and improves performance.', //Description
-			'lowQuality', //Save data variable name
-			'bool', //Variable type
-			false); //Default value
+		'If checked, disables some background details,\ndecreases loading times and improves performance.', //Description
+		'lowQuality', //Save data variable name
+		'bool', //Variable type
+		false); //Default value
 		addOption(option);
 
 		var option:Option = new Option('Max Optimization',
-		'If checked, disables everything except the HUD.',
+		'If checked, disables backgrounds, characters, and anything related to those in order to increase performance, this does not apply for Mods, or any HUD elements (such as Icons and Note Splashes).',
 		'maxOptimization',
 		'bool',
 		false);
 		addOption(option);
 
 		var option:Option = new Option('Memory Counter',
-		"Whether to display approximately how much memory is being used, and the Peak of that Memory.",
+		"Whether to display approximately how much memory is being used, and the peak of that Memory.",
 		'memCounter',
 		'bool',
 		false);
 		addOption(option);
 
-		/*
-		var option:Option = new Option('Persistent Cached Data',
-			'If checked, images loaded will stay in memory\nuntil the game is closed, this increases memory usage,\nbut basically makes reloading times instant.',
-			'imagesPersist',
-			'bool',
-			false);
-		option.onChange = onChangePersistentData; //Persistent Cached Data changes FlxGraphic.defaultPersist
-		addOption(option);
-		*/
-
 		super();
+	}
+
+	function onChangeAutoPause()
+	{
+		FlxG.autoPause = ClientPrefs.autoPause;
 	}
 
 	#if !mobile

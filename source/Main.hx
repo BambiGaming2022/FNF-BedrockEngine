@@ -46,12 +46,17 @@ class FPS_Mem extends TextField
 			memPeak = mem;
 		if (visible)
 		{
-			text = "FPS: " + times.length;
+			//TODO: make this thing less complicated
+
+			text = "FPS: " + times.length; //FPS Text
 
 			if(ClientPrefs.memCounter)
-				text = "FPS: " + times.length + "\nMEM: " + mem + " MB\nMEM peak: " + memPeak + " MB";
+				text = "FPS: " + times.length + "\nMEM: " + mem + " MB\nMEM peak: " + memPeak + " MB"; // FPS with Memory Counter text
 
-			if(!ClientPrefs.showFPS)
+			if(ClientPrefs.memCounter && !ClientPrefs.showFPS)
+				text = "MEM: " + mem + " MB\nMEM peak: " + memPeak + " MB"; // Memory Counter without FPS text
+
+			if(!ClientPrefs.showFPS && !ClientPrefs.memCounter)
 				text = ""; //nothing lol
 		}
 	}

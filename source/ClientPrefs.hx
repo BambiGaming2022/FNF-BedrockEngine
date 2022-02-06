@@ -324,6 +324,7 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.autoPause != null) {
 			autoPause = FlxG.save.data.autoPause;
+			FlxG.autoPause = autoPause;
 		}
 		if(FlxG.save.data.memCounter != null) {
 			memCounter = FlxG.save.data.memCounter;

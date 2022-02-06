@@ -60,7 +60,8 @@ class Conductor
 
 	public static function judgeNote(note:Note, diff:Float=0) //STOLEN FROM KADE ENGINE (bbpanzu) - I had to rewrite it later anyway after i added the custom hit windows lmao (Shadow Mario)
 	{
-		var timingWindows:Array<Int> = [ClientPrefs.marvelousWindow, ClientPrefs.sickWindow, ClientPrefs.goodWindow, ClientPrefs.badWindow];
+		JsonSettings.offdev(JsonSettings.offdir);
+		var timingWindows:Array<Int> = [JsonSettings.marvWindow, JsonSettings.sickWindow, JsonSettings.goodWindow, JsonSettings.badWindow];
 		if (ClientPrefs.keAccuracy)
 		{
 			var daDiff:Float = Math.abs(diff);

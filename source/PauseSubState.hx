@@ -86,7 +86,7 @@ class PauseSubState extends MusicBeatSubstate
 		opponentText.y = opponentText.y - 5;
 		opponentText.alpha = 0;
 		opponentText.updateHitbox();
-		opponentText.visible = PlayState.instance.opponentChart;
+		opponentText.visible = PlayState.opponentChart;
 		add(opponentText);
 
 		practiceText = new FlxText(20, 15 + 101, 0, "PRACTICE MODE", 32);

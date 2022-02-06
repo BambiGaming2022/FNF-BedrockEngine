@@ -192,7 +192,7 @@ class PlayState extends MusicBeatState
 	public var healthLoss:Float = 1;
 	public var instakillOnMiss:Bool = false;
 	public var cpuControlled:Bool = false;
-	public var opponentChart:Bool = false;
+	public static var opponentChart:Bool = false;
 	public var practiceMode:Bool = false;
 
 	public var botplaySine:Float = 0;
@@ -1477,8 +1477,8 @@ class PlayState extends MusicBeatState
 
 		if(ClientPrefs.maniaMode) 
 		{	
-			healthBar.createFilledBar(FlxColor.WHITE,
-			FlxColor.BLACK);
+			healthBar.createFilledBar(FlxColor.BLACK,
+			FlxColor.WHITE);
 			healthBar.updateBar();
 		}
 	}
@@ -2533,6 +2533,11 @@ class PlayState extends MusicBeatState
 		}
 		#end
 
+		if (!FlxG.autoPause && !paused && canPause && !cpuControlled)
+		{
+			pauseState();
+		}
+
 		super.onFocusLost();
 	}
 
@@ -2749,33 +2754,7 @@ class PlayState extends MusicBeatState
 
 		if (controls.PAUSE && startedCountdown && canPause)
 		{
-			var ret:Dynamic = callOnLuas('onPause', []);
-			if (ret != FunkinLua.Function_Stop)
-			{
-				persistentUpdate = false;
-				persistentDraw = true;
-				paused = true;
-
-				// 1 / 1000 chance for Gitaroo Man easter egg
-				/*if (FlxG.random.bool(0.1))
-				{
-					// gitaroo man easter egg
-					cancelMusicFadeTween();
-					MusicBeatState.switchState(new GitarooPause());
-				}
-				else { */
-				if (FlxG.sound.music != null)
-				{
-					FlxG.sound.music.pause();
-					vocals.pause();
-				}
-				openSubState(new PauseSubState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
-				// }
-
-				#if desktop
-				DiscordClient.changePresence(detailsPausedText, SONG.song + " (" + storyDifficultyText + ")" + opponentdiscordtxt, iconP2.getCharacter());
-				#end
-			}
+			pauseState();
 		}
 
 		if (FlxG.keys.anyJustPressed(debugKeysChart) && !endingSong && !inCutscene)
@@ -3145,6 +3124,36 @@ class PlayState extends MusicBeatState
 		}
 	}
 
+	function pauseState()
+		{
+			var ret:Dynamic = callOnLuas('onPause', []);
+			if(ret != FunkinLua.Function_Stop) {
+				persistentUpdate = false;
+				persistentDraw = true;
+				paused = true;
+	
+				// 1 / 1000 chance for Gitaroo Man easter egg
+				/*if (FlxG.random.bool(0.1))
+				{
+					// gitaroo man easter egg
+					cancelMusicFadeTween();
+					CustomFadeTransition.nextCamera = camOther;
+					MusicBeatState.switchState(new GitarooPause());
+				}
+				else {*/
+				if(FlxG.sound.music != null) {
+					FlxG.sound.music.pause();
+					vocals.pause();
+				}
+				openSubState(new PauseSubState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
+				//}
+	
+				#if desktop
+				DiscordClient.changePresence(detailsPausedText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
+				#end
+			}
+		}
+
 	function openChartEditor()
 	{
 		persistentUpdate = false;
@@ -3185,11 +3194,10 @@ class PlayState extends MusicBeatState
 				{
 					timer.active = true;
 				}
-				if (!ClientPrefs.instantRespawn)
-					openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x - boyfriend.positionArray[0],
-						boyfriend.getScreenPosition().y - boyfriend.positionArray[1], camFollowPos.x, camFollowPos.y));
-				else
+				if (ClientPrefs.instantRespawn || opponentChart)
 					MusicBeatState.resetState();
+				else openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x - boyfriend.positionArray[0],
+						boyfriend.getScreenPosition().y - boyfriend.positionArray[1], camFollowPos.x, camFollowPos.y));
 
 				// MusicBeatState.switchState(new GameOverState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 
@@ -4371,48 +4379,45 @@ class PlayState extends MusicBeatState
 		}
 
 		// FlxG.watch.addQuick('asdfa', upP);
-		if (!boyfriend.stunned && generatedMusic)
+		var char:Character = boyfriend;
+		if (opponentChart) char = dad;
+		if (!char.stunned && generatedMusic)
 		{
 			// rewritten inputs???
 			notes.forEachAlive(function(daNote:Note)
 			{
 				// hold note functions
-				if (daNote.isSustainNote && controlHoldArray[daNote.noteData] && daNote.canBeHit && daNote.mustPress && !daNote.tooLate && !daNote.wasGoodHit)
-				{
+				if (daNote.isSustainNote && controlHoldArray[daNote.noteData] && daNote.canBeHit 
+				&& daNote.mustPress && !daNote.tooLate && !daNote.wasGoodHit) {
 					goodNoteHit(daNote);
 				}
 			});
 
-			if (controlHoldArray.contains(true) && !endingSong)
-			{
+			if (controlHoldArray.contains(true) && !endingSong && !opponentChart) {
 				#if ACHIEVEMENTS_ALLOWED
 				var achieve:String = checkForAchievement(['oversinging']);
-				if (achieve != null)
-				{
+				if (achieve != null) {
 					startAchievement(achieve);
 				}
 				#end
-			}
-			else if (boyfriend.holdTimer > Conductor.stepCrochet * 0.001 * boyfriend.singDuration
-				&& boyfriend.animation.curAnim.name.startsWith('sing')
-				&& !boyfriend.animation.curAnim.name.endsWith('miss'))
+			} else if (boyfriend.holdTimer > Conductor.stepCrochet * 0.001 * boyfriend.singDuration && boyfriend.animation.curAnim.name.startsWith('sing')
+			&& !boyfriend.animation.curAnim.name.endsWith('miss'))
 				boyfriend.dance();
+
+			if (controlHoldArray.contains(true) && !endingSong && opponentChart) {/*bruh*/} else if (dad.holdTimer > Conductor.stepCrochet * 0.001 * dad.singDuration && dad.animation.curAnim.name.startsWith('sing')
+			&& !dad.animation.curAnim.name.endsWith('miss'))
+				dad.dance();
 		}
 
 		// TO DO: Find a better way to handle controller inputs, this should work for now
-		if (ClientPrefs.controllerMode)
+		if(ClientPrefs.controllerMode)
 		{
-			var controlArray:Array<Bool> = [
-				controls.NOTE_LEFT_R,
-				controls.NOTE_DOWN_R,
-				controls.NOTE_UP_R,
-				controls.NOTE_RIGHT_R
-			];
-			if (controlArray.contains(true))
+			var controlArray:Array<Bool> = [controls.NOTE_LEFT_R, controls.NOTE_DOWN_R, controls.NOTE_UP_R, controls.NOTE_RIGHT_R];
+			if(controlArray.contains(true))
 			{
 				for (i in 0...controlArray.length)
 				{
-					if (controlArray[i])
+					if(controlArray[i])
 						onKeyRelease(new KeyboardEvent(KeyboardEvent.KEY_UP, true, true, -1, keysArray[i][0]));
 				}
 			}
@@ -5030,7 +5035,8 @@ class PlayState extends MusicBeatState
 	override function stepHit()
 	{
 		super.stepHit();
-		if (FlxG.sound.music.time > Conductor.songPosition + 20 || FlxG.sound.music.time < Conductor.songPosition - 20)
+		if (Math.abs(FlxG.sound.music.time - (Conductor.songPosition - Conductor.offset)) > 20
+			|| (SONG.needsVoices && Math.abs(vocals.time - (Conductor.songPosition - Conductor.offset)) > 20))
 		{
 			resyncVocals();
 		}
