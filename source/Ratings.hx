@@ -3,14 +3,14 @@ package;
 class Ratings
 {
 	public static var ratingStuff:Array<Dynamic> = [
-		["D", 0.401], // %40
-		["C", 0.7], // &69
-		["B", 0.8], // &79
-		["A", 0.9], // %89
-		["AA", 0.951], // %95
-		["AAA", 0.976], // %97.5
-		["S", 1], // %99
-		["S+", 1] // %100
+		["D", 0.401], // 40%
+		["C", 0.7], // 69%
+		["B", 0.8], // 79%
+		["A", 0.9], // 89%
+		["A+", 0.951], // 95%
+		["S", 0.976], // 97.5%
+		["S+", 1], // 99%
+		["SS", 1] // 100%
 	];
 
 	public static var ratingComplex:Array<Dynamic> = [
@@ -39,16 +39,16 @@ class Ratings
 	];
 
 	public static var ratingSimple:Array<Dynamic> = [
-		["What the fuck bro", 0.001], // %0
-		["Fuck...", 0.2], // %19
-		["Shit", 0.4], // %39
-		["Bad", 0.6], // %59
-		["Okay", 0.69], // %68
-		["Nice", 0.691], // %69
-		["Cool", 0.8], // %79
-		["Great!", 0.9], // %89
-		["Sick!", 1], // %99
-		["Marvelous!!", 1] // %100
+		["You Suck!", 0.001], // 0%
+		["Shit", 0.2], // 19%
+		["Bad", 0.4], // 39%
+		["Eh", 0.6], // 59%
+		["Okay", 0.69], // 68%
+		["Nice", 0.691], // 69%
+		["Cool", 0.8], // 79%
+		["Great!", 0.9], // 89%
+		["Sick!", 1], // 99%
+		["Perfect!!", 1] // 100%
 	];
 
 

@@ -172,30 +172,28 @@ this disables everything related to backgrounds and characters, leaving only the
 
 ![image](https://user-images.githubusercontent.com/45212377/150618792-8be1b189-5603-4743-b23a-0b07df877576.png)
 
-## Letter Grading System (plus original graders)!
+## Letter Grading System!
 
 ![image](https://user-images.githubusercontent.com/45212377/151047810-9bb0c459-8714-41bd-b861-3d90e001ef9e.png)
 
-* S+  100% Accuracy.
-* S   99.9% Accuracy.
-* AAAA 99.1% Accuracy
-* AAA 99% Accuracy.
-* AA 	98.6% Accuracy.
-* B   80% Accuracy.
-* C   70% Accuracy.
-* D   40% Accuracy or below.
+* SS   100% Accuracy.
+* S+   99% Accuracy.
+* A+   95% Accuracy
+* A    89% Accuracy.
+* B    79% Accuracy.
+* C    69% Accuracy.
+* D    40% Accuracy or below.
 
-If you do not want engine to use letters, toggle them in Visuals and UI menu.
+If you do not want the engine to use letter grades, toggle then using the gameplaySettings.json file on the settings folder.
 
-
-Extra Grades
-* MFC - Full Combo with Only Marvelouses
+> ### FC Ratings
+* MFC - Full Combo with Only Marvelouses *(can be disabled)*
 * SFC - Full Combo with at least 1 Sick/Only Sicks
 * GFC - Full Combo with at least 1 Good/Only Goods
-* FC - Full Combo with at least 1 Bad/Only Bads (only works on Simple Accuracy)
-* SDB - Single Digit Bad (at least 1 Bad/Only Bads, only works on Complex Accuracy)
-* SDS - Single Digit Shit (at least 1 Shit/Only Shits)
-* SDCB - Single Digit Combo Break (you missed at least once)
+* FC - Full Combo with at least 1 Bad/Only Bads *(only works on Simple Accuracy)*
+* SDB - Single Digit Bad *(at least 1 Bad/Only Bads, only works on Complex Accuracy)*
+* SDS - Single Digit Shit *(at least 1 Shit/Only Shits)*
+* SDCB - Single Digit Combo Break *(you missed at least once)*
 * Clear - You missed at least 10 times
 
 ## Opponent Mode
@@ -209,21 +207,20 @@ can be enabled on the Gameplay Changers menu
 https://user-images.githubusercontent.com/45212377/151046841-dbbdb3e9-9491-4a51-81b6-f97976dabce7.mp4
 
 ## Judgement Skins
-You can now Change your Judgements' Appearance with the new UI Skins
 
-![image](https://user-images.githubusercontent.com/45212377/150618407-b18087c6-96d1-4968-9b4f-c4e3e20ab859.png)
 ![image](https://user-images.githubusercontent.com/45212377/150618450-f25e5a73-2b2d-4304-ace9-5ae346a65c37.png)
 
-read the readme.txt on the settings folder formore information on how to add custom judgement skins
+read the readme.txt on the settings folder for more information on how to add custom judgement skins, and for default judgement skin names
 
-## Note Skins:
+## Note Skins & Note Splash Skins:
 
-You can change your note skins, available skins are "Default", "Circle" and "Bar".
-Change them in Visual and UI menu!
+You can change your note skin via the json file
 
 ![image](https://imgyukle.com/f/2022/01/30/olXLUI.png)
 
-read the readme.txt on the settings folder for more information on how to add custom noteskins
+the same is also true for Note Splashes
+
+read the readme.txt on the settings folder for more information on how to add custom noteskins, and default note skin names
 
 ## Winning Icons
 
@@ -231,12 +228,10 @@ read the readme.txt on the settings folder for more information on how to add cu
 
 Template: ![icon-template](https://user-images.githubusercontent.com/45212377/151059381-3d366efc-65f8-42de-8cb1-dc90f65b1e9f.png)
 
-read the readme.txt file on the settings folder for more information on how to enable old icons
+read the readme.txt file on the settings folder for information on how to disable winning icons
 
 ## and more!
 I will keep updating this fork as much as possible for it to be in sync with the main repository, and adding more features to it in the future!
 
 # Future Plans
-* Softcoded Judgement Skins
-* Speed Modifiers on Freeplay Menu
-* Fix all current issues with Opponent Mode
+https://github.com/Gui-iago/FNF-BedrockEngine/projects/1
