@@ -81,6 +81,8 @@ class NotesSubState extends MusicBeatSubstate
 		blackBG = new FlxSprite(posX - 25).makeGraphic(870, 200, FlxColor.BLACK);
 		blackBG.alpha = 0.4;
 		add(blackBG);
+		
+		Main.curStateS = 'NotesSubState';
 
 		grpNotes = new FlxTypedGroup<FlxSprite>();
 		add(grpNotes);

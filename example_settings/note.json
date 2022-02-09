@@ -1,0 +1,9 @@
+{
+    "marvOffset": 25,
+    "sickOffset": 45,
+    "goodOffset": 90,
+    "badOffset": 135,
+
+    "noteSkin":"NOTE_assets",
+    "noteSplashSkin":"noteSplashes"
+}

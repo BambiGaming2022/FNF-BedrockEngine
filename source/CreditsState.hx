@@ -44,6 +44,7 @@ class CreditsState extends MusicBeatState
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("Reading the Credits", null);
 		#end
+		Main.curStateS = 'CreditsState';
 
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		add(bg);
@@ -106,16 +107,9 @@ class CreditsState extends MusicBeatState
 			[
 				'Stilic',
 				'stilic',
-				'Menu Animations, Freeplay Bump, Max Optimization, Complex Accuracy Lua to Source.',
+				'Engine Coder.',
 				'https://github.com/ShadowMario/FNF-PsychEngine/pull/1809',
 				'FF873C'
-			],
-			[
-				'ShadowBowser',
-				'shadowbowser',
-				'Artist, Old Credits Screen Icons',
-				'https://www.reddit.com/u/JulioHaHaHa',
-				'444444'
 			],
 			[''],
 			['Bedrock Contributors'],
@@ -146,6 +140,13 @@ class CreditsState extends MusicBeatState
 				'Rich Presence Designer',
 				'https://twitter.com/PrynnShilvaru',
 				'4253A2'
+			],
+			[
+				'ShadowBowser',
+				'shadowbowser',
+				'Old Credits Screen Icons',
+				'https://www.reddit.com/u/JulioHaHaHa',
+				'444444'
 			],
 			[
 				'Dex Dousky',
@@ -225,6 +226,13 @@ class CreditsState extends MusicBeatState
 				'Show/Hide Weeks temporally + Getting/Setting on Source Code',
 				'https://github.com/ShadowMario/FNF-PsychEngine/pull/3192',
 				'91CBFF'
+			],
+			[
+				'tposejank',
+				'tposejank',
+				'Discord Client ID editable through lua',
+				'https://github.com/ShadowMario/FNF-PsychEngine/pull/3845',
+				'013220'
 			],
 			[''],
 			['Engine Shoutouts'],

@@ -13,6 +13,7 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.FlxCamera;
+import JsonSettings;
 
 class PauseSubState extends MusicBeatSubstate
 {
@@ -24,6 +25,12 @@ class PauseSubState extends MusicBeatSubstate
 	var pauseOptions = [];
 	var curSelected:Int = 0;
 
+	var pausebg1:FlxSprite;
+	var pausebg2:FlxSprite;
+	var disk:FlxSprite;
+	var diskbg:FlxSprite;
+	var diskfg:FlxSprite;
+	var icon:HealthIcon;
 	var pauseMusic:FlxSound;
 	var practiceText:FlxText;
 	var opponentText:FlxText;
@@ -59,6 +66,81 @@ class PauseSubState extends MusicBeatSubstate
 		bg.scrollFactor.set();
 		add(bg);
 
+		if (!ClientPrefs.lowQuality)
+		{
+			var dadcolor = FlxColor.fromRGB(PlayState.instance.dad.healthColorArray[0], PlayState.instance.dad.healthColorArray[1],
+				PlayState.instance.dad.healthColorArray[2]);
+
+			var bfcolor = FlxColor.fromRGB(PlayState.instance.boyfriend.healthColorArray[0], PlayState.instance.boyfriend.healthColorArray[1],
+				PlayState.instance.boyfriend.healthColorArray[2]);
+
+			pausebg1 = new FlxSprite().loadGraphic(Paths.image('PauseMenuSprites/hoverleft'));
+			pausebg1.updateHitbox();
+			pausebg1.screenCenter();
+			pausebg1.antialiasing = ClientPrefs.globalAntialiasing;
+			if (!PlayState.instance.opponentChart)
+				pausebg1.color = dadcolor;
+			else
+				pausebg1.color = bfcolor;
+			add(pausebg1);
+			pausebg1.x = -400;
+			pausebg1.alpha = 0;
+			FlxTween.tween(pausebg1, {
+				x: 0,
+				alpha: 1
+			}, 1.3, {ease: FlxEase.quadOut});
+
+			pausebg2 = new FlxSprite().loadGraphic(Paths.image('PauseMenuSprites/hoverright-720p')); // kill me
+			pausebg2.updateHitbox();
+			pausebg2.antialiasing = ClientPrefs.globalAntialiasing;
+			if (!PlayState.instance.opponentChart)
+				pausebg2.color = dadcolor;
+			else
+				pausebg2.color = bfcolor;
+			add(pausebg2);
+			pausebg2.x += 200;
+			pausebg2.y += 200;
+			pausebg2.alpha = 0;
+			FlxTween.tween(pausebg2, {
+				x: 0,
+				y: 0,
+				alpha: 1
+			}, 1.3, {ease: FlxEase.quadOut});
+
+			diskbg = new FlxSprite(FlxG.width - 350, FlxG.height - 390).loadGraphic(Paths.image('PauseMenuSprites/disk-bg'));
+			diskbg.antialiasing = ClientPrefs.globalAntialiasing;
+			add(diskbg);
+
+			disk = new FlxSprite(FlxG.width - 348, FlxG.height - 338).loadGraphic(Paths.image('PauseMenuSprites/disk'));
+			disk.antialiasing = ClientPrefs.globalAntialiasing;
+			add(disk);
+
+			if (!PlayState.instance.opponentChart)
+				icon = new HealthIcon(PlayState.instance.dad.healthIcon);
+			else
+				icon = new HealthIcon(PlayState.instance.boyfriend.healthIcon);
+			iconanimation();
+			icon.setGraphicSize(Std.int(icon.width * 1.7));
+			icon.antialiasing = ClientPrefs.globalAntialiasing;
+			icon.x = FlxG.width - 230;
+			icon.y = FlxG.height - 180;
+			icon.flipX = true;
+			icon.scrollFactor.set();
+			add(icon);
+			icon.x += 140;
+			icon.y += 120;
+			icon.alpha = 0;
+			FlxTween.tween(icon, {
+				x: icon.x - 150,
+				y: icon.y - 170,
+				alpha: 1
+			}, 0.8, {ease: FlxEase.quadOut});
+
+			diskfg = new FlxSprite(FlxG.width - 200, FlxG.height - 380).loadGraphic(Paths.image('PauseMenuSprites/idk'));
+			diskfg.antialiasing = ClientPrefs.globalAntialiasing;
+			add(diskfg);
+		}
+
 		var levelInfo:FlxText = new FlxText(20, 15, 0, "", 32);
 		levelInfo.text += PlayState.SONG.song;
 		levelInfo.scrollFactor.set();
@@ -86,7 +168,7 @@ class PauseSubState extends MusicBeatSubstate
 		opponentText.y = opponentText.y - 5;
 		opponentText.alpha = 0;
 		opponentText.updateHitbox();
-		opponentText.visible = PlayState.opponentChart;
+		opponentText.visible = PlayState.instance.opponentChart;
 		add(opponentText);
 
 		practiceText = new FlxText(20, 15 + 101, 0, "PRACTICE MODE", 32);
@@ -137,10 +219,25 @@ class PauseSubState extends MusicBeatSubstate
 		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
 	}
 
+	function iconanimation()
+	{
+		JsonSettings.dev(JsonSettings.dir);
+
+		if (PlayState.instance.healthBar.percent > 85)
+			icon.animation.curAnim.curFrame = 1;
+		else if (PlayState.instance.healthBar.percent < 20 && JsonSettings.iconSupport)
+			icon.animation.curAnim.curFrame = 2;
+		else
+			icon.animation.curAnim.curFrame = 0;
+	}
+
 	override function update(elapsed:Float)
 	{
 		if (pauseMusic.volume < 0.5)
 			pauseMusic.volume += 0.01 * elapsed;
+
+		if (!ClientPrefs.lowQuality)
+			disk.angle -= 0.45 / (ClientPrefs.framerate / 60);
 
 		super.update(elapsed);
 
@@ -204,6 +301,10 @@ class PauseSubState extends MusicBeatSubstate
 						MusicBeatState.switchState(new FreeplayState());
 					}
 					FlxG.sound.playMusic(Paths.music('freakyMenu'));
+					if (ClientPrefs.useClassicSongs)
+					{
+						FlxG.sound.playMusic(Paths.music('freakyMenuC'));
+					}
 					PlayState.changedDifficulty = false;
 					PlayState.chartingMode = false;
 

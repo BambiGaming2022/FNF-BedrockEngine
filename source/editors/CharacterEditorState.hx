@@ -80,6 +80,7 @@ class CharacterEditorState extends MusicBeatState
 
 	override function create()
 	{
+		Main.curStateS = 'CharacterEditorState';
 		//FlxG.sound.playMusic(Paths.music('breakfast'), 0.5);
 
 		camEditor = new FlxCamera();
@@ -219,7 +220,7 @@ class CharacterEditorState extends MusicBeatState
 		var playerXDifference = 0;
 		if(char.isPlayer) playerXDifference = 670;
 
-		if(onPixelBG) {
+		if(onPixelBG && !ClientPrefs.maxOptimization) {
 			var playerYDifference:Float = 0;
 			if(char.isPlayer) {
 				playerXDifference += 200;
@@ -1076,7 +1077,7 @@ class CharacterEditorState extends MusicBeatState
 	function updatePresence() {
 		#if desktop
 		// Updating Discord Rich Presence
-		DiscordClient.changePresence("Character Editor", "Character: " + daAnim, leHealthIcon.getCharacter());
+		DiscordClient.changePresence("in the Character Editor", "Character: " + daAnim, leHealthIcon.getCharacter());
 		#end
 	}
 
@@ -1122,6 +1123,10 @@ class CharacterEditorState extends MusicBeatState
 				} else {
 					MusicBeatState.switchState(new editors.MasterEditorMenu());
 					FlxG.sound.playMusic(Paths.music('freakyMenu'));
+					if (ClientPrefs.useClassicSongs)
+					{
+						FlxG.sound.playMusic(Paths.music('freakyMenuC'));
+					}
 				}
 				FlxG.mouse.visible = false;
 				return;

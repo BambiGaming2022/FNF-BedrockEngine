@@ -194,6 +194,7 @@ class ChartingState extends MusicBeatState
 	public static var vortex:Bool = false;
 	override function create()
 	{
+		Main.curStateS = 'ChartingState';
 		if (PlayState.SONG != null)
 			_song = PlayState.SONG;
 		else
@@ -1674,6 +1675,10 @@ class ChartingState extends MusicBeatState
 				//if(onMasterEditor) {
 					MusicBeatState.switchState(new editors.MasterEditorMenu());
 					FlxG.sound.playMusic(Paths.music('freakyMenu'));
+					if (ClientPrefs.useClassicSongs)
+					{
+						FlxG.sound.playMusic(Paths.music('freakyMenuC'));
+					}
 				//}
 				FlxG.mouse.visible = false;
 				return;

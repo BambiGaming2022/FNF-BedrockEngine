@@ -14,6 +14,14 @@ class JsonSettings
     public static var logs:Int = 0; 
     //this is used for log counts
 
+    //readme stuff
+    public static var read:String = "settings/do-READ-me.txt";
+
+    //jsons content
+    public static var customGame:String = null;
+    public static var customJson:String = null;
+    public static var offset:String = null;
+
     //ui settings 
     public static var iconSupport:Bool;
     public static var noteSkin:String;
@@ -22,10 +30,10 @@ class JsonSettings
 
     //offsets, (working this time)
 
-    public static var marvWindow:Int = 25;
-    public static var sickWindow:Int = 45;
-    public static var goodWindow:Int = 60;
-    public static var badWindow:Int = 90;
+    public static var marvWindow:Int;
+    public static var sickWindow:Int;
+    public static var goodWindow:Int;
+    public static var badWindow:Int;
     //public static var shitWindow:Int = 135;
 
     //gameplay settings 
@@ -36,7 +44,7 @@ class JsonSettings
     //json directories
     public static var dirtwo:String = "settings/gameplaySettings.json";
     public static var dir:String = "settings/uiSettings.json";
-    public static var offdir:String = "settings/offsets.json";
+    public static var offdir:String = "settings/note.json";
 
     #if MODS_ALLOWED
     public static var dirmod:String = "mods/settings/settings.json";
@@ -46,17 +54,23 @@ class JsonSettings
     {
         if (FileSystem.exists(offdir))
         {
-            var offset:String = File.getContent(offdir);
+            offset = File.getContent(offdir);
             if (offset != null && offset.length > 0)
             {
                 logs++;
 
                 var piss:Dynamic = Json.parse(offset);
 
-                var marv:Int = Reflect.getProperty(piss, "marvOffset");
-                var sick:Int = Reflect.getProperty(piss, "sickOffset");
-                var good:Int = Reflect.getProperty(piss, "goodOffset");
-                var bad:Int =  Reflect.getProperty(piss, "badOffset");
+                var marv = Reflect.getProperty(piss, "marvOffset");
+                var sick = Reflect.getProperty(piss, "sickOffset");
+                var good = Reflect.getProperty(piss, "goodOffset");
+                var bad =  Reflect.getProperty(piss, "badOffset");
+
+                var noteSplashSkinTEMPLATE:String = Reflect.getProperty(piss, "noteSplashSkin");
+                var noteSkinTEMPLATE:String = Reflect.getProperty(piss, "noteSkin");
+
+                noteSkin = noteSkinTEMPLATE;
+                noteSplashSkin = noteSplashSkinTEMPLATE;
 
                 marvWindow = marv;
                 sickWindow = sick;
@@ -89,7 +103,7 @@ class JsonSettings
                     goodWindow = sick;
 
                     if (good < 10 || good > 135)
-                        goodWindow = 60;
+                        goodWindow = 90;
 
                 }
 
@@ -99,7 +113,7 @@ class JsonSettings
                     badWindow = bad;
 
                     if (bad < 15 || bad > 180)
-                        badWindow = 90;
+                        badWindow = 135;
                 }
 
                 //prevent people to abuse it
@@ -108,9 +122,23 @@ class JsonSettings
                 if (sick < 5 || sick > 75)
                     sickWindow = 45;
                 if (good < 10 || good > 135)
-                    goodWindow = 60;
+                    goodWindow = 90;
                 if (bad < 15 || bad > 180)
-                    badWindow = 90;
+                    badWindow = 135;
+
+                if (noteSkinTEMPLATE == null || noteSkinTEMPLATE.length < 0)
+                    {
+                    if (logs < 11)
+                     trace("invalid note skin, reverting back to the defaults.");
+                    noteSkin = 'NOTE_assets';
+                    }
+    
+                if (noteSplashSkinTEMPLATE == null || noteSplashSkinTEMPLATE.length < 0)
+                {
+                    if (logs < 11)
+                    trace("invalid note splash, reverting back to the defaults.");
+                    noteSplashSkin = 'noteSplashes';
+                }
             }
         }
     }
@@ -119,7 +147,7 @@ class JsonSettings
     {
         if (FileSystem.exists(dirtwo))
         {
-            var customJson:String = File.getContent(dirtwo);
+            customJson = File.getContent(dirtwo);
             if (customJson != null && customJson.length > 0)
             {
                 logs++;
@@ -165,7 +193,7 @@ class JsonSettings
     {
         if (FileSystem.exists(dir))
         {
-            var customGame:String = File.getContent(dir);
+            customGame = File.getContent(dir);
             if (customGame != null && customGame.length > 0)
             {
                 logs++;
@@ -173,11 +201,7 @@ class JsonSettings
                 var shit:Dynamic = Json.parse(customGame);
                 var iconSupportTEMPLATE:Bool = Reflect.getProperty(shit, "iconSupport");
 				var judgementSkinTEMPLATE:String = Reflect.getProperty(shit, "judgementSkin");
-				var noteSplashSkinTEMPLATE:String = Reflect.getProperty(shit, "noteSplashSkin");
-                var noteSkinTEMPLATE:String = Reflect.getProperty(shit, "noteSkin");
 
-                noteSkin = noteSkinTEMPLATE;
-                noteSplashSkin = noteSplashSkinTEMPLATE;
                 judgementSkin = judgementSkinTEMPLATE;
                 iconSupport = iconSupportTEMPLATE;
 
@@ -186,20 +210,6 @@ class JsonSettings
                    if (logs < 11) 
                     trace("invalid judgement skin, reverting back to the defaults.");
                    judgementSkin = 'bedrock';
-                }
-
-                if (noteSkinTEMPLATE == null || noteSkinTEMPLATE.length < 0)
-                {
-                    if (logs < 11)
-                     trace("invalid note skin, reverting back to the defaults.");
-                    noteSkin = 'NOTE_assets';
-                }
-
-                if (noteSplashSkinTEMPLATE == null || noteSplashSkinTEMPLATE.length < 0)
-                {
-                    if (logs < 11)
-                     trace("invalid note splash, reverting back to the defaults.");
-                    noteSplashSkin = 'noteSplashes';
                 }
             }
         }

@@ -35,6 +35,7 @@ class GameOverSubstate extends MusicBeatSubstate
 
 	override function create()
 	{
+		Main.curStateS = 'GameOverSubstate';
 		instance = this;
 		PlayState.instance.callOnLuas('onGameOverStart', []);
 

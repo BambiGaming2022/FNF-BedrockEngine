@@ -14,7 +14,7 @@ class ClientPrefs {
 	public static var globalAntialiasing:Bool = true;
 	public static var noteSplashes:Bool = true;
 	public static var lowQuality:Bool = false;
-	public static var framerate:Int = 120;
+	public static var framerate:Int = 60;
 	public static var cursing:Bool = true;
 	public static var violence:Bool = true;
 	public static var camZooms:Bool = true;
@@ -75,9 +75,13 @@ class ClientPrefs {
 	public static var showSongDisplay:Bool = true;
 	public static var autoPause:Bool = true;
 	public static var memCounter:Bool = false;
+	public static var memPeak:Bool = false;
+	public static var showState:Bool = false;
+	public static var useClassicSongs:Bool = false;
+	public static var hideStrumsMiddle:Bool = false;
 
 	// Added by Bedrock Engine (via Pull Requests)
-	public static var marvelouses:Bool = true;
+	public static var marvelouses:Bool = false;
 	public static var showWatermarks:Bool = true;
 
 	//Every key has two binds, add your key bind down here and then add your control on options/ControlsSubState.hx and Controls.hx
@@ -163,6 +167,10 @@ class ClientPrefs {
 		FlxG.save.data.showSongDisplay = showSongDisplay;
 		FlxG.save.data.autoPause = autoPause;
 		FlxG.save.data.memCounter = memCounter;
+		FlxG.save.data.memPeak = memPeak;
+		FlxG.save.data.showState = showState;
+		FlxG.save.data.useClassicSongs = useClassicSongs;
+		FlxG.save.data.hideStrumsMiddle = hideStrumsMiddle;
 
 		// Added by Bedrock Engine (via Pull Requests)
 		FlxG.save.data.marvelousWindow = marvelousWindow;
@@ -328,6 +336,18 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.memCounter != null) {
 			memCounter = FlxG.save.data.memCounter;
+		}
+		if(FlxG.save.data.memPeak != null) {
+			memPeak = FlxG.save.data.memPeak;
+		}
+		if(FlxG.save.data.showState != null) {
+			showState = FlxG.save.data.showState;
+		}
+		if(FlxG.save.data.useClassicSongs != null) {
+			useClassicSongs = FlxG.save.data.useClassicSongs;
+		}
+		if(FlxG.save.data.hideStrumsMiddle != null) {
+			hideStrumsMiddle = FlxG.save.data.hideStrumsMiddle;
 		}
 		
 		// Added by Bedrock Engine (via Pull Requests)

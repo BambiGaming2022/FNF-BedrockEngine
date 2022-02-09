@@ -31,6 +31,7 @@ class AchievementsMenuState extends MusicBeatState
 		#if desktop
 		DiscordClient.changePresence("in the Achievements Menu", null);
 		#end
+		Main.curStateS = 'AchievementsMenuState';
 
 		var menuBG:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuBGBlue'));
 		menuBG.setGraphicSize(Std.int(menuBG.width * 1.1));

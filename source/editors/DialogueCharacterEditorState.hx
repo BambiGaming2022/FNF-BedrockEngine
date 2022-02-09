@@ -71,6 +71,7 @@ class DialogueCharacterEditorState extends MusicBeatState
 	var ghostIdle:DialogueCharacter;
 
 	override function create() {
+		Main.curStateS = 'DialogueCharacterEditorState';
 		persistentUpdate = persistentDraw = true;
 		camGame = new FlxCamera();
 		camOther = new FlxCamera();
@@ -636,6 +637,10 @@ class DialogueCharacterEditorState extends MusicBeatState
 			if(FlxG.keys.justPressed.ESCAPE) {
 				MusicBeatState.switchState(new editors.MasterEditorMenu());
 				FlxG.sound.playMusic(Paths.music('freakyMenu'), 1);
+				if (ClientPrefs.useClassicSongs)
+				{
+					FlxG.sound.playMusic(Paths.music('freakyMenuC'), 1);
+				}
 				transitioning = true;
 			}
 

@@ -48,8 +48,7 @@ class MainMenuState extends MusicBeatState
 		'awards',
 		#end
 		'extras',
-		#if !switch
-		'donate',
+		#if !switch 'donate',
 		#end
 		'credits',
 		'options'
@@ -99,6 +98,7 @@ class MainMenuState extends MusicBeatState
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In the Main Menu", null);
 		#end
+		Main.curStateS = 'MainMenuState';
 		debugKeys = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
 
 		camGame = new FlxCamera();
@@ -301,12 +301,6 @@ class MainMenuState extends MusicBeatState
 			{
 				FlxG.sound.play(Paths.sound('scrollMenu'));
 				changeItem(1);
-			}
-
-			if (controls.UI_LEFT_P)
-			{
-				FlxG.sound.play(Paths.sound('scrollMenu'));
-				MusicBeatState.resetState();
 			}
 
 			if (controls.BACK)

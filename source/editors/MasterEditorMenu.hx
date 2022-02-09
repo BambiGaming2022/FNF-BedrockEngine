@@ -27,6 +27,7 @@ class MasterEditorMenu extends MusicBeatState
 		'Dialogue Portrait Editor',
 		'Character Editor',
 		'Chart Editor',
+		/*'Json Editor'*/
 	];
 	private var grpTexts:FlxTypedGroup<Alphabet>;
 	private var directories:Array<String> = [null];
@@ -37,6 +38,7 @@ class MasterEditorMenu extends MusicBeatState
 	override function create()
 	{
 		FlxG.camera.bgColor = FlxColor.BLACK;
+		Main.curStateS = 'MasterEditorMenu';
 		#if desktop
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("Editors Main Menu", null);
@@ -125,6 +127,8 @@ class MasterEditorMenu extends MusicBeatState
 					LoadingState.loadAndSwitchState(new DialogueEditorState(), false);
 				case 'Chart Editor'://felt it would be cool maybe
 					LoadingState.loadAndSwitchState(new ChartingState(), false);
+				/*case 'Json Editor':
+					MusicBeatState.switchState(new JsonEditor());*/
 			}
 			FlxG.sound.music.volume = 0;
 			#if PRELOAD_ALL

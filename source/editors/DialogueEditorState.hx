@@ -46,6 +46,7 @@ class DialogueEditorState extends MusicBeatState
 	var dialogueFile:DialogueFile = null;
 
 	override function create() {
+		Main.curStateS = 'DialogueEditorState';
 		persistentUpdate = persistentDraw = true;
 		FlxG.camera.bgColor = FlxColor.fromHSL(0, 0, 0.5);
 
@@ -339,6 +340,10 @@ class DialogueEditorState extends MusicBeatState
 			if(FlxG.keys.justPressed.ESCAPE) {
 				MusicBeatState.switchState(new editors.MasterEditorMenu());
 				FlxG.sound.playMusic(Paths.music('freakyMenu'), 1);
+				if (ClientPrefs.useClassicSongs)
+				{
+					FlxG.sound.playMusic(Paths.music('freakyMenuC'), 1);
+				}
 				transitioning = true;
 			}
 			var negaMult:Array<Int> = [1, -1];

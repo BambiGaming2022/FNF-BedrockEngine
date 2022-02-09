@@ -50,10 +50,6 @@ DIVIDERS
 
 divider means that the info bar will show the specific separator you set yourself.
 For example, if it's set as
-"divider": " // ", info bar will be like this:
+"divider": "//", info bar will be like this:
 
 "Score: // Accuracy: // Rank:".
-
-spaces before and after your divider are recommended.
-
-" // "

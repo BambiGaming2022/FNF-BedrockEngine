@@ -33,13 +33,14 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 	{
 		title = 'Gameplay Settings';
 		rpcTitle = 'Adjusting the Gameplay Settings'; //for Discord Rich Presence
+		Main.curStateS = 'GameplaySettingsSubState';
 
-		var Option = new Option('Complex Accuracy',
+		/*var Option = new Option('Complex Accuracy',
 		"If checked, the accuracy will follow a harsher system, Based on Etterna and Kade Engine.",
 		'keAccuracy',
 		'bool',
 		false);
-	addOption(Option);
+	addOption(Option);*/
 
 		var option:Option = new Option('Disable Reset Button',
 		"If checked, pressing Reset won't do anything.",
@@ -70,6 +71,13 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		true);
 	addOption(option);
 
+		var option:Option = new Option('Hide Opponent Notes',
+		'If checked, will hide opponent notes on middlescroll.',
+		'hideStrumsMiddle',
+		'bool',
+		false);
+	addOption(option);
+
 		var option:Option = new Option('Instant Respawn',
 		"If checked, skips the Game Over Screen entirely.",
 		'instantRespawn',
@@ -82,7 +90,7 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		'If unchecked, marvelous ratings will disappear.',
 		'marvelouses',
 		'bool',
-		true);
+		false);
 	addOption(option);
 
 	var option:Option = new Option('Middlescroll',

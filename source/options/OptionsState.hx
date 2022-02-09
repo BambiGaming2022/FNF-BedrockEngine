@@ -60,6 +60,7 @@ class OptionsState extends MusicBeatState
 		#if desktop
 		DiscordClient.changePresence("In the Options Menu", null);
 		#end
+		Main.curStateS = 'OptionsState';
 
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.color = 0xFFea71fd;

@@ -48,7 +48,8 @@ typedef TitleData =
 	gfx:Float,
 	gfy:Float,
 	backgroundSprite:String,
-	bpm:Int
+	bpm:Int,
+	cbpm:Int
 }
 
 class TitleState extends MusicBeatState
@@ -89,6 +90,7 @@ class TitleState extends MusicBeatState
 	{
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
+		Main.curStateS = 'TitleState';
 
 		#if MODS_ALLOWED
 		// Just to load a mod on start up if ya got one. For mods that change the menu music and bg
@@ -120,6 +122,7 @@ class TitleState extends MusicBeatState
 		{
 			path = "assets/images/gfDanceTitle.json";
 		}
+
 		// trace(path, FileSystem.exists(path));
 		titleJSON = Json.parse(File.getContent(path));
 		#else
@@ -252,8 +255,19 @@ class TitleState extends MusicBeatState
 				FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
 			}
 		}
+		else if (!initialized && ClientPrefs.useClassicSongs)
+		{
+			if (FlxG.sound.music == null)
+			{
+				FlxG.sound.playMusic(Paths.music('freakyMenuC'), 0);
+			}
+		}
 
 		Conductor.changeBPM(titleJSON.bpm);
+		if(ClientPrefs.useClassicSongs)
+		{
+			Conductor.changeBPM(titleJSON.cbpm);
+		}
 		persistentUpdate = true;
 
 		bgGrad = FlxGradient.createGradientFlxSprite(1460, 821, [FlxColor.TRANSPARENT, FlxColor.fromInt(0xFFDF52A7)]);
@@ -313,11 +327,15 @@ class TitleState extends MusicBeatState
 		if (!FileSystem.exists(path))
 		{
 			path = "assets/images/gfDanceTitle.png";
+			if(ClientPrefs.lowQuality)
+				path = "assets/images/lowQuality/gfDanceTitleLow.png";
 			// trace(path, FileSystem.exists(path));
 		}
 		gfDance.frames = FlxAtlasFrames.fromSparrow(BitmapData.fromFile(path), File.getContent(StringTools.replace(path, ".png", ".xml")));
 		#else
 		gfDance.frames = Paths.getSparrowAtlas('gfDanceTitle.png');
+		if(ClientPrefs.lowQuality)
+			gfDance.frames = Paths.getSparrowAtlas('lowQuality/gfDanceTitleLow.png');
 		#end
 		gfDance.animation.addByIndices('danceLeft', 'GF Dancing Beat', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
 		gfDance.animation.addByIndices('danceRight', 'GF Dancing Beat', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
@@ -631,6 +649,9 @@ class TitleState extends MusicBeatState
 						FlxG.sound.music.stop();
 						FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
 
+						if(ClientPrefs.useClassicSongs)
+							FlxG.sound.playMusic(Paths.music('freakyMenuC'), 0);
+
 						FlxG.sound.music.fadeIn(5, 0, 0.7);
 					}
 				case 2:
@@ -689,6 +710,7 @@ class TitleState extends MusicBeatState
 			remove(ngSpr);
 
 			FlxG.camera.flash(FlxColor.WHITE, 1);
+
 			remove(credGroup);
 			skippedIntro = true;
 		}

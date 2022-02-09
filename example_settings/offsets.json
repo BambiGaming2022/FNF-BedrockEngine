@@ -1,6 +1,6 @@
 {
     "marvOffset": 25,
     "sickOffset": 45,
-    "goodOffset": 60,
-    "badOffset": 90
+    "goodOffset": 90,
+    "badOffset": 135
 }
