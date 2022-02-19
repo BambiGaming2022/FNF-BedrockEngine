@@ -33,6 +33,8 @@ class ResultsState extends MusicBeatState
 
         var ratingResult:String = '';
 
+        swagQuotes = new FlxText();
+
         var judgements:FlxSpriteGroup = new FlxSpriteGroup();
 
         accText = new FlxText(-200, 65, 0,
@@ -50,7 +52,8 @@ class ResultsState extends MusicBeatState
         if(percent >= 1) {
             var poop = ratingsShit[ratingsShit.length - 1][0];
             ratingResult = poop;
-        } else {
+        } else 
+        {
             for (i in 0...ratingsShit.length - 1)
 			{
 				if (percent < ratingsShit[i][1])
@@ -79,8 +82,9 @@ class ResultsState extends MusicBeatState
 
             case 'X':
                 swagQuotes.text = 'Excellent! What\'s your train for this??';
+        }
 
-                swagQuotes = new FlxText();
+                
 
         resultRank = new FlxSprite(FlxG.width - 400, 60).loadGraphic(Paths.image('maniamode/rankresults/' + ratingResult));
         resultRank.antialiasing = ClientPrefs.globalAntialiasing;
