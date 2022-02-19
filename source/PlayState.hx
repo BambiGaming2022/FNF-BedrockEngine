@@ -765,11 +765,11 @@ class PlayState extends MusicBeatState
 					add(bg);
 				}
 			case "tank": //Week 7
+
 			var sky:FlxSprite = new FlxSprite(-400,-400).loadGraphic(Paths.image('militaryZone/tankSky'));
 			sky.scrollFactor.set(0, 0);
 			sky.antialiasing = true;
 			sky.setGraphicSize(Std.int(sky.width * 1.5));
-
 			add(sky);
 
 			var clouds:FlxSprite = new FlxSprite(FlxG.random.int(-700, -100), FlxG.random.int(-20, 20)).loadGraphic(Paths.image('militaryZone/tankClouds'));
@@ -777,7 +777,6 @@ class PlayState extends MusicBeatState
 			clouds.velocity.x = FlxG.random.float(5, 15);
 			clouds.antialiasing = true;
 			clouds.updateHitbox();
-
 			add(clouds);
 
 			var mountains:FlxSprite = new FlxSprite(-300,-20).loadGraphic(Paths.image('militaryZone/tankMountains'));
@@ -785,7 +784,6 @@ class PlayState extends MusicBeatState
 			mountains.setGraphicSize(Std.int(1.2 * mountains.width));
 			mountains.updateHitbox();
 			mountains.antialiasing = true;
-
 			add(mountains);
 
 			var buildings:FlxSprite = new FlxSprite(-200,0).loadGraphic(Paths.image('militaryZone/tankBuildings'));
@@ -793,7 +791,6 @@ class PlayState extends MusicBeatState
 			buildings.setGraphicSize(Std.int(buildings.width * 1.1));
 			buildings.updateHitbox();
 			buildings.antialiasing = true;
-
 			add(buildings);
 
 			var ruins:FlxSprite = new FlxSprite(-200,0).loadGraphic(Paths.image('militaryZone/tankRuins'));
@@ -801,7 +798,6 @@ class PlayState extends MusicBeatState
 			ruins.setGraphicSize(Std.int(ruins.width * 1.1));
 			ruins.updateHitbox();
 			ruins.antialiasing = true;
-
 			add(ruins);
 
 			var smokeLeft:FlxSprite = new FlxSprite(-200,-100);
@@ -810,7 +806,6 @@ class PlayState extends MusicBeatState
 			smokeLeft.scrollFactor.set(0.4, 0.4);
 			smokeLeft.antialiasing = true;
 			smokeLeft.animation.play('idle');
-			
 			add(smokeLeft);
 
 			var smokeRight:FlxSprite = new FlxSprite(1100,-100);
@@ -819,14 +814,12 @@ class PlayState extends MusicBeatState
 			smokeRight.scrollFactor.set(0.4, 0.4);
 			smokeRight.antialiasing = true;
 			smokeRight.animation.play('idle');
-			
 			add(smokeRight);
 
 			tower = new FlxSprite(100, 120);
 			tower.frames = Paths.getSparrowAtlas('militaryZone/tankWatchtower');
 			tower.animation.addByPrefix('idle', 'watchtower gradient color', 24, false);
 			tower.antialiasing = true;
-
 			add(tower);
 
 			tankRolling = new FlxSprite(300,300);
@@ -835,7 +828,6 @@ class PlayState extends MusicBeatState
 			tankRolling.scrollFactor.set(0.5, 0.5);
 			tankRolling.antialiasing = true;
 			tankRolling.animation.play('idle');
-			
 			add(tankRolling);
 
 			var ground:FlxSprite = new FlxSprite(-420, -150).loadGraphic(Paths.image('militaryZone/tankGround'));
@@ -843,7 +835,6 @@ class PlayState extends MusicBeatState
 			ground.antialiasing = true;
 			ground.setGraphicSize(Std.int(ground.width * 1.15));
 			ground.scrollFactor.set(1, 1);
-
 			ground.updateHitbox();
 			add(ground);
 
@@ -853,7 +844,6 @@ class PlayState extends MusicBeatState
 			tankBop1.scrollFactor.set(1.7, 1.5);
 			tankBop1.antialiasing = true;
 			add(tankBop1);
-			
 
 			tankBop2 = new FlxSprite(-300,750);
 			tankBop2.frames = Paths.getSparrowAtlas('militaryZone/tank1');
@@ -861,7 +851,6 @@ class PlayState extends MusicBeatState
 			tankBop2.scrollFactor.set(2.0, 0.2);
 			tankBop2.antialiasing = true;
 			add(tankBop2);
-			
 
 			tankBop3 = new FlxSprite(450,940);
 			tankBop3.frames = Paths.getSparrowAtlas('militaryZone/tank2');
@@ -876,7 +865,6 @@ class PlayState extends MusicBeatState
 			tankBop4.scrollFactor.set(3.5, 2.5);
 			tankBop4.antialiasing = true;
 			add(tankBop4);
-			
 
 			tankBop5 = new FlxSprite(1300,900);
 			tankBop5.frames = Paths.getSparrowAtlas('militaryZone/tank4');
@@ -884,7 +872,6 @@ class PlayState extends MusicBeatState
 			tankBop5.scrollFactor.set(1.5, 1.5);
 			tankBop5.antialiasing = true;
 			add(tankBop5);
-			
 
 			tankBop6 = new FlxSprite(1620,700);
 			tankBop6.frames = Paths.getSparrowAtlas('militaryZone/tank5');
