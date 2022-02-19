@@ -37,12 +37,11 @@ class AccessibilitySubState extends BaseOptionsMenu
 		var option:Option = new Option('Anti-Aliasing', 'If unchecked, disables anti-aliasing, increases performance\nat the cost of sharper visuals.',
 			'globalAntialiasing', 'bool', true);
 		option.showBoyfriend = false;
-		option.onChange = onChangeFilter; // Changing onChange is only needed if you want to make a special interaction after it changes the value
+		option.onChange = onChangeAntiAliasing; // Changing onChange is only needed if you want to make a special interaction after it changes the value
 		addOption(option);
 
 		var option:Option = new Option('Filter:', "Choose a filter for colorblindness.", 'curFilter', 'string', 'None',
 			['Deuteranopia', 'Protanopia', 'Tritanopia', 'None']);
-		option.onChange = onChangeAntiAliasing;
 		addOption(option);
 
 		var option:Option = new Option('Background Opacity:', 'How much opaque the background should be?', 'bgAlpha', 'float', true);
@@ -80,11 +79,6 @@ class AccessibilitySubState extends BaseOptionsMenu
 		// addOption(option);
 
 		super();
-	}
-
-	function onChangeFilter()
-	{
-		//nothing yet
 	}
 
 	function onChangeAntiAliasing()
