@@ -51,7 +51,7 @@ class VisualsUISubState extends BaseOptionsMenu
 			["Bedrock", "Classic"]);
 		addOption(option);
 
-		var option:Option = new Option('300x150 Icon Support', "If checked, enables the old icon support.", 'iconSupport',
+		var option:Option = new Option('Disable Winning Icons', "If unchecked, disables the Winning Icons.", 'iconSupport',
 			'bool', false);
 		addOption(option);
 
@@ -85,40 +85,6 @@ class VisualsUISubState extends BaseOptionsMenu
 		var option:Option = new Option('Use Classic Songs', "If checked, will use the Classic Songs instead of Bedrock's songs.", 'useClassicSongs', 'bool',
 			true);
 		addOption(option);
-
-		var option:Option = new Option('Background Opacity:', 'How much opaque the background should be?', 'bgAlpha', 'float', true);
-		option.displayFormat = '%v';
-		option.scrollSpeed = 100;
-		option.changeValue = 0.1;
-		option.decimals = 1;
-		option.minValue = 0;
-		option.maxValue = 1;
-		addOption(option);
-
-		var option:Option = new Option('Health Bar Opacity', 'How much opaque should the health bar and icons be.', 'healthBarAlpha', 'percent', 1);
-		option.scrollSpeed = 1.6;
-		option.minValue = 0.0;
-		option.maxValue = 1;
-		option.changeValue = 0.1;
-		option.decimals = 1;
-		addOption(option);
-
-		var option:Option = new Option('Lane Opacity', "How much opaque should your Lane Underlay be.", 'underlay', 'float', true);
-		option.displayFormat = '%v';
-		option.scrollSpeed = 100;
-		option.changeValue = 0.1;
-		option.decimals = 1;
-		option.minValue = 0;
-		option.maxValue = 1;
-		addOption(option);
-
-		var option:Option = new Option('Strumline Opacity', "How much opaque should your Notes' Strumline be?.", 'strumLineAlpha', 'percent', 1);
-		option.scrollSpeed = 1.6;
-		option.minValue = 0.0;
-		option.maxValue = 1;
-		option.changeValue = 0.1;
-		option.decimals = 1;
-		// addOption(option);
 
 		var option:Option = new Option('Time Bar:', "What should the Time Bar display?", 'timeBarType', 'string', 'Time Left',
 			['Time Left', 'Time Elapsed', 'Song Name', 'Disabled']);
