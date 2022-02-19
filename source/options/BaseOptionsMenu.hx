@@ -405,6 +405,9 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		}
 
 		boyfriend = new Character(840, 170, 'bf', true);
+		if (FlxG.random.bool(25))
+			boyfriend = new Character(840, 170, 'bf-holding-gf', true);
+
 		boyfriend.setGraphicSize(Std.int(boyfriend.width * 0.75));
 		boyfriend.updateHitbox();
 		boyfriend.dance();
