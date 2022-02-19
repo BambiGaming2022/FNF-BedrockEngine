@@ -66,6 +66,7 @@ class ResultsState extends MusicBeatState
         
         switch(ratingResult) {
             case 'D':
+<<<<<<< HEAD
                 swagQuotes.text = 'You suck!';
 
             case 'C':
@@ -82,6 +83,9 @@ class ResultsState extends MusicBeatState
 
             case 'X':
                 swagQuotes.text = 'Excellent! What\'s your train for this??';
+=======
+                swagQuotes = new FlxText;
+>>>>>>> parent of 6a2f7f7 (Update ResultsState.hx)
         }
 
                 
