@@ -85,7 +85,6 @@ class ClientPrefs
 	public static var antiMash:Null<Bool> = true;
 	public static var screenRes:String = '1280x720';
 	public static var iconSupport:Null<Bool> = false;
-	public static var coolFilters:String = 'None';
 
 	// Added by Bedrock Engine (via Pull Requests)
 	public static var marvelouses:Bool = false;
@@ -178,7 +177,6 @@ class ClientPrefs
 		FlxG.save.data.ratingSystem = ratingSystem;
 		FlxG.save.data.noteSkin = noteSkin;
 		FlxG.save.data.screenRes = screenRes;
-		FlxG.save.data.coolFilters = coolFilters;
 
 		// Added by Bedrock Engine (via Pull Requests)
 		FlxG.save.data.marvWindow = marvWindow;
@@ -413,9 +411,6 @@ class ClientPrefs
 		}
 		if(FlxG.save.data.screenRes != null) {
 			screenRes = FlxG.save.data.screenRes;
-		}
-		if(FlxG.save.data.coolFilters != null) {
-			coolFilters = FlxG.save.data.coolFilters;
 		}
 
 		// Added by Bedrock Engine (via Pull Requests)
