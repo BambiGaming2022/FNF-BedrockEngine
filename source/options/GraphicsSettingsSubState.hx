@@ -113,7 +113,7 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 
 		Main.gameWidth = Std.parseInt(res[0]);
 		Main.gameHeight = Std.parseInt(res[1]);
-		FlxG.scaleMode = MusicBeatState.modeStage;
+		FlxG.scaleMode = modeStage;
 	}
 
 	function onChangeAutoPause()
