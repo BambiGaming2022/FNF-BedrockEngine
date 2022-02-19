@@ -4189,7 +4189,7 @@ class PlayState extends MusicBeatState
 					CustomFadeTransition.nextCamera = null;
 				}
 				if (!ClientPrefs.getGameplaySetting('practice', false) && !ClientPrefs.getGameplaySetting('botplay', false))
-					openSubState(new ResultsSubState());
+					MusicBeatState.switchState(new ResultsState());
 				else
 					MusicBeatState.switchState(new FreeplayState());
 				changedDifficulty = false;
