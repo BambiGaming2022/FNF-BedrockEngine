@@ -784,8 +784,10 @@ class PlayState extends MusicBeatState
 			else if (SONG.player1 == 'tankman-player')
 				GameOverSubstate.characterName = 'tankman-player';
 			else
-				GameOverSubstate.characterName = 'bf';
+				GameOverSubstate.characterName = 'bf-dies';
 
+			/*maybe make this a switch??
+			- Gui iago*/
 
 			var sky:FlxSprite = new FlxSprite(-400,-400).loadGraphic(Paths.image('militaryZone/tankSky',"preload"));
 			sky.scrollFactor.set(0, 0);
