@@ -30,6 +30,7 @@ using StringTools;
 class OptionsState extends MusicBeatState
 {
 	var options:Array<String> = [
+		'Accessibility',
 		'Adjust Delay and Combo',
 		'Controls',
 		'Graphics',
@@ -60,6 +61,8 @@ class OptionsState extends MusicBeatState
 				openSubState(new options.GameplaySettingsSubState());
 			case 'Adjust Delay and Combo':
 				LoadingState.loadAndSwitchState(new options.NoteOffsetState());
+			case 'Accessibility':
+				openSubState(new options.AccessibilitySubState());				
 		}
 	}
 
