@@ -52,6 +52,7 @@ import openfl.display.BlendMode;
 import openfl.display.StageQuality;
 import openfl.events.KeyboardEvent;
 import openfl.filters.BitmapFilter;
+import openfl.filters.ColorMatrixFilter;
 import openfl.utils.Assets as OpenFlAssets;
 import editors.ChartingState;
 import editors.CharacterEditorState;
@@ -5792,7 +5793,7 @@ class PlayState extends MusicBeatState
 	function ShaderFilters():Void
 	{
 		//Matrix shaders:
-		if (ClientPrefs.accessibilityFilters == 'Deuteranopia')
+		if (ClientPrefs.coolFilters == 'Deuteranopia')
 		{
 			var matrix:Array<Float> = [
 						0.43, 0.72, -.15, 0, 0,
@@ -5803,7 +5804,7 @@ class PlayState extends MusicBeatState
 			filters.push(new ColorMatrixFilter(matrix));
 		}
 
-		if (ClientPrefs.accessibilityFilters == 'Protanopia')
+		if (ClientPrefs.coolFilters == 'Protanopia')
 		{
 			var matrix:Array<Float> = [
 						0.20, 0.99, -.19, 0, 0,
@@ -5814,7 +5815,7 @@ class PlayState extends MusicBeatState
 			filters.push(new ColorMatrixFilter(matrix));
 		}
 
-		if (ClientPrefs.accessibilityFilters == 'Tritanopia')
+		if (ClientPrefs.coolFilters == 'Tritanopia')
 		{
 			var matrix:Array<Float> = [
 						0.97, 0.11, -.08, 0, 0,
