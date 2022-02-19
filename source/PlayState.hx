@@ -783,7 +783,7 @@ class PlayState extends MusicBeatState
 				GameOverSubstate.characterName = 'bf-holding-gf';
 			else if (SONG.player1 == 'tankman-player')
 				GameOverSubstate.characterName = 'tankman-player';
-			else
+			else if (SONG.player1 == 'bf')
 				GameOverSubstate.characterName = 'bf-dies';
 
 			/*maybe make this a switch??
