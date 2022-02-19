@@ -32,9 +32,15 @@ class BedrockUtil
 			Paths.mods('noteskins/'),
 			Paths.mods(Paths.currentModDirectory + '/noteskins/'),
 			Paths.getPreloadPath('noteskins/')
+			/*Paths.mods('judgements/'),
+			Paths.mods(Paths.currentModDirectory + '/judgements/')
+			Paths.getPreloadPath('judgements/')
+			
+			WIP*/
 		];
 		#else
 		var directories:Array<String> = [Paths.getPreloadPath('noteskins/')];
+		//var directories:Array<String> = [Paths.getPreloadPath('judgements/')]
 		#end
 
 		for (i in 0...directories.length)
