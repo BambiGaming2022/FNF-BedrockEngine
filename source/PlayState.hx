@@ -261,6 +261,7 @@ class PlayState extends MusicBeatState
 	public var songMisses:Int = 0;
 	public var totalMisses:Int = 0;
 	public var scoreTxt:FlxText;
+	var filters:Array<BitmapFilter> = [];
 
 	var judgementCounter:FlxText;
 	var timeTxt:FlxText;
@@ -2069,6 +2070,7 @@ class PlayState extends MusicBeatState
 		{
 			generateStaticArrows(0);
 			generateStaticArrows(1);
+			ShaderFilters();
 			laneunderlay.x = playerStrums.members[0].x - 25;
 			laneunderlayOpponent.x = opponentStrums.members[0].x - 25;
 
@@ -4171,7 +4173,7 @@ class PlayState extends MusicBeatState
 					CustomFadeTransition.nextCamera = null;
 				}
 				if (!ClientPrefs.getGameplaySetting('practice', false) && !ClientPrefs.getGameplaySetting('botplay', false))
-					openSubState(new ResultsSubState());
+					openSubState(new ResultsState());
 				else
 					MusicBeatState.switchState(new FreeplayState());
 				changedDifficulty = false;
@@ -5785,6 +5787,47 @@ class PlayState extends MusicBeatState
 		tankRolling.y = 300;
 		tankRolling.angle = tankAngle - 90 + 15;
 		moveTank();
+	}
+
+	function ShaderFilters():Void
+	{
+		//Matrix shaders:
+		if (OptionsSubState.Deuteranopiabool)
+		{
+			var matrix:Array<Float> = [
+						0.43, 0.72, -.15, 0, 0,
+						0.34, 0.57, 0.09, 0, 0,
+						-.02, 0.03,    1, 0, 0,
+						   0,    0,    0, 1, 0,
+					];
+			filters.push(new ColorMatrixFilter(matrix));
+		}
+
+		if (OptionsSubState.Protanopiabool)
+		{
+			var matrix:Array<Float> = [
+						0.20, 0.99, -.19, 0, 0,
+						0.16, 0.79, 0.04, 0, 0,
+						0.01, -.01,    1, 0, 0,
+						   0,    0,    0, 1, 0,
+					];
+			filters.push(new ColorMatrixFilter(matrix));
+		}
+
+		if (OptionsSubState.Tritanopiabool)
+		{
+			var matrix:Array<Float> = [
+						0.97, 0.11, -.08, 0, 0,
+						0.02, 0.82, 0.16, 0, 0,
+						0.06, 0.88, 0.18, 0, 0,
+					  	   0,    0,    0, 1, 0,
+					];
+			filters.push(new ColorMatrixFilter(matrix));
+		}
+			camHUD.setFilters(filters);
+			camGame.setFilters(filters);
+			camHUD.filtersEnabled = true;
+			camGame.filtersEnabled = true;
 	}
 
 	var curLight:Int = 0;

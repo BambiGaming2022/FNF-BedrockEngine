@@ -1,4 +1,4 @@
-package;
+/*package;
 
 import flixel.FlxSprite;
 import flixel.FlxG;
@@ -131,4 +131,4 @@ class ResultsState extends MusicBeatState
         num = Math.round(num) / Math.pow(10, precision);
         return num;
     }
-}
+}*/
