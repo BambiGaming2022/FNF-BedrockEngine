@@ -36,6 +36,13 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 		title = 'Graphics';
 		rpcTitle = 'Tweaking the Graphics'; // for Discord Rich Presence
 
+		var option:Option = new Option('Anti-Aliasing', 'If unchecked, disables anti-aliasing, increases performance\nat the cost of sharper visuals.',
+			'globalAntialiasing', 'bool', true);
+		// option.showBoyfriend = true;
+		option.onChange = onChangeAntiAliasing; // Changing onChange is only needed if you want to make a special interaction after it changes the value
+		addOption(option);
+		// need to rewrite showBoyfriend to avoid crash maybe
+
 		var option:Option = new Option('Auto Pause', "Whether or not to pause the game automatically when the window is unfocused", 'autoPause', 'bool', true);
 		option.onChange = onChangeAutoPause;
 		addOption(option);
@@ -133,6 +140,19 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 		{
 			FlxG.drawFramerate = ClientPrefs.framerate;
 			FlxG.updateFramerate = ClientPrefs.framerate;
+		}
+	}
+
+	function onChangeAntiAliasing()
+	{
+		for (sprite in members)
+		{
+			var sprite:Dynamic = sprite; // Make it check for FlxSprite instead of FlxBasic
+			var sprite:FlxSprite = sprite; // Don't judge me ok
+			if (sprite != null && (sprite is FlxSprite) && !(sprite is FlxText))
+			{
+				sprite.antialiasing = ClientPrefs.globalAntialiasing;
+			}
 		}
 	}
 }
