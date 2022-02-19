@@ -14,7 +14,7 @@ class ResultsState extends MusicBeatState
 {
     public var swagQuotes:FlxText;
     public var accText:FlxText;
-    public var ratingsShit:Array<Dynamic>;
+    public var ratingShit:Array<Dynamic>;
     // public var continue:FlxText;
 
     public var applause:FlxSound;
@@ -44,9 +44,7 @@ class ResultsState extends MusicBeatState
         var perfect:FlxSprite = new FlxSprite(-150, 65).loadGraphic(Paths.image('maniamode/resultsscreen/perfect'));
         perfect.antialiasing = true;
 
-        swagQuotes = new FlxText(20, 200, 0, 8);
-
-        ratingsShit = Ratings.maniaRatings;
+        ratingShit = Ratings.maniaMode;
         var percent:Float = PlayState.instance.ratingPercent;
 
         if(percent >= 1) {
@@ -64,24 +62,9 @@ class ResultsState extends MusicBeatState
 			}
 		}
         
-        switch(ratingResult) {
+        switch(ratingShit) {
             case 'D':
-                swagQuotes.text = 'You suck!';
-
-            case 'C':
-                swagQuotes.text = 'Laame...';
-
-            case 'B':
-                swagQuotes.text = 'Good, for real.';
-
-            case 'A':
-                swagQuotes.text = 'Nice! Keep it up!';
-
-            case 'S':
-                swagQuotes.text = 'Awesome! Pro player!!';
-
-            case 'X':
-                swagQuotes.text = 'Excellent! What\'s your train for this??';
+                swagQuotes = new FlxText;
         }
 
                 

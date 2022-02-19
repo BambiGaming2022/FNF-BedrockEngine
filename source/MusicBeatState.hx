@@ -7,7 +7,6 @@ import flixel.addons.ui.FlxUIState;
 import flixel.math.FlxRect;
 import flixel.util.FlxTimer;
 import flixel.addons.transition.FlxTransitionableState;
-import flixel.system.scaleModes.StageSizeScaleMode;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.FlxSprite;
@@ -24,8 +23,6 @@ class MusicBeatState extends FlxUIState
 	private var curStep:Int = 0;
 	private var curBeat:Int = 0;
 
-	public static var modeStage:StageSizeScaleMode;
-
 	private var controls(get, never):Controls;
 
 	inline function get_controls():Controls
@@ -41,8 +38,6 @@ class MusicBeatState extends FlxUIState
 			openSubState(new CustomFadeTransition(0.7, true));
 		}
 		FlxTransitionableState.skipNextTransOut = false;
-
-		modeStage = new StageSizeScaleMode();
 	}
 
 	#if (VIDEOS_ALLOWED && windows)
