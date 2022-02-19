@@ -176,7 +176,6 @@ class PlayState extends MusicBeatState
 
 	public var timeBar:FlxBar;
 
-	public var marvelouses:Int = 0;
 	public var sicks:Int = 0;
 	public var goods:Int = 0;
 	public var bads:Int = 0;
@@ -1397,10 +1396,7 @@ class PlayState extends MusicBeatState
 		judgementCounter.screenCenter(Y);
 
 		// Just in case.
-		if (ClientPrefs.marvelouses)
-			judgementCounter.text = 'Marvs: ${marvelouses}\nSicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nCombo Breaks: ${songMisses}';
-		else
-			judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}$\nCombo Breaks: ${songMisses}';
+		judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}$\nCombo Breaks: ${songMisses}';
 
 		// then we add them
 		add(judgementCounter);
@@ -4428,14 +4424,8 @@ class PlayState extends MusicBeatState
 					score = 200;
 					goods++;
 				case "sick":
-					if (!ClientPrefs.marvelouses)
-						totalNotesHit += 1;
-					else
-						totalNotesHit += 0.95;
-					sicks++;
-				case "marvelous":
 					totalNotesHit += 1;
-					marvelouses++;
+					sicks++;
 			}
 		}
 		else
@@ -4464,7 +4454,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		if (daRating == (ClientPrefs.marvelouses ? 'marvelous' : 'sick') && !note.noteSplashDisabled)
+		if (daRating == ('sick') && !note.noteSplashDisabled)
 			spawnNoteSplashOnNote(note, false);
 
 		if (!practiceMode && !cpuControlled)
@@ -5787,8 +5777,6 @@ class PlayState extends MusicBeatState
 
 			// Rating FC
 			ratingFC = "";
-			if (marvelouses > 0)
-				ratingFC = "MFC"; // Marvelous Full Combo
 			if (sicks > 0)
 				ratingFC = "SFC"; // Sick Full Combo
 			if (goods > 0)
@@ -5800,10 +5788,7 @@ class PlayState extends MusicBeatState
 		setOnLuas('rating', ratingPercent);
 		setOnLuas('ratingName', ratingName);
 		setOnLuas('ratingFC', ratingFC);
-		if (ClientPrefs.marvelouses)
-			judgementCounter.text = 'Marvs: ${marvelouses}\nSicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nCombo Breaks: ${songMisses}\n';
-		else
-			judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nCombo Breaks: ${songMisses}\n';
+		judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nCombo Breaks: ${songMisses}\n';
 	}
 
 	public static var othersCodeName:String = 'otherAchievements';
