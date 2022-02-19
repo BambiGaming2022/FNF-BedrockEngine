@@ -1568,14 +1568,10 @@ class PlayState extends MusicBeatState
 
 				case 'ugh':
 					dad.alpha = 0;
-					healthBarBG.alpha = 0;
-					healthBar.alpha = 0;
-					iconP1.alpha = 0;
-					iconP2.alpha = 0;
-					scoreTxt.alpha = 0;
+					camHUD.alpha = 0;
 
 					var anim1:FlxSprite;
-					anim1 = new FlxSprite(dad.x,dad.y);
+					anim1 = new FlxSprite(-30,300);
 					anim1.frames = Paths.getSparrowAtlas('ughCutscene/ugh', "preload");
 					anim1.animation.addByPrefix('idle',"tankman cutscene",30,false);
 					anim1.animation.play('idle');
@@ -1587,7 +1583,6 @@ class PlayState extends MusicBeatState
 							if (frameNumber == 137)
 								{
 									boyfriend.playAnim('singUP');
-									camFollow.x += 390;
 								}
 
 							if (frameNumber == 1)
@@ -1599,7 +1594,11 @@ class PlayState extends MusicBeatState
 									sound.play();
 									FlxG.sound.list.add(sound);
 								}						
-								
+							if (frameNumber == 110)
+								{
+									camFollow.x += 430;
+								}	
+
 							if (frameNumber == 311)
 								{
 									camFollow.x = 450;
@@ -1620,11 +1619,7 @@ class PlayState extends MusicBeatState
 							startCountdown();
 							if (!ClientPrefs.hideHud)
 								{
-									FlxTween.tween(scoreTxt, {alpha: 1}, (Conductor.stepCrochet * 16 / 1000), {ease: FlxEase.quadInOut});
-									FlxTween.tween(iconP1, {alpha: 1}, (Conductor.stepCrochet * 16 / 1000), {ease: FlxEase.quadInOut});
-									FlxTween.tween(iconP2, {alpha: 1}, (Conductor.stepCrochet * 16 / 1000), {ease: FlxEase.quadInOut});
-									FlxTween.tween(healthBar, {alpha: 1}, (Conductor.stepCrochet * 16 / 1000), {ease: FlxEase.quadInOut});
-									FlxTween.tween(healthBarBG, {alpha: 1}, (Conductor.stepCrochet * 16 / 1000), {ease: FlxEase.quadInOut});
+									FlxTween.tween(camHUD, {alpha: 1}, (Conductor.stepCrochet * 16 / 1000), {ease: FlxEase.quadInOut});
 								}
 						}	
 						
