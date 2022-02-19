@@ -4436,6 +4436,7 @@ class PlayState extends MusicBeatState
 					score = -300;
 					combo = 0;
 					songMisses++;
+					totalMisses++;
 					health -= 0.1;
 					shits++;
 				case 'bad':
