@@ -61,7 +61,7 @@ class ResultsState extends MusicBeatState
         
         switch(ratingShit) {
             case 'D':
-                swagQuotes = new FlxText;
+                swagQuotes = new FlxText();
         }
 
         resultRank = new FlxSprite(FlxG.width - 400, 60).loadGraphic(Paths.image('maniamode/rankresults/' + ratingResult));
