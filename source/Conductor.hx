@@ -61,17 +61,13 @@ class Conductor
 			diff:Float = 0) // STOLEN FROM KADE ENGINE (bbpanzu) - I had to rewrite it later anyway after i added the custom hit windows lmao (Shadow Mario)
 	{
 		var timingWindows:Array<Int> = [
-			ClientPrefs.marvWindow,
 			ClientPrefs.sickWindow,
 			ClientPrefs.goodWindow,
 			ClientPrefs.badWindow
 		];
 		// tryna do MS based judgment due to popular demand
 		var windowNames:Array<String> = ['sick', 'good', 'bad'];
-		if (ClientPrefs.marvelouses)
-			windowNames = ['marvelous', 'sick', 'good', 'bad']; // i dont think that works on haxe
 
-		// var diff = Math.abs(note.strumTime - Conductor.songPosition) / (PlayState.songMultiplier >= 1 ? PlayState.songMultiplier : 1);
 		for (i in 0...timingWindows.length) // based on 4 timing windows, will break with anything else
 		{
 			if (diff <= timingWindows[Math.round(Math.min(i, timingWindows.length - 1))])
@@ -112,8 +108,6 @@ class Conductor
 			totalPos += ((((60 / curBPM) * 1000) / (denominator / 4)) / 4) * deltaSteps;
 		}
 		trace("new BPM map BUDDY " + bpmChangeMap);
-
-		recalculateStuff(songMultiplier); // haha funny speed mods
 	}
 
 	public static function changeBPM(newBpm:Float)

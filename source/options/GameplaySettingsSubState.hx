@@ -62,9 +62,6 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		var option:Option = new Option('Instant Respawn', "If checked, skips the Game Over Screen entirely.", 'instantRespawn', 'bool', false);
 		addOption(option);
 
-		var option:Option = new Option('Marvelous Ratings', 'If unchecked, marvelous ratings will not be used.', 'marvelouses', 'bool', false);
-		addOption(option);
-
 		var option:Option = new Option('Middlescroll', 'If checked, your notes get centered.', 'middleScroll', 'bool', false);
 		addOption(option);
 

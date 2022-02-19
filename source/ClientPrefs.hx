@@ -53,7 +53,6 @@ class ClientPrefs
 
 	public static var comboOffset:Array<Int> = [0, 0, 0, 0];
 	public static var ratingOffset:Int = 0;
-	public static var marvWindow:Int = 25;
 	public static var sickWindow:Int = 45;
 	public static var goodWindow:Int = 90;
 	public static var badWindow:Int = 135;
@@ -86,9 +85,6 @@ class ClientPrefs
 	public static var screenRes:String = '1280x720';
 	public static var iconSupport:Null<Bool> = false;
 	public static var coolFilters:String = 'None';
-
-	// Added by Bedrock Engine (via Pull Requests)
-	public static var marvelouses:Bool = false;
 	public static var showWatermarks:Bool = true;
 
 	// Every key has two binds, add your key bind down here and then add your control on options/ControlsSubState.hx and Controls.hx
@@ -179,10 +175,6 @@ class ClientPrefs
 		FlxG.save.data.noteSkin = noteSkin;
 		FlxG.save.data.screenRes = screenRes;
 		FlxG.save.data.coolFilters = coolFilters;
-
-		// Added by Bedrock Engine (via Pull Requests)
-		FlxG.save.data.marvWindow = marvWindow;
-		FlxG.save.data.marvelouses = marvelouses;
 		FlxG.save.data.showWatermarks = showWatermarks;
 
 		FlxG.save.flush();
@@ -416,16 +408,6 @@ class ClientPrefs
 		}
 		if(FlxG.save.data.coolFilters != null) {
 			coolFilters = FlxG.save.data.coolFilters;
-		}
-
-		// Added by Bedrock Engine (via Pull Requests)
-		if (FlxG.save.data.marvWindow != null)
-		{
-			marvWindow = FlxG.save.data.marvWindow;
-		}
-		if (FlxG.save.data.marvelouses != null)
-		{
-			marvelouses = FlxG.save.data.marvelouses;
 		}
 		if (FlxG.save.data.showWatermarks != null)
 		{

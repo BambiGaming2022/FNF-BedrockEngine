@@ -445,7 +445,9 @@ class TitleState extends MusicBeatState
 				if (titleText != null)
 					titleText.animation.play('press');
 
-				FlxG.camera.flash(FlxColor.GRAY, 1); // my eyes
+				if(ClientPrefs.flashing) {
+					FlxG.camera.flash(FlxColor.GRAY, 1); // my eyes
+				}
 				FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
 				FlxTween.tween(logoBl, {x: -1500, angle: 10, alpha: 0}, 2, {ease: FlxEase.expoInOut});
 				// FlxTween.tween(gfDance, {x: -1500}, 3.7, {ease: FlxEase.expoInOut});
@@ -667,7 +669,9 @@ class TitleState extends MusicBeatState
 		{
 			remove(ngSpr);
 
-			FlxG.camera.flash(FlxColor.WHITE, 1);
+			if(ClientPrefs.flashing) {
+				FlxG.camera.flash(FlxColor.WHITE, 1);
+			}
 
 			remove(credGroup);
 			skippedIntro = true;
