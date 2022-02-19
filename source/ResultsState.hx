@@ -79,7 +79,8 @@ class ResultsState extends MusicBeatState
 
             case 'X':
                 swagQuotes.text = 'Excellent! What\'s your train for this??';
-        }
+
+                swagQuotes = new FlxText();
 
         resultRank = new FlxSprite(FlxG.width - 400, 60).loadGraphic(Paths.image('maniamode/rankresults/' + ratingResult));
         resultRank.antialiasing = ClientPrefs.globalAntialiasing;
