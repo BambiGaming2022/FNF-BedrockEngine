@@ -2071,7 +2071,7 @@ class PlayState extends MusicBeatState
 		{
 			generateStaticArrows(0);
 			generateStaticArrows(1);
-			ShaderFilters();
+			/*shaderFilters();*/
 			laneunderlay.x = playerStrums.members[0].x - 25;
 			laneunderlayOpponent.x = opponentStrums.members[0].x - 25;
 
@@ -5790,7 +5790,7 @@ class PlayState extends MusicBeatState
 		moveTank();
 	}
 
-	function ShaderFilters():Void
+	/*function shaderFilters():Void
 	{
 		//Matrix shaders:
 		if (ClientPrefs.coolFilters == 'Deuteranopia')
@@ -5829,7 +5829,7 @@ class PlayState extends MusicBeatState
 			camGame.setFilters(filters);
 			camHUD.filtersEnabled = true;
 			camGame.filtersEnabled = true;
-	}
+	}*/
 
 	var curLight:Int = 0;
 	var curLightEvent:Int = 0;
