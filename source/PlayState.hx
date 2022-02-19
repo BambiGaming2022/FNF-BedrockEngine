@@ -5792,7 +5792,7 @@ class PlayState extends MusicBeatState
 	function ShaderFilters():Void
 	{
 		//Matrix shaders:
-		if (OptionsSubState.Deuteranopiabool)
+		if (ClientPrefs.accessibilityFilters == 'Deuteranopia')
 		{
 			var matrix:Array<Float> = [
 						0.43, 0.72, -.15, 0, 0,
@@ -5803,7 +5803,7 @@ class PlayState extends MusicBeatState
 			filters.push(new ColorMatrixFilter(matrix));
 		}
 
-		if (OptionsSubState.Protanopiabool)
+		if (ClientPrefs.accessibilityFilters == 'Protanopia')
 		{
 			var matrix:Array<Float> = [
 						0.20, 0.99, -.19, 0, 0,
@@ -5814,7 +5814,7 @@ class PlayState extends MusicBeatState
 			filters.push(new ColorMatrixFilter(matrix));
 		}
 
-		if (OptionsSubState.Tritanopiabool)
+		if (ClientPrefs.accessibilityFilters == 'Tritanopia')
 		{
 			var matrix:Array<Float> = [
 						0.97, 0.11, -.08, 0, 0,
