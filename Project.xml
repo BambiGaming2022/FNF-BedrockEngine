@@ -65,7 +65,10 @@
 		<library name="week4"         preload="true" />
 		<library name="week5"         preload="true" />
 		<library name="week6"         preload="true" />
+<<<<<<< HEAD
 		<!--<library name="week7"         preload="true" /> -->
+=======
+>>>>>>> f084b8b4e14e13f4e4f1ef2fac91fb8003de7013
 	</section>
 	
 	<section if="NO_PRELOAD_ALL">
@@ -76,7 +79,10 @@
 		<library name="week4"         preload="false" />
 		<library name="week5"         preload="false" />
 		<library name="week6"         preload="false" />
+<<<<<<< HEAD
 		<!-- <library name="week7"         preload="false" /> -->
+=======
+>>>>>>> f084b8b4e14e13f4e4f1ef2fac91fb8003de7013
 	</section>
 	
 	<assets path="plugins/"             rename=''               if="VIDEOS_ALLOWED windows" />
@@ -89,7 +95,6 @@
 	<assets path="assets/week4"         library="week4"/>
 	<assets path="assets/week5"         library="week5"/>
 	<assets path="assets/week6"         library="week6"/>
-	<assets path="assets/week7"         library="week7"/>
 	
 	<assets path='example_mods' rename='mods' embed='false' if="MODS_ALLOWED"/>
 	<assets path='art/readme.txt' rename='do NOT readme.txt' />
