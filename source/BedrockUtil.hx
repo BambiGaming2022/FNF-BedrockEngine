@@ -62,7 +62,7 @@ class BedrockUtil
 		}
 	}
 
-/*	public static function getNoteSkin(skin:String = 'normal', ?pixel:Bool = false)
+	public static function getNoteSkin(skin:String = 'normal', ?pixel:Bool = false)
 	{
 		var path:String = 'noteskins/';
 		if (pixel)
@@ -75,6 +75,7 @@ class BedrockUtil
 
 		return path;
 	}
+	/*
 
 typedef JudgementSkinFile =
 {
