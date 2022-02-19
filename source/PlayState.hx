@@ -1541,127 +1541,127 @@ class PlayState extends MusicBeatState
 						FlxG.sound.play(Paths.sound('ANGRY'));
 					schoolIntro(doof);
 
-				case 'ugh':
-					dad.alpha = 0;
-					healthBarBG.alpha = 0;
-					healthBar.alpha = 0;
-					iconP1.alpha = 0;
-					iconP2.alpha = 0;
-					scoreTxt.alpha = 0;
-
-					var anim1:FlxSprite;
-					anim1 = new FlxSprite(dad.x,dad.y);
-					anim1.frames = Paths.getSparrowAtlas('ughCutscene/ugh', 'week7');
-					anim1.animation.addByPrefix('idle',"tankman cutscene",30,false);
-					anim1.animation.play('idle');
-					anim1.antialiasing = true;
-					add(anim1);
-
-					anim1.animation.callback = function(idle, frameNumber:Int, frameIndex:Int)
-						{
-							if (frameNumber == 137)
-								{
-									boyfriend.playAnim('singUP');
-									camFollow.x += 390;
-								}
-
-							if (frameNumber == 1)
-								{
-									camFollow.x = 290;
-									FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom = 1.2}, 2);
-									var sound:FlxSound;	
-									sound = new FlxSound().loadEmbedded(Paths.getPreloadPath('week7/sounds/cuts1'));
-									sound.play();
-									FlxG.sound.list.add(sound);
-								}						
-								
-							if (frameNumber == 311)
-								{
-									camFollow.x = 450;
-									FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom = 0.9}, 2);
-								}								
-							
-							if (frameNumber == 181)
-								{
-									camFollow.x = 390;
-								}	
-								
-						}					
-
-						anim1.animation.finishCallback = function(idle)
-						{
-							remove(anim1);
-							dad.alpha = 1;
-							startCountdown();
-							if (!ClientPrefs.hideHud)
-								{
-									FlxTween.tween(scoreTxt, {alpha: 1}, (Conductor.stepCrochet * 16 / 1000), {ease: FlxEase.quadInOut});
-									FlxTween.tween(iconP1, {alpha: 1}, (Conductor.stepCrochet * 16 / 1000), {ease: FlxEase.quadInOut});
-									FlxTween.tween(iconP2, {alpha: 1}, (Conductor.stepCrochet * 16 / 1000), {ease: FlxEase.quadInOut});
-									FlxTween.tween(healthBar, {alpha: 1}, (Conductor.stepCrochet * 16 / 1000), {ease: FlxEase.quadInOut});
-									FlxTween.tween(healthBarBG, {alpha: 1}, (Conductor.stepCrochet * 16 / 1000), {ease: FlxEase.quadInOut});
-								}
-						}	
-						
-				case 'guns':		
-					dad.alpha = 0;
-					healthBarBG.alpha = 0;
-					healthBar.alpha = 0;
-					iconP1.alpha = 0;
-					iconP2.alpha = 0;
-					scoreTxt.alpha = 0;
-
-					var anim2:FlxSprite;
-					anim2 = new FlxSprite(dad.x,dad.y);
-					anim2.frames = Paths.getSparrowAtlas('gunsCutscene/guns', 'week7');
-					anim2.animation.addByPrefix('idle',"tankman cuts",30,false);
-					anim2.animation.play('idle');
-					anim2.antialiasing = true;
-					add(anim2);
-
-					anim2.animation.callback = function(idle, frameNumber:Int, frameIndex:Int)
-						{
-
-							if (frameNumber == 1)
-								{
-									camFollow.x = 340;
-									FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom = 1.2}, 3);
-									var sound:FlxSound;	
-									sound = new FlxSound().loadEmbedded(Paths.getPreloadPath('week7/sounds/cuts2'));
-									sound.play();
-									FlxG.sound.list.add(sound);
+					case 'ugh':
+						dad.alpha = 0;
+						healthBarBG.alpha = 0;
+						healthBar.alpha = 0;
+						iconP1.alpha = 0;
+						iconP2.alpha = 0;
+						scoreTxt.alpha = 0;
 	
-								}						
+						var anim1:FlxSprite;
+						anim1 = new FlxSprite(dad.x,dad.y);
+						anim1.frames = Paths.getSparrowAtlas('ughCutsene/ugh', 'preload');
+						anim1.animation.addByPrefix('idle',"tankman cutscene",30,false);
+						anim1.animation.play('idle');
+						anim1.antialiasing = true;
+						add(anim1);
+	
+						anim1.animation.callback = function(idle, frameNumber:Int, frameIndex:Int)
+							{
+								if (frameNumber == 137)
+									{
+										boyfriend.playAnim('singUP');
+										camFollow.x += 390;
+									}
+	
+								if (frameNumber == 1)
+									{
+										camFollow.x = 290;
+										FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom = 1.2}, 2);
+										var sound:FlxSound;	
+										sound = new FlxSound().loadEmbedded(Paths.sound('cuts1', 'week7'));
+										sound.play();
+										FlxG.sound.list.add(sound);
+									}						
+									
+								if (frameNumber == 311)
+									{
+										camFollow.x = 450;
+										FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom = 0.9}, 2);
+									}								
 								
-							if (frameNumber == 114)
-								{
-									gf.playAnim('sad');
-									camFollow.x = 370;
-									FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom = 1.3}, 0.1);
-								}								
-							
-							if (frameNumber == 233)
-								{
-									camFollow.x = 450;
-									FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom = 0.9}, 2);
-								}	
+								if (frameNumber == 181)
+									{
+										camFollow.x = 390;
+									}	
+									
+							}					
+	
+							anim1.animation.finishCallback = function(idle)
+							{
+								remove(anim1);
+								dad.alpha = 1;
+								startCountdown();
+								if (!ClientPrefs.hideHud)
+									{
+										FlxTween.tween(scoreTxt, {alpha: 1}, (Conductor.stepCrochet * 16 / 1000), {ease: FlxEase.quadInOut});
+										FlxTween.tween(iconP1, {alpha: 1}, (Conductor.stepCrochet * 16 / 1000), {ease: FlxEase.quadInOut});
+										FlxTween.tween(iconP2, {alpha: 1}, (Conductor.stepCrochet * 16 / 1000), {ease: FlxEase.quadInOut});
+										FlxTween.tween(healthBar, {alpha: 1}, (Conductor.stepCrochet * 16 / 1000), {ease: FlxEase.quadInOut});
+										FlxTween.tween(healthBarBG, {alpha: 1}, (Conductor.stepCrochet * 16 / 1000), {ease: FlxEase.quadInOut});
+									}
+							}	
+						
+					case 'guns':		
+						dad.alpha = 0;
+						healthBarBG.alpha = 0;
+						healthBar.alpha = 0;
+						iconP1.alpha = 0;
+						iconP2.alpha = 0;
+						scoreTxt.alpha = 0;
+	
+						var anim2:FlxSprite;
+						anim2 = new FlxSprite(dad.x,dad.y);
+						anim2.frames = Paths.getSparrowAtlas('gunsCutsene/guns', 'preload');
+						anim2.animation.addByPrefix('idle',"tankman cuts",30,false);
+						anim2.animation.play('idle');
+						anim2.antialiasing = true;
+						add(anim2);
+	
+						anim2.animation.callback = function(idle, frameNumber:Int, frameIndex:Int)
+							{
+	
+								if (frameNumber == 1)
+									{
+										camFollow.x = 340;
+										FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom = 1.2}, 3);
+										var sound:FlxSound;	
+										sound = new FlxSound().loadEmbedded(Paths.sound('cuts2', 'week7'));
+										sound.play();
+										FlxG.sound.list.add(sound);
+		
+									}						
+									
+								if (frameNumber == 114)
+									{
+										gf.playAnim('sad');
+										camFollow.x = 370;
+										FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom = 1.3}, 0.1);
+									}								
 								
-						}					
-
-						anim2.animation.finishCallback = function(idle)
-						{
-							remove(anim2);
-							dad.alpha = 1;
-							startCountdown();
-							if (!ClientPrefs.hideHud)
-								{
-									FlxTween.tween(scoreTxt, {alpha: 1}, (Conductor.stepCrochet * 16 / 1000), {ease: FlxEase.quadInOut});
-									FlxTween.tween(iconP1, {alpha: 1}, (Conductor.stepCrochet * 16 / 1000), {ease: FlxEase.quadInOut});
-									FlxTween.tween(iconP2, {alpha: 1}, (Conductor.stepCrochet * 16 / 1000), {ease: FlxEase.quadInOut});
-									FlxTween.tween(healthBar, {alpha: 1}, (Conductor.stepCrochet * 16 / 1000), {ease: FlxEase.quadInOut});
-									FlxTween.tween(healthBarBG, {alpha: 1}, (Conductor.stepCrochet * 16 / 1000), {ease: FlxEase.quadInOut});
-								}
-						}		
+								if (frameNumber == 233)
+									{
+										camFollow.x = 450;
+										FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom = 0.9}, 2);
+									}	
+									
+							}					
+	
+							anim2.animation.finishCallback = function(idle)
+							{
+								remove(anim2);
+								dad.alpha = 1;
+								startCountdown();
+								if (!ClientPrefs.hideHud)
+									{
+										FlxTween.tween(scoreTxt, {alpha: 1}, (Conductor.stepCrochet * 16 / 1000), {ease: FlxEase.quadInOut});
+										FlxTween.tween(iconP1, {alpha: 1}, (Conductor.stepCrochet * 16 / 1000), {ease: FlxEase.quadInOut});
+										FlxTween.tween(iconP2, {alpha: 1}, (Conductor.stepCrochet * 16 / 1000), {ease: FlxEase.quadInOut});
+										FlxTween.tween(healthBar, {alpha: 1}, (Conductor.stepCrochet * 16 / 1000), {ease: FlxEase.quadInOut});
+										FlxTween.tween(healthBarBG, {alpha: 1}, (Conductor.stepCrochet * 16 / 1000), {ease: FlxEase.quadInOut});
+									}
+							}		
 
 				default:
 					startCountdown();
