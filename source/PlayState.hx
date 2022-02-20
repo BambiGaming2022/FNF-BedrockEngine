@@ -774,8 +774,8 @@ class PlayState extends MusicBeatState
 			case "tank": //Week 7
 			if (SONG.song == "Stress")
 			{
-				picoStep = Json.parse(openfl.utils.Assets.getText(Paths.json('stress/picospeaker', "preload")));
-				tankStep = Json.parse(openfl.utils.Assets.getText(Paths.json('stress/tankSpawn', "preload")));
+				picoStep = Json.parse(openfl.utils.Assets.getText(Paths.json('stress/picospeaker')));
+				tankStep = Json.parse(openfl.utils.Assets.getText(Paths.json('stress/tankSpawn')));
 			}
 
 			if (SONG.player1 == 'bf-holding-gf')
@@ -788,125 +788,64 @@ class PlayState extends MusicBeatState
 			/*maybe make this a switch??
 			- Gui iago*/
 
-			var sky:FlxSprite = new FlxSprite(-400,-400).loadGraphic(Paths.image('militaryZone/tankSky',"preload"));
-			sky.scrollFactor.set(0, 0);
-			sky.antialiasing = true;
+			var sky:BGSprite = new BGSprite('tankSky', -400, -400, 0, 0);
 			sky.setGraphicSize(Std.int(sky.width * 1.5));
 			add(sky);
 
-			var clouds:FlxSprite = new FlxSprite(FlxG.random.int(-700, -100), FlxG.random.int(-20, 20)).loadGraphic(Paths.image('militaryZone/tankClouds', "preload"));
-			clouds.scrollFactor.set(0.1, 0.1);
+			var clouds:BGSprite = new BGSprite('tankClouds', FlxG.random.int(-700, -100), FlxG.random.int(-20, 20), 0.1, 0.1);
 			clouds.velocity.x = FlxG.random.float(5, 15);
-			clouds.antialiasing = true;
 			clouds.updateHitbox();
 			add(clouds);
 
-			var mountains:FlxSprite = new FlxSprite(-300,-20).loadGraphic(Paths.image('militaryZone/tankMountains', "preload"));
-			mountains.scrollFactor.set(0.2, 0.2);
+			var mountains:BGSprite = new BGSprite('tankMountains', -300, -20, 0.2, 0.2);
 			mountains.setGraphicSize(Std.int(1.2 * mountains.width));
 			mountains.updateHitbox();
-			mountains.antialiasing = true;
 			add(mountains);
 
-			var buildings:FlxSprite = new FlxSprite(-200,0).loadGraphic(Paths.image('militaryZone/tankBuildings', "preload"));
-			buildings.scrollFactor.set(0.3, 0.3);
+			var buildings:BGSprite = new BGSprite('tankBuildings', -200, 0, 0.3, 0.3);
 			buildings.setGraphicSize(Std.int(buildings.width * 1.1));
 			buildings.updateHitbox();
-			buildings.antialiasing = true;
 			add(buildings);
 
-			var ruins:FlxSprite = new FlxSprite(-200,0).loadGraphic(Paths.image('militaryZone/tankRuins', "preload"));
-			ruins.scrollFactor.set(0.35, 0.35);
+			var ruins:BGSprite = new BGSprite('tankRuins', -200, 0, 0.35, 0.35);
 			ruins.setGraphicSize(Std.int(ruins.width * 1.1));
 			ruins.updateHitbox();
-			ruins.antialiasing = true;
 			add(ruins);
 
-			var smokeLeft:FlxSprite = new FlxSprite(-200,-100);
-			smokeLeft.frames = Paths.getSparrowAtlas('militaryZone/smokeLeft', "preload");
-			smokeLeft.animation.addByPrefix('idle', 'SmokeBlurLeft ', 24, true);
-			smokeLeft.scrollFactor.set(0.4, 0.4);
-			smokeLeft.antialiasing = true;
-			smokeLeft.animation.play('idle');
+			var smokeLeft:BGSprite = new BGSprite('smokeLeft', -200, -100, 0.4, 0.4, ['SmokeBlurLeft '], true);
 			add(smokeLeft);
 
-			var smokeRight:FlxSprite = new FlxSprite(1100,-100);
-			smokeRight.frames = Paths.getSparrowAtlas('militaryZone/smokeRight', "preload");
-			smokeRight.animation.addByPrefix('idle', 'SmokeRight ', 24, true);
-			smokeRight.scrollFactor.set(0.4, 0.4);
-			smokeRight.antialiasing = true;
-			smokeRight.animation.play('idle');
+			var smokeRight:BGSprite = new BGSprite('smokeRight', 1100, -100, 0.4, 0.4, ['SmokeRight '], true);
 			add(smokeRight);
 
-			tower = new FlxSprite(100, 120);
-			tower.frames = Paths.getSparrowAtlas('militaryZone/tankWatchtower', "preload");
-			tower.animation.addByPrefix('idle', 'watchtower gradient color', 24, false);
-			tower.antialiasing = true;
+			tower = new BGSprite('tankWatchtower', 100, 120, 0.4, 0.4, ['watchtower gradient color'], true);
 			add(tower);
 
-			tankRolling = new FlxSprite(300,300);
-			tankRolling.frames = Paths.getSparrowAtlas('militaryZone/tankRolling', "preload");
-			tankRolling.animation.addByPrefix('idle', 'BG tank w lighting ', 24, true);
-			tankRolling.scrollFactor.set(0.5, 0.5);
-			tankRolling.antialiasing = true;
-			tankRolling.animation.play('idle');
+			tankRolling = new BGSprite('tankRolling', 300, 300, 0.5, 0.5, ['BG tank w lighting ']);
 			add(tankRolling);
 
-			if (PlayState.SONG.song == "Stress")
+			if (SONG.song == "stress")
 			{
 				tankmanRun = new FlxTypedGroup<TankmenBG>();
 				add(tankmanRun);
 			}
 
-			var ground:FlxSprite = new FlxSprite(-420, -150).loadGraphic(Paths.image('militaryZone/tankGround', "preload"));
-			ground.scrollFactor.set();
-			ground.antialiasing = true;
+			var ground:BGSprite = new BGSprite('tankGround', -420, -150);
 			ground.setGraphicSize(Std.int(ground.width * 1.15));
-			ground.scrollFactor.set(1, 1);
 			ground.updateHitbox();
 			add(ground);
 
-			tankBop1 = new FlxSprite(-500,650);
-			tankBop1.frames = Paths.getSparrowAtlas('militaryZone/tank0', "preload");
-			tankBop1.animation.addByPrefix('bop', 'fg tankhead far right', 24);
-			tankBop1.scrollFactor.set(1.7, 1.5);
-			tankBop1.antialiasing = true;
-			add(tankBop1);
+			tankBop1 = new BGSprite('tank0', -500, 650, 1.7, 1.5, ['fg tankhead far right'], true);
 
-			tankBop2 = new FlxSprite(-300,750);
-			tankBop2.frames = Paths.getSparrowAtlas('militaryZone/tank1', "preload");
-			tankBop2.animation.addByPrefix('bop','fg tankhead 5', 24);
-			tankBop2.scrollFactor.set(2.0, 0.2);
-			tankBop2.antialiasing = true;
-			add(tankBop2);
+			tankBop2 = new BGSprite('tank1', -300, 750, 2.0, 0.2, ['fg tankhead 5'], true);
 
-			tankBop3 = new FlxSprite(450,940);
-			tankBop3.frames = Paths.getSparrowAtlas('militaryZone/tank2', "preload");
-			tankBop3.animation.addByPrefix('bop','foreground man 3', 24);
-			tankBop3.scrollFactor.set(1.5, 1.5);
-			tankBop3.antialiasing = true;
-			add(tankBop3);
+			tankBop3 = new BGSprite('tank2', 450, 940, 1.5, 1.5, ['foreground man 3'], true);
 
-			tankBop4 = new FlxSprite(1300,1200);
-			tankBop4.frames = Paths.getSparrowAtlas('militaryZone/tank3', "preload");
-			tankBop4.animation.addByPrefix('bop','fg tankhead 4', 24);
-			tankBop4.scrollFactor.set(3.5, 2.5);
-			tankBop4.antialiasing = true;
-			add(tankBop4);
+			tankBop4 = new BGSprite('tank3', 1300, 1200, 3.5, 2.5, ['fg tankhead 4'], true);
 
-			tankBop5 = new FlxSprite(1300,900);
-			tankBop5.frames = Paths.getSparrowAtlas('militaryZone/tank4', "preload");
-			tankBop5.animation.addByPrefix('bop','fg tankman bobbin 3', 24);
-			tankBop5.scrollFactor.set(1.5, 1.5);
-			tankBop5.antialiasing = true;
-			add(tankBop5);
-
-			tankBop6 = new FlxSprite(1620,700);
-			tankBop6.frames = Paths.getSparrowAtlas('militaryZone/tank5', "preload");
-			tankBop6.animation.addByPrefix('bop','fg tankhead far right', 24);
-			tankBop6.scrollFactor.set(1.5, 1.5);
-			tankBop6.antialiasing = true;
-			add(tankBop6);
+			tankBop5 = new BGSprite('tank4', 1300, 900, 1.5, 1.5, ['fg tankman bobbin 3'], true);
+			
+			tankBop6 = new BGSprite('tank5', 1620, 700, 1.5, 1.5, ['fg tankhead far right'], true);
 		}
 
 		if (isPixelStage)
@@ -1590,9 +1529,9 @@ class PlayState extends MusicBeatState
 									sound.play();
 									FlxG.sound.list.add(sound);
 								}						
-							if (frameNumber == 110)
+							if (frameNumber == 108)
 								{
-									camFollow.x += 470;
+									camFollow.x += 670;
 								}	
 
 							if (frameNumber == 311)
