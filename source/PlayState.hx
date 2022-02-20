@@ -3080,7 +3080,7 @@ class PlayState extends MusicBeatState
 		var ratingNameTwo:String = ratingName;
 		var divider:String = ' ' + '-' + ' ';
 
-		scoreTxt.text = 'Score: ' + songScore;
+		scoreTxt.text = 'Score: ${songScore}';
 		scoreTxt.text += divider + 'Accuracy:' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
 
 		if (ratingFC == "" || totalMisses > 0)
@@ -3088,7 +3088,7 @@ class PlayState extends MusicBeatState
 		else
 			scoreTxt.text += ' [' + ratingFC + ']';
 
-		scoreTxt.text += divider + 'Misses: ' + songMisses;
+		scoreTxt.text += divider + 'Misses: ${songMisses}';
 
 		if (ratingFC == "")
 			scoreTxt.text += divider + '?';
@@ -3096,7 +3096,7 @@ class PlayState extends MusicBeatState
 			scoreTxt.text += divider + ratingName;
 
 		if (ClientPrefs.ratingSystem == "None")
-			scoreTxt.text = 'Score: ${songScore} Misses: ${totalMisses}';
+			scoreTxt.text = 'Score: ${songScore}' + divider + 'Misses: ${totalMisses}';
 
 		if (botplayTxt.visible)
 		{
