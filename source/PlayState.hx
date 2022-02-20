@@ -1592,7 +1592,7 @@ class PlayState extends MusicBeatState
 								}						
 							if (frameNumber == 110)
 								{
-									camFollow.x += 430;
+									camFollow.x += 470;
 								}	
 
 							if (frameNumber == 311)
@@ -3088,7 +3088,7 @@ class PlayState extends MusicBeatState
 		else
 			scoreTxt.text += ' [' + ratingFC + ']';
 
-		scoreTxt.text += divider + 'Misses:' + songMisses;
+		scoreTxt.text += divider + 'Misses: ' + songMisses;
 
 		if (ratingFC == "")
 			scoreTxt.text += divider + '?';

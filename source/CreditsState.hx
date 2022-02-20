@@ -234,7 +234,7 @@ class CreditsState extends MusicBeatState
 			[''],
 			['Engine Shoutouts'],
 			[
-				'shubs',
+				'Shubs',
 				'shubs',
 				'Made Forever Engine, Main Inspiration',
 				'https://github.com/Yoshubs/Forever-Engine-Legacy',
@@ -268,7 +268,7 @@ class CreditsState extends MusicBeatState
 				'shubs',
 				'Additional Programmer of Psych Engine',
 				'https://twitter.com/bbsub3',
-				'389A58'
+				'4494E6'
 			],
 			['Former Engine Members'],
 			[
@@ -280,13 +280,6 @@ class CreditsState extends MusicBeatState
 			],
 			[''],
 			['Engine Contributors'],
-			[
-				'shubs',
-				'shubs',
-				'New Input System Programmer',
-				'https://twitter.com/yoshubs',
-				'4494E6'
-			],
 			[
 				'SqirraRNG',
 				'gedehari',
