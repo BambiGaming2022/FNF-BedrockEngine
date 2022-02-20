@@ -30,7 +30,7 @@ using StringTools;
 class OptionsState extends MusicBeatState
 {
 	var options:Array<String> = [
-		'Accessibility',
+		/*'Accessibility',*/
 		'Adjust Delay and Combo',
 		'Controls',
 		'Graphics',

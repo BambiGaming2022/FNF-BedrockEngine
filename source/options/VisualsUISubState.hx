@@ -34,29 +34,28 @@ class VisualsUISubState extends BaseOptionsMenu
 		title = 'Visuals and UI';
 		rpcTitle = 'Tweaking the Visuals & UI'; // for Discord Rich Presence
 
-		var option:Option = new Option('Camera Zooms', "If unchecked, the camera won't zoom in on a beat hit.", 'camZooms', 'bool', true);
+		var option:Option = new Option('Camera Zooms', "If unchecked, the camera won't zoom in on a beat hit.",
+			'camZooms', 'bool', true);
 		addOption(option);
 
-		// var option:Option = new Option('Controller Mode', 'Check this if you want to play with\na controller instead of using your Keyboard.',
-		// 	'controllerMode', 'bool', false);
-		// addOption(option);
+		/*var option:Option = new Option('Controller Mode', 'Check this if you want to play with\na controller instead of using your Keyboard.',
+			'controllerMode', 'bool', false);
+		 addOption(option);*/
 
-		var option:Option = new Option('Flashing Lights', "Uncheck this if you're sensitive to flashing lights!", 'flashing', 'bool', true);
+		var option:Option = new Option('Flashing Lights', "Uncheck this if you're sensitive to flashing lights!",
+			'flashing', 'bool', true);
 		addOption(option);
 
-		var option:Option = new Option('Hide HUD', 'If checked, hides most HUD elements.', 'hideHud', 'bool', false);
+		var option:Option = new Option('Hide HUD', 'If checked, hides most HUD elements.',
+			'hideHud', 'bool', false);
 		addOption(option);
 
-		var option:Option = new Option('Judgement Skin', "What should judgements skins be?", 'judgementSkin', 'string', 'Bedrock',
-			["Bedrock", "Classic"]);
+		var option:Option = new Option('Disable Winning Icons', "If unchecked, disables the Winning Icons.",
+			'iconSupport', 'bool', false);
 		addOption(option);
 
-		var option:Option = new Option('Disable Winning Icons', "If unchecked, disables the Winning Icons.", 'iconSupport',
-			'bool', false);
-		addOption(option);
-
-		var option:Option = new Option('Judgement Counters', "If checked, will show Judgement Counters at the left side of the screen", 'judgCounter', 'bool',
-			true);
+		var option:Option = new Option('Judgement Counters', "If checked, will show Judgement Counters at the left side of the screen",
+			'judgCounter', 'bool', true);
 		addOption(option);
 
 		/*var option:Option = new Option ('Mania Mode', 
@@ -66,12 +65,12 @@ class VisualsUISubState extends BaseOptionsMenu
 				false);
 			addOption(option); */
 
-		var option:Option = new Option('Note Splashes', "If unchecked, hitting \"Marvelous!\" or \"Sick!\" notes won't show particles.", 'noteSplashes',
-			'bool', true);
+		var option:Option = new Option('Note Splashes', "If unchecked, hitting \"Marvelous!\" or \"Sick!\" notes won't show particles.",
+			'noteSplashes', 'bool', true);
 		addOption(option);
 
-		var option:Option = new Option('Score Text Zoom on Hit', "If unchecked, disables the Score text zooming\neverytime you hit a note.", 'scoreZoom',
-			'bool', true);
+		var option:Option = new Option('Score Text Zoom on Hit', "If unchecked, disables the Score text zooming\neverytime you hit a note.",
+			'scoreZoom', 'bool', true);
 		addOption(option);
 
 		var option:Option = new Option('Show Watermarks', "If unchecked, hides engine watermarks from the bottom right corner of the screen",
@@ -82,8 +81,17 @@ class VisualsUISubState extends BaseOptionsMenu
 			'showSongDisplay', 'bool', true);
 		addOption(option);
 
-		var option:Option = new Option('Use Classic Songs', "If checked, will use the Classic Songs instead of Bedrock's songs.", 'useClassicSongs', 'bool',
-			true);
+		var option:Option = new Option('Skip HaxeFlixel Splash', "Whether to skip the HaxeFlixel Splash Screen", 
+			'skipSplash', 'bool', true);
+		option.onChange = onChangeSplashState;
+		//addOption(option);
+
+		var option:Option = new Option('Use Classic Songs', "If checked, will use the Classic Songs instead of Bedrock's songs.",
+			'useClassicSongs', 'bool', true);
+		addOption(option);
+
+		var option:Option = new Option('Judgement Skin', "What should judgements skins be?", 'judgementSkin', 'string', 'Bedrock',
+			["Bedrock", "Classic"]);
 		addOption(option);
 
 		var option:Option = new Option('Time Bar:', "What should the Time Bar display?", 'timeBarType', 'string', 'Time Left',
@@ -91,9 +99,14 @@ class VisualsUISubState extends BaseOptionsMenu
 		addOption(option);
 
 		var option:Option = new Option('Time Bar Style:', "What should the Time Bar look like?", 'timeBarUi', 'string', 'Psych Engine',
-			['Psych Engine', 'Kade Engine' /*, 'Only Text'*/]);
+			['Psych Engine', 'Kade Engine']);
 		addOption(option);
 
 		super();
+	}
+
+	function onChangeSplashState()
+	{
+		Main.skipSplash = ClientPrefs.skipSplash;
 	}
 }
