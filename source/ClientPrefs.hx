@@ -29,7 +29,7 @@ class ClientPrefs
 	public static var noReset:Bool = false;
 	public static var dynamicCam:Bool = true;
 	public static var healthBarAlpha:Float = 1;
-	// public static var controllerMode:Bool = false;
+	public static var controllerMode:Bool = false;
 	public static var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
 		'scrolltype' => 'multiplicative',
@@ -143,7 +143,7 @@ class ClientPrefs
 		FlxG.save.data.comboOffset = comboOffset;
 		FlxG.save.data.achievementsMap = Achievements.achievementsMap;
 		FlxG.save.data.henchmenDeath = Achievements.henchmenDeath;
-		// FlxG.save.data.controllerMode = controllerMode;
+		FlxG.save.data.controllerMode = controllerMode;
 
 		FlxG.save.data.ratingOffset = ratingOffset;
 		FlxG.save.data.sickWindow = sickWindow;
@@ -307,10 +307,10 @@ class ClientPrefs
 		{
 			safeFrames = FlxG.save.data.safeFrames;
 		}
-		// if (FlxG.save.data.controllerMode != null)
-		// {
-		// 	controllerMode = FlxG.save.data.controllerMode;
-		// }
+		if (FlxG.save.data.controllerMode != null)
+		{
+			controllerMode = FlxG.save.data.controllerMode;
+		}
 		if (FlxG.save.data.gameplaySettings != null)
 		{
 			var savedMap:Map<String, Dynamic> = FlxG.save.data.gameplaySettings;
