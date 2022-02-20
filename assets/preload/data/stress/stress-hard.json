@@ -5113,7 +5113,7 @@
 		"song": "Stress",
 		"validScore": true,
 		"needsVoices": true,
-		"stage": "tank",
+		"stage": "militaryZone",
 		"denominator": 4,
 		"bpm": 178,
 		"speed": 2.6

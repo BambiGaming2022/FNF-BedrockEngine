@@ -4318,7 +4318,7 @@
 		"song": "Stress",
 		"validScore": true,
 		"needsVoices": true,
-		"stage": "tank",
+		"stage": "militaryZone",
 		"denominator": 4,
 		"noteStyle": "normal",
 		"bpm": 178,

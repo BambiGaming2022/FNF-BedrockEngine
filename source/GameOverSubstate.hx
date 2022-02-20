@@ -11,6 +11,7 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import haxe.Json;
 import openfl.utils.Assets;
+import Character;
 
 class GameOverSubstate extends MusicBeatSubstate
 {
@@ -21,11 +22,12 @@ class GameOverSubstate extends MusicBeatSubstate
 	var updateCamera:Bool = false;
 
 	var stageSuffix:String = "";
+	var char:CharacterFile;
 
-	public static var characterName:String = PlayState.SONG.player1 + '-dead';
-	public static var deathSoundName:String = Character.json.game_over_start;
-	public static var loopSoundName:String = Character.json.game_over_song;
-	public static var endSoundName:String = Character.json.game_over_end;
+	public static var characterName:String;
+	public static var deathSoundName:String = 'fnf_loss_sfx';
+	public static var loopSoundName:String = 'gameOver';
+	public static var endSoundName:String = 'gameOverEnd';
 
 	public static var instance:GameOverSubstate;
 

@@ -326,6 +326,8 @@ class PlayState extends MusicBeatState
 	{
 		Paths.clearStoredMemory();
 
+		GameOverSubstate.characterName = SONG.player1 + "-dead";
+
 		// for lua
 		instance = this;
 
