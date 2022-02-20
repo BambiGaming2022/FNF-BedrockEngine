@@ -86,7 +86,7 @@ class ClientPrefs
 	public static var iconSupport:Null<Bool> = false;
 	public static var coolFilters:String = 'None';
 	public static var showWatermarks:Bool = true;
-	public static var skipSplash:Bool = true;
+	public static var comboSprite:Bool = false;
 
 	// Every key has two binds, add your key bind down here and then add your control on options/ControlsSubState.hx and Controls.hx
 	public static var keyBinds:Map<String, Array<FlxKey>> = [
@@ -177,7 +177,7 @@ class ClientPrefs
 		FlxG.save.data.screenRes = screenRes;
 		FlxG.save.data.coolFilters = coolFilters;
 		FlxG.save.data.showWatermarks = showWatermarks;
-		FlxG.save.data.skipSplash = skipSplash;
+		FlxG.save.data.comboSprite = comboSprite;
 
 		FlxG.save.flush();
 
@@ -415,8 +415,8 @@ class ClientPrefs
 		{
 			showWatermarks = FlxG.save.data.showWatermarks;
 		}
-		if (FlxG.save.data.skipSplash != null) {
-			skipSplash = FlxG.save.data.skipSplash;
+		if (FlxG.save.data.comboSprite != null) {
+			comboSprite = FlxG.save.data.comboSprite;
 		}
 
 		// flixel automatically saves your volume!

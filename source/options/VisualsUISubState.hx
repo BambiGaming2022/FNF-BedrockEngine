@@ -54,6 +54,10 @@ class VisualsUISubState extends BaseOptionsMenu
 			'iconSupport', 'bool', false);
 		addOption(option);
 
+		var option:Option = new Option('Hide Combo Sprite', "If checked, disables the Combo Sprite that appears once you have a 10 Combo Streak.",
+			'comboSprite', 'bool', false);
+		addOption(option);
+
 		var option:Option = new Option('Judgement Counters', "If checked, will show Judgement Counters at the left side of the screen",
 			'judgCounter', 'bool', true);
 		addOption(option);
@@ -81,11 +85,6 @@ class VisualsUISubState extends BaseOptionsMenu
 			'showSongDisplay', 'bool', true);
 		addOption(option);
 
-		var option:Option = new Option('Skip HaxeFlixel Splash', "Whether to skip the HaxeFlixel Splash Screen", 
-			'skipSplash', 'bool', true);
-		option.onChange = onChangeSplashState;
-		//addOption(option);
-
 		var option:Option = new Option('Use Classic Songs', "If checked, will use the Classic Songs instead of Bedrock's songs.",
 			'useClassicSongs', 'bool', true);
 		addOption(option);
@@ -103,10 +102,5 @@ class VisualsUISubState extends BaseOptionsMenu
 		addOption(option);
 
 		super();
-	}
-
-	function onChangeSplashState()
-	{
-		Main.skipSplash = ClientPrefs.skipSplash;
 	}
 }

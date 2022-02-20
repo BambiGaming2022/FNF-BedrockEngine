@@ -4419,7 +4419,7 @@ class PlayState extends MusicBeatState
 		comboSpr.x += ClientPrefs.comboOffset[4];
 		comboSpr.y -= ClientPrefs.comboOffset[5];
 
-		if (combo > 9)
+		if (combo > 9 && !ClientPrefs.comboSprite)
 		{
 			add(comboSpr);
 		}
