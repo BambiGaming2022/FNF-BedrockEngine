@@ -4844,7 +4844,6 @@ class PlayState extends MusicBeatState
 				songScore -= 10;
 			if (!endingSong)
 			{
-				songMisses++;
 				totalMisses++;
 			}
 			totalPlayed++;

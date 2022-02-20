@@ -455,8 +455,6 @@ class TitleState extends MusicBeatState
 				FlxTween.tween(bgGrad, {alpha: 0.4}, 1, {ease: FlxEase.expoInOut});
 				FlxTween.tween(fgGrad, {alpha: 0.2}, 1, {ease: FlxEase.expoInOut});
 
-				// remove if you dont like it
-
 				transitioning = true;
 				// FlxG.sound.music.stop();
 
@@ -637,8 +635,17 @@ class TitleState extends MusicBeatState
 					createCoolText(['In association', 'with'], -40);
 					#end
 				case 8:
-					addMoreText('Gui iago', -40);
+					#if PSYCH_WATERMARKS
+					addMoreText('Gui iago', 15);
+					addMoreText('Luis com S', 15);
+					addMoreText('Hiro Mizuki', 15);
+					addMoreText('Gazozoz', 15);
+					addMoreText('Stilic', 15);
+					addMoreText('TahirArch', 15);
+					#else
+					addMoreText('Newgrounds')
 					ngSpr.visible = true;
+					#end
 				case 9:
 					deleteCoolText();
 					ngSpr.visible = false;
@@ -670,7 +677,7 @@ class TitleState extends MusicBeatState
 			remove(ngSpr);
 
 			if(ClientPrefs.flashing) {
-				FlxG.camera.flash(FlxColor.WHITE, 1);
+				FlxG.camera.flash(FlxColor.WHITE, 3);
 			}
 
 			remove(credGroup);
