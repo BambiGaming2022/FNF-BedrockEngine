@@ -1545,7 +1545,7 @@ class PlayState extends MusicBeatState
 								camFollow.x = 450;
 						}
 					}					
-					
+
 					anim.animation.finishCallback = function(idle)
 					{
 						remove(anim);
