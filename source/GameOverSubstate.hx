@@ -22,7 +22,7 @@ class GameOverSubstate extends MusicBeatSubstate
 
 	var stageSuffix:String = "";
 
-	public static var characterName:String = PlayState.instance.boyfriend.curCharacter + '-dead';
+	public static var characterName:String = PlayState.SONG.player1 + '-dead';
 	public static var deathSoundName:String = Character.json.game_over_start;
 	public static var loopSoundName:String = Character.json.game_over_song;
 	public static var endSoundName:String = Character.json.game_over_end;
