@@ -1651,20 +1651,7 @@ class PlayState extends MusicBeatState
 								
 							if (frameNumber == 114)
 								{
-									gf.playAnim('sad');
-									gf.playAnim('sad');
-									gf.playAnim('sad');
-									gf.playAnim('sad');
-									gf.playAnim('sad');
-									gf.playAnim('sad');
-									gf.playAnim('sad');
-									gf.playAnim('sad');
-									gf.playAnim('sad');
-									gf.playAnim('sad');
-									gf.playAnim('sad');
-									gf.playAnim('sad');
-									gf.playAnim('sad');
-									gf.playAnim('sad');
+									gf.playAnim('sad', true);
 									camFollow.x = 370;
 									FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom = 1.3}, 0.1);
 								}								
