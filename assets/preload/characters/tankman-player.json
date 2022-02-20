@@ -120,39 +120,6 @@
 			"fps": 24,
 			"name": "Tankman UPm note",
 			"indices": []
-		},
-		{
-			"offsets": [
-				160,
-				80
-			],
-			"indices": [],
-			"fps": 23,
-			"anim": "firstDeath",
-			"loop": true,
-			"name": "Tank Dies"
-		},
-		{
-			"offsets": [
-				150,
-				6
-			],
-			"indices": [],
-			"fps": 23,
-			"anim": "deathLoop",
-			"loop": true,
-			"name": "Tankman Dead Loop"
-		},
-		{
-			"offsets": [
-				153,
-				28
-			],
-			"indices": [],
-			"fps": 23,
-			"anim": "deathConfirm",
-			"loop": true,
-			"name": "Tankman Dead Confirm"
 		}
 	],
 	"no_antialiasing": false,
