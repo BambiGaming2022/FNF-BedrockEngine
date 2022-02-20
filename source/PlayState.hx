@@ -1549,7 +1549,7 @@ class PlayState extends MusicBeatState
 					{
 						camFollow.x = 290;
 						var sound:FlxSound;	
-						sound = new FlxSound().loadEmbedded(Paths.sound('ughCutscene/cuts1', 'week7'));
+						sound = new FlxSound().loadEmbedded(Paths.sound('cuts1', 'week7'));
 						sound.play();
 						FlxG.sound.list.add(sound);
 
