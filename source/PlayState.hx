@@ -877,14 +877,6 @@ class PlayState extends MusicBeatState
 					light.updateHitbox();
 					phillyCityLightsEvent.add(light);
 				}
-
-			case 'militaryZone':
-				add(tankBop1);
-				add(tankBop2);
-				add(tankBop3);
-				add(tankBop4);
-				add(tankBop5);
-				add(tankBop6);
 		}
 
 		if (!ClientPrefs.maniaMode)
@@ -893,7 +885,7 @@ class PlayState extends MusicBeatState
 			add(boyfriendGroup);
 		}
 
-		if (curStage == 'tank')
+		if (curStage == 'militaryZone')
 		{
 			add(tankBop1);
 			add(tankBop2);
