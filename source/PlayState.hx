@@ -806,6 +806,9 @@ class PlayState extends MusicBeatState
 				ruins.updateHitbox();
 				add(ruins);
 
+				tankRolling = new BGSprite('tankRolling', 300, 300, 0.5, 0.5, ['BG tank w lighting '], true);
+				add(tankRolling);
+
 				var smokeLeft:BGSprite = new BGSprite('smokeLeft', -200, -100, 0.4, 0.4, ['SmokeBlurLeft '], true);
 				add(smokeLeft);
 
@@ -829,12 +832,21 @@ class PlayState extends MusicBeatState
 				ground.updateHitbox();
 				add(ground);
 
+
+			if (!ClientPrefs.lowQuality)
+			{
 				tankBop1 = new BGSprite('tank0', -500, 650, 1.7, 1.5, ['fg tankhead far right'], true);
+
 				tankBop2 = new BGSprite('tank1', -300, 750, 2.0, 0.2, ['fg tankhead 5'], true);
+	
 				tankBop3 = new BGSprite('tank2', 450, 940, 1.5, 1.5, ['foreground man 3'], true);
+	
 				tankBop4 = new BGSprite('tank3', 1300, 1200, 3.5, 2.5, ['fg tankhead 4'], true);
+	
 				tankBop5 = new BGSprite('tank4', 1300, 900, 1.5, 1.5, ['fg tankman bobbin 3'], true);
+				
 				tankBop6 = new BGSprite('tank5', 1620, 700, 1.5, 1.5, ['fg tankhead far right'], true);
+			}
 		}
 
 		if (isPixelStage)
@@ -880,6 +892,21 @@ class PlayState extends MusicBeatState
 		{
 			add(dadGroup);
 			add(boyfriendGroup);
+		}
+
+		if (curStage == 'tank')
+		{
+			add(tankBop1);
+			add(tankBop2);
+			add(tankBop3);
+			add(tankBop4);
+			add(tankBop5);
+			add(tankBop6);
+		}
+
+		if (curStage == 'spooky')
+		{
+			add(halloweenWhite);
 		}
 
 		#if LUA_ALLOWED
@@ -5528,6 +5555,7 @@ class PlayState extends MusicBeatState
 					trainStart();
 				}
 			case "tank":
+				tankRolling.animation.play('bop', true);
 				tankBop1.animation.play('bop', true);
 				tankBop2.animation.play('bop', true);
 				tankBop3.animation.play('bop', true);
