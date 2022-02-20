@@ -2976,7 +2976,7 @@ class PlayState extends MusicBeatState
 		var divider:String = ' ' + '-' + ' ';
 
 		scoreTxt.text = 'Score: ${songScore}';
-		scoreTxt.text += divider + 'Accuracy:' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
+		scoreTxt.text += divider + 'Accuracy:' + accuracy + '%';
 
 		if (ratingFC == "" || totalMisses > 0)
 			scoreTxt.text += '';
