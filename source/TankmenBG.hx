@@ -53,7 +53,7 @@ class TankmenBG extends FlxSprite
     override public function new()
     {
         super();
-        frames = Paths.getSparrowAtlas("militaryZone/tankmanKilled1", "preload");
+        frames = Paths.getSparrowAtlas("tankmanKilled1", "week7");
         antialiasing = true;
         animation.addByPrefix("run", "tankman running", 24, false);
         animation.addByPrefix("shot", "John Shot " + FlxG.random.int(1,2), 24, false);
