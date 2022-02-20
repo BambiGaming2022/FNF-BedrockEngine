@@ -167,6 +167,8 @@ class CharacterEditorState extends MusicBeatState
 		UI_box.cameras = [camMenu];
 
 		UI_box.resize(250, 120);
+		if(Character.isDeadCharacter)
+			UI_box.resize(250, 170);
 		UI_box.x = FlxG.width - 275;
 		UI_box.y = 25;
 		UI_box.scrollFactor.set();
@@ -191,7 +193,6 @@ class CharacterEditorState extends MusicBeatState
 
 		addCharacterUI();
 		addAnimationsUI();
-		UI_characterbox.selected_tab_id = 'Character';
 
 		FlxG.mouse.useSystemCursor = true;
 		FlxG.mouse.visible = true;
@@ -415,6 +416,63 @@ class CharacterEditorState extends MusicBeatState
 			"scale": 1
 		}';
 
+	var TemplateDeadCharacter:String = '{
+		"animations": [
+			{
+				"offsets": [
+					37,
+					11
+				],
+				"loop": false,
+				"fps": 24,
+				"anim": "firstDeath",
+				"indices": [],
+				"name": "BF dies"
+			},
+			{
+				"offsets": [
+					37,
+					5
+				],
+				"loop": true,
+				"fps": 24,
+				"anim": "deathLoop",
+				"indices": [],
+				"name": "BF Dead Loop"
+			},
+			{
+				"offsets": [
+					37,
+					69
+				],
+				"loop": false,
+				"fps": 24,
+				"anim": "deathConfirm",
+				"indices": [],
+				"name": "BF Dead confirm"
+			}
+		],
+		"no_antialiasing": false,
+		"image": "characters/BF_DIES",
+		"position": [
+			0,
+			0
+		],
+		"healthicon": "face",
+		"flip_x": false,
+		"healthbar_colors": [
+			161,
+			161,
+			161
+		],
+		"camera_position": [
+			0,
+			0
+		],
+		"sing_duration": 6.1,
+		"scale": 1
+	}';
+
 	var charDropDown:FlxUIDropDownMenuCustom;
 
 	function addSettingsUI()
@@ -444,13 +502,55 @@ class CharacterEditorState extends MusicBeatState
 		charDropDown.selectedLabel = daAnim;
 		reloadCharacterDropDown();
 
-		var reloadCharacter:FlxButton = new FlxButton(140, 20, "Reload Char", function()
+		var reloadCharacter:FlxButton = new FlxButton(140, -10, "Reload Char", function()
 		{
 			loadChar(!check_player.checked);
 			reloadCharacterDropDown();
 		});
 
-		var templateCharacter:FlxButton = new FlxButton(140, 50, "Load Template", function()
+		var templateDeadCharacter:FlxButton = new FlxButton(140, 20, "Game Over Template", function()
+		{
+			var parsedJson:CharacterFile = cast Json.parse(TemplateDeadCharacter);
+			var characters:Array<Character> = [char, ghostChar];
+			for (character in characters)
+			{
+				character.animOffsets.clear();
+				character.animationsArray = parsedJson.animations;
+				for (anim in character.animationsArray)
+				{
+					character.addOffset(anim.anim, anim.offsets[0], anim.offsets[1]);
+				}
+				if (character.animationsArray[0] != null)
+				{
+					character.playAnim(character.animationsArray[0].anim, true);
+				}
+
+				character.singDuration = parsedJson.sing_duration;
+				character.positionArray = parsedJson.position;
+				character.cameraPosition = parsedJson.camera_position;
+
+				character.imageFile = parsedJson.image;
+				character.jsonScale = parsedJson.scale;
+				character.noAntialiasing = parsedJson.no_antialiasing;
+				character.originalFlipX = parsedJson.flip_x;
+				character.healthIcon = parsedJson.healthicon;
+				character.healthColorArray = parsedJson.healthbar_colors;
+				character.setPosition(character.positionArray[0] + OFFSET_X + 100, character.positionArray[1]);
+
+				character.gameOverStartSFX = parsedJson.game_over_start;
+				character.gameOver = parsedJson.game_over_song;
+				character.gameOverEnd = parsedJson.game_over_end;
+			}
+
+			reloadCharacterImage();
+			reloadCharacterDropDown();
+			reloadCharacterOptions();
+			resetHealthBarColor();
+			updatePointerPos();
+			genBoyOffsets();
+		});
+
+		var templateCharacter:FlxButton = new FlxButton(140, 20, "Load Template", function()
 		{
 			var parsedJson:CharacterFile = cast Json.parse(TemplateCharacter);
 			var characters:Array<Character> = [char, ghostChar];
@@ -490,17 +590,25 @@ class CharacterEditorState extends MusicBeatState
 		templateCharacter.color = FlxColor.RED;
 		templateCharacter.label.color = FlxColor.WHITE;
 
+		templateDeadCharacter.color = FlxColor.RED;
+		templateDeadCharacter.label.color = FlxColor.WHITE;
+
 		tab_group.add(new FlxText(charDropDown.x, charDropDown.y - 18, 0, 'Character:'));
 		tab_group.add(check_player);
 		tab_group.add(reloadCharacter);
 		tab_group.add(charDropDown);
 		tab_group.add(reloadCharacter);
 		tab_group.add(templateCharacter);
+		tab_group.add(templateDeadCharacter);
 		UI_box.addGroup(tab_group);
 	}
 
 	var imageInputText:FlxUIInputText;
 	var healthIconInputText:FlxUIInputText;
+
+	var gameOverStartInputText:FlxUIInputText;
+	var gameOverSongInputText:FlxUIInputText;
+	var gameOverEndInputText:FlxUIInputText;
 
 	var singDurationStepper:FlxUINumericStepper;
 	var scaleStepper:FlxUINumericStepper;
@@ -544,6 +652,12 @@ class CharacterEditorState extends MusicBeatState
 		});
 
 		healthIconInputText = new FlxUIInputText(15, imageInputText.y + 35, 75, leHealthIcon.getCharacter(), 8);
+
+		if(Character.isDeadCharacter) {
+			gameOverStartInputText = new FlxUIInputText(15, imageInputText.y + 35, 75, 'fnf_loss_sfx', 8);
+			gameOverSongInputText = new FlxUIInputText(15, imageInputText.y + 35, 75, 'gameOver', 8);
+			gameOverEndInputText = new FlxUIInputText(15, imageInputText.y + 35, 75, 'gameOverEnd', 8);
+		}
 
 		singDurationStepper = new FlxUINumericStepper(15, healthIconInputText.y + 45, 0.1, 4, 0, 999, 1);
 
@@ -613,6 +727,16 @@ class CharacterEditorState extends MusicBeatState
 		tab_group.add(healthColorStepperG);
 		tab_group.add(healthColorStepperB);
 		tab_group.add(saveCharacterButton);
+
+		if(Character.isDeadCharacter) {
+			tab_group.add(new FlxText(15, imageInputText.y - 18, 0, 'Game Over Start SFX:'));
+			tab_group.add(new FlxText(15, healthIconInputText.y - 18, 0, 'Game Over Song:'));
+			tab_group.add(new FlxText(15, singDurationStepper.y - 18, 0, 'Game Over End SFX:'));
+			tab_group.add(gameOverStartInputText);
+			tab_group.add(gameOverSongInputText);
+			tab_group.add(gameOverEndInputText);
+		}
+
 		UI_characterbox.addGroup(tab_group);
 	}
 
@@ -1209,7 +1333,10 @@ class CharacterEditorState extends MusicBeatState
 			imageInputText,
 			healthIconInputText,
 			animationNameInputText,
-			animationIndicesInputText
+			animationIndicesInputText,
+			gameOverStartInputText,
+			gameOverSongInputText,
+			gameOverEndInputText
 		];
 		for (i in 0...inputTexts.length)
 		{

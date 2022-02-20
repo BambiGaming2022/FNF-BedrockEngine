@@ -9,6 +9,8 @@ import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
+import haxe.Json;
+import openfl.utils.Assets;
 
 class GameOverSubstate extends MusicBeatSubstate
 {
@@ -20,10 +22,10 @@ class GameOverSubstate extends MusicBeatSubstate
 
 	var stageSuffix:String = "";
 
-	public static var characterName:String = 'bf-dead';
-	public static var deathSoundName:String = 'fnf_loss_sfx';
-	public static var loopSoundName:String = 'gameOver';
-	public static var endSoundName:String = 'gameOverEnd';
+	public static var characterName:String = PlayState.instance.boyfriend.curCharacter + '-dead';
+	public static var deathSoundName:String = Character.json.game_over_start;
+	public static var loopSoundName:String = Character.json.game_over_song;
+	public static var endSoundName:String = Character.json.game_over_end;
 
 	public static var instance:GameOverSubstate;
 
@@ -50,6 +52,9 @@ class GameOverSubstate extends MusicBeatSubstate
 		PlayState.instance.setOnLuas('inGameOver', true);
 
 		Conductor.songPosition = 0;
+
+		if(!Assets.exists(Paths.getPreloadPath('characters/' + characterName)))
+			resetVariables();
 
 		boyfriend = new Boyfriend(x, y, characterName);
 		boyfriend.x += boyfriend.positionArray[0];

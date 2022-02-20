@@ -1,0 +1,56 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				160,
+				80
+			],
+			"indices": [],
+			"fps": 23,
+			"anim": "firstDeath",
+			"loop": true,
+			"name": "Tank Dies"
+		},
+		{
+			"offsets": [
+				150,
+				6
+			],
+			"indices": [],
+			"fps": 23,
+			"anim": "deathLoop",
+			"loop": true,
+			"name": "Tankman Dead Loop"
+		},
+		{
+			"offsets": [
+				153,
+				28
+			],
+			"indices": [],
+			"fps": 23,
+			"anim": "deathConfirm",
+			"loop": true,
+			"name": "Tankman Dead Confirm"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/tankmanCaptainP1",
+	"position": [
+		-1,
+		219
+	],
+	"healthicon": "tankman",
+	"flip_x": true,
+	"healthbar_colors": [
+		255,
+		255,
+		255
+	],
+	"camera_position": [
+		0,
+		0
+	],
+	"sing_duration": 4,
+	"scale": 1
+}

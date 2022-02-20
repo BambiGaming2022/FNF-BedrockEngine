@@ -33,6 +33,10 @@ typedef CharacterFile =
 	var flip_x:Bool;
 	var no_antialiasing:Bool;
 	var healthbar_colors:Array<Int>;
+
+	var game_over_start:String;
+	var game_over_song:String;
+	var game_over_end:String;
 }
 
 typedef AnimArray =
@@ -77,6 +81,13 @@ class Character extends FlxSprite
 	public var noAntialiasing:Bool = false;
 	public var originalFlipX:Bool = false;
 	public var healthColorArray:Array<Int> = [255, 0, 0];
+
+	public var gameOver:String = '';
+	public var gameOverEnd:String = '';
+	public var gameOverStartSFX:String = '';
+
+	public static var json:CharacterFile;
+	public static var isDeadCharacter:Bool = false;
 
 	public static var DEFAULT_CHARACTER:String = 'bf'; // In case a character is missing, it will use BF on its place
 
@@ -127,7 +138,7 @@ class Character extends FlxSprite
 				var rawJson = Assets.getText(path);
 				#end
 
-				var json:CharacterFile = cast Json.parse(rawJson);
+				json = cast Json.parse(rawJson);
 				var spriteType = "sparrow";
 				// sparrow
 				// packer
@@ -189,6 +200,11 @@ class Character extends FlxSprite
 				healthIcon = json.healthicon;
 				singDuration = json.sing_duration;
 				flipX = !!json.flip_x;
+
+				gameOverStartSFX = json.game_over_start;
+				gameOver = json.game_over_song;
+				gameOverEnd = json.game_over_end;
+
 				if (json.no_antialiasing)
 				{
 					antialiasing = false;
@@ -239,6 +255,9 @@ class Character extends FlxSprite
 			hasMissAnimations = true;
 		recalculateDanceIdle();
 		dance();
+
+		if(animOffsets.exists('firstDeath') || animOffsets.exists('deathLoop') || animOffsets.exists('deathConfirm'))
+			isDeadCharacter = true;
 
 		if (isPlayer)
 		{
