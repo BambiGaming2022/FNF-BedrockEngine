@@ -2934,7 +2934,7 @@ class PlayState extends MusicBeatState
 						heyTimer = 0;
 					}
 				}
-			case "tank":
+			case 'militaryZone':
 				moveTank();
 		}
 
