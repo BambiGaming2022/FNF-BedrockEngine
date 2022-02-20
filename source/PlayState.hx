@@ -433,7 +433,7 @@ class PlayState extends MusicBeatState
 				case 'thorns':
 					curStage = 'schoolEvil';
 				case 'ugh' | 'guns' | 'stress':
-					curStage = 'militaryZone';
+					curStage = "tank";
 				default:
 					curStage = 'stage';
 			}
@@ -658,6 +658,7 @@ class PlayState extends MusicBeatState
 				GameOverSubstate.deathSoundName = 'fnf_loss_sfx-pixel';
 				GameOverSubstate.loopSoundName = 'gameOver-pixel';
 				GameOverSubstate.endSoundName = 'gameOverEnd-pixel';
+				GameOverSubstate.characterName = 'bf-pixel-dead';
 
 				var bgSky:BGSprite = new BGSprite('weeb/weebSky', 0, 0, 0.1, 0.1);
 				add(bgSky);
@@ -770,71 +771,142 @@ class PlayState extends MusicBeatState
 					bg.antialiasing = false;
 					add(bg);
 				}
-			case 'militaryZone': //Week 7
-				if (SONG.song == "Stress")
-				{
-					picoStep = Json.parse(openfl.utils.Assets.getText(Paths.json('stress/picospeaker')));
-					tankStep = Json.parse(openfl.utils.Assets.getText(Paths.json('stress/tankSpawn')));
-				}
+			case "tank": //Week 7
+			if (SONG.song == "Stress")
+			{
+				picoStep = Json.parse(openfl.utils.Assets.getText(Paths.json('stress/picospeaker', "preload")));
+				tankStep = Json.parse(openfl.utils.Assets.getText(Paths.json('stress/tankSpawn', "preload")));
+			}
 
-				/*maybe make this a switch??
-				- Gui iago*/
+			if (SONG.player1 == 'bf-holding-gf')
+				GameOverSubstate.characterName = 'bf-holding-gf';
+			else if (SONG.player1 == 'tankman-player')
+				GameOverSubstate.characterName = 'tankman-player';
+			else if (SONG.player1 == 'bf')
+				GameOverSubstate.characterName = 'bf-dies';
 
-				// no need for switch, i'm already making a softcoded game over. - Hiro Mizuki
+			/*maybe make this a switch??
+			- Gui iago*/
 
-				var sky:BGSprite = new BGSprite('tankSky', -400, -400, 0, 0);
-				sky.setGraphicSize(Std.int(sky.width * 1.5));
-				add(sky);
+			var sky:FlxSprite = new FlxSprite(-400,-400).loadGraphic(Paths.image('militaryZone/tankSky',"preload"));
+			sky.scrollFactor.set(0, 0);
+			sky.antialiasing = true;
+			sky.setGraphicSize(Std.int(sky.width * 1.5));
+			add(sky);
 
-				var clouds:BGSprite = new BGSprite('tankClouds', FlxG.random.int(-700, -100), FlxG.random.int(-20, 20), 0.1, 0.1);
-				clouds.velocity.x = FlxG.random.float(5, 15);
-				clouds.updateHitbox();
-				add(clouds);
+			var clouds:FlxSprite = new FlxSprite(FlxG.random.int(-700, -100), FlxG.random.int(-20, 20)).loadGraphic(Paths.image('militaryZone/tankClouds', "preload"));
+			clouds.scrollFactor.set(0.1, 0.1);
+			clouds.velocity.x = FlxG.random.float(5, 15);
+			clouds.antialiasing = true;
+			clouds.updateHitbox();
+			add(clouds);
 
-				var mountains:BGSprite = new BGSprite('tankMountains', -300, -20, 0.2, 0.2);
-				mountains.setGraphicSize(Std.int(1.2 * mountains.width));
-				mountains.updateHitbox();
-				add(mountains);
+			var mountains:FlxSprite = new FlxSprite(-300,-20).loadGraphic(Paths.image('militaryZone/tankMountains', "preload"));
+			mountains.scrollFactor.set(0.2, 0.2);
+			mountains.setGraphicSize(Std.int(1.2 * mountains.width));
+			mountains.updateHitbox();
+			mountains.antialiasing = true;
+			add(mountains);
 
-				var buildings:BGSprite = new BGSprite('tankBuildings', -200, 0, 0.3, 0.3);
-				buildings.setGraphicSize(Std.int(buildings.width * 1.1));
-				buildings.updateHitbox();
-				add(buildings);
+			var buildings:FlxSprite = new FlxSprite(-200,0).loadGraphic(Paths.image('militaryZone/tankBuildings', "preload"));
+			buildings.scrollFactor.set(0.3, 0.3);
+			buildings.setGraphicSize(Std.int(buildings.width * 1.1));
+			buildings.updateHitbox();
+			buildings.antialiasing = true;
+			add(buildings);
 
-				var ruins:BGSprite = new BGSprite('tankRuins', -200, 0, 0.35, 0.35);
-				ruins.setGraphicSize(Std.int(ruins.width * 1.1));
-				ruins.updateHitbox();
-				add(ruins);
+			var ruins:FlxSprite = new FlxSprite(-200,0).loadGraphic(Paths.image('militaryZone/tankRuins', "preload"));
+			ruins.scrollFactor.set(0.35, 0.35);
+			ruins.setGraphicSize(Std.int(ruins.width * 1.1));
+			ruins.updateHitbox();
+			ruins.antialiasing = true;
+			add(ruins);
 
-				var smokeLeft:BGSprite = new BGSprite('smokeLeft', -200, -100, 0.4, 0.4, ['SmokeBlurLeft '], true);
-				add(smokeLeft);
+			var smokeLeft:FlxSprite = new FlxSprite(-200,-100);
+			smokeLeft.frames = Paths.getSparrowAtlas('militaryZone/smokeLeft', "preload");
+			smokeLeft.animation.addByPrefix('idle', 'SmokeBlurLeft ', 24, true);
+			smokeLeft.scrollFactor.set(0.4, 0.4);
+			smokeLeft.antialiasing = true;
+			smokeLeft.animation.play('idle');
+			add(smokeLeft);
 
-				var smokeRight:BGSprite = new BGSprite('smokeRight', 1100, -100, 0.4, 0.4, ['SmokeRight '], true);
-				add(smokeRight);
+			var smokeRight:FlxSprite = new FlxSprite(1100,-100);
+			smokeRight.frames = Paths.getSparrowAtlas('militaryZone/smokeRight', "preload");
+			smokeRight.animation.addByPrefix('idle', 'SmokeRight ', 24, true);
+			smokeRight.scrollFactor.set(0.4, 0.4);
+			smokeRight.antialiasing = true;
+			smokeRight.animation.play('idle');
+			add(smokeRight);
 
-				tower = new BGSprite('tankWatchtower', 100, 120, 0.4, 0.4, ['watchtower gradient color'], true);
-				add(tower);
+			tower = new FlxSprite(100, 120);
+			tower.frames = Paths.getSparrowAtlas('militaryZone/tankWatchtower', "preload");
+			tower.animation.addByPrefix('idle', 'watchtower gradient color', 24, false);
+			tower.antialiasing = true;
+			add(tower);
 
-				tankRolling = new BGSprite('tankRolling', 300, 300, 0.5, 0.5, ['BG tank w lighting ']);
-				add(tankRolling);
+			tankRolling = new FlxSprite(300,300);
+			tankRolling.frames = Paths.getSparrowAtlas('militaryZone/tankRolling', "preload");
+			tankRolling.animation.addByPrefix('idle', 'BG tank w lighting ', 24, true);
+			tankRolling.scrollFactor.set(0.5, 0.5);
+			tankRolling.antialiasing = true;
+			tankRolling.animation.play('idle');
+			add(tankRolling);
 
-				if (SONG.song == "stress")
-				{
-					tankmanRun = new FlxTypedGroup<TankmenBG>();
-					add(tankmanRun);
-				}
+			if (PlayState.SONG.song == "Stress")
+			{
+				tankmanRun = new FlxTypedGroup<TankmenBG>();
+				add(tankmanRun);
+			}
 
-				var ground:BGSprite = new BGSprite('tankGround', -420, -150);
-				ground.setGraphicSize(Std.int(ground.width * 1.15));
-				ground.updateHitbox();
-				add(ground);
+			var ground:FlxSprite = new FlxSprite(-420, -150).loadGraphic(Paths.image('militaryZone/tankGround', "preload"));
+			ground.scrollFactor.set();
+			ground.antialiasing = true;
+			ground.setGraphicSize(Std.int(ground.width * 1.15));
+			ground.scrollFactor.set(1, 1);
+			ground.updateHitbox();
+			add(ground);
 
-				tankBop1 = new BGSprite('tank0', -500, 650, 1.7, 1.5, ['fg tankhead far right'], true);
-				tankBop2 = new BGSprite('tank1', -300, 750, 2.0, 0.2, ['fg tankhead 5'], true);
-				tankBop3 = new BGSprite('tank2', 450, 940, 1.5, 1.5, ['foreground man 3'], true);
-				tankBop4 = new BGSprite('tank3', 1300, 1200, 3.5, 2.5, ['fg tankhead 4'], true);
-				tankBop5 = new BGSprite('tank4', 1300, 900, 1.5, 1.5, ['fg tankman bobbin 3'], true);
-				tankBop6 = new BGSprite('tank5', 1620, 700, 1.5, 1.5, ['fg tankhead far right'], true);
+			tankBop1 = new FlxSprite(-500,650);
+			tankBop1.frames = Paths.getSparrowAtlas('militaryZone/tank0', "preload");
+			tankBop1.animation.addByPrefix('bop', 'fg tankhead far right', 24);
+			tankBop1.scrollFactor.set(1.7, 1.5);
+			tankBop1.antialiasing = true;
+			add(tankBop1);
+
+			tankBop2 = new FlxSprite(-300,750);
+			tankBop2.frames = Paths.getSparrowAtlas('militaryZone/tank1', "preload");
+			tankBop2.animation.addByPrefix('bop','fg tankhead 5', 24);
+			tankBop2.scrollFactor.set(2.0, 0.2);
+			tankBop2.antialiasing = true;
+			add(tankBop2);
+
+			tankBop3 = new FlxSprite(450,940);
+			tankBop3.frames = Paths.getSparrowAtlas('militaryZone/tank2', "preload");
+			tankBop3.animation.addByPrefix('bop','foreground man 3', 24);
+			tankBop3.scrollFactor.set(1.5, 1.5);
+			tankBop3.antialiasing = true;
+			add(tankBop3);
+
+			tankBop4 = new FlxSprite(1300,1200);
+			tankBop4.frames = Paths.getSparrowAtlas('militaryZone/tank3', "preload");
+			tankBop4.animation.addByPrefix('bop','fg tankhead 4', 24);
+			tankBop4.scrollFactor.set(3.5, 2.5);
+			tankBop4.antialiasing = true;
+			add(tankBop4);
+
+			tankBop5 = new FlxSprite(1300,900);
+			tankBop5.frames = Paths.getSparrowAtlas('militaryZone/tank4', "preload");
+			tankBop5.animation.addByPrefix('bop','fg tankman bobbin 3', 24);
+			tankBop5.scrollFactor.set(1.5, 1.5);
+			tankBop5.antialiasing = true;
+			add(tankBop5);
+
+			tankBop6 = new FlxSprite(1620,700);
+			tankBop6.frames = Paths.getSparrowAtlas('militaryZone/tank5', "preload");
+			tankBop6.animation.addByPrefix('bop','fg tankhead far right', 24);
+			tankBop6.scrollFactor.set(1.5, 1.5);
+			tankBop6.antialiasing = true;
+			add(tankBop6);
 		}
 
 		if (isPixelStage)
@@ -848,33 +920,8 @@ class PlayState extends MusicBeatState
 			add(gfGroup);
 
 		// Shitty layering but whatev it works LOL
-		switch (curStage) 
-		{
-			case 'limo':
-				add(limo);
-
-			case 'spooky':
-				add(halloweenWhite);
-
-			case 'philly':
-				phillyCityLightsEvent = new FlxTypedGroup<BGSprite>();
-				for (i in 0...5)
-				{
-					var light:BGSprite = new BGSprite('philly/win' + i, -10, 0, 0.3, 0.3);
-					light.visible = false;
-					light.setGraphicSize(Std.int(light.width * 0.85));
-					light.updateHitbox();
-					phillyCityLightsEvent.add(light);
-				}
-
-			case 'militaryZone':
-				add(tankBop1);
-				add(tankBop2);
-				add(tankBop3);
-				add(tankBop4);
-				add(tankBop5);
-				add(tankBop6);
-		}
+		if (curStage == 'limo')
+			add(limo);
 
 		if (!ClientPrefs.maniaMode)
 		{
@@ -882,11 +929,29 @@ class PlayState extends MusicBeatState
 			add(boyfriendGroup);
 		}
 
+		if (curStage == 'spooky')
+		{
+			add(halloweenWhite);
+		}
+
 		#if LUA_ALLOWED
 		luaDebugGroup = new FlxTypedGroup<DebugLuaText>();
 		luaDebugGroup.cameras = [camOther];
 		add(luaDebugGroup);
 		#end
+
+		if (curStage == 'philly')
+		{
+			phillyCityLightsEvent = new FlxTypedGroup<BGSprite>();
+			for (i in 0...5)
+			{
+				var light:BGSprite = new BGSprite('philly/win' + i, -10, 0, 0.3, 0.3);
+				light.visible = false;
+				light.setGraphicSize(Std.int(light.width * 0.85));
+				light.updateHitbox();
+				phillyCityLightsEvent.add(light);
+			}
+		}
 
 		// "GLOBAL" SCRIPTS
 		#if LUA_ALLOWED
@@ -969,33 +1034,23 @@ class PlayState extends MusicBeatState
 					gfVersion = 'gf-car';
 					if (ClientPrefs.lowQuality)
 						gfVersion = 'gfLow-car';
-
 				case 'mall' | 'mallEvil':
 					gfVersion = 'gf-christmas';
 					if (ClientPrefs.lowQuality)
 						gfVersion = 'gfLow-christmas';
-
 				case 'school' | 'schoolEvil':
 					gfVersion = 'gf-pixel';
-					
-				case 'militaryZone':
-					gfVersion = 'gf-tankmen';
-
 				default:
 					gfVersion = 'gf';
 					if (ClientPrefs.lowQuality)
 						gfVersion = 'gfLow';
 			}
-
 			switch (songName)
 			{
 				case 'tutorial':
 					gfVersion = 'gf';
 					if (ClientPrefs.lowQuality)
 						gfVersion = 'gf';
-
-				case 'stress':
-					gfVersion = 'pico-speaker';
 			}
 			SONG.gfVersion = gfVersion; // Fix for the Chart Editor
 		}
@@ -1508,108 +1563,124 @@ class PlayState extends MusicBeatState
 					schoolIntro(doof);
 
 				case 'ugh':
-					dad.visible = false;
+					dad.alpha = 0;
 					camHUD.alpha = 0;
 
-					var anim:FlxSprite;
-					anim = new FlxSprite(-30, 300);
-					anim.frames = Paths.getSparrowAtlas('ughCutscene/ugh', 'week7');
-					anim.animation.addByPrefix('idle', 'tankman cutscene', 24, false);
-					anim.animation.play('idle');
-					anim.antialiasing = ClientPrefs.globalAntialiasing;
-					add(anim);
+					var anim1:FlxSprite;
+					anim1 = new FlxSprite(-30,300);
+					anim1.frames = Paths.getSparrowAtlas('ughCutscene/ugh', "preload");
+					anim1.animation.addByPrefix('idle',"tankman cutscene",30,false);
+					anim1.animation.play('idle');
+					anim1.antialiasing = true;
+					add(anim1);
 
-					anim.animation.callback = function(idle, frameNumber:Int, frameIndex:Int)
-					{
-						camFollow.x = 290;
-						var sound:FlxSound;	
-						sound = new FlxSound().loadEmbedded(Paths.sound('ughCutscene/cuts1', 'week7'));
-						sound.play();
-						FlxG.sound.list.add(sound);
-
-						switch(frameNumber)
+					anim1.animation.callback = function(idle, frameNumber:Int, frameIndex:Int)
 						{
-							case 1:
-								FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom = 1.2}, 2);
+							if (frameNumber == 137)
+								{
+									boyfriend.playAnim('singUP');
+								}
 
-							case 125:
-								camFollow.x += 390;
+							if (frameNumber == 1)
+								{
+									camFollow.x = 290;
+									FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom = 1.2}, 2);
+									var sound:FlxSound;	
+									sound = new FlxSound().loadEmbedded(Paths.sound('cuts1', 'week7'));
+									sound.play();
+									FlxG.sound.list.add(sound);
+								}						
+							if (frameNumber == 110)
+								{
+									camFollow.x += 470;
+								}	
 
-							case 137:
-								boyfriend.playAnim('singUP');
+							if (frameNumber == 311)
+								{
+									camFollow.x = 450;
+									FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom = 0.9}, 2);
+								}								
+							
+							if (frameNumber == 181)
+								{
+									camFollow.x = 390;
+								}	
+								
+						}					
 
-							case 181:
-								camFollow.x = 290;
-
-							case 311:
-								camFollow.x = 450;
-						}
-					}					
-
-					anim.animation.finishCallback = function(idle)
-					{
-						remove(anim);
-						dad.visible = true;
-						startCountdown();
-						if (!ClientPrefs.hideHud)
+						anim1.animation.finishCallback = function(idle)
 						{
-							FlxTween.tween(camHUD, {alpha: 1}, (Conductor.stepCrochet * 16 / 1000), {ease: FlxEase.quadInOut});
-						}
-					}	
+							remove(anim1);
+							dad.alpha = 1;
+							startCountdown();
+							if (!ClientPrefs.hideHud)
+								{
+									FlxTween.tween(camHUD, {alpha: 1}, (Conductor.stepCrochet * 16 / 1000), {ease: FlxEase.quadInOut});
+								}
+						}	
 						
 				case 'guns':		
-					dad.visible = false;
+					dad.alpha = 0;
 					healthBarBG.alpha = 0;
 					healthBar.alpha = 0;
 					iconP1.alpha = 0;
 					iconP2.alpha = 0;
 					scoreTxt.alpha = 0;
 
-					var anim:FlxSprite;
-					anim = new FlxSprite(dad.x,dad.y);
-					anim.frames = Paths.getSparrowAtlas('gunsCutscene/guns', 'week7');
-					anim.animation.addByPrefix('idle', 'tankman cuts', 24, false);
-					anim.animation.play('idle');
-					anim.antialiasing = ClientPrefs.globalAntialiasing;
-					add(anim);
+					var anim2:FlxSprite;
+					anim2 = new FlxSprite(dad.x,dad.y);
+					anim2.frames = Paths.getSparrowAtlas('gunsCutscene/guns', "preload");
+					anim2.animation.addByPrefix('idle',"tankman cuts",30,false);
+					anim2.animation.play('idle');
+					anim2.antialiasing = true;
+					add(anim2);
 
-					anim.animation.callback = function(idle, frameNumber:Int, frameIndex:Int)
-					{
-						camFollow.x = 340;
-						var sound:FlxSound;	
-						sound = new FlxSound().loadEmbedded(Paths.sound('cuts2', 'week7'));
-						sound.play();
-						FlxG.sound.list.add(sound);
-
-						switch(frameNumber)
+					anim2.animation.callback = function(idle, frameNumber:Int, frameIndex:Int)
 						{
-							case 1:
-								FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom = 1.2}, 3);
 
-							case 114:
-								gf.playAnim('sad', true);
-								camFollow.x = 370;
-								FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom = 1.3}, 0.1);
-						}						
-					}					
+							if (frameNumber == 1)
+								{
+									camFollow.x = 340;
+									FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom = 1.2}, 3);
+									var sound:FlxSound;	
+									sound = new FlxSound().loadEmbedded(Paths.sound('cuts2', 'week7'));
+									sound.play();
+									FlxG.sound.list.add(sound);
+	
+								}						
+								
+							if (frameNumber == 114)
+								{
+									gf.playAnim('sad', true);
+									camFollow.x = 370;
+									FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom = 1.3}, 0.1);
+								}								
+							
+							if (frameNumber == 233)
+								{
+									camFollow.x = 450;
+									FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom = 0.9}, 2);
+								}	
+								
+						}					
 
-					anim.animation.finishCallback = function(idle)
-					{
-						remove(anim);
-						dad.visible = true;
-						startCountdown();
-						if (!ClientPrefs.hideHud)
-							{
-								FlxTween.tween(scoreTxt, {alpha: 1}, (Conductor.stepCrochet * 16 / 1000), {ease: FlxEase.quadInOut});
-								FlxTween.tween(iconP1, {alpha: 1}, (Conductor.stepCrochet * 16 / 1000), {ease: FlxEase.quadInOut});
-								FlxTween.tween(iconP2, {alpha: 1}, (Conductor.stepCrochet * 16 / 1000), {ease: FlxEase.quadInOut});
-								FlxTween.tween(healthBar, {alpha: 1}, (Conductor.stepCrochet * 16 / 1000), {ease: FlxEase.quadInOut});
-								FlxTween.tween(healthBarBG, {alpha: 1}, (Conductor.stepCrochet * 16 / 1000), {ease: FlxEase.quadInOut});
-							}
-					}
-
+						anim2.animation.finishCallback = function(idle)
+						{
+							remove(anim2);
+							dad.alpha = 1;
+							startCountdown();
+							if (!ClientPrefs.hideHud)
+								{
+									FlxTween.tween(scoreTxt, {alpha: 1}, (Conductor.stepCrochet * 16 / 1000), {ease: FlxEase.quadInOut});
+									FlxTween.tween(iconP1, {alpha: 1}, (Conductor.stepCrochet * 16 / 1000), {ease: FlxEase.quadInOut});
+									FlxTween.tween(iconP2, {alpha: 1}, (Conductor.stepCrochet * 16 / 1000), {ease: FlxEase.quadInOut});
+									FlxTween.tween(healthBar, {alpha: 1}, (Conductor.stepCrochet * 16 / 1000), {ease: FlxEase.quadInOut});
+									FlxTween.tween(healthBarBG, {alpha: 1}, (Conductor.stepCrochet * 16 / 1000), {ease: FlxEase.quadInOut});
+								}
+						}		
 				case "stress":
-					dad.visible = false;
+					dad.alpha = 0;
+					boyfriend.alpha = 0;
 					gf.alpha = 0;
 					healthBarBG.alpha = 0;
 					healthBar.alpha = 0;
@@ -1620,20 +1691,39 @@ class PlayState extends MusicBeatState
 					var holyfuck:FlxSprite;// very hard cutscene to do ever
 					holyfuck = new FlxSprite(-290,-260);
 					holyfuck.frames = Paths.getSparrowAtlas('stressCutscene/StressCutsceneLowResolutionGFVER', "preload");
-					holyfuck.animation.addByPrefix('idle', 'Gf tank cuts LOW', 24, false);
+					holyfuck.animation.addByPrefix('idle',"Gf tank cuts LOW",30,false);
 					holyfuck.setGraphicSize(Std.int(holyfuck.width * 1.4));// ;/
 					holyfuck.animation.play('idle');
-					holyfuck.antialiasing = ClientPrefs.globalAntialiasing;
+					holyfuck.antialiasing = true;
 					add(holyfuck);
 
 					var geez:FlxSprite;
 					geez = new FlxSprite(dad.x,dad.y);
 					geez.frames = Paths.getSparrowAtlas('stressCutscene/StressCutsceneLowResolution', "preload");
-					geez.animation.addByPrefix('idle', 'tankman cutscene LOW', 24, false);
+					geez.animation.addByPrefix('idle',"tankman cutscene LOW",30,false);
 					geez.setGraphicSize(Std.int(geez.width * 1.4));
 					geez.animation.play('idle');
-					geez.antialiasing = ClientPrefs.globalAntialiasing;
+					geez.antialiasing = true;
 					add(geez);									
+
+					var bfcuts:FlxSprite;
+					bfcuts = new FlxSprite(790,270);
+					bfcuts.frames = Paths.getSparrowAtlas('stressCutscene/tank cuts3 BF', "preload");
+					bfcuts.animation.addByPrefix('idle',"BF cuts",30,false);
+					bfcuts.animation.play('idle');
+					bfcuts.antialiasing = true;
+					add(bfcuts);
+
+					bfcuts.animation.callback = function(idle, frameNumber:Int, frameIndex:Int)//do nothing
+						{
+
+						}	
+
+					bfcuts.animation.finishCallback = function(idle)
+						{
+							remove(bfcuts);
+							boyfriend.alpha = 1;
+						}	
 
 					holyfuck.animation.callback = function(idle, frameNumber:Int, frameIndex:Int)//do nothing
 						{
@@ -1647,22 +1737,36 @@ class PlayState extends MusicBeatState
 						}	
 
 					geez.animation.callback = function(idle, frameNumber:Int, frameIndex:Int)
-					{
-						switch(frameNumber)
 						{
-							case 520:
-								camFollow.x += 290;
 
-							case 943:
-								FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom = 1.2}, 0.1);
-								camFollow.x += 390;
+							if (frameNumber == 1)
+								{
+									var sound:FlxSound;	
+									sound = new FlxSound().loadEmbedded(Paths.sound('cuts3', 'week7'));
+									sound.play();
+									FlxG.sound.list.add(sound);
+	
+								}					
+							
+							if (frameNumber == 943)
+								{
+									FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom = 1.2}, 0.1);
+									camFollow.x += 390;
+								}							
 
-							case 971:
-								camFollow.x = 340;
-								FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom = 0.9}, 3);
+							if (frameNumber == 520)
+								{
+									camFollow.x += 290;
+								}								
 
-						}
-					}		
+							if (frameNumber == 971)
+								{
+									camFollow.x = 340;
+									FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom = 0.9}, 3);
+								}	
+
+								
+						}		
 
 						geez.animation.finishCallback = function(idle)
 							{
