@@ -27,7 +27,7 @@ class NotesPromptSubState extends MusicBeatSubstate
 		bg.alpha = 0.3;
 		add(bg);
 
-		var text:Alphabet = new Alphabet(0, FlxG.height / 3, 'What noteskin do you want?', true);
+		var text:Alphabet = new Alphabet(0, FlxG.height / 3, 'Choose your Noteskin', true);
 		text.screenCenter(X);
 		add(text);
 
@@ -56,12 +56,14 @@ class NotesPromptSubState extends MusicBeatSubstate
 		{
 			if (controls.ACCEPT)
 			{
+				ClientPrefs.saveSettings();
 				FlxG.sound.play(Paths.sound('confirmMenu'));
 				close();
 			}
 
 			if (controls.BACK)
 			{
+				ClientPrefs.saveSettings();
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				close();
 			}
