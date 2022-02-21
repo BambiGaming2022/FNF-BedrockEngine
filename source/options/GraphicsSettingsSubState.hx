@@ -1,8 +1,10 @@
 package options;
 
+import meta.data.ClientPrefs;
 #if desktop
-import Discord.DiscordClient;
+import meta.data.Discord.DiscordClient;
 #end
+import meta.state.MusicBeatState;
 import flash.text.TextField;
 import flixel.FlxCamera;
 import flixel.FlxG;
@@ -24,7 +26,7 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;
 import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
-import Controls;
+import meta.data.Controls;
 import openfl.Lib;
 
 using StringTools;

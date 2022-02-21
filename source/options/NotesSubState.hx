@@ -1,8 +1,13 @@
 package options;
 
+import gameObjects.font.Alphabet;
+import meta.data.Controls;
+import meta.data.ClientPrefs;
 #if desktop
-import Discord.DiscordClient;
+import meta.data.Discord.DiscordClient;
 #end
+import gameObjects.ColorSwap;
+import meta.subState.MusicBeatSubstate;
 import flash.text.TextField;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -27,7 +32,6 @@ import flixel.graphics.FlxGraphic;
 import sys.FileSystem;
 import sys.io.File;
 #end
-import Controls;
 
 using StringTools;
 

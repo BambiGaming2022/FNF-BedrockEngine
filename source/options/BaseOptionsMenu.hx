@@ -1,8 +1,16 @@
 package options;
 
+import gameObjects.font.Alphabet;
+import gameObjects.CheckboxThingie;
+import gameObjects.Character;
+import gameObjects.AttachedSprite;
+import gameObjects.AttachedText;
+import meta.data.Controls;
+import meta.data.ClientPrefs;
 #if desktop
-import Discord.DiscordClient;
+import meta.data.Discord.DiscordClient;
 #end
+import meta.subState.MusicBeatSubstate;
 import flash.text.TextField;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -23,7 +31,6 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;
 import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
-import Controls;
 
 using StringTools;
 

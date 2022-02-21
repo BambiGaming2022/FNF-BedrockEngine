@@ -1,5 +1,12 @@
 package options;
 
+import gameObjects.font.Alphabet;
+import gameObjects.BGSprite;
+import gameObjects.Character;
+import meta.data.ClientPrefs;
+import meta.Conductor;
+import meta.data.CustomFadeTransition;
+import meta.state.MusicBeatState;
 import flixel.util.FlxStringUtil;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;

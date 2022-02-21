@@ -15,6 +15,9 @@ import openfl.events.Event;
 import openfl.system.System;
 import openfl.text.TextField;
 import openfl.text.TextFormat;
+import meta.state.TitleState;
+import meta.data.ClientPrefs;
+import meta.DisplayCounters;
 
 class Main extends Sprite
 {

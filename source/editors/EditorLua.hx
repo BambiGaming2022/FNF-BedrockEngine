@@ -1,5 +1,13 @@
 package editors;
 
+import gameObjects.DialogueBoxPsych;
+import meta.Conductor;
+import meta.data.ClientPrefs;
+import meta.data.Controls;
+#if desktop
+import meta.data.Discord;
+#end
+import meta.state.PlayState;
 #if LUA_ALLOWED
 import llua.Lua;
 import llua.LuaL;
@@ -23,11 +31,6 @@ import sys.FileSystem;
 import sys.io.File;
 #end
 import Type.ValueType;
-import Controls;
-import DialogueBoxPsych;
-#if desktop
-import Discord;
-#end
 
 using StringTools;
 
@@ -206,7 +209,7 @@ class EditorLua
 			}
 		});
 
-		Discord.DiscordClient.addLuaCallbacks(lua);
+		meta.data.Discord.DiscordClient.addLuaCallbacks(lua);
 
 		call('onCreate', []);
 		#end

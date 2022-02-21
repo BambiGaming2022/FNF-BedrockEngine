@@ -1,5 +1,7 @@
 package options;
 
+import gameObjects.font.Alphabet;
+import meta.data.ClientPrefs;
 using StringTools;
 
 class Option

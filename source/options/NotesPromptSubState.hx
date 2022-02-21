@@ -1,5 +1,9 @@
 package options;
 
+import gameObjects.font.Alphabet;
+import meta.data.ClientPrefs;
+import meta.data.FlxUIDropDownMenuCustom;
+import meta.subState.MusicBeatSubstate;
 import flixel.util.FlxColor;
 import flixel.FlxG;
 import flixel.FlxSprite;

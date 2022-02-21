@@ -1,8 +1,17 @@
 package editors;
 
+import gameObjects.HealthIcon;
+import gameObjects.MenuCharacter;
+import gameObjects.MenuItem;
+import gameObjects.font.Alphabet;
+import meta.CoolUtil;
 #if desktop
-import Discord.DiscordClient;
+import meta.data.Discord.DiscordClient;
 #end
+import meta.data.ClientPrefs;
+import meta.data.WeekData;
+import meta.state.TitleState;
+import meta.state.MusicBeatState;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.display.FlxGridOverlay;
@@ -31,7 +40,6 @@ import haxe.Json;
 import sys.io.File;
 import sys.FileSystem;
 #end
-import WeekData;
 
 using StringTools;
 

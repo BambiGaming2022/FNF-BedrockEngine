@@ -1,8 +1,17 @@
 package editors;
 
+import gameObjects.BGSprite;
+import gameObjects.HealthIcon;
+import meta.CoolUtil;
 #if desktop
-import Discord.DiscordClient;
+import meta.data.Discord.DiscordClient;
 #end
+import meta.data.ClientPrefs;
+import meta.data.FlxUIDropDownMenuCustom;
+import meta.state.PlayState;
+import meta.state.TitleState;
+import meta.state.MusicBeatState;
+import meta.state.menus.MainMenuState;
 import animateatlas.AtlasFrameMaker;
 import flixel.FlxG;
 import flixel.FlxObject;
@@ -29,7 +38,7 @@ import openfl.net.FileReference;
 import openfl.events.Event;
 import openfl.events.IOErrorEvent;
 import haxe.Json;
-import Character;
+import gameObjects.Character;
 import flixel.system.debug.interaction.tools.Pointer.GraphicCursorCross;
 import lime.system.Clipboard;
 import flixel.animation.FlxAnimation;

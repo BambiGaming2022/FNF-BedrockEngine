@@ -1,7 +1,16 @@
 package editors;
 
 import Section.SwagSection;
-import Song.SwagSong;
+import gameObjects.Note;
+import gameObjects.NoteSplash;
+import gameObjects.StrumNote;
+import meta.Conductor;
+import meta.data.FunkinLua;
+import meta.data.ClientPrefs;
+import meta.data.Song;
+import meta.state.PlayState;
+import meta.state.LoadingState;
+import meta.state.MusicBeatState;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.util.FlxColor;
@@ -19,7 +28,6 @@ import flixel.util.FlxTimer;
 import flixel.input.keyboard.FlxKey;
 import openfl.events.KeyboardEvent;
 import flixel.input.gamepad.FlxGamepad;
-import FunkinLua;
 
 using StringTools;
 

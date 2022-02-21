@@ -1,11 +1,25 @@
 package editors;
 
 #if desktop
-import Discord.DiscordClient;
+import meta.data.Discord.DiscordClient;
 #end
-import Conductor.BPMChangeEvent;
+import meta.Conductor;
+import meta.CoolUtil;
+import meta.data.Song;
+import meta.data.ClientPrefs;
+import meta.data.StageData;
+import meta.state.PlayState;
+import meta.state.MusicBeatState;
+import meta.state.LoadingState;
+import meta.state.TitleState;
+import gameObjects.AttachedSprite;
+import gameObjects.Character;
+import gameObjects.Prompt;
+import gameObjects.StrumNote;
+import gameObjects.Note;
+import gameObjects.HealthIcon;
+import meta.data.FlxUIDropDownMenuCustom;
 import Section.SwagSection;
-import Song.SwagSong;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxObject;
@@ -2535,7 +2549,7 @@ class ChartingState extends MusicBeatState
 		var rawJson = OpenFlAssets.getText(path);
 		#end
 
-		var json:Character.CharacterFile = cast Json.parse(rawJson);
+		var json:gameObjects.Character.CharacterFile = cast Json.parse(rawJson);
 		return json.healthicon;
 	}
 

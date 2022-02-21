@@ -1,8 +1,13 @@
 package editors;
 
+import gameObjects.font.Alphabet;
+import gameObjects.Character;
 #if desktop
-import Discord.DiscordClient;
+import meta.data.Discord.DiscordClient;
 #end
+import meta.state.*;
+import meta.state.menus.*;
+import meta.data.WeekData;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.display.FlxGridOverlay;

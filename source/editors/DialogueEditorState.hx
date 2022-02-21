@@ -1,8 +1,13 @@
 package editors;
 
+import gameObjects.DialogueBoxPsych;
+import gameObjects.font.Alphabet;
 #if desktop
-import Discord.DiscordClient;
+import meta.data.Discord.DiscordClient;
 #end
+import meta.data.ClientPrefs;
+import meta.state.*;
+import meta.state.menus.*;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.display.FlxGridOverlay;
@@ -25,7 +30,6 @@ import openfl.events.Event;
 import openfl.events.IOErrorEvent;
 import flash.net.FileFilter;
 import haxe.Json;
-import DialogueBoxPsych;
 import lime.system.Clipboard;
 #if sys
 import sys.io.File;
