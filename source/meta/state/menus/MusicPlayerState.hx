@@ -202,7 +202,8 @@ class MusicPlayerState extends MusicBeatState
 		if (curPlaying)
 		{
 			iconArray[instPlaying].canBounce = true;
-			iconArray[instPlaying].animation.curAnim.curFrame = 2;
+			if (!ClientPrefs.iconSupport)
+				iconArray[instPlaying].animation.curAnim.curFrame = 2;
 		}
 
 		changeSelection();
@@ -398,7 +399,9 @@ class MusicPlayerState extends MusicBeatState
 					iconArray[i].animation.curAnim.curFrame = 0;
 				}
 				iconArray[instPlaying].canBounce = true;
-				iconArray[instPlaying].animation.curAnim.curFrame = 2;
+				if (!ClientPrefs.iconSupport)
+					iconArray[instPlaying].animation.curAnim.curFrame = 2;
+
 				curPlaying = true;
 				#end
 			}

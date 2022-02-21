@@ -36,19 +36,14 @@ import Sys;
 import sys.FileSystem;
 #end
 
-
 using StringTools;
 
 class TankmenBG extends FlxSprite
 {
-
-	        
-
     public var tankSpeed:Float = 0.7 * 1000;
     public var goingRight:Bool = false;
     var runAnimPlayedTimes:Int = 0;
     var runAnimPlayedTimesMax:Int = 1;
-  
 
     override public function new()
     {
@@ -95,16 +90,12 @@ class TankmenBG extends FlxSprite
             velocity.x = tankSpeed * (newSpeedModifier * -1);
             if(animation.curAnim.name == "shot")
             {
-                
                 velocity.x = 0;
             }
         }
-        
-        
     }
     override public function update(elapsed:Float)
     {
-
         if(goingRight == true)
         {
             if(animation.curAnim.name == "shot")
@@ -113,7 +104,6 @@ class TankmenBG extends FlxSprite
                 velocity.x = 10;
             }
             flipX = true;
-
         }else{
             flipX = false;
             if(animation.curAnim.name == "shot")
@@ -123,35 +113,21 @@ class TankmenBG extends FlxSprite
             }
         }
         super.update(elapsed);
-        
 
         if(animation.curAnim.name == "run" && animation.curAnim.finished == true && runAnimPlayedTimes < runAnimPlayedTimesMax)
         {
-            
-            
             animation.play("run", true);
-
             runAnimPlayedTimes++;
-
-            
-            
         }
 
         if(animation.curAnim.name == "run" && animation.curAnim.finished == true && runAnimPlayedTimes >= runAnimPlayedTimesMax)
         {
-            
-            
             animation.play("shot", true);
-
-
             runAnimPlayedTimes = 0;
-            
-            
         }
         if(animation.curAnim.name == "shot" && animation.curAnim.curFrame >= animation.curAnim.frames.length - 1)
         {
             destroy();
         }
     }
-	
 }

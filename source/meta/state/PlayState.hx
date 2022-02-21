@@ -864,15 +864,10 @@ class PlayState extends MusicBeatState
 			if (!ClientPrefs.lowQuality)
 			{
 				tankBop1 = new BGSprite('tank0', -500, 650, 1.7, 1.5, ['fg tankhead far right'], true);
-
 				tankBop2 = new BGSprite('tank1', -300, 750, 2.0, 0.2, ['fg tankhead 5'], true);
-	
 				tankBop3 = new BGSprite('tank2', 450, 940, 1.5, 1.5, ['foreground man 3'], true);
-	
 				tankBop4 = new BGSprite('tank3', 1300, 1200, 3.5, 2.5, ['fg tankhead 4'], true);
-	
 				tankBop5 = new BGSprite('tank4', 1300, 900, 1.5, 1.5, ['fg tankman bobbin 3'], true);
-				
 				tankBop6 = new BGSprite('tank5', 1620, 700, 1.5, 1.5, ['fg tankhead far right'], true);
 			}
 		}
