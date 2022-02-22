@@ -212,6 +212,7 @@ class PlayState extends MusicBeatState
 	public var scoreTxt:FlxText;
 	var timeTxt:FlxText;
 	var scoreTxtTween:FlxTween;
+	var songDisplay:FlxText;
 
 	public static var campaignScore:Int = 0;
 	public static var campaignMisses:Int = 0;
@@ -847,14 +848,11 @@ class PlayState extends MusicBeatState
 		laneunderlay.color = FlxColor.BLACK;
 		laneunderlay.scrollFactor.set();
 
-		if (ClientPrefs.laneAlpha)
+		if (!ClientPrefs.middleScroll)
 		{
-				if (!ClientPrefs.middleScroll)
-				{
-					add(laneunderlayOpponent);
-				}
-				add(laneunderlay);
+			add(laneunderlayOpponent);
 		}
+			add(laneunderlay);
 
 		var showTime:Bool = (ClientPrefs.timeBarType != 'Disabled');
 		timeTxt = new FlxText(STRUM_X + (FlxG.width / 2) - 248, 19, 400, "", 32);
@@ -990,9 +988,9 @@ class PlayState extends MusicBeatState
 		healthBarBG.yAdd = -4;
 		add(healthBarBG);
 
-		if (ClientPrefs.downScroll && !ClientPrefs.maniaMode)
+		if (ClientPrefs.downScroll)
 			healthBarBG.y = 0.11 * FlxG.height;
-		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, (opponentChart ? LEFT_TO_RIGHT : RIGHT_TO_LEFT), Std.int(healthBarBG.width - 8),
+		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, (LEFT_TO_RIGHT) /*(opponentChart ? LEFT_TO_RIGHT : RIGHT_TO_LEFT)*/, Std.int(healthBarBG.width - 8),
 			Std.int(healthBarBG.height - 8), this, 'health', 0, 2);
 		healthBar.scrollFactor.set();
 		healthBar.visible = !ClientPrefs.hideHud;
@@ -1002,7 +1000,7 @@ class PlayState extends MusicBeatState
 
 		iconP1 = new HealthIcon(boyfriend.healthIcon, true);
 		iconP1.y = healthBar.y - 75;
-		iconP1.visible = !ClientPrefs.hideHud || !ClientPrefs.maniaMode;
+		iconP1.visible = !ClientPrefs.hideHud;
 		iconP1.visible = !ClientPrefs.hideHud;
 		iconP1.alpha = ClientPrefs.healthBarAlpha;
 		//iconP1.canBounce = true;
@@ -1010,7 +1008,7 @@ class PlayState extends MusicBeatState
 
 		iconP2 = new HealthIcon(dad.healthIcon, false);
 		iconP2.y = healthBar.y - 75;
-		iconP2.visible = !ClientPrefs.hideHud || !ClientPrefs.maniaMode;
+		iconP2.visible = !ClientPrefs.hideHud;
 		iconP2.visible = !ClientPrefs.hideHud;
 		iconP2.alpha = ClientPrefs.healthBarAlpha;
 		//iconP2.canBounce = true;
