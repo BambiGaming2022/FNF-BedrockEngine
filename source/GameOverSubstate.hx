@@ -119,6 +119,13 @@ class GameOverSubstate extends MusicBeatSubstate
 			}
 		}
 
+		if (boyfriend.animation.curAnim.name == 'firstDeath' && boyfriend.animation.curAnim.finished) {
+			if (PlayState.SONG.song == "Ugh" || PlayState.SONG.song == "Guns" || PlayState.SONG.song == "Stress") {
+				FlxG.sound.playMusic(Paths.music('gameOver'), 0.2);
+				FlxG.sound.play(Paths.sound('jeffGameover-' + FlxG.random.int(1, 25), 'week7'));
+			}
+		}
+
 		if (FlxG.sound.music.playing)
 		{
 			Conductor.songPosition = FlxG.sound.music.time;

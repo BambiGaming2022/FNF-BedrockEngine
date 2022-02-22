@@ -27,6 +27,7 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxMath;
 import flixel.math.FlxPoint;
 import flixel.math.FlxRect;
+import flixel.math.FlxAngle;
 import flixel.system.FlxSound;
 import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
@@ -682,8 +683,8 @@ class PlayState extends MusicBeatState
 					bg.antialiasing = false;
 					add(bg);
 				}
-
-			case 'tank':
+				
+			case 'tank': // Week 7
 				if (SONG.song.toLowerCase() == "stress") {
 					picoStep = Json.parse(openfl.utils.Assets.getText(Paths.json('stress/picospeaker')));
 					tankStep = Json.parse(openfl.utils.Assets.getText(Paths.json('stress/tankSpawn')));
@@ -1356,6 +1357,13 @@ class PlayState extends MusicBeatState
 				case 'senpai' | 'roses' | 'thorns':
 					if(daSong == 'roses') FlxG.sound.play(Paths.sound('ANGRY'));
 					schoolIntro(doof);
+
+				case "ugh":
+					startVideo("ugh");
+				case "guns":
+					startVideo("guns");
+				case "stress":
+					startVideo("stress");
 
 				default:
 					startCountdown();
@@ -2432,6 +2440,8 @@ class PlayState extends MusicBeatState
 						heyTimer = 0;
 					}
 				}
+			case 'tank':
+				moveTank();
 		}
 
 		if(!inCutscene) {
@@ -2454,7 +2464,7 @@ class PlayState extends MusicBeatState
 		var divider:String = ' ' + '-' + ' ';
 
 		scoreTxt.text = 'Score: ${songScore}';
-		scoreTxt.text += divider + 'Accuracy: ${accuracy}%;
+		scoreTxt.text += divider + 'Accuracy: ${accuracy}%';
 
 		if (ratingFC == "" || songMisses > 0)
 			scoreTxt.text += '';
@@ -4395,7 +4405,6 @@ class PlayState extends MusicBeatState
 					if (curStep == tankStep.left[i]){
 						var tankmanRunner:TankmenBG = new TankmenBG();
 						tankmanRunner.resetShit(FlxG.random.int(630, 730) * -1, 255, true, 1, 1.5);
-
 						tankmanRun.add(tankmanRunner);
 					}
 				}
