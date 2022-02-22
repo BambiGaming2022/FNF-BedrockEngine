@@ -196,6 +196,8 @@ class PlayState extends MusicBeatState
 	private var healthBarBG:AttachedSprite;
 
 	public var healthBar:FlxBar;
+	
+	public var cameraNoteMovements:Bool;
 
 	var songPercent:Float = 0;
 
@@ -2387,6 +2389,7 @@ class PlayState extends MusicBeatState
 		Conductor.changeBPM(songData.bpm, playbackRate);
 
 		curSong = songData.song;
+		cameraNoteMovements = songData.cameraNoteMovements;
 
 		if (SONG.needsVoices)
 			vocals = new FlxSound().loadEmbedded(Paths.voices(PlayState.SONG.song));
@@ -4893,7 +4896,7 @@ class PlayState extends MusicBeatState
 			var animToPlay:String = singAnimations[Std.int(Math.abs(daNote.noteData))] + 'miss' + daAlt;
 			char.playAnim(animToPlay, true);
 		}
-		if (camFocus == 'bf' && ClientPrefs.dynamicCam)
+		if (camFocus == 'bf' && ClientPrefs.dynamicCam && cameraNoteMovements)
 			triggerCamMovement(Math.abs(daNote.noteData % 4));
 		callOnLuas('noteMiss', [
 			notes.members.indexOf(daNote),
@@ -5007,7 +5010,7 @@ class PlayState extends MusicBeatState
 				char.playAnim(animToPlay, true);
 				char.holdTimer = 0;
 			}
-			if (camFocus == 'dad' && ClientPrefs.dynamicCam)
+			if (camFocus == 'dad' && ClientPrefs.dynamicCam && cameraNoteMovements)
 				triggerCamMovement(Math.abs(note.noteData % 4));
 		}
 
@@ -5169,7 +5172,7 @@ class PlayState extends MusicBeatState
 			var isSus:Bool = note.isSustainNote; // GET OUT OF MY HEAD, GET OUT OF MY HEAD, GET OUT OF MY HEAD
 			var leData:Int = Math.round(Math.abs(note.noteData));
 			var leType:String = note.noteType;
-			if (camFocus == 'bf' && ClientPrefs.dynamicCam)
+			if (camFocus == 'bf' && ClientPrefs.dynamicCam && cameraNoteMovements)
 				triggerCamMovement(Math.abs(note.noteData % 4));
 			callOnLuas((noteHitFix ? 'opponentNoteHit' : 'goodNoteHit'), [notes.members.indexOf(note), leData, leType, isSus]);
 
