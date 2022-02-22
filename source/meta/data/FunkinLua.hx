@@ -706,6 +706,13 @@ class FunkinLua {
 			return PlayState.instance.health;
 		});
 		
+		Lua_helper.add_callback(lua, "getCameraNoteMovements", function() {
+			return PlayState.instance.cameraNoteMovements;
+		});
+		Lua_helper.add_callback(lua, "setCameraNoteMovements", function(value:Bool = true) {
+			PlayState.instance.cameraNoteMovements = value;
+		});
+		
 		Lua_helper.add_callback(lua, "getColorFromHex", function(color:String) {
 			if(!color.startsWith('0x')) color = '0xff' + color;
 			return Std.parseInt(color);
