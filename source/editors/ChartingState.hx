@@ -124,6 +124,10 @@ class ChartingState extends MusicBeatState
 		[
 			'Change Scroll Speed',
 			"Value 1: Scroll Speed Multiplier (1 is default)\nValue 2: Time it takes to change fully in seconds."
+		],
+		[
+			'Change Arrow Movement',
+			"Value 1: Will It Be Enabled (1 is true, 0 is false). 0 By Default.\nleaves second value blank"
 		]
 	];
 
@@ -241,8 +245,7 @@ class ChartingState extends MusicBeatState
 				gfVersion: 'gf',
 				speed: 1,
 				stage: 'stage',
-				validScore: false,
-				cameraNoteMovements: false
+				validScore: false
 			};
 			addSection(_song.numerator * 4);
 			PlayState.SONG = _song;
@@ -488,13 +491,6 @@ class ChartingState extends MusicBeatState
 		{
 			saveEvents();
 		});
-		
-		var cameraNoteMovements:FlxUICheckBox = new FlxUICheckBox(110, loadAutosaveBtn.y + 30, null, null, "Enable\ncamera moves", 100);
-		cameraNoteMovements.checked = _song.cameraNoteMovements;
-		cameraNoteMovements.callback = function()
-		{
-			_song.cameraNoteMovements = cameraNoteMovements.checked;
-		}
 
 		var clear_events:FlxButton = new FlxButton(320, 310, 'Clear events', function()
 		{
@@ -726,7 +722,6 @@ class ChartingState extends MusicBeatState
 		tab_group_song.add(clear_notes);
 		tab_group_song.add(saveButton);
 		tab_group_song.add(saveEvents);
-		tab_group_song.add(cameraNoteMovements);
 		tab_group_song.add(reloadSong);
 		tab_group_song.add(reloadSongJson);
 		tab_group_song.add(loadAutosaveBtn);
@@ -3121,8 +3116,7 @@ class ChartingState extends MusicBeatState
 			player3: null,
 			gfVersion: _song.gfVersion,
 			stage: _song.stage,
-			validScore: false,
-			cameraNoteMovements: _song.cameraNoteMovements
+			validScore: false
 		};
 		var json = {
 			"song": eventsSong
