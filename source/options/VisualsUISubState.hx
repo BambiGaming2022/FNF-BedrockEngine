@@ -53,6 +53,10 @@ class VisualsUISubState extends BaseOptionsMenu
 			'hideHud', 'bool', false);
 		addOption(option);
 
+		var option:Option = new Option('Judgement Counter', "If checked, enables counters for all your judgements at\nleft side of the screen.",
+			'judgementCounter', 'bool', true);
+		addOption(option);
+
 		var option:Option = new Option('Note Splashes', "If unchecked, hitting \"Sick!\" notes won't show particles.",
 			'noteSplashes', 'bool', true);
 		addOption(option);

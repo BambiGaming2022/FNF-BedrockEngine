@@ -1068,9 +1068,7 @@ class PlayState extends MusicBeatState
 			songDisplay.visible = true;
 
 		if (ClientPrefs.judgementCounter)
-		{
 			judgementCounter.visible = true;
-		}
 
 		// add them
 		add(beWatermark);
