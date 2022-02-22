@@ -27,6 +27,7 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxMath;
 import flixel.math.FlxPoint;
 import flixel.math.FlxRect;
+import flixel.math.FlxAngle;
 import flixel.system.FlxSound;
 import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
@@ -811,7 +812,7 @@ class PlayState extends MusicBeatState
 				tankBop6.animation.addByPrefix('bop','fg tankhead far right', 24);
 				tankBop6.scrollFactor.set(1.5, 1.5);
 				tankBop6.antialiasing = true;
-					dd(tankBop6);
+				add(tankBop6);
 								
 		}
 
