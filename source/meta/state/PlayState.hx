@@ -197,7 +197,7 @@ class PlayState extends MusicBeatState
 
 	public var healthBar:FlxBar;
 	
-	public var cameraNoteMovements:Bool;
+	private var cameraNoteMovements:Bool = false;
 
 	var songPercent:Float = 0;
 
@@ -2389,7 +2389,6 @@ class PlayState extends MusicBeatState
 		Conductor.changeBPM(songData.bpm, playbackRate);
 
 		curSong = songData.song;
-		cameraNoteMovements = songData.cameraNoteMovements;
 
 		if (SONG.needsVoices)
 			vocals = new FlxSound().loadEmbedded(Paths.voices(PlayState.SONG.song));
@@ -3889,6 +3888,14 @@ class PlayState extends MusicBeatState
 						targetsArray[i].shake(intensity, duration);
 					}
 				}
+
+			case 'Change Arrow Movement':
+				var val1:Int = Std.parseInt(value1);
+				if (Math.isNaN(val1))
+					val1 = 0;
+
+				if (val1 == 1)
+					cameraNoteMovements = true;
 
 			case 'Change Character':
 				var charType:Int = 0;
