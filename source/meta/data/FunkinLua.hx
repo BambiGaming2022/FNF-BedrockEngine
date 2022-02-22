@@ -55,8 +55,13 @@ import meta.data.Discord;
 using StringTools;
 
 class FunkinLua {
+	#if mac
+	public static var Function_Stop = "Function_Stop";
+ 	public static var Function_Continue = "Function_Continue";
+	#else
 	public static var Function_Stop = 1;
 	public static var Function_Continue = 0;
+	#end
 
 	#if LUA_ALLOWED
 	public var lua:State = null;
@@ -93,8 +98,13 @@ class FunkinLua {
 		#end
 
 		// Lua shit
+		#if mac
+		set('Function_Stop', "Function_Stop");
+ 		set('Function_Continue', "Function_Continue");
+		#else
 		set('Function_Stop', Function_Stop);
 		set('Function_Continue', Function_Continue);
+		#end
 		set('luaDebugMode', false);
 		set('luaDeprecatedWarnings', true);
 		set('inChartEditor', false);
@@ -139,6 +149,7 @@ class FunkinLua {
 		set('rating', 0);
 		set('ratingName', '');
 		set('ratingFC', '');
+		set('beversion', MainMenuState.bedrockEngineVersion.trim());
 		set('version', MainMenuState.psychEngineVersion.trim());
 		
 		set('inGameOver', false);
@@ -187,6 +198,17 @@ class FunkinLua {
 		set('healthBarAlpha', ClientPrefs.healthBarAlpha);
 		set('noResetButton', ClientPrefs.noReset);
 		set('lowQuality', ClientPrefs.lowQuality);
+
+		//Bedrock's Settings
+		set('autoPause', ClientPrefs.autoPause);
+		set('antiMash', ClientPrefs.antiMash);
+		set('iconSupport', ClientPrefs.iconSupport);
+		set('comboSprite', ClientPrefs.comboSprite);
+		set('showWatermarks', ClientPrefs.showWatermarks);
+		set('useClassicSongs', ClientPrefs.useClassicSongs);
+		set('keAccuracy', ClientPrefs.keAccuracy);
+		set('instantRespawn', ClientPrefs.instantRespawn);
+		set('maniaMode', ClientPrefs.maniaMode);
 
 		Lua_helper.add_callback(lua, "addLuaScript", function(luaFile:String, ?ignoreAlreadyRunning:Bool = false) { //would be dope asf. 
 			var cervix = luaFile + ".lua";

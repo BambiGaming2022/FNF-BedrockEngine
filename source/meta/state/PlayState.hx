@@ -1339,16 +1339,20 @@ class PlayState extends MusicBeatState
 		add(scoreTxt);
 
 		// Watermarks, this is for Bedrock Engine
-		beWatermark = new FlxText(0, FlxG.height - 50, 0, "Bedrock Engine: v" + MainMenuState.bedrockEngineVersion, 16);
+		beWatermark = new FlxText(0, FlxG.height - 710, 0, "Bedrock Engine: v" + MainMenuState.bedrockEngineVersion, 16);
 		beWatermark.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		beWatermark.borderSize = 2;
+		beWatermark.borderQuality = 2;
 		beWatermark.scrollFactor.set();
 		beWatermark.updateHitbox();
 		beWatermark.x = FlxG.width - beWatermark.width - 5;
 		beWatermark.visible = false;
 
 		// And this is for Psych Engine
-		peWatermark = new FlxText(0, FlxG.height - 30, 0, "Psych Engine: v" + MainMenuState.psychEngineVersion, 16);
+		peWatermark = new FlxText(0, FlxG.height - 690, 0, "Psych Engine: v" + MainMenuState.psychEngineVersion, 16);
 		peWatermark.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		peWatermark.borderSize = 2;
+		peWatermark.borderQuality = 2;
 		peWatermark.scrollFactor.set();
 		peWatermark.updateHitbox();
 		peWatermark.x = FlxG.width - peWatermark.width - 5;
@@ -1357,6 +1361,8 @@ class PlayState extends MusicBeatState
 		// Song Display thingy
 		songDisplay = new FlxText(0, FlxG.height - 30, 0, SONG.song + " - " + CoolUtil.difficultyString(), 16);
 		songDisplay.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		songDisplay.borderSize = 2;
+		songDisplay.borderQuality = 2;
 		songDisplay.scrollFactor.set();
 		songDisplay.visible = false;
 
@@ -1426,6 +1432,7 @@ class PlayState extends MusicBeatState
 		botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		botplayTxt.scrollFactor.set();
 		botplayTxt.borderSize = 2;
+		botplayTxt.borderQuality = 2;
 		botplayTxt.visible = cpuControlled;
 		add(botplayTxt);
 
