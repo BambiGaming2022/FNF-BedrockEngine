@@ -1,5 +1,6 @@
 package openfl.display;
 
+import meta.data.ClientPrefs;
 import haxe.Timer;
 import openfl.events.Event;
 import openfl.text.TextField;
@@ -100,6 +101,8 @@ class FPS extends TextField
 			text += "\nstageDC: " + Context3DStats.contextDrawCalls(DrawCallContext.STAGE);
 			text += "\nstage3DDC: " + Context3DStats.contextDrawCalls(DrawCallContext.STAGE3D);
 			#end
+			if (ClientPrefs.showState)
+				text += "\nState: " + Main.mainClassState;
 
 			text += "\n";
 		}

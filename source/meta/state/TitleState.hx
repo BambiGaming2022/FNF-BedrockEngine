@@ -5,6 +5,7 @@ import gameObjects.ColorSwap;
 import meta.data.ClientPrefs;
 import meta.data.Highscore;
 import meta.data.PlayerSettings;
+import meta.data.WeekData;
 import meta.state.menus.*;
 #if desktop
 import meta.data.Discord.DiscordClient;

@@ -17,7 +17,6 @@ import openfl.text.TextField;
 import openfl.text.TextFormat;
 import meta.state.TitleState;
 import meta.data.ClientPrefs;
-import meta.DisplayCounters;
 
 class Main extends Sprite
 {
@@ -96,16 +95,12 @@ class Main extends Sprite
 		addChild(new FlxGame(gameWidth, gameHeight, initialState, zoom, framerate, framerate, skipSplash, startFullscreen));
 
 		#if !mobile
-		var displaycounters:DisplayCounters = new DisplayCounters(10, 3, 0xFFFFFF);
+		fpsVar = new FPS(10, 3, 0xFFFFFF);
+		addChild(fpsVar);
 		Lib.current.stage.align = "tl";
 		Lib.current.stage.scaleMode = StageScaleMode.NO_SCALE;
-		#end
-
-		#if !debug
-		addChild(displaycounters);
-		if (displaycounters != null)
-		{
-			displaycounters.visible = ClientPrefs.showFPS;
+		if(fpsVar != null) {
+			fpsVar.visible = ClientPrefs.showFPS;
 		}
 		#end
 	}

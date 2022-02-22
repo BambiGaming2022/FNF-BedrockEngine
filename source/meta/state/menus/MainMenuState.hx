@@ -1,6 +1,7 @@
 package meta.state.menus;
 
 import meta.data.ClientPrefs;
+import meta.data.WeekData;
 #if desktop
 import meta.data.Discord.DiscordClient;
 #end
