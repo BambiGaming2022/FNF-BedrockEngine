@@ -241,7 +241,8 @@ class ChartingState extends MusicBeatState
 				gfVersion: 'gf',
 				speed: 1,
 				stage: 'stage',
-				validScore: false
+				validScore: false,
+				cameraNoteMovements: false
 			};
 			addSection(_song.numerator * 4);
 			PlayState.SONG = _song;
@@ -487,6 +488,13 @@ class ChartingState extends MusicBeatState
 		{
 			saveEvents();
 		});
+		
+		var cameraNoteMovements:FlxUICheckBox = new FlxUICheckBox(110, loadAutosaveBtn.y + 30, null, null, "Enable\ncamera moves", 100);
+		cameraNoteMovements.checked = _song.cameraNoteMovements;
+		cameraNoteMovements.callback = function()
+		{
+			_song.cameraNoteMovements = cameraNoteMovements.checked;
+		}
 
 		var clear_events:FlxButton = new FlxButton(320, 310, 'Clear events', function()
 		{
@@ -718,6 +726,7 @@ class ChartingState extends MusicBeatState
 		tab_group_song.add(clear_notes);
 		tab_group_song.add(saveButton);
 		tab_group_song.add(saveEvents);
+		tab_group_song.add(cameraNoteMovements);
 		tab_group_song.add(reloadSong);
 		tab_group_song.add(reloadSongJson);
 		tab_group_song.add(loadAutosaveBtn);
@@ -3112,7 +3121,8 @@ class ChartingState extends MusicBeatState
 			player3: null,
 			gfVersion: _song.gfVersion,
 			stage: _song.stage,
-			validScore: false
+			validScore: false,
+			cameraNoteMovements: _song.cameraNoteMovements
 		};
 		var json = {
 			"song": eventsSong
