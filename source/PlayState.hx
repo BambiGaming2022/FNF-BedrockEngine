@@ -3591,6 +3591,9 @@ class PlayState extends MusicBeatState
 				daRating = 'bad';
 		 */
 
+		 if(combo > totalCombo)
+			totalCombo = combo;
+
 		var pixelShitPart1:String = "";
 		var pixelShitPart2:String = '';
 
