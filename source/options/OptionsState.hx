@@ -32,10 +32,10 @@ class OptionsState extends MusicBeatState
 	var options:Array<String> =
 	[
 		'Adjust Delay and Combo',
+		'Appearance',
 		'Controls',
 		'Gameplay',
 		'Graphics',
-		'Appearance',
 		'Note Colors'
 	];
 	private var grpOptions:FlxTypedGroup<Alphabet>;
