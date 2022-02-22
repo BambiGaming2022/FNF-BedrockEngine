@@ -32,7 +32,7 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 	public function new()
 	{
 		title = 'Gameplay Settings';
-		rpcTitle = 'In the Menus', 'Gameplay Settings Menu'; //for Discord Rich Presence
+		rpcTitle = 'In the Menus\nGameplay Settings Menu'; //for Discord Rich Presence
 		
 		var option:Option = new Option('Controller Mode', 'Check this if you want to play with\na controller instead of using your Keyboard.',
 			'controllerMode', 'bool', false);

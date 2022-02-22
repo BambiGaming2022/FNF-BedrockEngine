@@ -60,7 +60,8 @@ class ClientPrefs {
 	public static var laneAlpha:Float = 0;
 	public static var showWatermarks:Bool = false;
 	public static var showSongDisplay:Bool = false;
-	public static var ratingSystem:Bool = false;
+	public static var ratingSystem:String = 'Bedrock';
+	public static var judgementCounter:Bool = false;
 
 	//Every key has two binds, add your key bind down here and then add your control on options/ControlsSubState.hx and Controls.hx
 	public static var keyBinds:Map<String, Array<FlxKey>> = [
@@ -132,6 +133,7 @@ class ClientPrefs {
 		FlxG.save.data.showWatermarks = showWatermarks;
 		FlxG.save.data.showSongDisplay = showSongDisplay;
 		FlxG.save.data.ratingSystem = ratingSystem;
+		FlxG.save.data.judgementCounter = judgementCounter;
 	
 		FlxG.save.flush();
 
@@ -253,6 +255,9 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.ratingSystem != null) {
 			ratingSystem = FlxG.save.data.ratingSystem;
+		}
+		if(FlxG.save.data.judgementCounter != null) {
+			judgementCounter = FlxG.save.data.judgementCounter;
 		}
 		
 		// flixel automatically saves your volume!

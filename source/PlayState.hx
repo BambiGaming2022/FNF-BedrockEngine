@@ -205,9 +205,9 @@ class PlayState extends MusicBeatState
 	var wiggleShit:WiggleEffect = new WiggleEffect();
 	var bgGhouls:BGSprite;
 
-	public var songScore:Int = 0;
-	public var songHits:Int = 0;
-	public var songMisses:Int = 0;
+	public var score:Int = 0;
+	public var hits:Int = 0;
+	public var misses:Int = 0;
 	public var scoreTxt:FlxText;
 	var timeTxt:FlxText;
 	var scoreTxtTween:FlxTween;
@@ -258,6 +258,7 @@ class PlayState extends MusicBeatState
 	var judgementCounter:FlxText;
 	var beWatermark:FlxText;
 	var peWatermark:FlxText;
+	var songDisplay:FlxText;
 
 	override public function create()
 	{
@@ -846,14 +847,11 @@ class PlayState extends MusicBeatState
 		laneunderlay.color = FlxColor.BLACK;
 		laneunderlay.scrollFactor.set();
 
-		if (ClientPrefs.laneAlpha)
+		if (!ClientPrefs.middleScroll)
 		{
-				if (!ClientPrefs.middleScroll)
-				{
-					add(laneunderlayOpponent);
-				}
-				add(laneunderlay);
+				add(laneunderlayOpponent);
 		}
+		add(laneunderlay);
 
 		var showTime:Bool = (ClientPrefs.timeBarType != 'Disabled');
 		timeTxt = new FlxText(STRUM_X + (FlxG.width / 2) - 248, 19, 400, "", 32);
@@ -989,9 +987,9 @@ class PlayState extends MusicBeatState
 		healthBarBG.yAdd = -4;
 		add(healthBarBG);
 
-		if (ClientPrefs.downScroll && !ClientPrefs.maniaMode)
+		if (ClientPrefs.downScroll)
 			healthBarBG.y = 0.11 * FlxG.height;
-		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, (opponentChart ? LEFT_TO_RIGHT : RIGHT_TO_LEFT), Std.int(healthBarBG.width - 8),
+		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4,/* (opponentChart ? LEFT_TO_RIGHT : RIGHT_TO_LEFT), */Std.int(healthBarBG.width - 8),
 			Std.int(healthBarBG.height - 8), this, 'health', 0, 2);
 		healthBar.scrollFactor.set();
 		healthBar.visible = !ClientPrefs.hideHud;
@@ -1001,7 +999,7 @@ class PlayState extends MusicBeatState
 
 		iconP1 = new HealthIcon(boyfriend.healthIcon, true);
 		iconP1.y = healthBar.y - 75;
-		iconP1.visible = !ClientPrefs.hideHud || !ClientPrefs.maniaMode;
+		iconP1.visible = !ClientPrefs.hideHud;
 		iconP1.visible = !ClientPrefs.hideHud;
 		iconP1.alpha = ClientPrefs.healthBarAlpha;
 		//iconP1.canBounce = true;
@@ -1009,7 +1007,7 @@ class PlayState extends MusicBeatState
 
 		iconP2 = new HealthIcon(dad.healthIcon, false);
 		iconP2.y = healthBar.y - 75;
-		iconP2.visible = !ClientPrefs.hideHud || !ClientPrefs.maniaMode;
+		iconP2.visible = !ClientPrefs.hideHud;
 		iconP2.visible = !ClientPrefs.hideHud;
 		iconP2.alpha = ClientPrefs.healthBarAlpha;
 		//iconP2.canBounce = true;
@@ -2312,15 +2310,15 @@ class PlayState extends MusicBeatState
 		var ratingNameTwo:String = ratingName;
 		var divider:String = ' ' + '-' + ' ';
 
-		scoreTxt.text = 'Score: ${songScore}';
+		scoreTxt.text = 'Score: ${score}';
 		scoreTxt.text += divider + 'Accuracy:' + accuracy + '%';
 
-		if (ratingFC == "" || totalMisses > 0)
+		if (ratingFC == "" || misses > 0)
 			scoreTxt.text += '';
 		else
 			scoreTxt.text += ' [' + ratingFC + ']';
 
-		scoreTxt.text += divider + 'Misses: ${songMisses}';
+		scoreTxt.text += divider + 'Misses: ${misses}';
 
 		if (ratingFC == "")
 			scoreTxt.text += divider + '?';
@@ -2328,7 +2326,7 @@ class PlayState extends MusicBeatState
 			scoreTxt.text += divider + ratingName;
 
 		if (ClientPrefs.ratingSystem == "None")
-			scoreTxt.text = 'Score: ${songScore}' + divider + 'Misses: ${totalMisses}';
+			scoreTxt.text = 'Score: ${score}' + divider + 'Misses: ${misses}';
 
 		if(botplayTxt.visible) {
 			botplaySine += 180 * elapsed;
@@ -3237,7 +3235,7 @@ class PlayState extends MusicBeatState
 				#if !switch
 				var percent:Float = ratingPercent;
 				if(Math.isNaN(percent)) percent = 0;
-				Highscore.saveScore(SONG.song, songScore, storyDifficulty, percent);
+				Highscore.saveScore(SONG.song, score, storyDifficulty, percent);
 				#end
 			}
 
@@ -3249,8 +3247,8 @@ class PlayState extends MusicBeatState
 
 			if (isStoryMode)
 			{
-				campaignScore += songScore;
-				campaignMisses += songMisses;
+				campaignScore += score;
+				campaignMisses += misses;
 
 				storyPlaylist.remove(storyPlaylist[0]);
 
@@ -3412,8 +3410,8 @@ class PlayState extends MusicBeatState
 		}
 
 		if(!practiceMode && !cpuControlled) {
-			songScore += score;
-			songHits++;
+			score += score;
+			hits++;
 			totalPlayed++;
 			RecalculateRating();
 
@@ -3768,9 +3766,9 @@ class PlayState extends MusicBeatState
 
 		//For testing purposes
 		//trace(daNote.missHealth);
-		songMisses++;
+		misses++;
 		vocals.volume = 0;
-		if(!practiceMode) songScore -= 10;
+		if(!practiceMode) score -= 10;
 		
 		totalPlayed++;
 		RecalculateRating();
@@ -3811,9 +3809,9 @@ class PlayState extends MusicBeatState
 			}
 			combo = 0;
 
-			if(!practiceMode) songScore -= 10;
+			if(!practiceMode) score -= 10;
 			if(!endingSong) {
-				songMisses++;
+				misses++;
 			}
 			totalPlayed++;
 			RecalculateRating();
@@ -4408,13 +4406,13 @@ class PlayState extends MusicBeatState
 	public var ratingName:String = '?';
 	public var ratingPercent:Float;
 	public var ratingFC:String;
-	
+
 	public function RecalculateRating()
 	{
-		setOnLuas('score', songScore);
-		setOnLuas('misses', songMisses);
-		setOnLuas('hits', songHits);
-	
+		setOnLuas('score', score);
+		setOnLuas('misses', misses);
+		setOnLuas('hits', hits);
+
 		var ret:Dynamic = callOnLuas('onRecalculateRating', []);
 		if (ret != FunkinLua.Function_Stop)
 		{
@@ -4423,7 +4421,7 @@ class PlayState extends MusicBeatState
 			else
 				// Rating Percent
 				ratingPercent = Math.min(1, Math.max(0, totalNotesHit / totalPlayed));
-	
+
 			// i swear to the guy who made the old rating code
 			var ratings:Array<Dynamic> = Ratings.bedrockRatings;
 			switch (ClientPrefs.ratingSystem)
@@ -4441,7 +4439,7 @@ class PlayState extends MusicBeatState
 				case 'Mania':
 					ratings = Ratings.maniaRatings;
 			}
-	
+
 			// Rating Name
 			if (ratingPercent >= 1)
 			{
@@ -4468,12 +4466,13 @@ class PlayState extends MusicBeatState
 				ratingFC = "GFC"; // Good Full Combo
 			if (bads > 0 || shits > 0)
 				ratingFC = "FC"; // Full Combo
+		}
 
-			setOnLuas('rating', ratingPercent);
+		setOnLuas('rating', ratingPercent);
 		setOnLuas('ratingName', ratingName);
 		setOnLuas('ratingFC', ratingFC);
 		judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nMisses: ${misses}';
-		}
+	}
 
 	public static var othersCodeName:String = 'otherAchievements';
 	#if ACHIEVEMENTS_ALLOWED
@@ -4496,7 +4495,7 @@ class PlayState extends MusicBeatState
 			var unlock:Bool = false;
 
 			if (achievementName == othersCodeName) {
-				if(isStoryMode && campaignMisses + songMisses < 1 && CoolUtil.difficultyString() == 'HARD' && storyPlaylist.length <= 1 && !changedDifficulty && !usedPractice)
+				if(isStoryMode && campaignMisses + misses < 1 && CoolUtil.difficultyString() == 'HARD' && storyPlaylist.length <= 1 && !changedDifficulty && !usedPractice)
 				{
 					var weekName:String = WeekData.getWeekFileName();
 
