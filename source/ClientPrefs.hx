@@ -58,10 +58,10 @@ class ClientPrefs {
 
 	// Added by Bedrock
 	public static var laneAlpha:Float = 0;
-	public static var showWatermarks:Bool = false;
-	public static var showSongDisplay:Bool = false;
+	public static var showWatermarks:Bool = true;
+	public static var showSongDisplay:Bool = true;
 	public static var ratingSystem:String = 'Bedrock';
-	public static var judgementCounter:Bool = false;
+	public static var judgementCounter:Bool = true;
 
 	//Every key has two binds, add your key bind down here and then add your control on options/ControlsSubState.hx and Controls.hx
 	public static var keyBinds:Map<String, Array<FlxKey>> = [
