@@ -65,18 +65,6 @@ class PlayState extends MusicBeatState
 	public static var STRUM_X = 42;
 	public static var STRUM_X_MIDDLESCROLL = -278;
 
-	public static var ratingStuff:Array<Dynamic> = [
-		['You Suck!', 0.2], //From 0% to 19%
-		['Shit', 0.4], //From 20% to 39%
-		['Bad', 0.5], //From 40% to 49%
-		['Bruh', 0.6], //From 50% to 59%
-		['Meh', 0.69], //From 60% to 68%
-		['Nice', 0.7], //69%
-		['Good', 0.8], //From 70% to 79%
-		['Great', 0.9], //From 80% to 89%
-		['Sick!', 1], //From 90% to 99%
-		['Perfect!!', 1] //The value on this one isn't used actually, since Perfect is always "1"
-	];
 	public var modchartTweens:Map<String, FlxTween> = new Map<String, FlxTween>();
 	public var modchartSprites:Map<String, ModchartSprite> = new Map<String, ModchartSprite>();
 	public var modchartTimers:Map<String, FlxTimer> = new Map<String, FlxTimer>();
@@ -263,6 +251,13 @@ class PlayState extends MusicBeatState
 	
 	// Less laggy controls
 	private var keysArray:Array<Dynamic>;
+
+	// Added by Bedrock Engine
+	public var laneunderlay:FlxSprite;
+	public var laneunderlayOpponent:FlxSprite;
+	var judgementCounter:FlxText;
+	var beWatermark:FlxText;
+	var peWatermark:FlxText;
 
 	override public function create()
 	{
@@ -841,6 +836,25 @@ class PlayState extends MusicBeatState
 		if(ClientPrefs.downScroll) strumLine.y = FlxG.height - 150;
 		strumLine.scrollFactor.set();
 
+		laneunderlayOpponent = new FlxSprite(0, 0).makeGraphic(110 * 4 + 50, FlxG.height * 2);
+		laneunderlayOpponent.alpha = ClientPrefs.laneAlpha;
+		laneunderlayOpponent.color = FlxColor.BLACK;
+		laneunderlayOpponent.scrollFactor.set();
+
+		laneunderlay = new FlxSprite(0, 0).makeGraphic(110 * 4 + 50, FlxG.height * 2);
+		laneunderlay.alpha = ClientPrefs.laneAlpha;
+		laneunderlay.color = FlxColor.BLACK;
+		laneunderlay.scrollFactor.set();
+
+		if (ClientPrefs.laneAlpha)
+		{
+				if (!ClientPrefs.middleScroll)
+				{
+					add(laneunderlayOpponent);
+				}
+				add(laneunderlay);
+		}
+
 		var showTime:Bool = (ClientPrefs.timeBarType != 'Disabled');
 		timeTxt = new FlxText(STRUM_X + (FlxG.width / 2) - 248, 19, 400, "", 32);
 		timeTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -967,19 +981,19 @@ class PlayState extends MusicBeatState
 		moveCameraSection(0);
 
 		healthBarBG = new AttachedSprite('healthBar');
-		healthBarBG.y = FlxG.height * 0.89;
+		healthBarBG.y = FlxG.height * 0.875;
 		healthBarBG.screenCenter(X);
 		healthBarBG.scrollFactor.set();
 		healthBarBG.visible = !ClientPrefs.hideHud;
 		healthBarBG.xAdd = -4;
 		healthBarBG.yAdd = -4;
 		add(healthBarBG);
-		if(ClientPrefs.downScroll) healthBarBG.y = 0.11 * FlxG.height;
 
-		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
-			'health', 0, 2);
+		if (ClientPrefs.downScroll && !ClientPrefs.maniaMode)
+			healthBarBG.y = 0.11 * FlxG.height;
+		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, (opponentChart ? LEFT_TO_RIGHT : RIGHT_TO_LEFT), Std.int(healthBarBG.width - 8),
+			Std.int(healthBarBG.height - 8), this, 'health', 0, 2);
 		healthBar.scrollFactor.set();
-		// healthBar
 		healthBar.visible = !ClientPrefs.hideHud;
 		healthBar.alpha = ClientPrefs.healthBarAlpha;
 		add(healthBar);
@@ -987,33 +1001,102 @@ class PlayState extends MusicBeatState
 
 		iconP1 = new HealthIcon(boyfriend.healthIcon, true);
 		iconP1.y = healthBar.y - 75;
+		iconP1.visible = !ClientPrefs.hideHud || !ClientPrefs.maniaMode;
 		iconP1.visible = !ClientPrefs.hideHud;
 		iconP1.alpha = ClientPrefs.healthBarAlpha;
+		//iconP1.canBounce = true;
 		add(iconP1);
 
 		iconP2 = new HealthIcon(dad.healthIcon, false);
 		iconP2.y = healthBar.y - 75;
+		iconP2.visible = !ClientPrefs.hideHud || !ClientPrefs.maniaMode;
 		iconP2.visible = !ClientPrefs.hideHud;
 		iconP2.alpha = ClientPrefs.healthBarAlpha;
+		//iconP2.canBounce = true;
 		add(iconP2);
+
 		reloadHealthBarColors();
 
-		scoreTxt = new FlxText(0, healthBarBG.y + 36, FlxG.width, "", 20);
-		scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		scoreTxt = new FlxText(0, healthBarBG.y + 40, FlxG.width, "", 20);
+		scoreTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		scoreTxt.scrollFactor.set();
-		scoreTxt.borderSize = 1.25;
 		scoreTxt.visible = !ClientPrefs.hideHud;
 		add(scoreTxt);
 
+		// Watermarks, this is for Bedrock Engine
+		beWatermark = new FlxText(0, FlxG.height - 710, 0, "Bedrock Engine: v" + MainMenuState.bedrockEngineVersion, 16);
+		beWatermark.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		beWatermark.borderSize = 2;
+		beWatermark.borderQuality = 2;
+		beWatermark.scrollFactor.set();
+		beWatermark.updateHitbox();
+		beWatermark.x = FlxG.width - beWatermark.width - 5;
+		beWatermark.visible = false;
+
+		// And this is for Psych Engine
+		peWatermark = new FlxText(0, FlxG.height - 690, 0, "Psych Engine: v" + MainMenuState.psychEngineVersion, 16);
+		peWatermark.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		peWatermark.borderSize = 2;
+		peWatermark.borderQuality = 2;
+		peWatermark.scrollFactor.set();
+		peWatermark.updateHitbox();
+		peWatermark.x = FlxG.width - peWatermark.width - 5;
+		peWatermark.visible = false;
+
+		// Song Display thingy
+		songDisplay = new FlxText(0, FlxG.height - 30, 0, SONG.song + " - " + CoolUtil.difficultyString(), 16);
+		songDisplay.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		songDisplay.borderSize = 2;
+		songDisplay.borderQuality = 2;
+		songDisplay.scrollFactor.set();
+		songDisplay.visible = false;
+
+		// Judgement Counter
+		judgementCounter = new FlxText(20, 0, 0, "", 20);
+		judgementCounter.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		judgementCounter.borderSize = 2;
+		judgementCounter.borderQuality = 2;
+		judgementCounter.scrollFactor.set();
+		judgementCounter.cameras = [camHUD];
+		judgementCounter.screenCenter(Y);
+		judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nMisses: ${misses}';
+		judgementCounter.visible = false;
+
+		if (ClientPrefs.showWatermarks)
+			beWatermark.visible = true;
+		peWatermark.visible = true;
+
+		if (ClientPrefs.showSongDisplay)
+			songDisplay.visible = true;
+
+		if (ClientPrefs.judgementCounter)
+		{
+			judgementCounter.visible = true;
+		}
+
+		// add them
+		add(beWatermark);
+		add(peWatermark);
+		add(songDisplay);
+		add(judgementCounter);
+
+		// Botplay Text Stuff
 		botplayTxt = new FlxText(400, timeBarBG.y + 55, FlxG.width - 800, "BOTPLAY", 32);
+		if (ClientPrefs.downScroll)
+			botplayTxt.y = timeBarBG.y - 78;
+		if (ClientPrefs.middleScroll)
+		{
+			if (ClientPrefs.downScroll)
+				botplayTxt.y = botplayTxt.y - 78;
+			else
+				botplayTxt.y = botplayTxt.y + 78;
+		}
 		botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		botplayTxt.scrollFactor.set();
-		botplayTxt.borderSize = 1.25;
+		botplayTxt.borderSize = 2;
+		botplayTxt.borderQuality = 2;
 		botplayTxt.visible = cpuControlled;
 		add(botplayTxt);
-		if(ClientPrefs.downScroll) {
-			botplayTxt.y = timeBarBG.y - 78;
-		}
 
 		strumLineNotes.cameras = [camHUD];
 		grpNoteSplashes.cameras = [camHUD];
@@ -1028,6 +1111,14 @@ class PlayState extends MusicBeatState
 		timeBarBG.cameras = [camHUD];
 		timeTxt.cameras = [camHUD];
 		doof.cameras = [camHUD];
+
+		// Added by Bedrock
+		laneunderlay.cameras = [camHUD];
+		laneunderlayOpponent.cameras = [camHUD];
+		judgementCounter.cameras = [camHUD];
+		beWatermark.cameras = [camHUD];
+		peWatermark.cameras = [camHUD];
+		songDisplay.cameras = [camHUD];
 
 		// if (SONG.song == 'South')
 		// FlxG.camera.alpha = 0.7;
@@ -1485,6 +1576,12 @@ class PlayState extends MusicBeatState
 				setOnLuas('defaultOpponentStrumY' + i, opponentStrums.members[i].y);
 				//if(ClientPrefs.middleScroll) opponentStrums.members[i].visible = false;
 			}
+
+			laneunderlay.x = playerStrums.members[0].x - 25;
+			laneunderlayOpponent.x = opponentStrums.members[0].x - 25;
+
+			laneunderlay.screenCenter(Y);
+			laneunderlayOpponent.screenCenter(Y);
 
 			startedCountdown = true;
 			Conductor.songPosition = 0;
@@ -2211,11 +2308,27 @@ class PlayState extends MusicBeatState
 
 		super.update(elapsed);
 
-		if(ratingName == '?') {
-			scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Rating: ' + ratingName;
-		} else {
-			scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Rating: ' + ratingName + ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' + ' - ' + ratingFC;//peeps wanted no integer rating
-		}
+		var accuracy:Float = Highscore.floorDecimal(ratingPercent * 100, 2);
+		var ratingNameTwo:String = ratingName;
+		var divider:String = ' ' + '-' + ' ';
+
+		scoreTxt.text = 'Score: ${songScore}';
+		scoreTxt.text += divider + 'Accuracy:' + accuracy + '%';
+
+		if (ratingFC == "" || totalMisses > 0)
+			scoreTxt.text += '';
+		else
+			scoreTxt.text += ' [' + ratingFC + ']';
+
+		scoreTxt.text += divider + 'Misses: ${songMisses}';
+
+		if (ratingFC == "")
+			scoreTxt.text += divider + '?';
+		else
+			scoreTxt.text += divider + ratingName;
+
+		if (ClientPrefs.ratingSystem == "None")
+			scoreTxt.text = 'Score: ${songScore}' + divider + 'Misses: ${totalMisses}';
 
 		if(botplayTxt.visible) {
 			botplaySine += 180 * elapsed;
@@ -4295,52 +4408,72 @@ class PlayState extends MusicBeatState
 	public var ratingName:String = '?';
 	public var ratingPercent:Float;
 	public var ratingFC:String;
-	public function RecalculateRating() {
+	
+	public function RecalculateRating()
+	{
 		setOnLuas('score', songScore);
 		setOnLuas('misses', songMisses);
 		setOnLuas('hits', songHits);
-
+	
 		var ret:Dynamic = callOnLuas('onRecalculateRating', []);
-		if(ret != FunkinLua.Function_Stop)
+		if (ret != FunkinLua.Function_Stop)
 		{
-			if(totalPlayed < 1) //Prevent divide by 0
-				ratingName = '?';
+			if (totalPlayed < 1) // Prevent divide by 0
+				ratingPercent = 0;
 			else
-			{
 				// Rating Percent
 				ratingPercent = Math.min(1, Math.max(0, totalNotesHit / totalPlayed));
-				//trace((totalNotesHit / totalPlayed) + ', Total: ' + totalPlayed + ', notes hit: ' + totalNotesHit);
-
-				// Rating Name
-				if(ratingPercent >= 1)
+	
+			// i swear to the guy who made the old rating code
+			var ratings:Array<Dynamic> = Ratings.bedrockRatings;
+			switch (ClientPrefs.ratingSystem)
+			{
+				case "Psych":
+					ratings = Ratings.psychRatings;
+				// GO CHECK FOREVER ENGINE OUT!! https://github.com/Yoshubs/Forever-Engine-Legacy
+				case "Forever":
+					ratings = Ratings.foreverRatings;
+				// ALSO TRY ANDROMEDA!! https://github.com/nebulazorua/andromeda-engine
+				case "Andromeda":
+					ratings = Ratings.andromedaRatings;
+				case "Etterna":
+					ratings = Ratings.accurateRatings;
+				case 'Mania':
+					ratings = Ratings.maniaRatings;
+			}
+	
+			// Rating Name
+			if (ratingPercent >= 1)
+			{
+				var dummyRating = ratings[ratings.length - 1][0];
+				ratingName = dummyRating;
+			}
+			else
+			{
+				for (i in 0...ratings.length - 1)
 				{
-					ratingName = ratingStuff[ratingStuff.length-1][0]; //Uses last string
-				}
-				else
-				{
-					for (i in 0...ratingStuff.length-1)
+					if (ratingPercent < ratings[i][1])
 					{
-						if(ratingPercent < ratingStuff[i][1])
-						{
-							ratingName = ratingStuff[i][0];
-							break;
-						}
+						ratingName = ratings[i][0];
+						break;
 					}
 				}
 			}
 
 			// Rating FC
 			ratingFC = "";
-			if (sicks > 0) ratingFC = "SFC";
-			if (goods > 0) ratingFC = "GFC";
-			if (bads > 0 || shits > 0) ratingFC = "FC";
-			if (songMisses > 0 && songMisses < 10) ratingFC = "SDCB";
-			else if (songMisses >= 10) ratingFC = "Clear";
-		}
-		setOnLuas('rating', ratingPercent);
+			if (sicks > 0)
+				ratingFC = "SFC"; // Sick Full Combo
+			if (goods > 0)
+				ratingFC = "GFC"; // Good Full Combo
+			if (bads > 0 || shits > 0)
+				ratingFC = "FC"; // Full Combo
+
+			setOnLuas('rating', ratingPercent);
 		setOnLuas('ratingName', ratingName);
 		setOnLuas('ratingFC', ratingFC);
-	}
+		judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nMisses: ${misses}';
+		}
 
 	public static var othersCodeName:String = 'otherAchievements';
 	#if ACHIEVEMENTS_ALLOWED

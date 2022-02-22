@@ -56,6 +56,12 @@ class ClientPrefs {
 	public static var badWindow:Int = 135;
 	public static var safeFrames:Float = 10;
 
+	// Added by Bedrock
+	public static var laneAlpha:Float = 0;
+	public static var showWatermarks:Bool = false;
+	public static var showSongDisplay:Bool = false;
+	public static var ratingSystem:Bool = false;
+
 	//Every key has two binds, add your key bind down here and then add your control on options/ControlsSubState.hx and Controls.hx
 	public static var keyBinds:Map<String, Array<FlxKey>> = [
 		//Key Bind, Name for ControlsSubState
@@ -120,6 +126,12 @@ class ClientPrefs {
 		FlxG.save.data.safeFrames = safeFrames;
 		FlxG.save.data.gameplaySettings = gameplaySettings;
 		FlxG.save.data.controllerMode = controllerMode;
+
+		// Added by Bedrock
+		FlxG.save.data.laneAlpha = laneAlpha;
+		FlxG.save.data.showWatermarks = showWatermarks;
+		FlxG.save.data.showSongDisplay = showSongDisplay;
+		FlxG.save.data.ratingSystem = ratingSystem;
 	
 		FlxG.save.flush();
 
@@ -227,6 +239,20 @@ class ClientPrefs {
 			{
 				gameplaySettings.set(name, value);
 			}
+		}
+
+		// Added by Bedrock
+		if(FlxG.save.data.laneAlpha != null) {
+			laneAlpha = FlxG.save.data.laneAlpha;
+		}
+		if(FlxG.save.data.showWatermarks != null) {
+			showWatermarks = FlxG.save.data.showWatermarks;
+		}
+		if(FlxG.save.data.showSongDisplay != null) {
+			showSongDisplay = FlxG.save.data.showSongDisplay;
+		}
+		if(FlxG.save.data.ratingSystem != null) {
+			ratingSystem = FlxG.save.data.ratingSystem;
 		}
 		
 		// flixel automatically saves your volume!
