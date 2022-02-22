@@ -30,7 +30,6 @@ typedef SwagSong =
 	var arrowSkin:String;
 	var splashSkin:String;
 	var validScore:Bool;
-	var cameraNoteMovements:Bool;
 }
 
 class Song
@@ -44,7 +43,6 @@ class Song
 	public var splashSkin:String;
 	public var speed:Float = 1;
 	public var stage:String;
-	public var cameraNoteMovements:Bool;
 
 	public var player1:String = 'bf';
 	public var player2:String = 'dad';
@@ -68,8 +66,6 @@ class Song
 		{
 			songJson.denominator = 4;
 		}
-		
-		songJson.cameraNoteMovements = false;
 
 		if (songJson.events == null)
 		{
