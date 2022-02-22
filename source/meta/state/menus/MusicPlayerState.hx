@@ -235,6 +235,7 @@ class MusicPlayerState extends MusicBeatState
 		songs.push(new MPlayerMeta(songName, weekNum, songCharacter, color));
 	}
 
+	var speedPlaying:Int = -1;
 	public static var instPlaying:Int = -1;
 	private static var vocals:FlxSound = null;
 
@@ -369,7 +370,7 @@ class MusicPlayerState extends MusicBeatState
 
 		if (accepted)
 		{
-			if (instPlaying != curSelected)
+			if(instPlaying != curSelected || speedPlaying != ClientPrefs.getGameplaySetting('songspeed', 1))
 			{
 				#if desktop
 				DiscordClient.changePresence('In the Music Player', '\nListening To: ' + CoolUtil.formatString(songs[curSelected].songName), null);
@@ -391,8 +392,20 @@ class MusicPlayerState extends MusicBeatState
 				vocals.persist = true;
 				vocals.looped = true;
 				vocals.volume = 0.7;
+				Conductor.mapBPMChanges(PlayState.SONG, ClientPrefs.getGameplaySetting('songspeed', 1));
+				Conductor.changeBPM(PlayState.SONG.bpm, ClientPrefs.getGameplaySetting('songspeed', 1));
 				instPlaying = curSelected;
-				Conductor.changeBPM(PlayState.SONG.bpm);
+				speedPlaying = ClientPrefs.getGameplaySetting('songspeed', 1);
+				#if cpp
+				@:privateAccess
+				{
+					if (ClientPrefs.getGameplaySetting('songspeed', 1) != 1) {
+						lime.media.openal.AL.sourcef(FlxG.sound.music._channel.__source.__backend.handle, lime.media.openal.AL.PITCH, ClientPrefs.getGameplaySetting('songspeed', 1));
+						if (vocals.playing)
+							lime.media.openal.AL.sourcef(vocals._channel.__source.__backend.handle, lime.media.openal.AL.PITCH, ClientPrefs.getGameplaySetting('songspeed', 1));
+					}
+				}
+				#end
 				for (i in 0...iconArray.length)
 				{
 					iconArray[i].canBounce = false;

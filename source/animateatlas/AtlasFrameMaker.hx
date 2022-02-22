@@ -31,15 +31,7 @@ class AtlasFrameMaker extends FlxFramesCollection
 	// public static var heightoffset:Int = 0;
 	// public static var excludeArray:Array<String>;
 
-	/**
-
-		* Creates Frames from TextureAtlas(very early and broken ok) Originally made for FNF HD by Smokey and Rozebud
-		*
-		* @param   key                 The file path.
-		* @param   _excludeArray       Use this to only create selected animations. Keep null to create all of them.
-		*
-	 */
-	public static function construct(key:String, ?_excludeArray:Array<String> = null):FlxFramesCollection
+	public static function construct(key:String,?_excludeArray:Array<String> = null, ?noAntialiasing:Bool = false):FlxFramesCollection
 	{
 		// widthoffset = _widthoffset;
 		// heightoffset = _heightoffset;
@@ -59,8 +51,8 @@ class AtlasFrameMaker extends FlxFramesCollection
 
 		var graphic:FlxGraphic = Paths.image('$key/spritemap');
 		var ss:SpriteAnimationLibrary = new SpriteAnimationLibrary(animationData, atlasData, graphic.bitmap);
-		var t:SpriteMovieClip = ss.createAnimation();
-		if (_excludeArray == null)
+		var t:SpriteMovieClip = ss.createAnimation(noAntialiasing);
+		if(_excludeArray == null)
 		{
 			_excludeArray = t.getFrameLabels();
 			// trace('creating all anims');

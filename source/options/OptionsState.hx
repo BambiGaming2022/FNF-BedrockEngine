@@ -3,10 +3,12 @@ package options;
 import gameObjects.font.Alphabet;
 import meta.data.Controls;
 import meta.data.ClientPrefs;
+import meta.data.StageData;
 #if desktop
 import meta.data.Discord.DiscordClient;
 #end
 import meta.state.LoadingState;
+import meta.state.PlayState;
 import meta.state.MusicBeatState;
 import meta.state.menus.MainMenuState;
 import flash.text.TextField;
@@ -47,6 +49,14 @@ class OptionsState extends MusicBeatState
 
 	private static var curSelected:Int = 0;
 	public static var menuBG:FlxSprite;
+	static var goToPlayState:Bool = false;
+
+	public function new(?goToPlayState:Bool)
+	{
+		super();
+		if (goToPlayState != null)
+			OptionsState.goToPlayState = goToPlayState;
+	}
 
 	var holdTime:Float = 0;
 
@@ -147,10 +157,15 @@ class OptionsState extends MusicBeatState
 			}
 		}
 
-		if (controls.BACK)
-		{
+		if (controls.BACK) {
 			FlxG.sound.play(Paths.sound('cancelMenu'));
-			MusicBeatState.switchState(new MainMenuState());
+			if (goToPlayState) {
+				StageData.loadDirectory(PlayState.SONG);
+				LoadingState.loadAndSwitchState(new PlayState(), true);
+			} else {
+				MusicBeatState.switchState(new MainMenuState());
+			}
+			goToPlayState = false;
 		}
 
 		if (controls.ACCEPT)
