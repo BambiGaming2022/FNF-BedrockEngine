@@ -124,6 +124,10 @@ class ChartingState extends MusicBeatState
 		[
 			'Change Scroll Speed',
 			"Value 1: Scroll Speed Multiplier (1 is default)\nValue 2: Time it takes to change fully in seconds."
+		],
+		[
+			'Change Arrow Movement',
+			"Value 1: Will It Be Enabled (1 is true, 0 is false). 0 By Default.\nleaves second value blank"
 		]
 	];
 
