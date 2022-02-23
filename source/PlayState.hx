@@ -1199,8 +1199,6 @@ class PlayState extends MusicBeatState
 			judgementCounter.text += 'Combo: ${combo}\n';
 		if (ClientPrefs.showRank)
 			judgementCounter.text += 'Rank: ${ratingName}\n';
-		else if (ClientPrefs.showRank && ratingFC == "")
-			judgementCounter.text += 'Rank: ?\n';
 		if (ClientPrefs.showSick)
 			judgementCounter.text += 'Sicks: ${sicks}\n';
 		if (ClientPrefs.showGood)
@@ -4745,8 +4743,6 @@ class PlayState extends MusicBeatState
 			judgementCounter.text += 'Combo: ${combo}\n';
 		if (ClientPrefs.showRank)
 			judgementCounter.text += 'Rank: ${ratingName}\n';
-		else if (ClientPrefs.showRank && ratingFC == "")
-			judgementCounter.text += 'Rank: ?\n';
 		if (ClientPrefs.showSick)
 			judgementCounter.text += 'Sicks: ${sicks}\n';
 		if (ClientPrefs.showGood)
