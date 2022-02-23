@@ -14,22 +14,24 @@ Credits:
 * [XtraXD1](https://github.com/ShadowMario/FNF-PsychEngine/pull/3192) - Show/Hide Weeks temporally + Getting/Setting on Source Code
 * [Yoshubs](https://github.com/Yoshubs/Forever-Engine-Legacy) - made Forever Engine, Main Inspiration
 
+> **Remember: this engine should be treated as nothing but a Mod/Fork of Psych Engine**
+
 # Sections:
 
-* [Compilation Dependencies](https://github.com/Gui-iago/FNF-BedrockEngine#compiling)
-* [Downloads](https://github.com/Gui-iago/FNF-BedrockEngine#downloads)
+* [How to](https://github.com/Gui-iago/FNF-BedrockEngine/blob/main/README.md#how-to-compile-the-game-and-what-is-needed-to-do-so)
+* [Compiling Dependencies](https://github.com/Gui-iago/FNF-BedrockEngine/blob/main/README.md#how-to-compile-the-game-and-what-is-needed-to-do-so)
 * [Terminal Setup & Commands](https://github.com/Gui-iago/FNF-BedrockEngine#terminal-setup--compiling-game)
 * [Features](https://github.com/Gui-iago/FNF-BedrockEngine#current-features)
 
-# Dependencies for Compiling
+# How to Compile the Game, and what is needed to do so
 
 > ### Dependencies
 
 - Git
-- Haxel (LATEST VERSION, STOP USING 4.1.5!!!!)
-- VS Community (windows only!)
+- Haxe (LATEST VERSION ONLY, PLEASE, STOP USING 4.1.5!!!!)
+- Visual Studio Community (Windows Only)
 
-> ### OPTIONAL Dependencies 
+> ### OPTIONAL Dependencies
 
 - Visual Studio Code (for modifying the code itself)
 
@@ -38,111 +40,137 @@ Credits:
 - Lime
 - Bracket Pair Colorizer 2
 - HXCPP Debugger
-- Tabline
+- Tabnine
 
-# Downloads
+> ### Optional Visual Studio Code Extensions
 
-### Git 
-for Windows and Mac: https://git-scm.com/downloads
-* **after installing, open a Command Prompt or Terminal, and type in:**
+- Haxe blocks
+- Haxe Checkstyle
+- Haxe JSX
+- Haxe Extension Pack
+- HaxeUI
+- indent-rainbow
+- Lua Extension by keyring
+
+# Compiling Dependencies
+
+### Git & Haxe
+
+Windows and macOS: 
+
+- https://git-scm.com/downloads
+- https://haxe.org/download
+
+macOS with homebrew:
+```
+brew install git
+brew install haxe
+```
+
+Ubuntu based Linux distros:
+```
+sudo add-apt-repository ppa:haxe/releases -y
+sudo apt update
+sudo apt install git haxe -y
+mkdir ~/haxelib && haxelib setup ~/haxelib
+```
+
+Debian based Linux distros:
+```
+sudo apt-get install git haxe -y
+mkdir ~/haxelib && haxelib setup ~/haxelib
+```
+
+Arch based Linux distros:
+```
+sudo pacman -S git haxe
+mkdir ~/haxelib && haxelib setup ~/haxelib
+```
+
+Redhat based Linux distros:
+```
+sudo dnf install git haxe -y
+mkdir ~/haxelib && haxelib setup ~/haxelib
+```
+
+openSuse based Linux distros: 
+```
+sudo zypper install git haxe
+mkdir ~/haxelib && haxelib setup ~/haxelib
+```
+
+### Post installation on all platforms, run
+```
 haxelib setup
+```
 
-- Linux (Ubuntu and Debian based Distros): 
+### Visual Studio Community
 
-* sudo apt-get update
-* sudo apt-get install git -y
-
-Linux (Arch based Distros): 
-
-* sudo pacman -Sy git --noconfirm
-
-### Haxe
-
-- for Windows and Mac: https://haxe.org/download/
-
-- Linux (Ubuntu and Debian based distros):
-
-* sudo add-apt-repository ppa:haxe/releases -y
-* sudo apt-get update
-* sudo apt-get install haxe -y
-* mkdir ~/haxelib && haxelib setup ~/haxelib
-
-- Linux (Arch based distros)
-
-* sudo pacman -Sy haxe --noconfirm
-
-### VS Community
 https://my.visualstudio.com/Downloads?q=visual%20studio%202017&wt.mc_id=o~msft~vscom~older-downloads
 
-> ### VS Community Setup
+> ### Visual Studo Community Setup
 
-once you download and install VS Community, on the "Workloads" tab, select "Desktop Development with C++"
+Once you download and install VS Community, on the "Individual Components" tab, select:
 
-near the "Install" button, there's a Drop-Down menu, click on it, Select "Download first, then Install"
+```
+MSVC v142 - VS 2019 C++ x64/x86 build tools
+Windows SDK (10.0.17763.0)
+```
 
-now wait until it finishes, it is recommended to reboot your PC once it finishes, but it's not needed at all
+
+Desktop Development with C++
+Near the "Install" button, there's a Drop-Down menu, click on it, Select "Download first, then Install"
+Now wait until it finishes, it is recommended to reboot your PC once it finishes, but it's not needed at all
 
 # Terminal Setup & Compiling Game
 
-- on Windows: press "Windows+R" and type in "cmd", if you don't like cmd, or you just use something different, open that program instead
+Windows: Press "Windows + R" and type in "cmd", if you don't like cmd, or you just use something different, open that program instead
 cmd is usually faster, that's why I'm recommending it!
 
-- on some Linux Distros: Press "CTRL+ALT+T" and a Terminal window should open -- although, if you are on linux, you probably know that already
-- on other Linux Distros: Usually in your applications menu, or press Ctrl+Alt+2-6, Ctrl+Alt+7 usually get you back to your desktop
+Linux: press "CTRL + ALT + T" and a Terminal window should open -- although, if you are on linux, you probably know that already
 
-- on Mac: Press cmd+space and type "Terminal" into spotlight or open Launchpad and look for Terminal
-type in these commands
+### Type in these commands:
 
-* haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
-* haxelib git linc_luajit https://github.com/nebulazorua/linc_luajit.git
-* haxelib git hxvm-luajit https://github.com/nebulazorua/hxvm-luajit
-* haxelib git faxe https://github.com/uhrobots/faxe
-* haxelib git polymod https://github.com/MasterEric/polymod.git
-* haxelib git extension-webm https://github.com/KadeDev/extension-webm
-* haxelib install lime 7.9.0
-* haxelib install openfl
-* haxelib install flixel
-* haxelib install flixel-tools
-* haxelib install flixel-ui
-* haxelib install hscript
-* haxelib install flixel-addons
-* haxelib install actuate
-* haxelib run lime setup
-* haxelib run lime setup flixel
-* haxelib run flixel-tools setup 
+```bash
+haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
+haxelib git linc_luajit https://github.com/nebulazorua/linc_luajit.git
+haxelib git hxvm-luajit https://github.com/nebulazorua/hxvm-luajit
+haxelib git faxe https://github.com/uhrobots/faxe
+haxelib git polymod https://github.com/MasterEric/polymod.git
+haxelib git extension-webm https://github.com/KadeDev/extension-webm
+haxelib install lime 7.9.0
+haxelib install openfl
+haxelib install flixel
+haxelib install flixel-tools
+haxelib install flixel-ui
+haxelib install hscript
+haxelib install flixel-addons
+haxelib install actuate
+haxelib run lime setup
+haxelib run lime setup flixel
+haxelib run flixel-tools setup
+```
 
-***read carefully*** when it prompts for you to do anything (like: setup the lime command, setup flixel tools, etc)
+**_Read Carefully:_** When it prompts for you to do anything (like: setup the lime command, setup flixel tools, etc)
 
-once it's done, do this command to compile the game
+Compiling test version:
 
-### Windows
-
-lime test windows
-
-### Linux
-
-lime test linux
-
-### Mac
-lime test mac
+```
+lime test PLATFORM # linux, windows, mac
+```
 
 ### for Debug Builds
 
-add a "-debug" flag at the end of "lime test <platform>"
+Append `-debug` at the end of `lime test PLATFORM`
 
-### VS Code Installation
-- Windows and Mac: https://code.visualstudio.com/Download
+### Visual Studio Code Installation
 
-Linux (Ubuntu and Debian based distros):
-* sudo apt install software-properties-common apt-transport-https wget
-* wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
-* sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
-* sudo apt install code
+Windows and Mac: https://code.visualstudio.com/Download
 
-Linux (Arch based distros):
-* sudo pacman -Sy code
+Linux: https://code.visualstudio.com/docs/setup/linux
+* Alternatively, you can use your distro's package manager to install Visual Studio Code
 
-In case you don't want your mod to be able to run .lua scripts, delete the "LUA_ALLOWED" line on Project.xml
+In case you don't want your mod to be able to run .lua scripts, delete the `LUA_ALLOWED` line on `Project.xml`
 
 # Current Features
 
@@ -213,21 +241,24 @@ can be enabled on the Gameplay Changers menu
 
 https://user-images.githubusercontent.com/45212377/151046841-dbbdb3e9-9491-4a51-81b6-f97976dabce7.mp4
 
-## Judgement Skins
+## Customization Features
+You can now customize your notes, judgements, note splashes and even something insignificant
+like your dividers, all in one place, the Settings Menu!
 
-![image](https://user-images.githubusercontent.com/45212377/150618450-f25e5a73-2b2d-4304-ace9-5ae346a65c37.png)
+![image](https://user-images.githubusercontent.com/45212377/153362801-fa09bf76-863a-4fff-b1b6-2f7cba8a1d61.png)
 
-read the readme.txt on the settings folder for more information on how to add custom judgement skins, and for default judgement skin names
+Current Changeables:
+* Notes
+* Note Splashes
+* Judgements
+* Dividers (for the Info Bar)
 
-## Note Skins & Note Splash Skins:
+Current Toggles:
+* Disable Winning Icons (old icon support)
+* Enable Letter Grades
+* Disable Antimash
 
-You can change your note skin via the json file
-
-![image](https://imgyukle.com/f/2022/01/30/olXLUI.png)
-
-the same is also true for Note Splashes
-
-read the readme.txt on the settings folder for more information on how to add custom noteskins, and default note skin names
+more features will be added to it in the future.
 
 ## Winning Icons
 

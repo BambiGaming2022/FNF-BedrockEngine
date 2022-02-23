@@ -15,15 +15,15 @@ import openfl.events.Event;
 import openfl.system.System;
 import openfl.text.TextField;
 import openfl.text.TextFormat;
+import meta.state.TitleState;
+import meta.data.ClientPrefs;
 
 class Main extends Sprite
 {
 	public static var gameWidth:Int = 1280; // Width of the game in pixels (might be less / more in actual pixels depending on your zoom).
 	public static var gameHeight:Int = 720; // Height of the game in pixels (might be less / more in actual pixels depending on your zoom).
 
-	public static var mainClassState:Class<FlxState>; // Determine the main class state of the game
-
-	public static var curStateS:String = ''; // Determine the current state of the game, text for the counter
+	public static var mainClassState:Class<FlxState> = TitleState; // Determine the main class state of the game
 
 	public static var instance:Main;
 
@@ -95,16 +95,12 @@ class Main extends Sprite
 		addChild(new FlxGame(gameWidth, gameHeight, initialState, zoom, framerate, framerate, skipSplash, startFullscreen));
 
 		#if !mobile
-		var displaycounters:DisplayCounters = new DisplayCounters(10, 3, 0xFFFFFF);
+		fpsVar = new FPS(10, 3, 0xFFFFFF);
+		addChild(fpsVar);
 		Lib.current.stage.align = "tl";
 		Lib.current.stage.scaleMode = StageScaleMode.NO_SCALE;
-		#end
-
-		#if !debug
-		addChild(displaycounters);
-		if (displaycounters != null)
-		{
-			displaycounters.visible = ClientPrefs.showFPS;
+		if(fpsVar != null) {
+			fpsVar.visible = ClientPrefs.showFPS;
 		}
 		#end
 	}

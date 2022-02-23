@@ -1,0 +1,6 @@
+import bedrock-rewritten's source filesystem for better organization
+fix high memory usage (need to find the root of the problem first)
+
+------------------
+
+more things will be added in the future

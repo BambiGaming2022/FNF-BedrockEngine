@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Menu_Tankman.png">
+	<!-- Created with Adobe Animate version 20.0.3.25487 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Tankman0000" x="429" y="556" width="426" height="556" frameX="-4" frameY="-18" frameWidth="431" frameHeight="574"/>
+	<SubTexture name="Tankman0001" x="429" y="556" width="426" height="556" frameX="-4" frameY="-18" frameWidth="431" frameHeight="574"/>
+	<SubTexture name="Tankman0002" x="429" y="0" width="427" height="556" frameX="-4" frameY="-17" frameWidth="431" frameHeight="574"/>
+	<SubTexture name="Tankman0003" x="429" y="0" width="427" height="556" frameX="-4" frameY="-17" frameWidth="431" frameHeight="574"/>
+	<SubTexture name="Tankman0004" x="428" y="1144" width="425" height="560" frameX="-2" frameY="-13" frameWidth="431" frameHeight="574"/>
+	<SubTexture name="Tankman0005" x="428" y="1144" width="425" height="560" frameX="-2" frameY="-13" frameWidth="431" frameHeight="574"/>
+	<SubTexture name="Tankman0006" x="0" y="1144" width="428" height="571" frameX="0" frameY="-2" frameWidth="431" frameHeight="574"/>
+	<SubTexture name="Tankman0007" x="0" y="1144" width="428" height="571" frameX="0" frameY="-2" frameWidth="431" frameHeight="574"/>
+	<SubTexture name="Tankman0008" x="0" y="573" width="429" height="571" frameX="0" frameY="-2" frameWidth="431" frameHeight="574"/>
+	<SubTexture name="Tankman0009" x="0" y="573" width="429" height="571" frameX="0" frameY="-2" frameWidth="431" frameHeight="574"/>
+	<SubTexture name="Tankman0010" x="0" y="0" width="429" height="573" frameX="0" frameY="0" frameWidth="431" frameHeight="574"/>
+	<SubTexture name="Tankman0011" x="0" y="0" width="429" height="573" frameX="0" frameY="0" frameWidth="431" frameHeight="574"/>
+	<SubTexture name="Tankman0012" x="0" y="0" width="429" height="573" frameX="0" frameY="0" frameWidth="431" frameHeight="574"/>
+	<SubTexture name="Tankman0013" x="0" y="0" width="429" height="573" frameX="0" frameY="0" frameWidth="431" frameHeight="574"/>
+</TextureAtlas>
