@@ -63,10 +63,12 @@ class ClientPrefs {
 	public static var ratingSystem:String = 'Bedrock';
 	public static var judgementCounter:Bool = true;
 	public static var comboSpr:Bool = false;
+	public static var showKPS:Bool = false;
 
 	// Added by Bedrock (Judgement Counters)
 	public static var showtotalCombo:Bool = true;
 	public static var showCombo:Bool = true;
+	public static var showRank:Bool = true;
 	public static var showSick:Bool = true;
 	public static var showGood:Bool = true;
 	public static var showBad:Bool = true;
@@ -145,10 +147,12 @@ class ClientPrefs {
 		FlxG.save.data.ratingSystem = ratingSystem;
 		FlxG.save.data.judgementCounter = judgementCounter;
 		FlxG.save.data.comboSpr = comboSpr;
+		FlxG.save.data.showKPS = showKPS;
 
 		// Added by Bedrock (Judgement Counters)
 		FlxG.save.data.showtotalCombo = showtotalCombo;
 		FlxG.save.data.showCombo = showCombo;
+		FlxG.save.data.showRank = showRank;
 		FlxG.save.data.showSick = showSick;
 		FlxG.save.data.showGood = showGood;
 		FlxG.save.data.showBad = showBad;
@@ -282,6 +286,9 @@ class ClientPrefs {
 		if(FlxG.save.data.comboSpr != null) {
 			comboSpr = FlxG.save.data.comboSpr;
 		}
+		if(FlxG.save.data.showKPS != null) {
+			showKPS = FlxG.save.data.showKPS;
+		}
 
 		// Added by Bedrock (Judgement Counters)
 		if(FlxG.save.data.showtotalCombo != null) {
@@ -289,6 +296,9 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.showCombo != null) {
 			showCombo = FlxG.save.data.showCombo;
+		}
+		if(FlxG.save.data.showRank != null) {
+			showRank = FlxG.save.data.showRank;
 		}
 		if(FlxG.save.data.showSick != null) {
 			showSick = FlxG.save.data.showSick;

@@ -42,6 +42,10 @@ class CounterPrefsSubState extends BaseOptionsMenu
 			'showCombo', 'bool', true);
 		addOption(option);
 
+		var option:Option = new Option('Show Rank', "If checked, will show your Current Rank in a Song.",
+			'showRank', 'bool', true);
+		addOption(option);
+
 		var option:Option = new Option('Show Sick!', 'If checked, will show how many Sick! Ratings you have in a Song.',
 			'showSick', 'bool', true);
 		addOption(option);

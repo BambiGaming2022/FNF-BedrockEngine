@@ -63,6 +63,10 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'showSongDisplay', 'bool', true);
 		addOption(option);
 
+		var option:Option = new Option('Show Keys Per Second', "If checked, shows a Keys per Second Display on the Info Bar",
+			'showKPS', 'bool', false);
+		addOption(option);
+
 		/*var option:Option = new Option('Note Delay',
 			'Changes how late a note is spawned.\nUseful for preventing audio lag from wireless earphones.',
 			'noteOffset',

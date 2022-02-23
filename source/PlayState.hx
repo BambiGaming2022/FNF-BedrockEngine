@@ -264,6 +264,8 @@ class PlayState extends MusicBeatState
 	var beWatermark:FlxText;
 	var peWatermark:FlxText;
 	var songDisplay:FlxText;
+	var keysPerSecond:Int = 0;
+	var maxKPS:Int = 0;
 
 	// Week 7 Shit
 	var tower:FlxSprite;
@@ -1017,7 +1019,6 @@ class PlayState extends MusicBeatState
 		timeBarBG.color = FlxColor.BLACK;
 		timeBarBG.xAdd = -4;
 		timeBarBG.yAdd = -4;
-		add(timeBarBG);
 
 		timeBar = new FlxBar(timeBarBG.x + 4, timeBarBG.y + 4, LEFT_TO_RIGHT, Std.int(timeBarBG.width - 8), Std.int(timeBarBG.height - 8), this,
 			'songPercent', 0, 1);
@@ -1026,8 +1027,6 @@ class PlayState extends MusicBeatState
 		timeBar.numDivisions = 800; //How much lag this causes?? Should i tone it down to idk, 400 or 200?
 		timeBar.alpha = 0;
 		timeBar.visible = showTime;
-		add(timeBar);
-		add(timeTxt);
 		timeBarBG.sprTracker = timeBar;
 
 		strumLineNotes = new FlxTypedGroup<StrumNote>();
@@ -1198,6 +1197,10 @@ class PlayState extends MusicBeatState
 			judgementCounter.text += 'Highest Combo: ${totalCombo}\n';
 		if (ClientPrefs.showCombo)
 			judgementCounter.text += 'Combo: ${combo}\n';
+		if (ClientPrefs.showRank)
+			judgementCounter.text += 'Rank: ${ratingName}\n';
+		else if (ClientPrefs.showRank && ratingFC == "")
+			judgementCounter.text += 'Rank: ?\n';
 		if (ClientPrefs.showSick)
 			judgementCounter.text += 'Sicks: ${sicks}\n';
 		if (ClientPrefs.showGood)
@@ -1762,6 +1765,11 @@ class PlayState extends MusicBeatState
 			add(songDisplay);
 			add(judgementCounter);
 			add(botplayTxt);
+
+			// Time Bar
+			add(timeBarBG);
+			add(timeBar);
+			add(timeTxt);
 
 			var swagCounter:Int = 0;
 
@@ -2481,6 +2489,22 @@ class PlayState extends MusicBeatState
 			}
 		}
 
+		/*this code sucks
+		note to self: fix it later because I really should be sleeping rn
+		- Gui iago*/
+
+		if(controls.NOTE_LEFT_P || controls.NOTE_DOWN_P || controls.NOTE_UP_P || controls.NOTE_RIGHT_P) {
+			keysPerSecond++;
+		} else { //this is the one part that sucks and doesn't work properly.
+			new FlxTimer().start(0.3, function(tmr:FlxTimer)
+			{
+				keysPerSecond = 0;
+			});
+		}
+
+		if (keysPerSecond > maxKPS)
+			maxKPS = keysPerSecond;
+
 		super.update(elapsed);
 
 		var accuracy:Float = Highscore.floorDecimal(ratingPercent * 100, 2);
@@ -2497,10 +2521,8 @@ class PlayState extends MusicBeatState
 
 		scoreTxt.text += divider + 'Misses: ${songMisses}';
 
-		if (ratingFC == "")
-			scoreTxt.text += divider + '?';
-		else
-			scoreTxt.text += divider + ratingName;
+		if (ClientPrefs.showKPS)
+			scoreTxt.text += divider + 'KPS: ${keysPerSecond} (${maxKPS})';
 
 		if (ClientPrefs.ratingSystem == "None")
 			scoreTxt.text = 'Score: ${songScore}' + divider + 'Misses: ${songMisses}';
@@ -4110,6 +4132,7 @@ class PlayState extends MusicBeatState
 				combo += 1;
 				if(combo > totalCombo)
 					totalCombo = combo;
+
 				popUpScore(note);
 				if(combo > 9999) combo = 9999;
 			}
@@ -4720,6 +4743,10 @@ class PlayState extends MusicBeatState
 			judgementCounter.text += 'Highest Combo: ${totalCombo}\n';
 		if (ClientPrefs.showCombo)
 			judgementCounter.text += 'Combo: ${combo}\n';
+		if (ClientPrefs.showRank)
+			judgementCounter.text += 'Rank: ${ratingName}\n';
+		else if (ClientPrefs.showRank && ratingFC == "")
+			judgementCounter.text += 'Rank: ?\n';
 		if (ClientPrefs.showSick)
 			judgementCounter.text += 'Sicks: ${sicks}\n';
 		if (ClientPrefs.showGood)
