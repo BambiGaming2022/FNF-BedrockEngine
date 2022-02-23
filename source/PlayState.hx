@@ -993,12 +993,6 @@ class PlayState extends MusicBeatState
 		laneunderlay.color = FlxColor.BLACK;
 		laneunderlay.scrollFactor.set();
 
-		if (!ClientPrefs.middleScroll)
-		{
-			add(laneunderlayOpponent);
-		}
-			add(laneunderlay);
-
 		var showTime:Bool = (ClientPrefs.timeBarType != 'Disabled');
 		timeTxt = new FlxText(STRUM_X + (FlxG.width / 2) - 248, 19, 400, "", 32);
 		timeTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -1037,8 +1031,6 @@ class PlayState extends MusicBeatState
 		timeBarBG.sprTracker = timeBar;
 
 		strumLineNotes = new FlxTypedGroup<StrumNote>();
-		add(strumLineNotes);
-		add(grpNoteSplashes);
 
 		if(ClientPrefs.timeBarType == 'Song Name')
 		{
@@ -1131,7 +1123,6 @@ class PlayState extends MusicBeatState
 		healthBarBG.visible = !ClientPrefs.hideHud;
 		healthBarBG.xAdd = -4;
 		healthBarBG.yAdd = -4;
-		add(healthBarBG);
 
 		if (ClientPrefs.downScroll)
 			healthBarBG.y = 0.11 * FlxG.height;
@@ -1140,7 +1131,6 @@ class PlayState extends MusicBeatState
 		healthBar.scrollFactor.set();
 		healthBar.visible = !ClientPrefs.hideHud;
 		healthBar.alpha = ClientPrefs.healthBarAlpha;
-		add(healthBar);
 		healthBarBG.sprTracker = healthBar;
 
 		iconP1 = new HealthIcon(boyfriend.healthIcon, true);
@@ -1149,7 +1139,6 @@ class PlayState extends MusicBeatState
 		iconP1.visible = !ClientPrefs.hideHud;
 		iconP1.alpha = ClientPrefs.healthBarAlpha;
 		//iconP1.canBounce = true;
-		add(iconP1);
 
 		iconP2 = new HealthIcon(dad.healthIcon, false);
 		iconP2.y = healthBar.y - 75;
@@ -1157,7 +1146,6 @@ class PlayState extends MusicBeatState
 		iconP2.visible = !ClientPrefs.hideHud;
 		iconP2.alpha = ClientPrefs.healthBarAlpha;
 		//iconP2.canBounce = true;
-		add(iconP2);
 
 		reloadHealthBarColors();
 
@@ -1165,7 +1153,6 @@ class PlayState extends MusicBeatState
 		scoreTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		scoreTxt.scrollFactor.set();
 		scoreTxt.visible = !ClientPrefs.hideHud;
-		add(scoreTxt);
 
 		// Watermarks, this is for Bedrock Engine
 		beWatermark = new FlxText(0, FlxG.height - 710, 0, "Bedrock Engine: v" + MainMenuState.bedrockEngineVersion, 16);
@@ -1203,24 +1190,36 @@ class PlayState extends MusicBeatState
 		judgementCounter.scrollFactor.set();
 		judgementCounter.cameras = [camHUD];
 		judgementCounter.screenCenter(Y);
-		judgementCounter.text = 'Highest Combo: ${totalCombo}\nCombo: ${combo}\nSicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nCombo Breaks: ${comboBreaks}\n';
+		judgementCounter.text = '';
 		judgementCounter.visible = false;
 
-		if (ClientPrefs.showWatermarks)
+		//make a switch later
+		if (ClientPrefs.showtotalCombo)
+			judgementCounter.text += 'Highest Combo: ${totalCombo}\n';
+		if (ClientPrefs.showCombo)
+			judgementCounter.text += 'Combo: ${combo}\n';
+		if (ClientPrefs.showSick)
+			judgementCounter.text += 'Sicks: ${sicks}\n';
+		if (ClientPrefs.showGood)
+			judgementCounter.text += 'Goods: ${goods}\n';
+		if (ClientPrefs.showBad)
+			judgementCounter.text += 'Bads: ${bads}\n';
+		if (ClientPrefs.showShit)
+			judgementCounter.text += 'Shits: ${shits}\n';
+		if (ClientPrefs.showComboBreaks)
+			judgementCounter.text += 'Combo Breaks: ${comboBreaks}\n';
+		judgementCounter.text += '\n';
+
+		if (ClientPrefs.showWatermarks) {
 			beWatermark.visible = true;
-		peWatermark.visible = true;
+			peWatermark.visible = true;
+		}
 
 		if (ClientPrefs.showSongDisplay)
 			songDisplay.visible = true;
 
 		if (ClientPrefs.judgementCounter)
 			judgementCounter.visible = true;
-
-		// add them
-		add(beWatermark);
-		add(peWatermark);
-		add(songDisplay);
-		add(judgementCounter);
 
 		// Botplay Text Stuff
 		botplayTxt = new FlxText(400, timeBarBG.y + 55, FlxG.width - 800, "BOTPLAY", 32);
@@ -1238,7 +1237,6 @@ class PlayState extends MusicBeatState
 		botplayTxt.borderSize = 2;
 		botplayTxt.borderQuality = 2;
 		botplayTxt.visible = cpuControlled;
-		add(botplayTxt);
 
 		strumLineNotes.cameras = [camHUD];
 		grpNoteSplashes.cameras = [camHUD];
@@ -1738,6 +1736,33 @@ class PlayState extends MusicBeatState
 			setOnLuas('startedCountdown', true);
 			callOnLuas('onCountdownStarted', []);
 
+			if (!ClientPrefs.middleScroll)
+			{
+				add(laneunderlayOpponent);
+			}
+
+			// Underlay
+			add(laneunderlay);
+
+			// Health Icons and Bar
+			add(healthBar);
+			add(healthBarBG);
+			add(iconP1);
+			add(iconP2);
+
+			// Notes
+			add(strumLineNotes);
+			add(notes);
+			add(grpNoteSplashes);
+
+			// Texts
+			add(scoreTxt);
+			add(beWatermark);
+			add(peWatermark);
+			add(songDisplay);
+			add(judgementCounter);
+			add(botplayTxt);
+
 			var swagCounter:Int = 0;
 
 			if (skipCountdown){
@@ -1943,7 +1968,6 @@ class PlayState extends MusicBeatState
 		FlxG.sound.list.add(new FlxSound().loadEmbedded(Paths.inst(PlayState.SONG.song)));
 
 		notes = new FlxTypedGroup<Note>();
-		add(notes);
 
 		var noteData:Array<SwagSection>;
 
@@ -3591,9 +3615,6 @@ class PlayState extends MusicBeatState
 				daRating = 'bad';
 		 */
 
-		 if(combo > totalCombo)
-			totalCombo = combo;
-
 		var pixelShitPart1:String = "";
 		var pixelShitPart2:String = '';
 
@@ -3615,7 +3636,6 @@ class PlayState extends MusicBeatState
 		rating.x += ClientPrefs.comboOffset[0];
 		rating.y -= ClientPrefs.comboOffset[1];
 
-
 		var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'combo' + pixelShitPart2));
 		comboSpr.cameras = [camHUD];
 		comboSpr.screenCenter();
@@ -3623,9 +3643,17 @@ class PlayState extends MusicBeatState
 		comboSpr.acceleration.y = 600;
 		comboSpr.velocity.y -= 150;
 		comboSpr.visible = !ClientPrefs.hideHud;
-		comboSpr.x += ClientPrefs.comboOffset[0];
-		comboSpr.y -= ClientPrefs.comboOffset[1];
+		comboSpr.x += ClientPrefs.comboOffset[4];
+		comboSpr.y -= ClientPrefs.comboOffset[5];
 
+		if (combo > 9 && !ClientPrefs.comboSpr)
+		{
+			add(comboSpr);
+		}
+		else
+		{
+			remove(comboSpr);
+		}
 
 		comboSpr.velocity.x += FlxG.random.int(1, 10);
 		insert(members.indexOf(strumLineNotes), rating);
@@ -3911,7 +3939,6 @@ class PlayState extends MusicBeatState
 				note.destroy();
 			}
 		});
-		combo = 0;
 
 		health -= daNote.missHealth * healthLoss;
 		if(instakillOnMiss)
@@ -4081,6 +4108,8 @@ class PlayState extends MusicBeatState
 			if (!note.isSustainNote)
 			{
 				combo += 1;
+				if(combo > totalCombo)
+					totalCombo = combo;
 				popUpScore(note);
 				if(combo > 9999) combo = 9999;
 			}
@@ -4684,7 +4713,25 @@ class PlayState extends MusicBeatState
 		setOnLuas('rating', ratingPercent);
 		setOnLuas('ratingName', ratingName);
 		setOnLuas('ratingFC', ratingFC);
-		judgementCounter.text = 'Highest Combo: ${totalCombo}\nCombo: ${combo}\nSicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nCombo Breaks: ${comboBreaks}\n';
+		judgementCounter.text = '';
+		
+		//make a switch later.
+		if (ClientPrefs.showtotalCombo)
+			judgementCounter.text += 'Highest Combo: ${totalCombo}\n';
+		if (ClientPrefs.showCombo)
+			judgementCounter.text += 'Combo: ${combo}\n';
+		if (ClientPrefs.showSick)
+			judgementCounter.text += 'Sicks: ${sicks}\n';
+		if (ClientPrefs.showGood)
+			judgementCounter.text += 'Goods: ${goods}\n';
+		if (ClientPrefs.showBad)
+			judgementCounter.text += 'Bads: ${bads}\n';
+		if (ClientPrefs.showShit)
+			judgementCounter.text += 'Shits: ${shits}\n';
+		if (ClientPrefs.showComboBreaks)
+			judgementCounter.text += 'Combo Breaks: ${comboBreaks}\n';
+
+			judgementCounter.text += '\n';
 	}
 
 	public static var othersCodeName:String = 'otherAchievements';

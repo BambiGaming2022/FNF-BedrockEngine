@@ -62,6 +62,16 @@ class ClientPrefs {
 	public static var showSongDisplay:Bool = true;
 	public static var ratingSystem:String = 'Bedrock';
 	public static var judgementCounter:Bool = true;
+	public static var comboSpr:Bool = false;
+
+	// Added by Bedrock (Judgement Counters)
+	public static var showtotalCombo:Bool = true;
+	public static var showCombo:Bool = true;
+	public static var showSick:Bool = true;
+	public static var showGood:Bool = true;
+	public static var showBad:Bool = true;
+	public static var showShit:Bool = true;
+	public static var showComboBreaks:Bool = true;
 
 	//Every key has two binds, add your key bind down here and then add your control on options/ControlsSubState.hx and Controls.hx
 	public static var keyBinds:Map<String, Array<FlxKey>> = [
@@ -134,6 +144,16 @@ class ClientPrefs {
 		FlxG.save.data.showSongDisplay = showSongDisplay;
 		FlxG.save.data.ratingSystem = ratingSystem;
 		FlxG.save.data.judgementCounter = judgementCounter;
+		FlxG.save.data.comboSpr = comboSpr;
+
+		// Added by Bedrock (Judgement Counters)
+		FlxG.save.data.showtotalCombo = showtotalCombo;
+		FlxG.save.data.showCombo = showCombo;
+		FlxG.save.data.showSick = showSick;
+		FlxG.save.data.showGood = showGood;
+		FlxG.save.data.showBad = showBad;
+		FlxG.save.data.showShit = showShit;
+		FlxG.save.data.showComboBreaks = showComboBreaks;
 	
 		FlxG.save.flush();
 
@@ -258,6 +278,32 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.judgementCounter != null) {
 			judgementCounter = FlxG.save.data.judgementCounter;
+		}
+		if(FlxG.save.data.comboSpr != null) {
+			comboSpr = FlxG.save.data.comboSpr;
+		}
+
+		// Added by Bedrock (Judgement Counters)
+		if(FlxG.save.data.showtotalCombo != null) {
+			showtotalCombo = FlxG.save.data.showtotalCombo;
+		}
+		if(FlxG.save.data.showCombo != null) {
+			showCombo = FlxG.save.data.showCombo;
+		}
+		if(FlxG.save.data.showSick != null) {
+			showSick = FlxG.save.data.showSick;
+		}
+		if(FlxG.save.data.showGood != null) {
+			showGood = FlxG.save.data.showGood;
+		}
+		if(FlxG.save.data.showBad != null) {
+			showBad = FlxG.save.data.showBad;
+		}
+		if(FlxG.save.data.showShit != null) {
+			showShit = FlxG.save.data.showShit;
+		}
+		if(FlxG.save.data.showComboBreaks != null) {
+			showComboBreaks = FlxG.save.data.showComboBreaks;
 		}
 		
 		// flixel automatically saves your volume!

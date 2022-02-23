@@ -49,6 +49,10 @@ class VisualsUISubState extends BaseOptionsMenu
 		option.onChange = onChangeFPSCounter;
 		#end
 
+		var option:Option = new Option('Hide Combo Sprite', "If checked, disables the Combo Sprite.",
+			'comboSpr', 'bool', false);
+		addOption(option);
+
 		var option:Option = new Option('Hide HUD', 'If checked, hides most HUD elements.',
 			'hideHud', 'bool', false);
 		addOption(option);
