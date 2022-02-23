@@ -690,9 +690,6 @@ class PlayState extends MusicBeatState
 				if (SONG.song.toLowerCase() == "stress") {
 					picoStep = Json.parse(openfl.utils.Assets.getText(Paths.json('stress/picospeaker')));
 					tankStep = Json.parse(openfl.utils.Assets.getText(Paths.json('stress/tankSpawn')));
-
-					tankmanRun = new FlxTypedGroup<TankmenBG>();
-					add(tankmanRun);
 				}
 
 				var sky:FlxSprite = new FlxSprite(-400,-400).loadGraphic(Paths.image('warzone/tankSky'));
@@ -758,6 +755,8 @@ class PlayState extends MusicBeatState
 				tankRolling.antialiasing = true;
 				tankRolling.animation.play('idle');
 				add(tankRolling);
+				tankmanRun = new FlxTypedGroup<TankmenBG>();
+					add(tankmanRun);
 
 				var ground:FlxSprite = new FlxSprite(-420, -150).loadGraphic(Paths.image('warzone/tankGround'));
 				ground.scrollFactor.set();
