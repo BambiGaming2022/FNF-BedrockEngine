@@ -25,8 +25,8 @@ using StringTools;
 
 class MainMenuState extends MusicBeatState
 {
-	public static var bedrockEngineVersion:String = '0.1'; // This is also used for Discord RPC
-	public static var psychEngineVersion:String = '0.5.1-git'; // this one too
+	public static var beVersion:String = '0.1'; // This is also used for Discord RPC
+	public static var peVersion:String = '0.5.1-git'; // this one too
 	public static var curSelected:Int = 0;
 
 	var menuItems:FlxTypedGroup<FlxSprite>;
@@ -128,11 +128,11 @@ class MainMenuState extends MusicBeatState
 
 		FlxG.camera.follow(camFollowPos, null, 1);
 
-		var beVer:FlxText = new FlxText(12, FlxG.height - 64, 0, "Bedrock Engine v" + bedrockEngineVersion, 12);
+		var beVer:FlxText = new FlxText(12, FlxG.height - 64, 0, "Bedrock Engine v" + beVersion, 12);
 		beVer.scrollFactor.set();
 		beVer.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(beVer);
-		var peVer:FlxText = new FlxText(12, FlxG.height - 44, 0, "Psych Engine v" + psychEngineVersion, 12);
+		var peVer:FlxText = new FlxText(12, FlxG.height - 44, 0, "Psych Engine v" + peVersion, 12);
 		peVer.scrollFactor.set();
 		peVer.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(peVer);

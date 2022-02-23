@@ -64,6 +64,10 @@ class ClientPrefs {
 	public static var judgementCounter:Bool = true;
 	public static var comboSpr:Bool = false;
 	public static var showKPS:Bool = false;
+	public static var hitSound:Bool = false;
+	public static var bgAlpha:Float = 0;
+	public static var noteSkin:String = 'normal';
+	public static var screenRes:String = '1280x720';
 
 	// Added by Bedrock (Judgement Counters)
 	public static var showtotalCombo:Bool = true;
@@ -148,6 +152,10 @@ class ClientPrefs {
 		FlxG.save.data.judgementCounter = judgementCounter;
 		FlxG.save.data.comboSpr = comboSpr;
 		FlxG.save.data.showKPS = showKPS;
+		FlxG.save.data.hitSound = hitSound;
+		FlxG.save.data.bgAlpha = bgAlpha;
+		FlxG.save.data.noteSkin = noteSkin;
+		FlxG.save.data.screenRes = screenRes;
 
 		// Added by Bedrock (Judgement Counters)
 		FlxG.save.data.showtotalCombo = showtotalCombo;
@@ -289,7 +297,19 @@ class ClientPrefs {
 		if(FlxG.save.data.showKPS != null) {
 			showKPS = FlxG.save.data.showKPS;
 		}
-
+		if(FlxG.save.data.hitSound != null) {
+			hitSound = FlxG.save.data.hitSound;
+		}
+		if(FlxG.save.data.bgAlpha != null) {
+			bgAlpha = FlxG.save.data.bgAlpha;
+		}
+		if (FlxG.save.data.noteSkin != null) {
+			noteSkin = FlxG.save.data.noteSkin;
+		}
+		if(FlxG.save.data.screenRes != null) {
+			screenRes = FlxG.save.data.screenRes;
+		}
+		
 		// Added by Bedrock (Judgement Counters)
 		if(FlxG.save.data.showtotalCombo != null) {
 			showtotalCombo = FlxG.save.data.showtotalCombo;

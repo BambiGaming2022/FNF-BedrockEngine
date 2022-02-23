@@ -68,6 +68,24 @@ class VisualsUISubState extends BaseOptionsMenu
 		var option:Option = new Option('Score Text Zoom on Hit', "If unchecked, disables the Score text zooming\neverytime you hit a note.",
 			'scoreZoom', 'bool', true);
 		addOption(option);
+
+		var option:Option = new Option('Show Watermarks', "If unchecked, hides engine watermarks from the bottom right corner of the screen",
+			'showWatermarks', 'bool', true);
+		addOption(option);
+
+		var option:Option = new Option('Show Song Display', "If unchecked, hides song name and difficulty from the bottom left corner of the screen",
+			'showSongDisplay', 'bool', true);
+		addOption(option);
+
+		var option:Option = new Option('Background Opacity:', 'How much opaque the background should be.',
+			'bgAlpha', 'float', true);
+		option.displayFormat = '%v';
+		option.scrollSpeed = 100;
+		option.changeValue = 0.1;
+		option.decimals = 1;
+		option.minValue = 0;
+		option.maxValue = 1;
+		addOption(option);
 		
 		var option:Option = new Option('Health Bar Opacity',
 			'How much opaque should the health bar and icons be.',
