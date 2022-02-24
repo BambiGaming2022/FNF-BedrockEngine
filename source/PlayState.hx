@@ -4068,8 +4068,10 @@ class PlayState extends MusicBeatState
 
 	function opponentNoteHit(note:Note):Void
 	{
-		if (Paths.formatToSongPath(SONG.song) != 'tutorial')
-			camZooming = true;
+		if (!opponentChart) {
+			if (Paths.formatToSongPath(SONG.song) != 'tutorial')
+				camZooming = true;
+		}
 
 		var char:Character = dad;
 		if(opponentChart) char = boyfriend;
@@ -4126,6 +4128,11 @@ class PlayState extends MusicBeatState
 
 	function goodNoteHit(note:Note):Void
 	{
+		if (opponentChart) {
+			if (!camZooming)
+				if (Paths.formatToSongPath(SONG.song) != 'tutorial')
+					camZooming = true;
+		}
 		if (!note.wasGoodHit)
 		{
 			if(cpuControlled && (note.ignoreNote || note.hitCausesMiss)) return;

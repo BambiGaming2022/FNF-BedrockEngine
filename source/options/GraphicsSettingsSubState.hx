@@ -36,6 +36,11 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 		title = 'Graphics';
 		rpcTitle = 'Graphics Settings Menu'; //for Discord Rich Presence
 
+		//I'd suggest using "Low Quality" as an example for making your own option since it is the simplest here
+		var option:Option = new Option('Low Quality', 'If checked, disables some background details,\ndecreases loading times and improves performance.', //Name and Description
+			'lowQuality', 'bool', false); // Save Data Variable Name on ClientPrefs, Variable Type and Default value
+		addOption(option);
+
 		var option:Option = new Option('Anti-Aliasing', 'If unchecked, disables anti-aliasing, increases performance\nat the cost of sharper visuals.',
 			'globalAntialiasing', 'bool', true);
 		option.showBoyfriend = true;
@@ -81,11 +86,6 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 		addOption(option);
 		option.onChange = onChangeFullscreen;
 		#end
-
-		//I'd suggest using "Low Quality" as an example for making your own option since it is the simplest here
-		var option:Option = new Option('Low Quality', 'If checked, disables some background details,\ndecreases loading times and improves performance.', //Name and Description
-			'lowQuality', 'bool', false); // Save Data Variable Name on ClientPrefs, Variable Type and Default value
-		addOption(option);
 
 		/*
 		var option:Option = new Option('Persistent Cached Data',
