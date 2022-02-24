@@ -1347,11 +1347,7 @@ class PlayState extends MusicBeatState
 					else {
 						dadGroup.visible = false;
 
-						var animationData:AnimationData = Json.parse(Paths.getTextFromFile('images/spritemaps/skewTest/Animation.json'));
-						var atlasData:AtlasData = Json.parse(Paths.getTextFromFile('images/spritemaps/skewTest/spritemap.json'));
-						var graphic:FlxGraphic = Paths.image('spritemaps/skewTest/spritemap');
-						var ss:SpriteAnimationLibrary = new SpriteAnimationLibrary(animationData, atlasData, graphic.bitmap);
-						var t:SpriteMovieClip = ss.createAnimation(noAntialiasing);
+						//var wellwellwell:FlxAtlasFrames = new FlxAtlasFrames.fromTexturePackerJson();
 
 						FlxG.sound.playMusic(Paths.music('DISTORTO', 'week7'));
 						FlxG.sound.play(Paths.sound('wellWellWell', 'week7'));
