@@ -3142,7 +3142,7 @@ class PlayState extends MusicBeatState
 				char.specialAnim = true;
 
 			case 'Camera Follow Pos':
-				var val1:Float = Std.parseFloat(value1);
+				var val1:Float = Math.abs(Std.parseFloat(value1));
 				var val2:Float = Std.parseFloat(value2);
 				if(Math.isNaN(val1)) val1 = 0;
 				if(Math.isNaN(val2)) val2 = 0;
