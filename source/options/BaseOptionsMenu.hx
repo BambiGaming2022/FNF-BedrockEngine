@@ -345,7 +345,6 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		boyfriend.setGraphicSize(Std.int(boyfriend.width * 0.75));
 		boyfriend.updateHitbox();
 		boyfriend.dance();
-		boyfriend.alpha = 1; //this avoids the bg opacity affection to this shit
 		insert(1, boyfriend);
 		boyfriend.visible = wasVisible;
 	}

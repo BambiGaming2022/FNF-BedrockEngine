@@ -1,5 +1,6 @@
 package;
 
+import animateatlas.AtlasFrameMaker;
 import flixel.graphics.FlxGraphic;
 #if desktop
 import Discord.DiscordClient;
@@ -45,6 +46,7 @@ import openfl.display.BlendMode;
 import openfl.display.StageQuality;
 import openfl.filters.BitmapFilter;
 import openfl.utils.Assets as OpenFlAssets;
+import openfl.Assets;
 import editors.ChartingState;
 import editors.CharacterEditorState;
 import flixel.group.FlxSpriteGroup;
@@ -56,6 +58,15 @@ import Achievements;
 import StageData;
 import FunkinLua;
 import DialogueBoxPsych;
+import animateatlas.JSONData.AtlasData;
+import openfl.display.BitmapData;
+import openfl.display.Tilemap;
+import openfl.display.Tileset;
+import animateatlas.JSONData.AnimationData;
+import animateatlas.tilecontainer.TileAnimationLibrary;
+import animateatlas.tilecontainer.TileContainerMovieClip;
+import animateatlas.displayobject.SpriteAnimationLibrary;
+import animateatlas.displayobject.SpriteMovieClip;
 #if sys
 import sys.FileSystem;
 #end
@@ -241,6 +252,8 @@ class PlayState extends MusicBeatState
 	var keysPressed:Array<Bool> = [];
 	var boyfriendIdleTime:Float = 0.0;
 	var boyfriendIdled:Bool = false;
+
+	public var noAntialiasing:Bool = !ClientPrefs.globalAntialiasing;
 
 	// Lua shit
 	public static var instance:PlayState;
@@ -429,6 +442,10 @@ class PlayState extends MusicBeatState
 		boyfriendGroup = new FlxSpriteGroup(BF_X, BF_Y);
 		dadGroup = new FlxSpriteGroup(DAD_X, DAD_Y);
 		gfGroup = new FlxSpriteGroup(GF_X, GF_Y);
+
+		boyfriendGroup.alpha = ClientPrefs.bgOpacity;
+		dadGroup.alpha = ClientPrefs.bgOpacity;
+		gfGroup.alpha = ClientPrefs.bgOpacity;
 
 		switch (curStage)
 		{
@@ -1325,11 +1342,25 @@ class PlayState extends MusicBeatState
 					schoolIntro(doof);
 
 				case "ugh":
-					startVideo("ugh");
+					if(ClientPrefs.lowQuality)
+						startVideo(Paths.getPreloadPath('week7/videos/ugh'));
+					else {
+						dadGroup.visible = false;
+
+						var animationData:AnimationData = Json.parse(Paths.getTextFromFile('images/spritemaps/skewTest/Animation.json'));
+						var atlasData:AtlasData = Json.parse(Paths.getTextFromFile('images/spritemaps/skewTest/spritemap.json'));
+						var graphic:FlxGraphic = Paths.image('spritemaps/skewTest/spritemap');
+						var ss:SpriteAnimationLibrary = new SpriteAnimationLibrary(animationData, atlasData, graphic.bitmap);
+						var t:SpriteMovieClip = ss.createAnimation(noAntialiasing);
+
+						FlxG.sound.playMusic(Paths.music('DISTORTO', 'week7'));
+						FlxG.sound.play(Paths.sound('wellWellWell', 'week7'));
+					}
+					
 				case "guns":
-					startVideo("guns");
+					startVideo(Paths.getPreloadPath('week7/videos/guns'));
 				case "stress":
-					startVideo("stress");
+					startVideo(Paths.getPreloadPath('week7/videos/stress'));
 
 				default:
 					startCountdown();
@@ -2094,7 +2125,7 @@ class PlayState extends MusicBeatState
 		}
 		checkEventNote();
 		generatedMusic = true;
-	}
+}
 
 	function eventPushed(event:EventNote) {
 		switch(event.event) {
