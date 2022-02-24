@@ -12,6 +12,7 @@ class BackgroundGirls extends FlxSprite
 
 		// BG fangirls dissuaded
 		frames = Paths.getSparrowAtlas('weeb/bgFreaks');
+		alpha = ClientPrefs.bgOpacity;
 
 		swapDanceType();
 

@@ -36,29 +36,25 @@ import Sys;
 import sys.FileSystem;
 #end
 
-
 using StringTools;
 
 class TankmenBG extends FlxSprite
 {
-
-	        
-
     public var tankSpeed:Float = 0.7 * 1000;
     public var goingRight:Bool = false;
     var runAnimPlayedTimes:Int = 0;
     var runAnimPlayedTimesMax:Int = 1;
   
-
     override public function new()
     {
         super();
         frames = Paths.getSparrowAtlas("tankmen/tankmanKilled1", "week7");
-        antialiasing = true;
+        antialiasing = ClientPrefs.globalAntialiasing;
         animation.addByPrefix("run", "tankman running", 24, false);
         animation.addByPrefix("shot", "John Shot " + FlxG.random.int(1,2), 24, false);
         animation.play("run");
-        
+        alpha = ClientPrefs.bgOpacity;
+
         updateHitbox();
         setGraphicSize(Std.int(width * 0.8));
         updateHitbox();

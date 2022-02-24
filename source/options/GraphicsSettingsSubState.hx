@@ -53,6 +53,35 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 		option.onChange = onChangeFramerate;
 		#end
 
+		#if desktop // only desktop can use these shits
+		var option:Option = new Option('Screen Resolution', 'Select your preferred screen resolution.\n(Goes from 240p to 8K)',
+			'screenRes', 'string', '1280x720',
+			[
+				'426x240',
+				'640x360',
+				'854x480',
+				'1280x720',
+				'1920x1080',
+				'3840x2160',
+				'7680x4320'
+			]
+		);
+		addOption(option);
+		option.onChange = onChangeScreenRes;
+
+		var option:Option = new Option('Fullscreen', 'This option will activate the Flixel\'s fullscreen.', 
+			'fullscreen', 'bool', false);
+		addOption(option);
+		option.onChange = onChangeFullscreen;
+		#end
+
+		var option:Option = new Option('BG Opacity', 'If changed, it will change the characters\' and background\'s alpha.',
+			'bgOpacity', 'float', 1);
+		option.minValue = 0;
+		option.maxValue = 1;
+		option.changeValue = 0.1;
+		addOption(option);
+
 		//I'd suggest using "Low Quality" as an example for making your own option since it is the simplest here
 		var option:Option = new Option('Low Quality', 'If checked, disables some background details,\ndecreases loading times and improves performance.', //Name and Description
 			'lowQuality', 'bool', false); // Save Data Variable Name on ClientPrefs, Variable Type and Default value
@@ -81,6 +110,20 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 				sprite.antialiasing = ClientPrefs.globalAntialiasing;
 			}
 		}
+	}
+
+	function onChangeFullscreen() //i hate to make a 1 line function
+	{
+		FlxG.fullscreen;
+	}
+
+	function onChangeScreenRes()
+	{
+		var res = ClientPrefs.screenRes.split('x');
+
+		FlxG.resizeWindow(Std.parseInt(res[0]), Std.parseInt(res[1]));
+		FlxG.fullscreen = false;
+		FlxG.fullscreen = ClientPrefs.fullscreen;
 	}
 
 	function onChangeFramerate()

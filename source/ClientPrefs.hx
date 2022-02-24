@@ -28,6 +28,9 @@ class ClientPrefs {
 	public static var noReset:Bool = false;
 	public static var healthBarAlpha:Float = 1;
 	public static var controllerMode:Bool = false;
+	public static var screenRes:String = '1280x720';
+	public static var bgOpacity:Float = 1;
+	public static var fullscreen:Bool = false;
 	public static var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
 		'scrolltype' => 'multiplicative', 
@@ -141,6 +144,9 @@ class ClientPrefs {
 		FlxG.save.data.controllerMode = controllerMode;
 
 		// Added by Bedrock
+		FlxG.save.data.screenRes = screenRes;
+		FlxG.save.data.bgOpacity = bgOpacity;
+		FlxG.save.data.fullscreen = fullscreen;
 		FlxG.save.data.laneAlpha = laneAlpha;
 		FlxG.save.data.showWatermarks = showWatermarks;
 		FlxG.save.data.showSongDisplay = showSongDisplay;
@@ -268,6 +274,17 @@ class ClientPrefs {
 		}
 
 		// Added by Bedrock
+		#if desktop
+		if(FlxG.save.data.screenRes != null) {
+			screenRes = FlxG.save.data.screenRes;
+		}
+		#end
+		if(FlxG.save.data.bgOpacity != null) {
+			bgOpacity = FlxG.save.data.bgOpacity;
+		}
+		if(FlxG.save.data.fullscreen != null) {
+			fullscreen = FlxG.save.data.fullscreen;
+		}
 		if(FlxG.save.data.laneAlpha != null) {
 			laneAlpha = FlxG.save.data.laneAlpha;
 		}

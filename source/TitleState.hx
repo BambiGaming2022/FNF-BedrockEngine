@@ -39,7 +39,6 @@ import openfl.Assets;
 using StringTools;
 typedef TitleData =
 {
-	
 	titlex:Float,
 	titley:Float,
 	startx:Float,
