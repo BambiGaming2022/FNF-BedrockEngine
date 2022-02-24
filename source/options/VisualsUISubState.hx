@@ -76,16 +76,6 @@ class VisualsUISubState extends BaseOptionsMenu
 		var option:Option = new Option('Show Song Display', "If unchecked, hides song name and difficulty from the bottom left corner of the screen",
 			'showSongDisplay', 'bool', true);
 		addOption(option);
-
-		var option:Option = new Option('Background Opacity:', 'How much opaque the background should be.',
-			'bgAlpha', 'float', true);
-		option.displayFormat = '%v';
-		option.scrollSpeed = 100;
-		option.changeValue = 0.1;
-		option.decimals = 1;
-		option.minValue = 0;
-		option.maxValue = 1;
-		addOption(option);
 		
 		var option:Option = new Option('Health Bar Opacity',
 			'How much opaque should the health bar and icons be.',
@@ -103,7 +93,7 @@ class VisualsUISubState extends BaseOptionsMenu
 			'Enables a black background behind the notes for visibility\nhow much opaque should it be?',
 			'laneAlpha',
 			'percent',
-			1);
+			0);
 		option.scrollSpeed = 1.6;
 		option.minValue = 0.0;
 		option.maxValue = 1;

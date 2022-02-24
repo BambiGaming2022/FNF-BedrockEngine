@@ -53,8 +53,8 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 		option.onChange = onChangeFramerate;
 		#end
 
-		var option:Option = new Option('BG Opacity', 'If changed, it will change the characters\' and background\'s alpha.',
-			'bgOpacity', 'float', 1);
+		var option:Option = new Option('Background Opacity', 'How opaque should the characters and the background be.',
+			'bgOpacity', 'float', 0);
 		option.minValue = 0;
 		option.maxValue = 1;
 		option.changeValue = 0.1;

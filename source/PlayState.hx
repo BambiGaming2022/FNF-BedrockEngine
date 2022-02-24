@@ -264,7 +264,6 @@ class PlayState extends MusicBeatState
 	// Sprites
 	public var laneunderlay:FlxSprite;
 	public var laneunderlayOpponent:FlxSprite;
-	var bgOpacity:FlxSprite;
 
 	// Int
 	public var comboBreaks:Int = 0;
@@ -945,10 +944,6 @@ class PlayState extends MusicBeatState
 		if(ClientPrefs.downScroll) strumLine.y = FlxG.height - 150;
 		strumLine.scrollFactor.set();
 
-		bgOpacity = new FlxSprite(0, 0).makeGraphic(1280, 720);
-		bgOpacity.alpha = ClientPrefs.bgAlpha;
-		bgOpacity.color = FlxColor.BLACK;
-
 		laneunderlayOpponent = new FlxSprite(0, 0).makeGraphic(110 * 4 + 50, FlxG.height * 2);
 		laneunderlayOpponent.alpha = ClientPrefs.laneAlpha;
 		laneunderlayOpponent.color = FlxColor.BLACK;
@@ -1079,6 +1074,15 @@ class PlayState extends MusicBeatState
 		FlxG.fixedTimestep = false;
 		moveCameraSection(0);
 
+		/*
+			I may move these to a separate state later
+			mostly because I don't wanna rely on PlayState
+			for literally almost everything
+			check ClassHUD.hx to see what would be moved
+			if I did implement this change
+			- Gui iago
+		*/
+
 		healthBarBG = new AttachedSprite('healthBar');
 		healthBarBG.y = FlxG.height * 0.875;
 		healthBarBG.screenCenter(X);
@@ -1156,7 +1160,6 @@ class PlayState extends MusicBeatState
 		judgementCounter.text = '';
 		judgementCounter.visible = false;
 
-		//make a switch later
 		if (ClientPrefs.showtotalCombo)
 			judgementCounter.text += 'Highest Combo: ${totalCombo}\n';
 		if (ClientPrefs.showCombo)
@@ -1224,7 +1227,6 @@ class PlayState extends MusicBeatState
 		beWatermark.cameras = [camHUD];
 		peWatermark.cameras = [camHUD];
 		songDisplay.cameras = [camHUD];
-		bgOpacity.cameras = [camHUD];
 
 		// if (SONG.song == 'South')
 		// FlxG.camera.alpha = 0.7;
@@ -1709,14 +1711,12 @@ class PlayState extends MusicBeatState
 			setOnLuas('startedCountdown', true);
 			callOnLuas('onCountdownStarted', []);
 
+			// Underlay
 			if (!ClientPrefs.middleScroll)
 			{
 				add(laneunderlayOpponent);
 			}
-
-			// Underlay
 			add(laneunderlay);
-			add(bgOpacity);
 
 			// Health Icons and Bar
 			add(healthBar);
@@ -1746,7 +1746,7 @@ class PlayState extends MusicBeatState
 
 			if (skipCountdown){
 				Conductor.songPosition = 0;
-				Conductor.songPosition -= Conductor.crochet ;
+				Conductor.songPosition -= Conductor.crochet;
 				swagCounter = 3;
 			}
 			startTimer = new FlxTimer().start(Conductor.crochet / 1000, function(tmr:FlxTimer)
