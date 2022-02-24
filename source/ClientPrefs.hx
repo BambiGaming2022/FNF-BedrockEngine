@@ -58,6 +58,7 @@ class ClientPrefs {
 
 	// Added by Bedrock
 	public static var laneAlpha:Float = 0;
+	public static var instantRespawn:Bool = false;
 	public static var showWatermarks:Bool = true;
 	public static var showSongDisplay:Bool = true;
 	public static var ratingSystem:String = 'Bedrock';
@@ -151,6 +152,7 @@ class ClientPrefs {
 		FlxG.save.data.bgOpacity = bgOpacity;
 		FlxG.save.data.fullscreen = fullscreen;
 		FlxG.save.data.laneAlpha = laneAlpha;
+		FlxG.save.data.instantRespawn = instantRespawn;
 		FlxG.save.data.showWatermarks = showWatermarks;
 		FlxG.save.data.showSongDisplay = showSongDisplay;
 		FlxG.save.data.ratingSystem = ratingSystem;
@@ -297,6 +299,9 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.laneAlpha != null) {
 			laneAlpha = FlxG.save.data.laneAlpha;
+		}
+		if(FlxG.save.data.instantRespawn != null) {
+			instantRespawn = FlxG.save.data.instantRespawn;
 		}
 		if(FlxG.save.data.showWatermarks != null) {
 			showWatermarks = FlxG.save.data.showWatermarks;
