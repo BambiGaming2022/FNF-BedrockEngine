@@ -65,7 +65,7 @@ class ClientPrefs {
 	public static var judgementCounter:Bool = true;
 	public static var comboSpr:Bool = false;
 	public static var showKPS:Bool = false;
-	public static var hitSound:Bool = false;
+	public static var hitsoundVolume:Float = 0;
 	public static var bgAlpha:Float = 0;
 	public static var noteSkin:String = 'normal';
 	public static var screenRes:String = '1280x720';
@@ -159,7 +159,7 @@ class ClientPrefs {
 		FlxG.save.data.judgementCounter = judgementCounter;
 		FlxG.save.data.comboSpr = comboSpr;
 		FlxG.save.data.showKPS = showKPS;
-		FlxG.save.data.hitSound = hitSound;
+		FlxG.save.data.hitsoundVolume = hitsoundVolume;
 		FlxG.save.data.bgAlpha = bgAlpha;
 		FlxG.save.data.noteSkin = noteSkin;
 		FlxG.save.data.screenRes = screenRes;
@@ -321,8 +321,8 @@ class ClientPrefs {
 		if(FlxG.save.data.showKPS != null) {
 			showKPS = FlxG.save.data.showKPS;
 		}
-		if(FlxG.save.data.hitSound != null) {
-			hitSound = FlxG.save.data.hitSound;
+		if(FlxG.save.data.hitsoundVolume != null){
+			hitsoundVolume = FlxG.save.data.hitsoundVolume;
 		}
 		if(FlxG.save.data.bgAlpha != null) {
 			bgAlpha = FlxG.save.data.bgAlpha;

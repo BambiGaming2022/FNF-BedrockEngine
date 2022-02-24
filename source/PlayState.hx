@@ -1373,12 +1373,6 @@ class PlayState extends MusicBeatState
 		CoolUtil.precacheSound('missnote3');
 		CoolUtil.precacheMusic('breakfast');
 
-		if (ClientPrefs.hitSound)
-		{
-			CoolUtil.precacheSound('Tick');
-			FlxG.sound.play(Paths.sound('Tick'), 0);
-		}
-
 		#if desktop
 		// Updating Discord Rich Presence.
 		DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")" + rpcOpponentText, iconP2.getCharacter());
@@ -3574,8 +3568,9 @@ class PlayState extends MusicBeatState
 		var noteDiff:Float = Math.abs(note.strumTime - Conductor.songPosition + ClientPrefs.ratingOffset);
 		//trace(noteDiff, ' ' + Math.abs(note.strumTime - Conductor.songPosition));
 
-		if (ClientPrefs.hitSound)
-			FlxG.sound.play(Paths.sound('Tick'));
+		if(ClientPrefs.hitsoundVolume > 0){
+			FlxG.sound.play(Paths.sound('Tick'), ClientPrefs.hitsoundVolume).pan = note.noteData < 4? -0.3 : 0.3;
+		}
 
 		// boyfriend.playAnim('hey');
 		vocals.volume = 1;

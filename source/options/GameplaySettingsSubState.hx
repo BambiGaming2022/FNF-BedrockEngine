@@ -47,10 +47,6 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'downScroll', 'bool', false); // Save Data Variable Name on ClientPrefs, Variable Type and Default value
 		addOption(option);
 
-		var option:Option = new Option('Enable Hit Sounds', "If checked, will play a sound when you hit a note", 
-			'hitSound', 'bool', false);
-		addOption(option);
-
 		var option:Option = new Option('Ghost Tapping', "If checked, you won't get misses from pressing keys\nwhile there are no notes able to be hit.",
 			'ghostTapping', 'bool', true);
 		addOption(option);
@@ -85,6 +81,18 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		option.minValue = 0;
 		option.maxValue = 500;
 		addOption(option);*/
+
+		var option:Option = new Option('Hitsound Volume',
+			'Sets how loud the hitsounds should be. 0 means disabled.',
+			'hitsoundVolume',
+			'percent',
+			1);
+		option.scrollSpeed = 1.6;
+		option.minValue = 0.0;
+		option.maxValue = 1;
+		option.changeValue = 0.1;
+		option.decimals = 1;
+		addOption(option);
 
 		var option:Option = new Option('Rating Offset',
 			'Changes how late/early you have to hit for a "Sick!"\nHigher values mean you have to hit later.',
