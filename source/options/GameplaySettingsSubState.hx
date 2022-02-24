@@ -54,6 +54,10 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		var option:Option = new Option('Ghost Tapping', "If checked, you won't get misses from pressing keys\nwhile there are no notes able to be hit.",
 			'ghostTapping', 'bool', true);
 		addOption(option);
+		
+		var option:Option = new Option('Instant Respawn',
+			"If checked, you will automatically respawn, skipping the game over animation.", 'instantRespawn', 'bool', false);
+		addOption(option);
 
 		var option:Option = new Option('Middlescroll', 'If checked, your notes get centered.',
 			'middleScroll', 'bool', false);
