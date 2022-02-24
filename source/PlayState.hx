@@ -1181,6 +1181,8 @@ class PlayState extends MusicBeatState
 			judgementCounter.text += 'Highest Combo: ${totalCombo}\n';
 		if (ClientPrefs.showCombo)
 			judgementCounter.text += 'Combo: ${combo}\n';
+		if (ClientPrefs.showComboBreaks)
+			judgementCounter.text += 'Combo Breaks: ${comboBreaks}\n';
 		if (ClientPrefs.showRank)
 			judgementCounter.text += 'Rank: ${ratingName}\n';
 		if (ClientPrefs.showSick)
@@ -1191,8 +1193,6 @@ class PlayState extends MusicBeatState
 			judgementCounter.text += 'Bads: ${bads}\n';
 		if (ClientPrefs.showShit)
 			judgementCounter.text += 'Shits: ${shits}\n';
-		if (ClientPrefs.showComboBreaks)
-			judgementCounter.text += 'Combo Breaks: ${comboBreaks}\n';
 		judgementCounter.text += '\n';
 
 		if (ClientPrefs.showWatermarks) {
@@ -4776,6 +4776,8 @@ class PlayState extends MusicBeatState
 			judgementCounter.text += 'Highest Combo: ${totalCombo}\n';
 		if (ClientPrefs.showCombo)
 			judgementCounter.text += 'Combo: ${combo}\n';
+		if (ClientPrefs.showComboBreaks)
+			judgementCounter.text += 'Combo Breaks: ${comboBreaks}\n';
 		if (ClientPrefs.showRank)
 			judgementCounter.text += 'Rank: ${ratingName}\n';
 		if (ClientPrefs.showSick)
@@ -4786,8 +4788,6 @@ class PlayState extends MusicBeatState
 			judgementCounter.text += 'Bads: ${bads}\n';
 		if (ClientPrefs.showShit)
 			judgementCounter.text += 'Shits: ${shits}\n';
-		if (ClientPrefs.showComboBreaks)
-			judgementCounter.text += 'Combo Breaks: ${comboBreaks}\n';
 
 			judgementCounter.text += '\n';
 	}
