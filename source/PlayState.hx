@@ -354,7 +354,7 @@ class PlayState extends MusicBeatState
 			SONG = Song.loadFromJson('tutorial');
 
 		if (opponentChart)
-			rpcOpponentText = " - Playing as Opponent"
+			rpcOpponentText = " - Playing as Opponent";
 
 		Conductor.mapBPMChanges(SONG);
 		Conductor.changeBPM(SONG.bpm);
