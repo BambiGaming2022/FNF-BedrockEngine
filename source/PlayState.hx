@@ -1122,14 +1122,12 @@ class PlayState extends MusicBeatState
 		iconP1.visible = !ClientPrefs.hideHud;
 		iconP1.visible = !ClientPrefs.hideHud;
 		iconP1.alpha = ClientPrefs.healthBarAlpha;
-		//iconP1.canBounce = true;
 
 		iconP2 = new HealthIcon(dad.healthIcon, false);
 		iconP2.y = healthBar.y - 75;
 		iconP2.visible = !ClientPrefs.hideHud;
 		iconP2.visible = !ClientPrefs.hideHud;
 		iconP2.alpha = ClientPrefs.healthBarAlpha;
-		//iconP2.canBounce = true;
 
 		reloadHealthBarColors();
 
@@ -2353,10 +2351,15 @@ class PlayState extends MusicBeatState
 
 	override public function update(elapsed:Float)
 	{
-		/*if (FlxG.keys.justPressed.NINE)
+		if (FlxG.keys.justPressed.NINE)
 		{
 			iconP1.swapOldIcon();
-		}*/
+		}
+
+		if (FlxG.keys.justPressed.NINE && curStage == 'limo')
+		{
+			iconP2.swapMomIcon();
+		}
 
 		callOnLuas('onUpdate', [elapsed]);
 
@@ -2583,15 +2586,16 @@ class PlayState extends MusicBeatState
 		if (health > 2)
 			health = 2;
 
-		if (healthBar.percent < 20)
-			(opponentChart ? iconP2 : iconP1).animation.curAnim.curFrame = 1;
-		else
-			(opponentChart ? iconP2 : iconP1).animation.curAnim.curFrame = 0;
-
-		if (healthBar.percent > 80)
-			(opponentChart ? iconP1 : iconP2).animation.curAnim.curFrame = 1;
-		else
-			(opponentChart ? iconP1 : iconP2).animation.curAnim.curFrame = 0;
+		if (healthBar.percent < 20) {
+            (opponentChart && !ClientPrefs.oldIcons ? iconP1 : iconP2).animation.curAnim.curFrame = 2;
+            (opponentChart ? iconP2 : iconP1).animation.curAnim.curFrame = 1;
+        } else if (healthBar.percent > 80) {
+            (opponentChart ? iconP1 : iconP2).animation.curAnim.curFrame = 1;
+            (opponentChart && !ClientPrefs.oldIcons ? iconP2 : iconP1).animation.curAnim.curFrame = 2;
+        } else {
+            (opponentChart ? iconP1 : iconP2).animation.curAnim.curFrame = 0;
+            (opponentChart ? iconP2 : iconP1).animation.curAnim.curFrame = 0;
+        }
 
 		if (FlxG.keys.anyJustPressed(debugKeysCharacter) && !endingSong && !inCutscene) {
 			persistentUpdate = false;

@@ -57,6 +57,10 @@ class VisualsUISubState extends BaseOptionsMenu
 			'hideHud', 'bool', false);
 		addOption(option);
 
+		var option:Option = new Option('Hide Winning Icons', "If checked, will use the old icons and disable the winning icons\nthis may also fix broken icons for mods that don't use winning icons\nMake sure to put your Icons on the 'images/icons/old' folder",
+			'oldIcons', 'bool', false);
+		addOption(option);
+
 		var option:Option = new Option('Judgement Counter', "If checked, enables counters for all your judgements at\nleft side of the screen.",
 			'judgementCounter', 'bool', true);
 		addOption(option);

@@ -71,6 +71,7 @@ class ClientPrefs {
 	public static var screenRes:String = '1280x720';
 	public static var bgOpacity:Float = 1;
 	public static var fullscreen:Bool = false;
+	public static var oldIcons:Bool = false;
 
 	// Added by Bedrock (Judgement Counters)
 	public static var showtotalCombo:Bool = true;
@@ -163,6 +164,7 @@ class ClientPrefs {
 		FlxG.save.data.bgAlpha = bgAlpha;
 		FlxG.save.data.noteSkin = noteSkin;
 		FlxG.save.data.screenRes = screenRes;
+		FlxG.save.data.oldIcons = oldIcons;
 
 		// Added by Bedrock (Judgement Counters)
 		FlxG.save.data.showtotalCombo = showtotalCombo;
@@ -332,6 +334,9 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.screenRes != null) {
 			screenRes = FlxG.save.data.screenRes;
+		}
+		if(FlxG.save.data.oldIcons != null) {
+			oldIcons = FlxG.save.data.oldIcons;
 		}
 		
 		// Added by Bedrock (Judgement Counters)
