@@ -1,8 +1,10 @@
 package;
 
 import haxe.Json;
+#if sys
 import sys.io.File;
 import sys.FileSystem;
+#end
 
 using StringTools;
 
@@ -37,6 +39,7 @@ class BedrockUtil
 		for (i in 0...directories.length)
 		{
 			var directory:String = directories[i];
+			#if sys
 			if (FileSystem.exists(directory))
 			{
 				for (file in FileSystem.readDirectory(directory))
@@ -56,6 +59,7 @@ class BedrockUtil
 					}
 				}
 			}
+			#end
 		}
 	}
 
