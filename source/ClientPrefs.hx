@@ -284,6 +284,9 @@ class ClientPrefs {
 		#if desktop
 		if(FlxG.save.data.screenRes != null) {
 			screenRes = FlxG.save.data.screenRes;
+
+			var res = ClientPrefs.screenRes.split('x');
+			FlxG.resizeWindow(Std.parseInt(res[0]), Std.parseInt(res[1]));
 		}
 		if(FlxG.save.data.fullscreen != null) {
 			fullscreen = FlxG.save.data.fullscreen;
