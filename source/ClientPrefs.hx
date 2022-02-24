@@ -286,12 +286,12 @@ class ClientPrefs {
 		if(FlxG.save.data.screenRes != null) {
 			screenRes = FlxG.save.data.screenRes;
 		}
+		if(FlxG.save.data.fullscreen != null) {
+			fullscreen = FlxG.save.data.fullscreen;
+		}
 		#end
 		if(FlxG.save.data.bgOpacity != null) {
 			bgOpacity = FlxG.save.data.bgOpacity;
-		}
-		if(FlxG.save.data.fullscreen != null) {
-			fullscreen = FlxG.save.data.fullscreen;
 		}
 		if(FlxG.save.data.laneAlpha != null) {
 			laneAlpha = FlxG.save.data.laneAlpha;
