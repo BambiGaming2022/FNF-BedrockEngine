@@ -100,14 +100,6 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 		super();
 	}
 
-	function onChangeScreenRes()
-	{
-		if(!FlxG.fullscreen) {
-			var res = ClientPrefs.screenRes.split('x');
-			FlxG.resizeWindow(Std.parseInt(res[0]), Std.parseInt(res[1]));
-		}
-	}
-
 	function onChangeAntiAliasing()
 	{
 		for (sprite in members)
