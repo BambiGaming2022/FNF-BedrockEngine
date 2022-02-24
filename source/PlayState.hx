@@ -1738,8 +1738,8 @@ class PlayState extends MusicBeatState
 			add(laneunderlay);
 
 			// Health Icons and Bar
-			add(healthBar);
 			add(healthBarBG);
+			add(healthBar);
 			add(iconP1);
 			add(iconP2);
 
