@@ -47,8 +47,6 @@ class MainMenuState extends MusicBeatState
 	var camFollow:FlxObject;
 	var camFollowPos:FlxObject;
 	var debugKeys:Array<FlxKey>;
-	var coolTween:FlxTween;
-	var coolSprite:FlxSprite;
 
 	override function create()
 	{
@@ -298,12 +296,6 @@ class MainMenuState extends MusicBeatState
 				}
 				camFollow.setPosition(spr.getGraphicMidpoint().x, spr.getGraphicMidpoint().y - add);
 				spr.centerOffsets();
-				if (coolTween != null)
-					coolTween.destroy();
-				if (coolSprite != null)
-					coolSprite.angle = spr.angle;
-				coolSprite = spr;
-				coolTween = FlxTween.angle(spr, spr.angle, -spr.angle, Conductor.crochet / 1000, {ease: FlxEase.sineInOut, type: FlxTweenType.PINGPONG});
 			}
 		});
 	}
