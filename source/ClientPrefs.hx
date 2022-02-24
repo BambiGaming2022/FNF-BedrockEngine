@@ -28,9 +28,6 @@ class ClientPrefs {
 	public static var noReset:Bool = false;
 	public static var healthBarAlpha:Float = 1;
 	public static var controllerMode:Bool = false;
-	public static var screenRes:String = '1280x720';
-	public static var bgOpacity:Float = 1;
-	public static var fullscreen:Bool = false;
 	public static var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
 		'scrolltype' => 'multiplicative', 
@@ -71,6 +68,8 @@ class ClientPrefs {
 	public static var bgAlpha:Float = 0;
 	public static var noteSkin:String = 'normal';
 	public static var screenRes:String = '1280x720';
+	public static var bgOpacity:Float = 1;
+	public static var fullscreen:Bool = false;
 
 	// Added by Bedrock (Judgement Counters)
 	public static var showtotalCombo:Bool = true;

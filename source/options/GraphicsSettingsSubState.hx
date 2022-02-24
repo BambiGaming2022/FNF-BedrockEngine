@@ -87,17 +87,6 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 			'lowQuality', 'bool', false); // Save Data Variable Name on ClientPrefs, Variable Type and Default value
 		addOption(option);
 
-		#if desktop //no need for this at other platforms cuz only desktop has fullscreen as false by default (MAYBE I'LL TRY TO MAKE IT FOR FULLSCREEN MODE TOO)
-		var option:Option = new Option('Screen Resolution',
-			'Choose your preferred screen resolution.',
-			'screenRes',
-			'string',
-			'1280x720',
-			['640x360', '852x480', '960x540', '1280x720', '1920x1080', '3840x2160', '7680x4320']);
-		addOption(option);
-		option.onChange = onChangeScreenRes;
-		#end
-
 		/*
 		var option:Option = new Option('Persistent Cached Data',
 			'If checked, images loaded will stay in memory\nuntil the game is closed, this increases memory usage,\nbut basically makes reloading times instant.',
