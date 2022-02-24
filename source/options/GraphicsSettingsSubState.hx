@@ -53,6 +53,13 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 		option.onChange = onChangeFramerate;
 		#end
 
+		var option:Option = new Option('BG Opacity', 'If changed, it will change the characters\' and background\'s alpha.',
+			'bgOpacity', 'float', 1);
+		option.minValue = 0;
+		option.maxValue = 1;
+		option.changeValue = 0.1;
+		addOption(option);
+		
 		#if desktop // only desktop can use these shits
 		var option:Option = new Option('Screen Resolution', 'Select your preferred screen resolution.\n(Goes from 240p to 8K)',
 			'screenRes', 'string', '1280x720',
@@ -74,13 +81,6 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 		addOption(option);
 		option.onChange = onChangeFullscreen;
 		#end
-
-		var option:Option = new Option('BG Opacity', 'If changed, it will change the characters\' and background\'s alpha.',
-			'bgOpacity', 'float', 1);
-		option.minValue = 0;
-		option.maxValue = 1;
-		option.changeValue = 0.1;
-		addOption(option);
 
 		//I'd suggest using "Low Quality" as an example for making your own option since it is the simplest here
 		var option:Option = new Option('Low Quality', 'If checked, disables some background details,\ndecreases loading times and improves performance.', //Name and Description
