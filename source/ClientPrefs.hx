@@ -364,6 +364,7 @@ class ClientPrefs {
 		if(FlxG.save.data.showComboBreaks != null) {
 			showComboBreaks = FlxG.save.data.showComboBreaks;
 		}
+		gameplaySettings.set('opponentplay', false);
 		
 		// flixel automatically saves your volume!
 		if(FlxG.save.data.volume != null)
