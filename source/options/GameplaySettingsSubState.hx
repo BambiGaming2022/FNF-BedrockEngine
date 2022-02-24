@@ -47,6 +47,10 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'downScroll', 'bool', false); // Save Data Variable Name on ClientPrefs, Variable Type and Default value
 		addOption(option);
 
+		var option:Option = new Option('Enable Hit Sounds', "If checked, will play a sound when you hit a note", 
+			'hitSound', 'bool', false);
+		addOption(option);
+
 		var option:Option = new Option('Ghost Tapping', "If checked, you won't get misses from pressing keys\nwhile there are no notes able to be hit.",
 			'ghostTapping', 'bool', true);
 		addOption(option);
@@ -55,16 +59,16 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'middleScroll', 'bool', false);
 		addOption(option);
 
-		var option:Option = new Option('Show Watermarks', "If unchecked, hides engine watermarks from the bottom right corner of the screen",
-			'showWatermarks', 'bool', true);
-		addOption(option);
-
-		var option:Option = new Option('Show Song Display', "If unchecked, hides song name and difficulty from the bottom left corner of the screen",
-			'showSongDisplay', 'bool', true);
-		addOption(option);
-
 		var option:Option = new Option('Show Keys Per Second', "If checked, shows a Keys per Second Display on the Info Bar",
 			'showKPS', 'bool', false);
+		addOption(option);
+
+		var option:Option = new Option('Rating System:',
+		    "What should your Rating System be?", 
+			'ratingSystem', 
+			'string', 
+			'Bedrock',
+			['Bedrock', 'Psych', 'Forever', 'Andromeda', "Etterna", 'Mania', "None"]);
 		addOption(option);
 
 		/*var option:Option = new Option('Note Delay',
