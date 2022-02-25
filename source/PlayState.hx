@@ -370,6 +370,8 @@ class PlayState extends MusicBeatState
 
 		if (opponentChart)
 			rpcOpponentText = " - Playing as Opponent";
+		else
+			rpcOpponentText = "";
 
 		Conductor.mapBPMChanges(SONG);
 		Conductor.changeBPM(SONG.bpm);

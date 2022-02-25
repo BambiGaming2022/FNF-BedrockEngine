@@ -87,26 +87,265 @@ class CreditsState extends MusicBeatState
 		#end
 
 		var pisspoop:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
-			['Psych Engine Team'],
-			['Shadow Mario',		'shadowmario',		'Main Programmer of Psych Engine',						'https://twitter.com/Shadow_Mario_',	'444444'],
-			['RiverOaken',			'riveroaken',		'Main Artist/Animator of Psych Engine',					'https://twitter.com/river_oaken',		'C30085'],
-			['shubs',				'shubs',			'Additional Programmer of Psych Engine',				'https://twitter.com/yoshubs',			'4494E6'],
+			['Bedrock Engine Team'],
+			[
+				'Gui iago',
+				'gui',
+				'Engine Coder and Publisher',
+				'https://github.com/Gui-iago',
+				'26B65B'
+			],
+			[
+				'Luisinh010',
+				'luis',
+				'Engine Coder',
+				'https://github.com/Luisinhi010',
+				'DBAC50'
+			],
+			[
+				'Stilic',
+				'stilic',
+				'Engine Coder.',
+				'https://github.com/ShadowMario/FNF-PsychEngine/pull/1809',
+				'FF873C'
+			],
 			[''],
+			['Bedrock Contributors'],
+			[
+				'NxtVithor',
+				'nxtvithor',
+				'Note Skins',
+				'https://twitter.com/NxtVithor',
+				'FF00E4'
+			],
+			[
+				'Suok',
+				'suok',
+				'Title Screen Logo, Credits Icons',
+				'https://twitter.com/oSuOk3',
+				'ff0062'
+			],
+			[
+				'Gazozoz',
+				'gazozoz',
+				'Camera Movement Code',
+				'https://twitter.com/Gazozoz_',
+				'982f2F'
+			],
+			[
+				'Prynnho',
+				'prynn',
+				'Rich Presence Designer',
+				'https://twitter.com/PrynnShilvaru',
+				'4253A2'
+			],
+			[
+				'ShadowBowser',
+				'shadowbowser',
+				'Old Credits Screen Icons',
+				'https://www.reddit.com/u/JulioHaHaHa',
+				'444444'
+			],
+			[
+				'Dex Dousky',
+				'dex',
+				'Main Menu Music, Game Over Music',
+				'https://twitter.com/cachorro_sonico',
+				'58320D'
+			],
+			[
+				'LazyBudd',
+				'lazyb',
+				'Offset Song',
+				'https://twitter.com/Lazy_Weeddy_boy',
+				'FF6200'
+			],
+			[''],
+			['Original PRs'],
+			[
+				'BURGER76920',
+				'burger',
+				'Json-editable Menus',
+				'https://github.com/ShadowMario/FNF-PsychEngine/pull/3891',
+				'D78B50'
+			],
+			[
+				'CerBor',
+				'cerbor',
+				'Difficulty Drop Down on Chart Menu',
+				'https://github.com/ShadowMario/FNF-PsychEngine/pull/2896',
+				'C952E0'
+			],
+			[
+				'HiroMizuki',
+				'hirom',
+				'Pixel Note Splashes',
+				'https://github.com/ShadowMario/FNF-PsychEngine/pull/1792',
+				'31FF7C'
+			],
+			[
+				'i-winxd',
+				'i-winxd',
+				'Complex Accuracy (Old Lua)',
+				'https://github.com/ShadowMario/FNF-PsychEngine/discussions/2917',
+				'FFA6D2'
+			],
+			[
+				'lemz1',
+				'lemz1',
+				'Play as Opponent',
+				'https://github.com/ShadowMario/FNF-PsychEngine/pull/2770',
+				'48C7FF'
+			],
+			[
+				'l1ttleO',
+				'l1ttleO',
+				'Hit Sounds, Miss Sounds Toggle',
+				'https://github.com/l1ttleO/ProjectFNF',
+				'a3fbfb'
+			],
+			[
+				'magnumsrtisswag',
+				'magnums',
+				'Credits Warning',
+				'https://github.com/magnumsrtisswag',
+				'333333'
+			],
+			[
+				'Starmapo',
+				'starmapo',
+				'Time Signatures on Chart Editor',
+				'https://github.com/ShadowMario/FNF-PsychEngine/pull/3428',
+				'83FF87'
+			],
+			[
+				'XtraXD1',
+				'xtraxd1',
+				'Show/Hide Weeks temporally + Getting/Setting on Source Code',
+				'https://github.com/ShadowMario/FNF-PsychEngine/pull/3192',
+				'91CBFF'
+			],
+			[
+				'tposejank',
+				'tposejank',
+				'Discord Client ID editable through lua',
+				'https://github.com/ShadowMario/FNF-PsychEngine/pull/3845',
+				'013220'
+			],
+			[''],
+			['Engine Shoutouts'],
+			[
+				'Shubs',
+				'shubs',
+				'Made Forever Engine, Main Inspiration',
+				'https://github.com/Yoshubs/Forever-Engine-Legacy',
+				'4494E6'
+			],
+			[
+				'Verwex',
+				'verwex',
+				'Made Mic´d Up Engine, Winning Icons, Original Code for Menu Animations',
+				'https://github.com/Verwex/Funkin-Mic-d-Up-SC',
+				'F3B56B'
+			],
+			[''],
+			['Psych Engine Team'],
+			[
+				'Shadow Mario',
+				'shadowmario',
+				'Main Programmer of Psych Engine',
+				'https://twitter.com/Shadow_Mario_',
+				'444444'
+			],
+			[
+				'RiverOaken',
+				'riveroaken',
+				'Main Artist/Animator of Psych Engine',
+				'https://twitter.com/river_oaken',
+				'C30085'
+			],
+			[
+				'Shubs',
+				'shubs',
+				'Additional Programmer of Psych Engine',
+				'https://twitter.com/bbsub3',
+				'4494E6'
+			],
 			['Former Engine Members'],
-			['bb-panzu',			'bb-panzu',			'Ex-Programmer of Psych Engine',						'https://twitter.com/bbsub3',			'389A58'],
+			[
+				'bb-panzu',
+				'bb-panzu',
+				'Ex-Programmer of Psych Engine',
+				'https://twitter.com/bbsub3',
+				'389A58'
+			],
 			[''],
 			['Engine Contributors'],
-			['SqirraRNG',			'gedehari',			'Chart Editor\'s Sound Waveform base',					'https://twitter.com/gedehari',			'FF9300'],
-			['iFlicky',				'iflicky',			'Delay/Combo Menu Song Composer\nand Dialogue Sounds',	'https://twitter.com/flicky_i',			'C549DB'],
-			['PolybiusProxy',		'polybiusproxy',	'.MP4 Video Loader Extension',							'https://twitter.com/polybiusproxy',	'FFEAA6'],
-			['Keoiki',				'keoiki',			'Note Splash Animations',								'https://twitter.com/Keoiki_',			'FFFFFF'],
-			['Smokey',				'smokey',			'Spritemap Texture Support',							'https://twitter.com/Smokey_5_',		'0033CC'],
+			[
+				'SqirraRNG',
+				'gedehari',
+				'Chart Editor\'s Sound Waveform base',
+				'https://twitter.com/gedehari',
+				'FF9300'
+			],
+			[
+				'iFlicky',
+				'iflicky',
+				'Delay/Combo Menu Song Composer\nand Dialogue Sounds',
+				'https://twitter.com/flicky_i',
+				'C549DB'
+			],
+			[
+				'PolybiusProxy',
+				'polybiusproxy',
+				'.MP4 Video Loader Extension',
+				'https://twitter.com/polybiusproxy',
+				'FFEAA6'
+			],
+			[
+				'Keoiki',
+				'keoiki',
+				'Note Splash Animations',
+				'https://twitter.com/Keoiki_',
+				'FFFFFF'
+			],
+			[
+				'Smokey',
+				'smokey',
+				'Spritemap Texture Support',
+				'https://twitter.com/Smokey_5_',
+				'0033CC'
+			],
 			[''],
 			["Funkin' Crew"],
-			['ninjamuffin99',		'ninjamuffin99',	"Programmer of Friday Night Funkin'",					'https://twitter.com/ninja_muffin99',	'F73838'],
-			['PhantomArcade',		'phantomarcade',	"Animator of Friday Night Funkin'",						'https://twitter.com/PhantomArcade3K',	'FFBB1B'],
-			['evilsk8r',			'evilsk8r',			"Artist of Friday Night Funkin'",						'https://twitter.com/evilsk8r',			'53E52C'],
-			['kawaisprite',			'kawaisprite',		"Composer of Friday Night Funkin'",						'https://twitter.com/kawaisprite',		'6475F3']
+			[
+				'ninjamuffin99',
+				'ninjamuffin99',
+				"Programmer of Friday Night Funkin'",
+				'https://twitter.com/ninja_muffin99',
+				'F73838'
+			],
+			[
+				'PhantomArcade',
+				'phantomarcade',
+				"Animator of Friday Night Funkin'",
+				'https://twitter.com/PhantomArcade3K',
+				'FFBB1B'
+			],
+			[
+				'evilsk8r',
+				'evilsk8r',
+				"Artist of Friday Night Funkin'",
+				'https://twitter.com/evilsk8r',
+				'53E52C'
+			],
+			[
+				'kawaisprite',
+				'kawaisprite',
+				"Composer of Friday Night Funkin'",
+				'https://twitter.com/kawaisprite',
+				'6475F3'
+			]
 		];
 		
 		for(i in pisspoop){
