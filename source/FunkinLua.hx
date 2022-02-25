@@ -137,6 +137,7 @@ class FunkinLua {
 		set('gfSection', false);
 
 		// Gameplay settings
+		set('notesOpacity', PlayState.instance.notesOpacity);
 		set('healthGainMult', PlayState.instance.healthGain);
 		set('healthLossMult', PlayState.instance.healthLoss);
 		set('instakillOnMiss', PlayState.instance.instakillOnMiss);
