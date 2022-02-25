@@ -112,6 +112,14 @@ class VisualsUISubState extends BaseOptionsMenu
 			'Time Left',
 			['Time Left', 'Time Elapsed', 'Song Name', 'Disabled']);
 		addOption(option);
+		
+		var option:Option = new Option('Time Bar Style:',
+			"What should the Time Bar look like?",
+			'timeBarUi',
+			'string',
+			'Psych Engine',
+			['Bedrock', 'Psych Engine', 'Kade Engine']);
+		addOption(option);
 
 		super();
 	}
