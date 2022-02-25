@@ -1,5 +1,6 @@
 package;
 
+import flixel.system.FlxSound;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSubState;
@@ -23,6 +24,8 @@ class GameOverSubstate extends MusicBeatSubstate
 	public static var deathSoundName:String = 'fnf_loss_sfx';
 	public static var loopSoundName:String = 'gameOver';
 	public static var endSoundName:String = 'gameOverEnd';
+	
+	var jeffSound:FlxSound;
 
 	public static var instance:GameOverSubstate;
 
@@ -123,7 +126,7 @@ class GameOverSubstate extends MusicBeatSubstate
 			FlxG.sound.playMusic(Paths.music('gameOver'), 0.2);
 
 			if (PlayState.SONG.player2 == 'tankman') {
-				FlxG.sound.play(Paths.sound('jeffGameover/jeffGameover-' + FlxG.random.int(1, 25), 'week7'));
+				jeffSound = FlxG.sound.play(Paths.sound('jeffGameover/jeffGameover-' + FlxG.random.int(1, 25), 'week7'));
 			}
 		}
 
@@ -156,12 +159,23 @@ class GameOverSubstate extends MusicBeatSubstate
 			boyfriend.playAnim('deathConfirm', true);
 			FlxG.sound.music.stop();
 			FlxG.sound.play(Paths.music(endSoundName));
+			if (jeffSound != null)
+				jeffSound.fadeOut(1.2, 0, function(twn:FlxTween)
+				{
+					jeffSound.destroy();
+					jeffSound = null;
+				});
 			new FlxTimer().start(0.7, function(tmr:FlxTimer)
 			{
 				FlxG.camera.fade(FlxColor.BLACK, 2, false, function()
 				{
 					MusicBeatState.resetState();
 				});
+				if (PlayState.SONG.song == 'ugh'/* && PlayState.deathCounter > 0*/)
+					new FlxTimer().start(0.5, function(tmr:FlxTimer)
+					{
+						FlxG.sound.play(Paths.sound('ugh', 'week7'));
+					});
 			});
 			PlayState.instance.callOnLuas('onGameOverConfirm', [true]);
 		}
