@@ -181,10 +181,7 @@ class CreditsState extends MusicBeatState
 	var quitting:Bool = false;
 	var holdTime:Float = 0;
 	override function update(elapsed:Float)
-	{
-		warningDialogue.setText("YOU ARE ABOUT TO GO TO: \n"
-			+ creditsStuff[curSelected][3] + "\nARE YOU ABSOLUTELY SURE YOU WANT TO GO TO THIS URL? \n(Y - Yes, N - No, C - Close this window)");
-		
+	{		
 		if (FlxG.sound.music.volume < 0.7)
 		{
 			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
@@ -271,6 +268,9 @@ class CreditsState extends MusicBeatState
 			if (curSelected >= creditsStuff.length)
 				curSelected = 0;
 		} while(unselectableCheck(curSelected));
+		
+		warningDialogue.setText("YOU ARE ABOUT TO GO TO: \n"
+			+ creditsStuff[curSelected][3] + "\nARE YOU ABSOLUTELY SURE YOU WANT TO GO TO THIS URL? \n(Y - Yes, N - No, C - Close this window)");
 
 		var newColor:Int =  getCurrentBGColor();
 		warningDialogue.setColor(FlxColor.fromInt(newColor));
@@ -306,6 +306,8 @@ class CreditsState extends MusicBeatState
 
 		if(moveTween != null) moveTween.cancel();
 		moveTween = FlxTween.tween(descText, {y : descText.y + 75}, 0.25, {ease: FlxEase.sineOut});
+		
+		warningDialogue.bop();
 
 		descBox.setGraphicSize(Std.int(descText.width + 20), Std.int(descText.height + 25));
 		descBox.updateHitbox();
