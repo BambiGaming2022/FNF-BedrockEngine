@@ -720,6 +720,8 @@ class PlayState extends MusicBeatState
 				}
 				
 			case 'tank': // Week 7
+				GameOverSubstate.characterName = 'bf-ugh-dead';
+				
 				if (SONG.song.toLowerCase() == "stress") {
 					picoStep = Json.parse(openfl.utils.Assets.getText(Paths.json('stress/picospeaker')));
 					tankStep = Json.parse(openfl.utils.Assets.getText(Paths.json('stress/tankSpawn')));
