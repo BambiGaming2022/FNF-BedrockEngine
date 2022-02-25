@@ -33,6 +33,13 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 	{
 		title = 'Gameplay Settings';
 		rpcTitle = 'In the Menus\nGameplay Settings Menu'; //for Discord Rich Presence
+
+		var option:Option = new Option('Auto Pause', "If checked, the game will be paused when you\nswitch to another window.",
+			'autoPause', 'bool', #if html5 false #else true #end);
+		option.onChange = function() {
+			FlxG.autoPause = ClientPrefs.autoPause;
+		}
+		addOption(option);
 		
 		var option:Option = new Option('Controller Mode', 'Check this if you want to play with\na controller instead of using your Keyboard.',
 			'controllerMode', 'bool', false);

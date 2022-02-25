@@ -29,6 +29,11 @@ using StringTools;
 
 class OptionsState extends MusicBeatState
 {
+	private var grpOptions:FlxTypedGroup<Alphabet>;
+	private static var curSelected:Int = 0;
+	public static var menuBG:FlxSprite;
+	static var goToPlayState:Bool = false;
+
 	var options:Array<String> =
 	[
 		'Page 1',
@@ -39,9 +44,13 @@ class OptionsState extends MusicBeatState
 		'Graphics',
 		'Note Preferences'
 	];
-	private var grpOptions:FlxTypedGroup<Alphabet>;
-	private static var curSelected:Int = 0;
-	public static var menuBG:FlxSprite;
+
+	public function new(?goToPlayState:Bool)
+	{
+		super();
+		if (goToPlayState != null)
+			OptionsState.goToPlayState = goToPlayState;
+	}
 
 	function openSelectedSubstate(label:String) {
 		switch(label) {
@@ -120,7 +129,13 @@ class OptionsState extends MusicBeatState
 
 		if (controls.BACK) {
 			FlxG.sound.play(Paths.sound('cancelMenu'));
-			MusicBeatState.switchState(new MainMenuState());
+			if (goToPlayState) {
+				StageData.loadDirectory(PlayState.SONG);
+				goToPlayState = false;
+				LoadingState.loadAndSwitchState(new PlayState(), true);
+			} else {
+				MusicBeatState.switchState(new MainMenuState());
+			}
 		}
 
 		if (controls.ACCEPT) {
