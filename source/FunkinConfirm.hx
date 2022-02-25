@@ -8,7 +8,7 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxAxes;
 import flixel.util.FlxColor;
 /**
- * Confirmation window for FNF
+ * Confirmation window for FNF.
  * Kinda based on @magnumsrtisswag PR to Psych Engine.
  * @author CerBor
  * @author magnumsrtisswag
@@ -20,6 +20,10 @@ class FunkinConfirm extends FlxSpriteGroup
 	private var _content:FlxText;
 	private var _action:FunkinConfirmAction->Void;
 
+	/**
+	 * Is dialog shown, or not? Use this variable to find it out!
+	 * (Read only)
+	**/
 	public var isShown(default, set):Bool = false;
 
 	var DEFAULT_TITLE:String = "Title";
@@ -85,15 +89,16 @@ class FunkinConfirm extends FlxSpriteGroup
 	/**
 	 * Gets color for dialog background.
 	**/
-	public function getColor()
+	public function getColor():FlxColor
 	{
 		return _bg.color;
 	}
 
 	/**
 	 * Sets color for dialog background.
+	 * @param newColor New color of the dialog.
 	**/
-	public function setColor(newColor:FlxColor)
+	public function setColor(newColor:FlxColor):FlxColor
 	{
 		_bg.color = newColor;
 		return _bg.color;
@@ -108,15 +113,16 @@ class FunkinConfirm extends FlxSpriteGroup
 	/**
 	 * Gets dialog title.
 	**/
-	public function getTitle()
+	public function getTitle():String
 	{
 		return _title.text;
 	}
 
 	/**
 	 * Sets dialog title.
+	 * @param newTitle New title of the dialog.
 	**/
-	public function setTitle(newTitle:String)
+	public function setTitle(newTitle:String):String
 	{
 		_title.changeText(newTitle);
 		_title.screenCenter(FlxAxes.X);
@@ -131,15 +137,16 @@ class FunkinConfirm extends FlxSpriteGroup
 	/**
 	 * Gets dialog text.
 	**/
-	public function getText()
+	public function getText():String
 	{
 		return _content.text;
 	}
 
 	/**
 	 * Sets dialog text.
+	 * @param newText New text of the dialog.
 	**/
-	public function setText(newText:String)
+	public function setText(newText:String):String
 	{
 		_content.text = newText;
 		_content.screenCenter(FlxAxes.X);
@@ -154,15 +161,16 @@ class FunkinConfirm extends FlxSpriteGroup
 	/**
 	 * Get stuff on action (idk why do u need this but okay).
 	**/
-	public function getAction()
+	public function getAction():FunkinConfirmAction->Void
 	{
 		return _action;
 	}
 
 	/**
 	 * Changes stuff on action.
+	 * @param newAction New action of the dialog.
 	**/
-	public function setAction(newAction:FunkinConfirmAction->Void)
+	public function setAction(newAction:FunkinConfirmAction->Void):FunkinConfirmAction->Void
 	{
 		_action = newAction;
 		return _action;
@@ -170,8 +178,9 @@ class FunkinConfirm extends FlxSpriteGroup
 
 	/**
 	 * Shows the dialog.
+	 * @return Does method get throught
 	**/
-	public function show()
+	public function show():Bool
 	{
 		if (_title.lettersArray[_title.lettersArray.length - 1].angle != 25 || isShown)
 			return false;
@@ -188,8 +197,9 @@ class FunkinConfirm extends FlxSpriteGroup
 
 	/**
 	 * Hides the dialog.
+	 * @return Does method get throught
 	**/
-	public function hide()
+	public function hide():Bool
 	{
 		if (_title.lettersArray[_title.lettersArray.length - 1].angle != 0 || !isShown)
 			return false;
@@ -205,12 +215,46 @@ class FunkinConfirm extends FlxSpriteGroup
 	}
 
 	/**
+	 * In case someone will spam with the bop
+	**/
+	private var isBopStarted:Bool = false;
+	
+	/**
+	 * Make dialog moves, like other elements (in credits state)
+	 * @return Did method get throught?
+	**/
+	public function bop():Bool
+	{
+		if (isBopStarted)
+			return false;
+		isBopStarted = true;
+
+		var contentInitialY = _content.y;
+
+		FlxTween.tween(_content, {y: contentInitialY / 1.1}, 0.2, {ease: FlxEase.sineInOut, onComplete: (twn:FlxTween) -> {
+			FlxTween.tween(_content, {y: contentInitialY}, 0.3, {ease: FlxEase.sineOut});
+		}});
+
+		for (i in 0..._title.lettersArray.length)
+		{
+			var initialLetterAngle:Float = _title.lettersArray[i].angle;
+			FlxTween.angle(_title.lettersArray[i], initialLetterAngle, initialLetterAngle + FlxG.random.int(-10, 10), 0.3, {ease: FlxEase.sineInOut, onComplete: (twn:FlxTween) -> {
+				FlxTween.angle(_title.lettersArray[i], _title.lettersArray[i].angle, initialLetterAngle, 0.5, {ease: FlxEase.sineOut, onComplete: (twn2:FlxTween) -> {
+					if (i == _title.lettersArray.length - 1)
+						isBopStarted = false;
+				}});
+			}});
+		}
+		return true;
+	}
+
+	/**
 	 * Calculates width, if you gonna change _bg variable
 	**/
-	public function calculateWidth()
+	public function calculateWidth():Int
 	{
 		if (45 * _title.text.length > 20 * getMaxSymboledLine(_content.text).length)
-			return 45 * _title.text.length;
+			return Std.int(45 * _title.text.length);
 		else
 			return Std.int(_content.size / 1.6) * getMaxSymboledLine(_content.text).length;
 	}
@@ -218,13 +262,13 @@ class FunkinConfirm extends FlxSpriteGroup
 	/**
 	 * Calculates height, if you gonna change _bg variable
 	**/
-	public function calculateHeight()
+	public function calculateHeight():Int
 	{
-		return 50 * _content.text.split("\n").length + 100;
+		return Std.int(50 * _content.text.split("\n").length + 100);
 	}
 
 	// Needs for auto-calculating dialogue width.
-	private function getMaxSymboledLine(str:String)
+	private function getMaxSymboledLine(str:String):String
 	{
 		var lines = str.split("\n");
 		var biggestCount:Int = 0;
