@@ -42,8 +42,8 @@ class CounterPrefsSubState extends BaseOptionsMenu
 			'showCombo', 'bool', true);
 		addOption(option);
 
-		var option:Option = new Option('Show Rank', "If checked, will show your Current Rank in a Song.",
-			'showRank', 'bool', true);
+		var option:Option = new Option('Show Combo Breaks', 'If checked, will show how many Combo Breaks you have in a Song.',
+			'showComboBreaks', 'bool', true);
 		addOption(option);
 
 		var option:Option = new Option('Show Sick!', 'If checked, will show how many Sick! Ratings you have in a Song.',
@@ -60,10 +60,6 @@ class CounterPrefsSubState extends BaseOptionsMenu
 
 		var option:Option = new Option('Show Shit', 'If checked, will show how many Shit Ratings you have in a Song.',
 			'showShit', 'bool', true);
-		addOption(option);
-
-		var option:Option = new Option('Show Combo Breaks', 'If checked, will show how many Combo Breaks you have in a Song.',
-			'showComboBreaks', 'bool', true);
 		addOption(option);
 
 		super();

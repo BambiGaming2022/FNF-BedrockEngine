@@ -82,7 +82,6 @@ class ClientPrefs {
 	// Added by Bedrock (Judgement Counters)
 	public static var showtotalCombo:Bool = true;
 	public static var showCombo:Bool = true;
-	public static var showRank:Bool = true;
 	public static var showSick:Bool = true;
 	public static var showGood:Bool = true;
 	public static var showBad:Bool = true;
@@ -177,7 +176,6 @@ class ClientPrefs {
 		// Added by Bedrock (Judgement Counters)
 		FlxG.save.data.showtotalCombo = showtotalCombo;
 		FlxG.save.data.showCombo = showCombo;
-		FlxG.save.data.showRank = showRank;
 		FlxG.save.data.showSick = showSick;
 		FlxG.save.data.showGood = showGood;
 		FlxG.save.data.showBad = showBad;
@@ -361,9 +359,6 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.showCombo != null) {
 			showCombo = FlxG.save.data.showCombo;
-		}
-		if(FlxG.save.data.showRank != null) {
-			showRank = FlxG.save.data.showRank;
 		}
 		if(FlxG.save.data.showSick != null) {
 			showSick = FlxG.save.data.showSick;

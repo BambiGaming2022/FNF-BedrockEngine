@@ -1156,7 +1156,7 @@ class PlayState extends MusicBeatState
 		reloadHealthBarColors();
 
 		scoreTxt = new FlxText(0, healthBarBG.y + 40, FlxG.width, "", 20);
-		scoreTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		scoreTxt.setFormat(Paths.font("vcr.ttf"), 18, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		scoreTxt.scrollFactor.set();
 		scoreTxt.visible = !ClientPrefs.hideHud;
 
@@ -1205,8 +1205,6 @@ class PlayState extends MusicBeatState
 			judgementCounter.text += 'Combo: ${combo}\n';
 		if (ClientPrefs.showComboBreaks)
 			judgementCounter.text += 'Combo Breaks: ${comboBreaks}\n';
-		if (ClientPrefs.showRank)
-			judgementCounter.text += 'Rank: ${ratingName}\n';
 		if (ClientPrefs.showSick)
 			judgementCounter.text += 'Sicks: ${sicks}\n';
 		if (ClientPrefs.showGood)
@@ -2534,7 +2532,7 @@ class PlayState extends MusicBeatState
 
 		var accuracy:Float = Highscore.floorDecimal(ratingPercent * 100, 2);
 		var ratingNameTwo:String = ratingName;
-		var divider:String = ' ' + '-' + ' ';
+		var divider:String = ' ' + '//' + ' ';
 
 		scoreTxt.text = 'Score: ${songScore}';
 		scoreTxt.text += divider + 'Accuracy: ${accuracy}%';
@@ -2548,6 +2546,8 @@ class PlayState extends MusicBeatState
 
 		if (ClientPrefs.showKPS)
 			scoreTxt.text += divider + 'KPS: ${keysPerSecond} (${maxKPS})';
+
+		scoreTxt.text += divider + 'Rank: ${ratingName}';
 
 		if (ClientPrefs.ratingSystem == "None")
 			scoreTxt.text = 'Score: ${songScore}' + divider + 'Misses: ${songMisses}';
@@ -3980,8 +3980,9 @@ class PlayState extends MusicBeatState
 					startAchievement(achieve);
 				}
 				#end
-			} else if (boyfriend.holdTimer > Conductor.stepCrochet * 0.001 * boyfriend.singDuration && boyfriend.animation.curAnim.name.startsWith('sing')
-			&& !boyfriend.animation.curAnim.name.endsWith('miss'))
+			} else if (!opponentChart && boyfriend.holdTimer > Conductor.stepCrochet * 0.001 * boyfriend.singDuration && boyfriend.animation.curAnim.name.startsWith('sing')
+			&& !boyfriend.animation.curAnim.name.endsWith('miss') || opponentChart && boyfriend.holdTimer > Conductor.stepCrochet * 0.002 
+			* boyfriend.singDuration)
 				boyfriend.dance();
 
 			if (controlHoldArray.contains(true) && !endingSong && opponentChart) {/*bruh*/} else if (dad.holdTimer > Conductor.stepCrochet * 0.001 * dad.singDuration && dad.animation.curAnim.name.startsWith('sing')
@@ -4830,8 +4831,6 @@ class PlayState extends MusicBeatState
 			judgementCounter.text += 'Combo: ${combo}\n';
 		if (ClientPrefs.showComboBreaks)
 			judgementCounter.text += 'Combo Breaks: ${comboBreaks}\n';
-		if (ClientPrefs.showRank)
-			judgementCounter.text += 'Rank: ${ratingName}\n';
 		if (ClientPrefs.showSick)
 			judgementCounter.text += 'Sicks: ${sicks}\n';
 		if (ClientPrefs.showGood)
