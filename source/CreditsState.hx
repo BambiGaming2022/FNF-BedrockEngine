@@ -24,6 +24,8 @@ using StringTools;
 class CreditsState extends MusicBeatState
 {
 	var curSelected:Int = -1;
+	
+	var warningDialogue:FunkinConfirm;
 
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 	private var iconArray:Array<AttachedSprite> = [];
@@ -159,6 +161,16 @@ class CreditsState extends MusicBeatState
 		//descText.borderSize = 2.4;
 		descBox.sprTracker = descText;
 		add(descText);
+		
+		warningDialogue = new FunkinConfirm(null, "WARNING!!!", null, function(action:FunkinConfirmAction)
+		{
+			warningDialogue.hide();
+			if (action == FunkinConfirmAction.YES_BUTTON_PRESSED)
+			{
+				CoolUtil.browserLoad(creditsStuff[curSelected][3]);
+			}
+		});
+		add(warningDialogue);
 
 		bg.color = getCurrentBGColor();
 		intendedColor = bg.color;
@@ -170,6 +182,9 @@ class CreditsState extends MusicBeatState
 	var holdTime:Float = 0;
 	override function update(elapsed:Float)
 	{
+		warningDialogue.setText("YOU ARE ABOUT TO GO TO: \n"
+			+ creditsStuff[curSelected][3] + "\nARE YOU ABSOLUTELY SURE YOU WANT TO GO TO THIS URL? \n(Y - Yes, N - No, C - Close this window)");
+		
 		if (FlxG.sound.music.volume < 0.7)
 		{
 			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
@@ -210,7 +225,7 @@ class CreditsState extends MusicBeatState
 			}
 
 			if(controls.ACCEPT) {
-				CoolUtil.browserLoad(creditsStuff[curSelected][3]);
+				warningDialogue.show();
 			}
 			if (controls.BACK)
 			{
@@ -258,6 +273,7 @@ class CreditsState extends MusicBeatState
 		} while(unselectableCheck(curSelected));
 
 		var newColor:Int =  getCurrentBGColor();
+		warningDialogue.setColor(FlxColor.fromInt(newColor));
 		if(newColor != intendedColor) {
 			if(colorTween != null) {
 				colorTween.cancel();
