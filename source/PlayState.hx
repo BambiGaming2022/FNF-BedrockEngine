@@ -86,6 +86,9 @@ class PlayState extends MusicBeatState
 	public var modchartSaves:Map<String, FlxSave> = new Map<String, FlxSave>();
 	//event variables
 	private var isCameraOnForcedPos:Bool = false;
+	private var isHealthDrain:Bool = false;
+	private var healthDrainValue:Float = 0;
+	private var healthDrainOnBeat:Bool = false;
 	#if (haxe >= "4.0.0")
 	public var boyfriendMap:Map<String, Boyfriend> = new Map();
 	public var dadMap:Map<String, Character> = new Map();
@@ -3158,6 +3161,16 @@ class PlayState extends MusicBeatState
 					camFollow.y = val2;
 					isCameraOnForcedPos = true;
 				}
+		
+			case 'Health Drain':
+				var val1:Float = Std.parseFloat(value1);
+				var val2:Int = Std.parseInt(value2);
+				if (Math.isNaN(val1) || val1 < 0 || val1 > 100) val1 = 0;
+				if (Math.isNaN(val2) || val2 > 1 || val2 < 0) val2 = 1;
+
+				isHealthDrain = true;
+				healthDrainValue = (2 * (val1 / 100)) * ClientPrefs.getGameplaySetting('healthloss', 1);
+				healthDrainOnBeat = val2 == 1;
 
 			case 'Alt Idle Animation':
 				var char:Character = dad;
@@ -4520,6 +4533,11 @@ class PlayState extends MusicBeatState
 		if(curStep == lastStepHit) {
 			return;
 		}
+		
+		if (isHealthDrain && !healthDrainOnBeat)
+		{
+			health -= healthDrainValue;
+		}
 
 		lastStepHit = curStep;
 		setOnLuas('curStep', curStep);
@@ -4541,6 +4559,11 @@ class PlayState extends MusicBeatState
 		if(lastBeatHit >= curBeat) {
 			//trace('BEAT HIT: ' + curBeat + ', LAST HIT: ' + lastBeatHit);
 			return;
+		}
+		
+		if (isHealthDrain && healthDrainOnBeat)
+		{
+			health -= healthDrainValue;
 		}
 
 		if (generatedMusic)
