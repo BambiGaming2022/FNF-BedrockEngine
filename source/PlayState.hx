@@ -3664,18 +3664,13 @@ class PlayState extends MusicBeatState
 				msText.color = cyan;
 		}
 
-		msText.text = Std.string(Std.int(Conductor.ms)) + "ms";
+		msText.text = Std.string(Std.int(Conductor.ms)) + "ms" + (cpuControlled ? " (BOT)" : "");
 
-		if (cpuControlled)
-			msText.text += " (BOT)";
 
 		if (ClientPrefs.milliseconds) 
 		{
 			msText.cameras = [camHUD];
 			add(msText);
-			new FlxTimer().start(1, function(lol:FlxTimer = null) {
-				//remove(msText);
-			});
 		}
 
 		
@@ -3734,6 +3729,10 @@ class PlayState extends MusicBeatState
 		rating.visible = !ClientPrefs.hideHud;
 		rating.x += ClientPrefs.comboOffset[0];
 		rating.y -= ClientPrefs.comboOffset[1];
+
+		msText.x = rating.x;
+		msText.y = rating.y;
+		msText.size = 20;
 
 		var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'combo' + pixelShitPart2));
 		comboSpr.cameras = [camHUD];
@@ -3840,8 +3839,15 @@ class PlayState extends MusicBeatState
 			{
 				coolText.destroy();
 				comboSpr.destroy();
-
 				rating.destroy();
+			},
+			startDelay: Conductor.crochet * 0.001
+		});
+
+		FlxTween.tween(msText, {alpha: 1}, 0.75, {
+			onComplete: function(tween:FlxTween)
+			{
+				msText.destroy();
 			},
 			startDelay: Conductor.crochet * 0.001
 		});
