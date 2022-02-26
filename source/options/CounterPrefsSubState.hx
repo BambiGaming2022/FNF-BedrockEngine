@@ -34,6 +34,10 @@ class CounterPrefsSubState extends BaseOptionsMenu
 		title = 'Counter Preferences';
 		rpcTitle = 'In the Menus\nCounter Preferences'; //for Discord Rich Presence
 
+		var option:Option = new Option('Judgement Counters', "If checked, enables counters for all your judgements at\nleft side of the screen.",
+			'judgementCounter', 'bool', true);
+		addOption(option);
+
 		var option:Option = new Option('Show Highest Combo', "If checked, will show your Highest Combo in a Song.",
 			'showtotalCombo', 'bool', true);
 		addOption(option);

@@ -14,7 +14,7 @@ class MillisecondCounterSubState extends BaseOptionsMenu
         title = "Millisecond Counter Menu";
         rpcTitle = "In the Menus\nMillisecond Counter Menu";
     
-        var option:Option = new Option('Millisecond Counter', "If unchecked, millisecond counters when you hit a note\nwill be disabled.",
+        var option:Option = new Option('Millisecond Counter', "If unchecked, millisecond counters for when you hit a note\nwill be disabled.",
 		'milliseconds', 'bool', true);
 		addOption(option);
 
@@ -28,7 +28,7 @@ class MillisecondCounterSubState extends BaseOptionsMenu
     function lmao()
     {
         if (!coolBool && ClientPrefs.millisecondColor) {
-        option2 = new Option('Millisecond Color (Inactive)', "If unchecked, millisecond counters won't change.\nEnable counters to change this!",
+        option2 = new Option('Millisecond Color (Inactive)', "If unchecked, millisecond counters won't change colors.\nEnable counters to change this!",
         'nothinglol', 'string', "", [""]);
         //so uh, nothinglol is a null string, it means if this option is inactive you wont be able to change anything in this option
         }

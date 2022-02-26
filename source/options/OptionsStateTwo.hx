@@ -33,7 +33,7 @@ class OptionsStateTwo extends MusicBeatState
 	[
 		'Page 2',
 		'Counter Preferences',
-		'Millisecond Counter Preferences'
+		'MS Counter Preferences'
 	];
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 	private static var curSelected:Int = 0;
@@ -43,7 +43,7 @@ class OptionsStateTwo extends MusicBeatState
 		switch(label) {
 			case 'Counter Preferences':
 				openSubState(new options.CounterPrefsSubState());
-			case 'Millisecond Counter Preferences':
+			case 'MS Counter Preferences':
 				openSubState(new options.MillisecondCounterSubState());
 		}
 	}
