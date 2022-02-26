@@ -280,6 +280,10 @@ class PlayState extends MusicBeatState
 	// Sprites
 	public var laneunderlay:FlxSprite;
 	public var laneunderlayOpponent:FlxSprite;
+	// stores the last judgement object
+	public static var lastRating:FlxSprite;
+	// stores the last combo objects in an array
+	public static var lastCombo:Array<FlxSprite>;
 
 	// Int
 	public var comboBreaks:Int = 0;
@@ -316,6 +320,9 @@ class PlayState extends MusicBeatState
 
 		// for lua
 		instance = this;
+
+		// sets up the combo object array
+		lastCombo = [];
 
 		debugKeysChart = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
 		debugKeysCharacter = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_2'));
@@ -3626,6 +3633,16 @@ class PlayState extends MusicBeatState
 		var rating:FlxSprite = new FlxSprite();
 		var score:Int = 350;
 
+		// deletes all combo sprites prior to initalizing new ones
+		if (lastCombo != null)
+		{
+			while (lastCombo.length > 0)
+			{
+				lastCombo[0].kill();
+				lastCombo.remove(lastCombo[0]);
+			}
+		}
+
 		//millisecond text shit
 		var msText:FlxText = null;
 		var red:FlxColor = FlxColor.RED;
@@ -3638,7 +3655,7 @@ class PlayState extends MusicBeatState
 
 		if (daRating != null) {
 			msText = new FlxText(0, 0, 0, 0);
-			msText.setFormat(Paths.font("vcr.ttf"), 18, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			msText.setFormat(Paths.font("pixel.otf"), 18, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		}
 
 		switch (daRating)
@@ -3665,15 +3682,11 @@ class PlayState extends MusicBeatState
 		}
 
 		msText.text = Std.string(Std.int(Conductor.ms)) + "ms" + (cpuControlled ? " (BOT)" : "");
-
-
 		if (ClientPrefs.milliseconds) 
 		{
 			msText.cameras = [camHUD];
 			add(msText);
 		}
-
-		
 
 		if(daRating == 'sick' && !note.noteSplashDisabled)
 		{
@@ -3730,6 +3743,12 @@ class PlayState extends MusicBeatState
 		rating.x += ClientPrefs.comboOffset[0];
 		rating.y -= ClientPrefs.comboOffset[1];
 
+		if (lastRating != null) {
+				lastRating.kill();
+			}
+		add(rating);
+		lastRating = rating;
+
 		msText.x = rating.x;
 		msText.y = rating.y;
 		msText.size = 20;
@@ -3743,7 +3762,6 @@ class PlayState extends MusicBeatState
 		comboSpr.visible = !ClientPrefs.hideHud;
 		comboSpr.x += ClientPrefs.comboOffset[4];
 		comboSpr.y -= ClientPrefs.comboOffset[5];
-
 		if (combo > 9 && !ClientPrefs.comboSpr)
 		{
 			add(comboSpr);
@@ -3792,6 +3810,8 @@ class PlayState extends MusicBeatState
 
 			numScore.x += ClientPrefs.comboOffset[2];
 			numScore.y -= ClientPrefs.comboOffset[3];
+
+			lastCombo.push(numScore);
 
 			if (!PlayState.isPixelStage)
 			{
