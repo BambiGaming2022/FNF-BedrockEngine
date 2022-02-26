@@ -73,6 +73,7 @@ class ClientPrefs {
 	public static var bgOpacity:Float = 1;
 	public static var fullscreen:Bool = false;
 	public static var oldIcons:Bool = false;
+	public static var milliseconds:Bool = true;
 	#if !html5
 	public static var autoPause:Bool = true;
 	#else
@@ -172,6 +173,7 @@ class ClientPrefs {
 		FlxG.save.data.screenRes = screenRes;
 		FlxG.save.data.oldIcons = oldIcons;
 		FlxG.save.data.autoPause = autoPause;
+		FlxG.save.data.milliseconds = milliseconds;
 
 		// Added by Bedrock (Judgement Counters)
 		FlxG.save.data.showtotalCombo = showtotalCombo;
@@ -351,6 +353,9 @@ class ClientPrefs {
 		if(FlxG.save.data.autoPause != null) {
 			autoPause = FlxG.save.data.autoPause;
 			FlxG.autoPause = autoPause;
+		}
+		if (FlxG.save.data.milliseconds != null) {
+			milliseconds = FlxG.save.data.milliseconds;
 		}
 		
 		// Added by Bedrock (Judgement Counters)

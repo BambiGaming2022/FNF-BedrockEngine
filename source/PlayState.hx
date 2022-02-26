@@ -3626,8 +3626,20 @@ class PlayState extends MusicBeatState
 		var rating:FlxSprite = new FlxSprite();
 		var score:Int = 350;
 
+		//millisecond text shit
+		var msText:FlxText = null;
+		var red:FlxColor = FlxColor.RED;
+		var orange:FlxColor = FlxColor.ORANGE;
+		var green:FlxColor = FlxColor.GREEN;
+		var cyan:FlxColor = FlxColor.CYAN;
+
 		//tryna do MS based judgment due to popular demand
 		var daRating:String = Conductor.judgeNote(note, noteDiff);
+
+		if (daRating != null) {
+			msText = new FlxText(0, 0, 0, 0);
+			msText.setFormat(Paths.font("vcr.ttf"), 18, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		}
 
 		switch (daRating)
 		{
@@ -3635,19 +3647,33 @@ class PlayState extends MusicBeatState
 				totalNotesHit += 0;
 				score = 50;
 				shits++;
+				msText.color = red;
 			case "bad": // bad
 				totalNotesHit += 0.5;
 				score = 100;
 				bads++;
+				msText.color = orange;
 			case "good": // good
 				totalNotesHit += 0.75;
 				score = 200;
 				goods++;
+				msText.color = green;
 			case "sick": // sick
 				totalNotesHit += 1;
 				sicks++;
+				msText.color = cyan;
 		}
 
+		msText.text = Std.string(Std.int(Conductor.ms)) + "ms" + (cpuControlled ? " (BOT)" : "");
+
+
+		if (ClientPrefs.milliseconds) 
+		{
+			msText.cameras = [camHUD];
+			add(msText);
+		}
+
+		
 
 		if(daRating == 'sick' && !note.noteSplashDisabled)
 		{
@@ -3703,6 +3729,10 @@ class PlayState extends MusicBeatState
 		rating.visible = !ClientPrefs.hideHud;
 		rating.x += ClientPrefs.comboOffset[0];
 		rating.y -= ClientPrefs.comboOffset[1];
+
+		msText.x = rating.x;
+		msText.y = rating.y;
+		msText.size = 20;
 
 		var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'combo' + pixelShitPart2));
 		comboSpr.cameras = [camHUD];
@@ -3809,8 +3839,15 @@ class PlayState extends MusicBeatState
 			{
 				coolText.destroy();
 				comboSpr.destroy();
-
 				rating.destroy();
+			},
+			startDelay: Conductor.crochet * 0.001
+		});
+
+		FlxTween.tween(msText, {alpha: 1}, 0.75, {
+			onComplete: function(tween:FlxTween)
+			{
+				msText.destroy();
 			},
 			startDelay: Conductor.crochet * 0.001
 		});
@@ -4024,11 +4061,12 @@ class PlayState extends MusicBeatState
 
 		//For testing purposes
 		//trace(daNote.missHealth);
-		if (combo > 0)
+		if (combo > 1)
 		{
 			comboBreaks++;
-			combo = 0;
 		}
+
+		combo = 0;
 
 		songMisses++;
 
