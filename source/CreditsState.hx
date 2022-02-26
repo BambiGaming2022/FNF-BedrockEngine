@@ -200,9 +200,9 @@ class CreditsState extends MusicBeatState
 			[
 				'l1ttleO',
 				'l1ttleO',
-				'Hit Sounds, Miss Sounds Toggle',
+				'OG Hit Sound, Miss Sounds Toggle',
 				'https://github.com/l1ttleO/ProjectFNF',
-				'a3fbfb'
+				'CBFFEF'
 			],
 			[
 				'magnumsrtisswag',
@@ -230,7 +230,7 @@ class CreditsState extends MusicBeatState
 				'tposejank',
 				'Discord Client ID editable through lua',
 				'https://github.com/ShadowMario/FNF-PsychEngine/pull/3845',
-				'013220'
+				'94FF8C'
 			],
 			[''],
 			['Engine Shoutouts'],
