@@ -2559,7 +2559,10 @@ class PlayState extends MusicBeatState
 		if (ClientPrefs.showKPS)
 			scoreTxt.text += divider + 'KPS: ${keysPerSecond} (${maxKPS})';
 
-		scoreTxt.text += divider + 'Rank: ${ratingName}';
+		if (ratingFC == "" && ClientPrefs.ratingSystem == 'Psych')
+			scoreTxt.text += divider + 'Rank: ?';
+		else
+			scoreTxt.text += divider + 'Rank: ${ratingName}';
 
 		if (ClientPrefs.ratingSystem == "None")
 			scoreTxt.text = 'Score: ${songScore}' + divider + 'Misses: ${songMisses}';
@@ -3660,7 +3663,7 @@ class PlayState extends MusicBeatState
 
 		if (daRating != null) {
 			msText = new FlxText(0, 0, 0, 0);
-			msText.setFormat(Paths.font("pixel.otf"), 18, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			msText.setFormat(Paths.font("pixel.otf"), 15, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		}
 
 		switch (daRating)
@@ -3687,12 +3690,6 @@ class PlayState extends MusicBeatState
 		}
 
 		msText.text = Std.string(Std.int(Conductor.ms)) + "ms" + (cpuControlled ? " (BOT)" : "");
-		if (ClientPrefs.milliseconds) 
-		{
-			msText.cameras = [camHUD];
-			add(msText);
-		}
-
 		if(daRating == 'sick' && !note.noteSplashDisabled)
 		{
 			spawnNoteSplashOnNote(note);
@@ -3774,6 +3771,11 @@ class PlayState extends MusicBeatState
 		else
 		{
 			remove(comboSpr);
+		}
+		if (ClientPrefs.milliseconds) 
+		{
+			msText.cameras = [camHUD];
+			add(msText);
 		}
 
 		comboSpr.velocity.x += FlxG.random.int(1, 10);
