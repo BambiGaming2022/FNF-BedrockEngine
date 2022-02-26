@@ -8,6 +8,7 @@ import Discord.DiscordClient;
 import Section.SwagSection;
 import Song.SwagSong;
 import WiggleEffect.WiggleEffectType;
+import flash.system.System;
 import flixel.FlxBasic;
 import flixel.FlxCamera;
 import flixel.FlxG;
@@ -316,6 +317,10 @@ class PlayState extends MusicBeatState
 
 	override public function create()
 	{
+		if (ClientPrefs.millisecondColor && !ClientPrefs.milliseconds) {
+			//System.exit(0);
+		}
+
 		Paths.clearStoredMemory();
 
 		// for lua
@@ -3664,21 +3669,21 @@ class PlayState extends MusicBeatState
 				totalNotesHit += 0;
 				score = 50;
 				shits++;
-				msText.color = red;
+				if (ClientPrefs.millisecondColor) {msText.color = red;}
 			case "bad": // bad
 				totalNotesHit += 0.5;
 				score = 100;
 				bads++;
-				msText.color = orange;
+				if (ClientPrefs.millisecondColor) {msText.color = orange;}
 			case "good": // good
 				totalNotesHit += 0.75;
 				score = 200;
 				goods++;
-				msText.color = green;
+				if (ClientPrefs.millisecondColor) {msText.color = green;}
 			case "sick": // sick
 				totalNotesHit += 1;
 				sicks++;
-				msText.color = cyan;
+				if (ClientPrefs.millisecondColor) {msText.color = cyan;}
 		}
 
 		msText.text = Std.string(Std.int(Conductor.ms)) + "ms" + (cpuControlled ? " (BOT)" : "");
@@ -3864,10 +3869,10 @@ class PlayState extends MusicBeatState
 			startDelay: Conductor.crochet * 0.001
 		});
 
-		FlxTween.tween(msText, {alpha: 1}, 0.75, {
+		FlxTween.tween(msText, {alpha: 0}, 0.1, {
 			onComplete: function(tween:FlxTween)
 			{
-				msText.destroy();
+				msText.destroy(); //so anyways i started copy-pasting
 			},
 			startDelay: Conductor.crochet * 0.001
 		});

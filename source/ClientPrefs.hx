@@ -74,6 +74,8 @@ class ClientPrefs {
 	public static var fullscreen:Bool = false;
 	public static var oldIcons:Bool = false;
 	public static var milliseconds:Bool = true;
+	public static var millisecondColor:Bool = true;
+	public static var nothinglol:Null<String> = "";
 	#if !html5
 	public static var autoPause:Bool = true;
 	#else
@@ -174,6 +176,8 @@ class ClientPrefs {
 		FlxG.save.data.oldIcons = oldIcons;
 		FlxG.save.data.autoPause = autoPause;
 		FlxG.save.data.milliseconds = milliseconds;
+		FlxG.save.data.millisecondColor = millisecondColor;
+		FlxG.save.data.nothinglol = nothinglol;
 
 		// Added by Bedrock (Judgement Counters)
 		FlxG.save.data.showtotalCombo = showtotalCombo;
@@ -356,6 +360,12 @@ class ClientPrefs {
 		}
 		if (FlxG.save.data.milliseconds != null) {
 			milliseconds = FlxG.save.data.milliseconds;
+		}
+		if (FlxG.save.data.millisecondCounter != null) {
+			millisecondColor = FlxG.save.data.millisecondCounter;
+		}
+		if (FlxG.save.data.nothinglol != "") {
+			nothinglol = FlxG.save.data.nothinglol;
 		}
 		
 		// Added by Bedrock (Judgement Counters)
