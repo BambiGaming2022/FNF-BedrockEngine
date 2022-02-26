@@ -32,9 +32,8 @@ class MillisecondCounterSubState extends BaseOptionsMenu
         'nothinglol', 'string', "", [""]);
         //so uh, nothinglol is a null string, it means if this option is inactive you wont be able to change anything in this option
         }
-
         else {
-            option2 = new Option('Millisecond Color', "If unchecked, millisecond counters won't change.",
+            option2 = new Option('Millisecond Color', "If unchecked, millisecond counters won't change colors.",
 		    'millisecondColor', 'bool', coolBool);
         }
     }
