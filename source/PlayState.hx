@@ -3626,8 +3626,20 @@ class PlayState extends MusicBeatState
 		var rating:FlxSprite = new FlxSprite();
 		var score:Int = 350;
 
+		//millisecond text shit
+		var msText:FlxText = null;
+		var red:FlxColor = FlxColor.RED;
+		var orange:FlxColor = FlxColor.ORANGE;
+		var green:FlxColor = FlxColor.GREEN;
+		var cyan:FlxColor = FlxColor.CYAN;
+
 		//tryna do MS based judgment due to popular demand
 		var daRating:String = Conductor.judgeNote(note, noteDiff);
+
+		if (daRating != null) {
+			msText = new FlxText(0, 0, 0, 0);
+			msText.setFormat(Paths.font("vcr.ttf"), 18, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		}
 
 		switch (daRating)
 		{
@@ -3635,19 +3647,38 @@ class PlayState extends MusicBeatState
 				totalNotesHit += 0;
 				score = 50;
 				shits++;
+				msText.color = red;
 			case "bad": // bad
 				totalNotesHit += 0.5;
 				score = 100;
 				bads++;
+				msText.color = orange;
 			case "good": // good
 				totalNotesHit += 0.75;
 				score = 200;
 				goods++;
+				msText.color = green;
 			case "sick": // sick
 				totalNotesHit += 1;
 				sicks++;
+				msText.color = cyan;
 		}
 
+		msText.text = Std.string(Std.int(Conductor.ms)) + "ms";
+
+		if (cpuControlled)
+			msText.text += " (BOT)";
+
+		if (ClientPrefs.milliseconds) 
+		{
+			msText.cameras = [camHUD];
+			add(msText);
+			new FlxTimer().start(1, function(lol:FlxTimer = null) {
+				//remove(msText);
+			});
+		}
+
+		
 
 		if(daRating == 'sick' && !note.noteSplashDisabled)
 		{
@@ -4024,11 +4055,12 @@ class PlayState extends MusicBeatState
 
 		//For testing purposes
 		//trace(daNote.missHealth);
-		if (combo > 0)
+		if (combo > 1)
 		{
 			comboBreaks++;
-			combo = 0;
 		}
+
+		combo = 0;
 
 		songMisses++;
 
