@@ -3580,14 +3580,48 @@ class PlayState extends MusicBeatState
 			}
 			else
 			{
-				trace('WENT BACK TO FREEPLAY??');
-				cancelMusicFadeTween();
-				if(FlxTransitionableState.skipNextTransIn) {
-					CustomFadeTransition.nextCamera = null;
+				if (opponentChart && SONG.player2 == 'spirit' && SONG.song.toLowerCase() == 'thorns')
+				{
+					trace ("Ilqdob iuhhhhgrp ;)"); // Umm, decrypted message? Just for fun??
+					camFollow.set(dad.getMidpoint().x + 150, dad.getMidpoint().y - 100);
+					FlxTween.tween(dad, {x: boyfriend.x - 200, alpha: 0}, 1.7, {ease: FlxEase.quintOut, onComplete: function(twn:FlxTween)
+					{
+						camFollow.set(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
+						var boyfriendPossessed:Character = new Character(boyfriend.x, boyfriend.y, "bf-possessed", true);
+						add(boyfriendPossessed);
+						boyfriend.visible = false;
+						boyfriendPossessed.playAnim('possess', true);
+						new FlxTimer().start(5.2, function(tmr:FlxTimer)
+						{
+							var blackScreen:FlxSprite = new FlxSprite().makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
+							add(blackScreen);
+							// I will probably add achievement and some sounds later
+							new FlxTimer().start(1.5, function(tmr2:FlxTimer)
+							{
+								// Copy pasted code
+								trace('WENT BACK TO FREEPLAY??');
+								cancelMusicFadeTween();
+								if(FlxTransitionableState.skipNextTransIn) {
+									CustomFadeTransition.nextCamera = null;
+								}
+								MusicBeatState.switchState(new FreeplayState());
+								FlxG.sound.playMusic(Paths.music('freakyMenu'));
+								changedDifficulty = false;
+							});
+						});
+					}});
 				}
-				MusicBeatState.switchState(new FreeplayState());
-				FlxG.sound.playMusic(Paths.music('freakyMenu'));
-				changedDifficulty = false;
+				else
+				{
+					trace('WENT BACK TO FREEPLAY??');
+					cancelMusicFadeTween();
+					if(FlxTransitionableState.skipNextTransIn) {
+						CustomFadeTransition.nextCamera = null;
+					}
+					MusicBeatState.switchState(new FreeplayState());
+					FlxG.sound.playMusic(Paths.music('freakyMenu'));
+					changedDifficulty = false;
+				}
 			}
 			transitioning = true;
 		}
