@@ -115,7 +115,7 @@ class PlayState extends MusicBeatState
 	public var boyfriendGroup:FlxSpriteGroup;
 	public var dadGroup:FlxSpriteGroup;
 	public var gfGroup:FlxSpriteGroup;
-	public static var c_Stage:String = '';
+	public static var curStage:String = '';
 	public static var isPixelStage:Bool = false;
 	public static var SONG:SwagSong = null;
 	public static var isStoryMode:Bool = false;
@@ -5076,7 +5076,7 @@ class PlayState extends MusicBeatState
 				}
 			}
 
-			if(!Achievements.isAchievementUnlocked(achievementName) && !cpuControlled && coolFloat >= 1 && !unlock) {
+			if(!Achievements.isAchievementUnlocked(achievementName) && !cpuControlled && coolFloat < 1 && !unlock) {
 				switch(achievementName)
 				{
 					case 'ur_bad':
