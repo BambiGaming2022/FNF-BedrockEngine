@@ -156,8 +156,6 @@ class PlayState extends MusicBeatState
 	private var healthBarBG:AttachedSprite;
 	public var healthBar:FlxBar;
 	var songPercent:Float = 0;
-	
-	var coolFloat:Null<Float>;
 
 	private var timeBarBG:AttachedSprite;
 	public var timeBar:FlxBar;
@@ -324,7 +322,6 @@ class PlayState extends MusicBeatState
 		if (ClientPrefs.millisecondColor && !ClientPrefs.milliseconds) {
 			//System.exit(0);
 		}
-	
 
 		Paths.clearStoredMemory();
 
@@ -362,10 +359,6 @@ class PlayState extends MusicBeatState
 		practiceMode = ClientPrefs.getGameplaySetting('practice', false);
 		cpuControlled = ClientPrefs.getGameplaySetting('botplay', false);
 		opponentChart = ClientPrefs.getGameplaySetting('opponentplay', false);
-		
-		if (cpuControlled)
-			coolFloat++;
-		
 
 		// var gameCam:FlxCamera = FlxG.camera;
 		camGame = new FlxCamera();
@@ -2403,9 +2396,6 @@ class PlayState extends MusicBeatState
 		{
 			iconP2.swapMomIcon();
 		}
-		
-		if (cpuControlled)
-			coolFloat++;
 
 		callOnLuas('onUpdate', [elapsed]);
 
@@ -5076,7 +5066,7 @@ class PlayState extends MusicBeatState
 				}
 			}
 
-			if(!Achievements.isAchievementUnlocked(achievementName) && !cpuControlled && coolFloat < 1 && !unlock) {
+			if(!Achievements.isAchievementUnlocked(achievementName) && !cpuControlled && !unlock) {
 				switch(achievementName)
 				{
 					case 'ur_bad':
