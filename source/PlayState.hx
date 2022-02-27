@@ -670,11 +670,9 @@ class PlayState extends MusicBeatState
 					fgTrees.antialiasing = false;
 				}
 
-				var bgTrees:FlxSprite = new FlxSprite(repositionShit - 380, -800);
+				var bgTrees:BGSprite = new BGSprite('weeb/weebTrees', repositionShit - 380, -800, 0.85, 0.85);
 				bgTrees.frames = Paths.getPackerAtlas('weeb/weebTrees');
-				bgTrees.animation.add('treeLoop', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18], 12);
-				bgTrees.animation.play('treeLoop');
-				bgTrees.scrollFactor.set(0.85, 0.85);
+				bgTrees.animation.addByPrefix('idle', 'trees_', 12, true);
 				add(bgTrees);
 				bgTrees.antialiasing = false;
 
@@ -737,9 +735,11 @@ class PlayState extends MusicBeatState
 				}
 				
 			case 'tank': // Week 7
-				GameOverSubstate.characterName = 'bf-ugh-dead';
+				GameOverSubstate.characterName = 'bf-ugh-dead'; //idk if that shit in this line is a serious work but i'll just let it here
 				
 				if (SONG.song.toLowerCase() == "stress") {
+					GameOverSubstate.characterName = 'bf-holding-gf-dead';
+
 					picoStep = Json.parse(openfl.utils.Assets.getText(Paths.json('stress/picospeaker')));
 					tankStep = Json.parse(openfl.utils.Assets.getText(Paths.json('stress/tankSpawn')));
 				}
@@ -1647,7 +1647,7 @@ class PlayState extends MusicBeatState
 
 		var senpaiEvil:FlxSprite = new FlxSprite();
 		senpaiEvil.frames = Paths.getSparrowAtlas('weeb/senpaiCrazy');
-		senpaiEvil.animation.addByPrefix('idle', 'Senpai Pre Explosion', 24, false);
+		senpaiEvil.animation.addByPrefix('idle', 'Senpai Pre Explosion', 12, false);
 		senpaiEvil.setGraphicSize(Std.int(senpaiEvil.width * 6));
 		senpaiEvil.scrollFactor.set();
 		senpaiEvil.updateHitbox();
