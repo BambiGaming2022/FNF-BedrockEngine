@@ -679,7 +679,7 @@ class PlayState extends MusicBeatState
 				bgTrees.antialiasing = false;
 
 				if(!ClientPrefs.lowQuality) {
-					var treeLeaves:BGSprite = new BGSprite('weeb/petals', repositionShit, -40, 0.85, 0.85, ['PETALS ALL'], true);
+					var treeLeaves:BGSprite = new BGSprite('weeb/petals', repositionShit, -40, 0.85, 0.85, ['PETALS ALL'], true, 12);
 					treeLeaves.setGraphicSize(widShit);
 					treeLeaves.updateHitbox();
 					add(treeLeaves);
@@ -718,12 +718,12 @@ class PlayState extends MusicBeatState
 				var posX = 400;
 				var posY = 200;
 				if(!ClientPrefs.lowQuality) {
-					var bg:BGSprite = new BGSprite('weeb/animatedEvilSchool', posX, posY, 0.8, 0.9, ['background 2'], true);
+					var bg:BGSprite = new BGSprite('weeb/animatedEvilSchool', posX, posY, 0.8, 0.9, ['background 2'], true, 12);
 					bg.scale.set(6, 6);
 					bg.antialiasing = false;
 					add(bg);
 
-					bgGhouls = new BGSprite('weeb/bgGhouls', -100, 190, 0.9, 0.9, ['BG freaks glitch instance'], false);
+					bgGhouls = new BGSprite('weeb/bgGhouls', -100, 190, 0.9, 0.9, ['BG freaks glitch instance'], false, 12);
 					bgGhouls.setGraphicSize(Std.int(bgGhouls.width * daPixelZoom));
 					bgGhouls.updateHitbox();
 					bgGhouls.visible = false;
