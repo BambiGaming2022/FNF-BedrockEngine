@@ -156,8 +156,6 @@ class PlayState extends MusicBeatState
 	private var healthBarBG:AttachedSprite;
 	public var healthBar:FlxBar;
 	var songPercent:Float = 0;
-	
-	var coolFloat:Null<Float>;
 
 	private var timeBarBG:AttachedSprite;
 	public var timeBar:FlxBar;
@@ -290,11 +288,16 @@ class PlayState extends MusicBeatState
 	// stores the last combo objects in an array
 	public static var lastCombo:Array<FlxSprite>;
 
-	// Int
+	// Ints
 	public var comboBreaks:Int = 0;
 	public var totalCombo:Int = 0;
 	var keysPerSecond:Int = 0;
 	var maxKPS:Int = 0;
+
+	// Floats
+	public var coolNullFloat:Null<Float> = 0; //dont use this, its used for botplay!!!!!
+	var coolFloat:Float = 0; //you can use this, dont forget to make it public if you want to use this in override and public functions
+
 
 	// Texts
 	public var beWatermark:FlxText;
@@ -324,7 +327,6 @@ class PlayState extends MusicBeatState
 		if (ClientPrefs.millisecondColor && !ClientPrefs.milliseconds) {
 			//System.exit(0);
 		}
-	
 
 		Paths.clearStoredMemory();
 
@@ -362,10 +364,7 @@ class PlayState extends MusicBeatState
 		practiceMode = ClientPrefs.getGameplaySetting('practice', false);
 		cpuControlled = ClientPrefs.getGameplaySetting('botplay', false);
 		opponentChart = ClientPrefs.getGameplaySetting('opponentplay', false);
-		
-		if (cpuControlled)
-			coolFloat++;
-		
+
 
 		// var gameCam:FlxCamera = FlxG.camera;
 		camGame = new FlxCamera();
@@ -2403,9 +2402,9 @@ class PlayState extends MusicBeatState
 		{
 			iconP2.swapMomIcon();
 		}
-		
+
 		if (cpuControlled)
-			coolFloat++;
+			coolNullFloat++;
 
 		callOnLuas('onUpdate', [elapsed]);
 
@@ -3755,7 +3754,7 @@ class PlayState extends MusicBeatState
 				songScore += score;
 				songHits++;
 				totalPlayed++;
-				
+				RecalculateRating();
 			}
 			
 			else
@@ -3765,8 +3764,7 @@ class PlayState extends MusicBeatState
 					
 				botSong += score;
 			}
-			
-			RecalculateRating();
+
 
 			if(ClientPrefs.scoreZoom)
 			{
@@ -5073,7 +5071,7 @@ class PlayState extends MusicBeatState
 				}
 			}
 
-			if(!Achievements.isAchievementUnlocked(achievementName) && !cpuControlled && coolFloat < 1 && !unlock) {
+			if(!Achievements.isAchievementUnlocked(achievementName) && !cpuControlled && coolNullFloat < 1 && !unlock) {
 				switch(achievementName)
 				{
 					case 'ur_bad':
