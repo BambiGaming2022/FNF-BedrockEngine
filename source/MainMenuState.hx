@@ -25,8 +25,8 @@ using StringTools;
 
 class MainMenuState extends MusicBeatState
 {
+	public static var modName:String = 'json-stuff-here';
 	public static var curSelected:Int = 0;
-
 	var menuItems:FlxTypedGroup<FlxSprite>;
 	private var camGame:FlxCamera;
 	private var camAchievement:FlxCamera;
@@ -125,8 +125,6 @@ class MainMenuState extends MusicBeatState
 		}
 
 		FlxG.camera.follow(camFollowPos, null, 1);
-
-		public static var modName:String = 'json-stuff-here';
 
 		/*var customVer:FlxText = new FlxText(12, FlxG.height - 64, 0, modName + Main.customVersion, 12);
 		customVer.scrollFactor.set();

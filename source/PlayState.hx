@@ -1175,7 +1175,7 @@ class PlayState extends MusicBeatState
 		scoreTxt.visible = !ClientPrefs.hideHud;
 
 		// Watermarks, this is for Bedrock Engine
-		beWatermark = new FlxText(0, FlxG.height - 710, 0, "Bedrock Engine: v" + MainMenuState.beVersion, 16);
+		beWatermark = new FlxText(0, FlxG.height - 710, 0, "Bedrock Engine: v" + Main.beVersion, 16);
 		beWatermark.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		beWatermark.borderSize = 2;
 		beWatermark.borderQuality = 2;
@@ -1185,7 +1185,7 @@ class PlayState extends MusicBeatState
 		beWatermark.visible = false;
 
 		// And this is for Psych Engine
-		peWatermark = new FlxText(0, FlxG.height - 690, 0, "Psych Engine: v" + MainMenuState.peVersion, 16);
+		peWatermark = new FlxText(0, FlxG.height - 690, 0, "Psych Engine: v" + Main.peVersion, 16);
 		peWatermark.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		peWatermark.borderSize = 2;
 		peWatermark.borderQuality = 2;

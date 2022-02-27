@@ -128,8 +128,9 @@ class FunkinLua {
 		set('rating', 0);
 		set('ratingName', '');
 		set('ratingFC', '');
-		set('version', MainMenuState.peVersion.trim());
-		set('beversion', MainMenuState.beVersion.trim());
+		set('version', Main.peVersion.trim());
+		set('beVersion', Main.beVersion.trim());
+		set('modVersion', Main.customVersion.trim());
 		
 		set('inGameOver', false);
 		set('mustHitSection', false);
