@@ -227,6 +227,8 @@ class PlayState extends MusicBeatState
 	public var songScore:Int = 0;
 	public var songHits:Int = 0;
 	public var songMisses:Int = 0;
+	var botSong:Null<Int> = 0;
+	var botMiss:Null<Int> = 0;
 	public var scoreTxt:FlxText;
 	var timeTxt:FlxText;
 	var scoreTxtTween:FlxTween;
@@ -2543,29 +2545,34 @@ class PlayState extends MusicBeatState
 		super.update(elapsed);
 
 		var accuracy:Float = Highscore.floorDecimal(ratingPercent * 100, 2);
-		var ratingNameTwo:String = ratingName;
 		var divider:String = ' ' + '//' + ' ';
 
-		scoreTxt.text = 'Score: ${songScore}';
-		scoreTxt.text += divider + 'Accuracy: ${accuracy}%';
+		if (!cpuControlled)
+		{
+			scoreTxt.text = 'Score: ${songScore}';
+			scoreTxt.text += divider + 'Accuracy: ${accuracy}%';
 
-		if (ratingFC == "" || songMisses > 0)
-			scoreTxt.text += '';
+			if (ratingFC == "" || songMisses > 0)
+				scoreTxt.text += '';
+			else
+				scoreTxt.text += ' [' + ratingFC + ']';
+
+			scoreTxt.text += divider + 'Misses: ${songMisses}';
+
+			if (ClientPrefs.showKPS)
+				scoreTxt.text += divider + 'KPS: ${keysPerSecond} (${maxKPS})';
+
+			if (ratingFC == "" && ClientPrefs.ratingSystem == 'Psych')
+				scoreTxt.text += divider + 'Rank: ?';
+			else
+				scoreTxt.text += divider + 'Rank: ${ratingName}';
+
+			if (ClientPrefs.ratingSystem == "None")
+				scoreTxt.text = 'Score: ${songScore}' + divider + 'Misses: ${songMisses}';
+		}
+
 		else
-			scoreTxt.text += ' [' + ratingFC + ']';
-
-		scoreTxt.text += divider + 'Misses: ${songMisses}';
-
-		if (ClientPrefs.showKPS)
-			scoreTxt.text += divider + 'KPS: ${keysPerSecond} (${maxKPS})';
-
-		if (ratingFC == "" && ClientPrefs.ratingSystem == 'Psych')
-			scoreTxt.text += divider + 'Rank: ?';
-		else
-			scoreTxt.text += divider + 'Rank: ${ratingName}';
-
-		if (ClientPrefs.ratingSystem == "None")
-			scoreTxt.text = 'Score: ${songScore}' + divider + 'Misses: ${songMisses}';
+			scoreTxt.text = 'Score: ${botSong} ${divider} Misses: ${songMisses}';
 
 		if(botplayTxt.visible) {
 			botplaySine += 180 * elapsed;
@@ -2844,10 +2851,10 @@ class PlayState extends MusicBeatState
 		}
 		checkEventNote();
 
-		if (!inCutscene) {
-			if(!cpuControlled) {
-				keyShit();
-			} else if(boyfriend.holdTimer > Conductor.stepCrochet * 0.001 * boyfriend.singDuration && boyfriend.animation.curAnim.name.startsWith('sing') && !boyfriend.animation.curAnim.name.endsWith('miss')) {
+		if (!inCutscene) 
+		{
+			keyShit();
+			if(boyfriend.holdTimer > Conductor.stepCrochet * 0.001 * boyfriend.singDuration && boyfriend.animation.curAnim.name.startsWith('sing') && !boyfriend.animation.curAnim.name.endsWith('miss')) {
 				boyfriend.dance();
 			}
 			if(cpuControlled && opponentChart && dad.holdTimer > Conductor.stepCrochet * 0.001 * dad.singDuration && dad.animation.curAnim.name.startsWith('sing') && !dad.animation.curAnim.name.endsWith('miss')) {
@@ -3690,15 +3697,34 @@ class PlayState extends MusicBeatState
 		}
 
 		msText.text = Std.string(Std.int(Conductor.ms)) + "ms" + (cpuControlled ? " (BOT)" : "");
+
 		if(daRating == 'sick' && !note.noteSplashDisabled)
 		{
 			spawnNoteSplashOnNote(note);
 		}
 
-		if(!practiceMode && !cpuControlled) {
-			songScore += score;
-			songHits++;
-			totalPlayed++;
+
+
+		if(!practiceMode) 
+		{
+			if (!cpuControlled) {
+				if (botSong > songScore)
+					songScore = botSong;
+
+				songScore += score;
+				songHits++;
+				totalPlayed++;
+				
+			}
+			
+			else
+			{
+				if (songScore > botSong)
+					botSong = songScore;
+					
+				botSong += score;
+			}
+			
 			RecalculateRating();
 
 			if(ClientPrefs.scoreZoom)
@@ -3758,11 +3784,6 @@ class PlayState extends MusicBeatState
 		else
 			add(rating);
 
-		msText.x = rating.x;
-		msText.y = rating.y;
-		msText.size = 20;
-		lastCombo.push(msText);
-
 		var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'combo' + pixelShitPart2));
 		comboSpr.cameras = [camHUD];
 		comboSpr.screenCenter();
@@ -3820,10 +3841,16 @@ class PlayState extends MusicBeatState
 		seperatedScore.push(Math.floor(combo / 10) % 10);
 		seperatedScore.push(combo % 10);
 
+		msText.x = comboSpr.x;
+		msText.y = comboSpr.y;
+		msText.size = 20;
+		lastCombo.push(msText);
+
 		var daLoop:Int = 0;
+		var numScore:FlxSprite;
 		for (i in seperatedScore)
 		{
-			var numScore:FlxSprite = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'num' + Std.int(i) + pixelShitPart2));
+			numScore = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'num' + Std.int(i) + pixelShitPart2));
 			numScore.cameras = [camHUD];
 			numScore.screenCenter();
 			numScore.x = coolText.x + (43 * daLoop) - 90;
@@ -3870,7 +3897,7 @@ class PlayState extends MusicBeatState
 		/* 
 			trace(combo);
 			trace(seperatedScore);
-		 */
+		*/
 
 		coolText.text = Std.string(seperatedScore);
 		// add(coolText);
@@ -3929,7 +3956,7 @@ class PlayState extends MusicBeatState
 		var key:Int = getKeyFromEvent(eventKey);
 		//trace('Pressed: ' + eventKey);
 
-		if (!cpuControlled && !paused && key > -1 && (FlxG.keys.checkStatus(eventKey, JUST_PRESSED) || ClientPrefs.controllerMode))
+		if (!paused && key > -1 && (FlxG.keys.checkStatus(eventKey, JUST_PRESSED) || ClientPrefs.controllerMode))
 		{
 			if(!boyfriend.stunned && generatedMusic && !endingSong)
 			{
@@ -3954,7 +3981,7 @@ class PlayState extends MusicBeatState
 							sortedNotesList.push(daNote);
 							//notesDatas.push(daNote.noteData);
 						}
-						canMiss = true;
+						if (!cpuControlled) canMiss = true;
 					}
 				});
 				sortedNotesList.sort((a, b) -> Std.int(a.strumTime - b.strumTime));
@@ -4010,7 +4037,7 @@ class PlayState extends MusicBeatState
 	{
 		var eventKey:FlxKey = event.keyCode;
 		var key:Int = getKeyFromEvent(eventKey);
-		if(!cpuControlled && !paused && key > -1)
+		if(!paused && key > -1)
 		{
 			var spr:StrumNote = playerStrums.members[key];
 			if(spr != null)
@@ -4877,7 +4904,7 @@ class PlayState extends MusicBeatState
 		var ret:Dynamic = callOnLuas('onRecalculateRating', []);
 		if (ret != FunkinLua.Function_Stop)
 		{
-			if (totalPlayed < 1) // Prevent divide by 0
+			if (totalPlayed < 1 || cpuControlled) // Prevent divide by 0
 				ratingPercent = 0;
 			else
 				// Rating Percent
