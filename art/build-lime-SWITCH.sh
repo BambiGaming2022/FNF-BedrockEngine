@@ -1,0 +1,2 @@
+#!bin/sh
+cd .. && echo REBUILDING LIME FOR EXPORT (VERBOSE) && lime rebuild linux -clean -v && lime rebuild switch -clean -v && lime rebuild tools -clean -v && echo HOPE AND PRAY... && echo BUILDING GAME && lime build switch -final -clean -v && echo NSP FILE CREATED
