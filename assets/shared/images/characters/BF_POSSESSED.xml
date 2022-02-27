@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="BF_POSSESSED.png">
+	<!-- Created with Adobe Animate version 19.0.0.326 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="BF Possessed0000" x="0" y="0" width="90" height="83" pivotX="252" pivotY="184" frameX="-2" frameY="0" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0001" x="0" y="0" width="90" height="83" frameX="-2" frameY="0" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0002" x="91" y="0" width="90" height="83" frameX="-2" frameY="0" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0003" x="91" y="0" width="90" height="83" frameX="-2" frameY="0" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0004" x="91" y="0" width="90" height="83" frameX="-2" frameY="0" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0005" x="91" y="0" width="90" height="83" frameX="-2" frameY="0" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0006" x="0" y="0" width="90" height="83" frameX="-2" frameY="0" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0007" x="0" y="0" width="90" height="83" frameX="-2" frameY="0" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0008" x="0" y="0" width="90" height="83" frameX="-2" frameY="0" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0009" x="0" y="0" width="90" height="83" frameX="-2" frameY="0" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0010" x="182" y="0" width="90" height="83" frameX="-2" frameY="0" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0011" x="273" y="0" width="90" height="83" frameX="-2" frameY="0" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0012" x="364" y="0" width="90" height="83" frameX="-2" frameY="0" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0013" x="0" y="84" width="90" height="83" frameX="-2" frameY="0" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0014" x="91" y="84" width="90" height="81" frameX="-2" frameY="-2" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0015" x="182" y="84" width="90" height="81" frameX="-2" frameY="-2" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0016" x="182" y="84" width="90" height="81" frameX="-2" frameY="-2" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0017" x="273" y="84" width="90" height="81" frameX="-2" frameY="-2" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0018" x="273" y="84" width="90" height="81" frameX="-2" frameY="-2" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0019" x="364" y="84" width="90" height="81" frameX="-2" frameY="-2" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0020" x="0" y="168" width="90" height="81" frameX="-2" frameY="-2" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0021" x="0" y="168" width="90" height="81" frameX="-2" frameY="-2" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0022" x="0" y="168" width="90" height="81" frameX="-2" frameY="-2" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0023" x="0" y="168" width="90" height="81" frameX="-2" frameY="-2" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0024" x="0" y="168" width="90" height="81" frameX="-2" frameY="-2" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0025" x="0" y="168" width="90" height="81" frameX="-2" frameY="-2" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0026" x="0" y="168" width="90" height="81" frameX="-2" frameY="-2" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0027" x="0" y="168" width="90" height="81" frameX="-2" frameY="-2" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0028" x="0" y="168" width="90" height="81" frameX="-2" frameY="-2" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0029" x="0" y="168" width="90" height="81" frameX="-2" frameY="-2" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0030" x="91" y="168" width="90" height="81" frameX="-2" frameY="-2" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0031" x="91" y="168" width="90" height="81" frameX="-2" frameY="-2" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0032" x="91" y="168" width="90" height="81" frameX="-2" frameY="-2" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0033" x="182" y="168" width="90" height="81" frameX="-2" frameY="-2" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0034" x="182" y="168" width="90" height="81" frameX="-2" frameY="-2" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0035" x="182" y="168" width="90" height="81" frameX="-2" frameY="-2" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0036" x="273" y="168" width="90" height="81" frameX="-2" frameY="-2" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0037" x="273" y="168" width="90" height="81" frameX="-2" frameY="-2" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0038" x="364" y="168" width="90" height="81" frameX="-2" frameY="-2" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0039" x="0" y="250" width="90" height="81" frameX="-2" frameY="-2" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0040" x="0" y="250" width="90" height="81" frameX="-2" frameY="-2" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0041" x="91" y="250" width="90" height="81" frameX="-2" frameY="-2" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0042" x="91" y="250" width="90" height="81" frameX="-2" frameY="-2" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0043" x="182" y="250" width="90" height="81" frameX="-2" frameY="-2" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0044" x="182" y="250" width="90" height="81" frameX="-2" frameY="-2" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0045" x="273" y="250" width="90" height="81" frameX="-2" frameY="-2" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0046" x="273" y="250" width="90" height="81" frameX="-2" frameY="-2" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0047" x="273" y="250" width="90" height="81" frameX="-2" frameY="-2" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0048" x="273" y="250" width="90" height="81" frameX="-2" frameY="-2" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0049" x="273" y="250" width="90" height="81" frameX="-2" frameY="-2" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0050" x="273" y="250" width="90" height="81" frameX="-2" frameY="-2" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0051" x="273" y="250" width="90" height="81" frameX="-2" frameY="-2" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0052" x="273" y="250" width="90" height="81" frameX="-2" frameY="-2" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0053" x="273" y="250" width="90" height="81" frameX="-2" frameY="-2" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0054" x="364" y="250" width="77" height="76" frameX="-6" frameY="-3" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0055" x="364" y="250" width="77" height="76" frameX="-6" frameY="-3" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0056" x="364" y="250" width="77" height="76" frameX="-6" frameY="-3" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0057" x="364" y="250" width="77" height="76" frameX="-6" frameY="-3" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0058" x="364" y="250" width="77" height="76" frameX="-6" frameY="-3" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0059" x="273" y="250" width="90" height="81" frameX="-2" frameY="-2" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0060" x="273" y="250" width="90" height="81" frameX="-2" frameY="-2" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0061" x="273" y="250" width="90" height="81" frameX="-2" frameY="-2" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0062" x="273" y="250" width="90" height="81" frameX="-2" frameY="-2" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0063" x="273" y="250" width="90" height="81" frameX="-2" frameY="-2" frameWidth="94" frameHeight="85"/>
+	<SubTexture name="BF Possessed0064" x="0" y="332" width="94" height="85"/>
+	<SubTexture name="BF Possessed0065" x="0" y="332" width="94" height="85"/>
+	<SubTexture name="BF Possessed0066" x="0" y="332" width="94" height="85"/>
+	<SubTexture name="BF Possessed0067" x="0" y="332" width="94" height="85"/>
+	<SubTexture name="BF Possessed0068" x="0" y="332" width="94" height="85"/>
+	<SubTexture name="BF Possessed0069" x="95" y="332" width="94" height="85"/>
+	<SubTexture name="BF Possessed0070" x="95" y="332" width="94" height="85"/>
+	<SubTexture name="BF Possessed0071" x="95" y="332" width="94" height="85"/>
+	<SubTexture name="BF Possessed0072" x="95" y="332" width="94" height="85"/>
+	<SubTexture name="BF Possessed0073" x="95" y="332" width="94" height="85"/>
+	<SubTexture name="BF Possessed0074" x="190" y="332" width="94" height="85"/>
+	<SubTexture name="BF Possessed0075" x="190" y="332" width="94" height="85"/>
+	<SubTexture name="BF Possessed0076" x="190" y="332" width="94" height="85"/>
+	<SubTexture name="BF Possessed0077" x="190" y="332" width="94" height="85"/>
+	<SubTexture name="BF Possessed0078" x="190" y="332" width="94" height="85"/>
+	<SubTexture name="BF Possessed0079" x="285" y="332" width="94" height="85"/>
+	<SubTexture name="BF Possessed0080" x="285" y="332" width="94" height="85"/>
+	<SubTexture name="BF Possessed0081" x="285" y="332" width="94" height="85"/>
+	<SubTexture name="BF Possessed0082" x="285" y="332" width="94" height="85"/>
+	<SubTexture name="BF Possessed0083" x="285" y="332" width="94" height="85"/>
+	<SubTexture name="BF Possessed0084" x="380" y="332" width="94" height="85"/>
+	<SubTexture name="BF Possessed0085" x="380" y="332" width="94" height="85"/>
+	<SubTexture name="BF Possessed0086" x="380" y="332" width="94" height="85"/>
+	<SubTexture name="BF Possessed0087" x="380" y="332" width="94" height="85"/>
+	<SubTexture name="BF Possessed0088" x="380" y="332" width="94" height="85"/>
+	<SubTexture name="BF Possessed0089" x="380" y="332" width="94" height="85"/>
+	<SubTexture name="BF Possessed0090" x="380" y="332" width="94" height="85"/>
+	<SubTexture name="BF Possessed0091" x="380" y="332" width="94" height="85"/>
+	<SubTexture name="BF Possessed0092" x="380" y="332" width="94" height="85"/>
+	<SubTexture name="BF Possessed0093" x="380" y="332" width="94" height="85"/>
+	<SubTexture name="BF Possessed0094" x="380" y="332" width="94" height="85"/>
+	<SubTexture name="BF Possessed0095" x="380" y="332" width="94" height="85"/>
+	<SubTexture name="BF Possessed0096" x="380" y="332" width="94" height="85"/>
+	<SubTexture name="BF Possessed0097" x="380" y="332" width="94" height="85"/>
+	<SubTexture name="BF Possessed0098" x="380" y="332" width="94" height="85"/>
+	<SubTexture name="BF Possessed0099" x="380" y="332" width="94" height="85"/>
+	<SubTexture name="BF Possessed0100" x="380" y="332" width="94" height="85"/>
+	<SubTexture name="BF Possessed0101" x="380" y="332" width="94" height="85"/>
+	<SubTexture name="BF Possessed0102" x="380" y="332" width="94" height="85"/>
+	<SubTexture name="BF Possessed0103" x="380" y="332" width="94" height="85"/>
+	<SubTexture name="BF Possessed0104" x="0" y="418" width="94" height="85"/>
+	<SubTexture name="BF Possessed0105" x="0" y="418" width="94" height="85"/>
+	<SubTexture name="BF Possessed0106" x="0" y="418" width="94" height="85"/>
+	<SubTexture name="BF Possessed0107" x="95" y="418" width="94" height="85"/>
+	<SubTexture name="BF Possessed0108" x="95" y="418" width="94" height="85"/>
+	<SubTexture name="BF Possessed0109" x="190" y="418" width="94" height="85"/>
+	<SubTexture name="BF Possessed0110" x="190" y="418" width="94" height="85"/>
+	<SubTexture name="BF Possessed0111" x="285" y="418" width="94" height="85"/>
+	<SubTexture name="BF Possessed0112" x="285" y="418" width="94" height="85"/>
+	<SubTexture name="BF Possessed0113" x="285" y="418" width="94" height="85"/>
+	<SubTexture name="BF Possessed0114" x="380" y="418" width="94" height="85"/>
+	<SubTexture name="BF Possessed0115" x="380" y="418" width="94" height="85"/>
+	<SubTexture name="BF Possessed0116" x="380" y="418" width="94" height="85"/>
+	<SubTexture name="BF Possessed0117" x="380" y="418" width="94" height="85"/>
+	<SubTexture name="BF Possessed0118" x="380" y="418" width="94" height="85"/>
+	<SubTexture name="BF Possessed0119" x="380" y="418" width="94" height="85"/>
+</TextureAtlas>

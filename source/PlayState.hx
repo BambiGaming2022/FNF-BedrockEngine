@@ -294,11 +294,16 @@ class PlayState extends MusicBeatState
 	// stores the last combo objects in an array
 	public static var lastCombo:Array<FlxSprite>;
 
-	// Int
+	// Ints
 	public var comboBreaks:Int = 0;
 	public var totalCombo:Int = 0;
 	var keysPerSecond:Int = 0;
 	var maxKPS:Int = 0;
+
+	// Floats
+	public var coolNullFloat:Null<Float> = 0; //dont use this, its used for botplay!!!!!
+	var coolFloat:Float = 0; //you can use this, dont forget to make it public if you want to use this in override and public functions
+
 
 	// Texts
 	public var beWatermark:FlxText;
@@ -365,6 +370,7 @@ class PlayState extends MusicBeatState
 		practiceMode = ClientPrefs.getGameplaySetting('practice', false);
 		cpuControlled = ClientPrefs.getGameplaySetting('botplay', false);
 		opponentChart = ClientPrefs.getGameplaySetting('opponentplay', false);
+
 
 		// var gameCam:FlxCamera = FlxG.camera;
 		camGame = new FlxCamera();
@@ -1181,7 +1187,7 @@ class PlayState extends MusicBeatState
 		scoreTxt.visible = !ClientPrefs.hideHud;
 
 		// Watermarks, this is for Bedrock Engine
-		beWatermark = new FlxText(0, FlxG.height - 710, 0, "Bedrock Engine: v" + MainMenuState.beVersion, 16);
+		beWatermark = new FlxText(0, FlxG.height - 710, 0, "Bedrock Engine: v" + Main.beVersion, 16);
 		beWatermark.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		beWatermark.borderSize = 2;
 		beWatermark.borderQuality = 2;
@@ -1191,7 +1197,7 @@ class PlayState extends MusicBeatState
 		beWatermark.visible = false;
 
 		// And this is for Psych Engine
-		peWatermark = new FlxText(0, FlxG.height - 690, 0, "Psych Engine: v" + MainMenuState.peVersion, 16);
+		peWatermark = new FlxText(0, FlxG.height - 690, 0, "Psych Engine: v" + Main.peVersion, 16);
 		peWatermark.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		peWatermark.borderSize = 2;
 		peWatermark.borderQuality = 2;
@@ -2405,6 +2411,9 @@ class PlayState extends MusicBeatState
 			iconP2.swapMomIcon();
 		}
 
+		if (cpuControlled)
+			coolNullFloat++;
+
 		callOnLuas('onUpdate', [elapsed]);
 
 		switch (curStage)
@@ -2534,26 +2543,10 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		/*this code sucks
-		note to self: fix it later because I really should be sleeping rn
-		- Gui iago*/
-
-		if(controls.NOTE_LEFT_P || controls.NOTE_DOWN_P || controls.NOTE_UP_P || controls.NOTE_RIGHT_P) {
-			keysPerSecond++;
-		} else { //this is the one part that sucks and doesn't work properly.
-			new FlxTimer().start(0.3, function(tmr:FlxTimer)
-			{
-				keysPerSecond = 0;
-			});
-		}
-
-		if (keysPerSecond > maxKPS)
-			maxKPS = keysPerSecond;
-
 		super.update(elapsed);
 
 		var accuracy:Float = Highscore.floorDecimal(ratingPercent * 100, 2);
-		var divider:String = ' ' + '//' + ' ';
+		var divider:String = ' // ';
 
 		if (!cpuControlled)
 		{
@@ -2567,18 +2560,31 @@ class PlayState extends MusicBeatState
 
 			scoreTxt.text += divider + 'Misses: ${songMisses}';
 
-			if (ClientPrefs.showKPS)
-				scoreTxt.text += divider + 'KPS: ${keysPerSecond} (${maxKPS})';
+			//this is dumb but it's for consistency
+			var rankTxtType:String;
+			rankTxtType = "";
 
-			if (ratingFC == "" && ClientPrefs.ratingSystem == 'Psych')
-				scoreTxt.text += divider + 'Rank: ?';
+			if(ClientPrefs.ratingSystem == 'Psych')
+			{
+				rankTxtType = 'Rating';
+			}
+			else if(ClientPrefs.ratingSystem == 'Bedrock' || ClientPrefs.ratingSystem == 'Forever' || ClientPrefs.ratingSystem == 'Etterna' || ClientPrefs.ratingSystem == 'Mania')
+			{
+				rankTxtType = 'Rank';
+			}
+			else if(ClientPrefs.ratingSystem == 'Andromeda')
+			{
+				rankTxtType = 'Grade';
+			}
+
+			if(ClientPrefs.ratingSystem == 'Psych' && ratingFC == '')
+				scoreTxt.text += divider + '${rankTxtType}: ?';
 			else
-				scoreTxt.text += divider + 'Rank: ${ratingName}';
+				scoreTxt.text += divider + '${rankTxtType}: ${ratingName}';
 
 			if (ClientPrefs.ratingSystem == "None")
 				scoreTxt.text = 'Score: ${songScore}' + divider + 'Misses: ${songMisses}';
 		}
-
 		else
 			scoreTxt.text = 'Score: ${botSong} ${divider} Misses: ${songMisses}';
 
@@ -3588,14 +3594,48 @@ class PlayState extends MusicBeatState
 			}
 			else
 			{
-				trace('WENT BACK TO FREEPLAY??');
-				cancelMusicFadeTween();
-				if(FlxTransitionableState.skipNextTransIn) {
-					CustomFadeTransition.nextCamera = null;
+				if (opponentChart && SONG.player2 == 'spirit' && SONG.song.toLowerCase() == 'thorns')
+				{
+					trace ("Ilqdob iuhhhhgrp ;)"); // Umm, decrypted message? Just for fun??
+					camFollow.set(dad.getMidpoint().x + 150, dad.getMidpoint().y - 100);
+					FlxTween.tween(dad, {x: boyfriend.x - 200, alpha: 0}, 1.7, {ease: FlxEase.quintOut, onComplete: function(twn:FlxTween)
+					{
+						camFollow.set(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
+						var boyfriendPossessed:Character = new Character(boyfriend.x, boyfriend.y, "bf-possessed", true);
+						add(boyfriendPossessed);
+						boyfriend.visible = false;
+						boyfriendPossessed.playAnim('possess', true);
+						new FlxTimer().start(5.2, function(tmr:FlxTimer)
+						{
+							var blackScreen:FlxSprite = new FlxSprite().makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
+							add(blackScreen);
+							// I will probably add achievement and some sounds later
+							new FlxTimer().start(1.5, function(tmr2:FlxTimer)
+							{
+								// Copy pasted code
+								trace('WENT BACK TO FREEPLAY??');
+								cancelMusicFadeTween();
+								if(FlxTransitionableState.skipNextTransIn) {
+									CustomFadeTransition.nextCamera = null;
+								}
+								MusicBeatState.switchState(new FreeplayState());
+								FlxG.sound.playMusic(Paths.music('freakyMenu'));
+								changedDifficulty = false;
+							});
+						});
+					}});
 				}
-				MusicBeatState.switchState(new FreeplayState());
-				FlxG.sound.playMusic(Paths.music('freakyMenu'));
-				changedDifficulty = false;
+				else
+				{
+					trace('WENT BACK TO FREEPLAY??');
+					cancelMusicFadeTween();
+					if(FlxTransitionableState.skipNextTransIn) {
+						CustomFadeTransition.nextCamera = null;
+					}
+					MusicBeatState.switchState(new FreeplayState());
+					FlxG.sound.playMusic(Paths.music('freakyMenu'));
+					changedDifficulty = false;
+				}
 			}
 			transitioning = true;
 		}
@@ -3722,7 +3762,7 @@ class PlayState extends MusicBeatState
 				songScore += score;
 				songHits++;
 				totalPlayed++;
-				
+				RecalculateRating();
 			}
 			
 			else
@@ -3732,8 +3772,7 @@ class PlayState extends MusicBeatState
 					
 				botSong += score;
 			}
-			
-			RecalculateRating();
+
 
 			if(ClientPrefs.scoreZoom)
 			{
@@ -5040,7 +5079,7 @@ class PlayState extends MusicBeatState
 				}
 			}
 
-			if(!Achievements.isAchievementUnlocked(achievementName) && !cpuControlled && !unlock) {
+			if(!Achievements.isAchievementUnlocked(achievementName) && !cpuControlled && coolNullFloat < 1 && !unlock) {
 				switch(achievementName)
 				{
 					case 'ur_bad':

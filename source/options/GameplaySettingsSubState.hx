@@ -66,16 +66,12 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'middleScroll', 'bool', false);
 		addOption(option);
 
-		var option:Option = new Option('Show Keys Per Second', "If checked, shows a Keys per Second Display on the Info Bar",
-			'showKPS', 'bool', false);
-		addOption(option);
-
 		var option:Option = new Option('Rating System:',
 		    "What should your Rating System be?", 
 			'ratingSystem', 
 			'string', 
 			'Bedrock',
-			['Bedrock', 'Psych', 'Forever', 'Andromeda', "Etterna", 'Mania', "None"]);
+			['Bedrock', 'Psych', 'Forever', 'Andromeda', 'Etterna', 'Mania', 'None']);
 		addOption(option);
 
 		/*var option:Option = new Option('Note Delay',

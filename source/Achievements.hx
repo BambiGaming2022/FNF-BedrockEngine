@@ -45,7 +45,8 @@ class Achievements {
 		["Hyperactive",					"Finish a Song without going Idle.",				'hype',					null, 			false],
 		["Just the Two of Us",			"Finish a Song pressing only two keys.",			'two_keys',				null,			false],
 		["Toaster Gamer",				"Have you tried to run the game on a toaster?",		'toastie',				null,			false],
-		["Debugger",					"Beat the \"Test\" Stage from the Chart Editor.",	'debugger',				null,			true]
+		["Debugger",					"Beat the \"Test\" Stage from the Chart Editor.",	'debugger',				null,			true],
+		['Freedom!',					"Free the Spirit",									'free_spirit',			null,			false]
 	];
 
 	public static var achievementsStuff:Array<Dynamic> = [ 

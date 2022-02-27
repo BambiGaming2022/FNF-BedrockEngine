@@ -25,10 +25,8 @@ using StringTools;
 
 class MainMenuState extends MusicBeatState
 {
-	public static var beVersion:String = '0.1'; // This is also used for Discord RPC
-	public static var peVersion:String = '0.5.1-git'; // this one too
+	public static var modName:String = 'json-stuff-here';
 	public static var curSelected:Int = 0;
-
 	var menuItems:FlxTypedGroup<FlxSprite>;
 	private var camGame:FlxCamera;
 	private var camAchievement:FlxCamera;
@@ -128,18 +126,25 @@ class MainMenuState extends MusicBeatState
 
 		FlxG.camera.follow(camFollowPos, null, 1);
 
-		var beVer:FlxText = new FlxText(12, FlxG.height - 64, 0, "Bedrock Engine v" + beVersion, 12);
+		/*var customVer:FlxText = new FlxText(12, FlxG.height - 64, 0, modName + Main.customVersion, 12);
+		customVer.scrollFactor.set();
+		customVer.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(customVer);*/
+		
+		var beVer:FlxText = new FlxText(12, FlxG.height - 44, 0, "Bedrock Engine v" + Main.beVersion, 12);
 		beVer.scrollFactor.set();
 		beVer.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(beVer);
-		var peVer:FlxText = new FlxText(12, FlxG.height - 44, 0, "Psych Engine v" + peVersion, 12);
+		
+		var peVer:FlxText = new FlxText(12, FlxG.height - 24, 0, "Psych Engine v" + Main.peVersion, 12);
 		peVer.scrollFactor.set();
 		peVer.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(peVer);
-		var fnfVer:FlxText = new FlxText(12, FlxG.height - 24, 0, "Friday Night Funkin' v" + Application.current.meta.get('version'), 12);
+		
+		/*var fnfVer:FlxText = new FlxText(12, FlxG.height - 24, 0, "Friday Night Funkin' v" + Application.current.meta.get('version'), 12);
 		fnfVer.scrollFactor.set();
 		fnfVer.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(fnfVer);
+		add(fnfVer);*/
 
 		// NG.core.calls.event.logEvent('swag').send();
 
