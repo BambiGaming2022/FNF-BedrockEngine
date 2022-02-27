@@ -6,7 +6,8 @@ import Discord.DiscordClient;
 
 class MillisecondCounterSubState extends BaseOptionsMenu
 {
-    public var coolBool:Null<Bool> = ClientPrefs.milliseconds;
+    public var coolBool:Bool = ClientPrefs.milliseconds;
+    var coolNullBool:Null<Bool> = ClientPrefs.millisecondColor;
     var option2:Option;
 
     public function new()
@@ -34,7 +35,7 @@ class MillisecondCounterSubState extends BaseOptionsMenu
         }
         else {
             option2 = new Option('Millisecond Color', "If unchecked, millisecond counters won't change colors.",
-		    'millisecondColor', 'bool', coolBool);
+		    'millisecondColor', 'bool', coolNullBool);
         }
     }
 }
