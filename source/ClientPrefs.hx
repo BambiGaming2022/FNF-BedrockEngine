@@ -65,7 +65,6 @@ class ClientPrefs {
 	public static var ratingSystem:String = 'Bedrock';
 	public static var judgementCounter:Bool = true;
 	public static var comboSpr:Bool = false;
-	public static var showKPS:Bool = false;
 	public static var hitsoundVolume:Float = 0;
 	public static var bgAlpha:Float = 0;
 	public static var noteSkin:String = 'normal';
@@ -169,7 +168,6 @@ class ClientPrefs {
 		FlxG.save.data.ratingSystem = ratingSystem;
 		FlxG.save.data.judgementCounter = judgementCounter;
 		FlxG.save.data.comboSpr = comboSpr;
-		FlxG.save.data.showKPS = showKPS;
 		FlxG.save.data.hitsoundVolume = hitsoundVolume;
 		FlxG.save.data.bgAlpha = bgAlpha;
 		FlxG.save.data.noteSkin = noteSkin;
@@ -337,9 +335,6 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.comboSpr != null) {
 			comboSpr = FlxG.save.data.comboSpr;
-		}
-		if(FlxG.save.data.showKPS != null) {
-			showKPS = FlxG.save.data.showKPS;
 		}
 		if(FlxG.save.data.hitsoundVolume != null){
 			hitsoundVolume = FlxG.save.data.hitsoundVolume;

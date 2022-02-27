@@ -2536,26 +2536,10 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		/*this code sucks
-		note to self: fix it later because I really should be sleeping rn
-		- Gui iago*/
-
-		if(controls.NOTE_LEFT_P || controls.NOTE_DOWN_P || controls.NOTE_UP_P || controls.NOTE_RIGHT_P) {
-			keysPerSecond++;
-		} else { //this is the one part that sucks and doesn't work properly.
-			new FlxTimer().start(0.3, function(tmr:FlxTimer)
-			{
-				keysPerSecond = 0;
-			});
-		}
-
-		if (keysPerSecond > maxKPS)
-			maxKPS = keysPerSecond;
-
 		super.update(elapsed);
 
 		var accuracy:Float = Highscore.floorDecimal(ratingPercent * 100, 2);
-		var divider:String = ' ' + '//' + ' ';
+		var divider:String = ' // ';
 
 		if (!cpuControlled)
 		{
@@ -2569,18 +2553,31 @@ class PlayState extends MusicBeatState
 
 			scoreTxt.text += divider + 'Misses: ${songMisses}';
 
-			if (ClientPrefs.showKPS)
-				scoreTxt.text += divider + 'KPS: ${keysPerSecond} (${maxKPS})';
+			//this is dumb but it's for consistency
+			var rankTxtType:String;
+			rankTxtType = "";
 
-			if (ratingFC == "" && ClientPrefs.ratingSystem == 'Psych')
-				scoreTxt.text += divider + 'Rank: ?';
+			if(ClientPrefs.ratingSystem == 'Psych')
+			{
+				rankTxtType = 'Rating';
+			}
+			else if(ClientPrefs.ratingSystem == 'Bedrock' || ClientPrefs.ratingSystem == 'Forever' || ClientPrefs.ratingSystem == 'Etterna' || ClientPrefs.ratingSystem == 'Mania')
+			{
+				rankTxtType = 'Rank';
+			}
+			else if(ClientPrefs.ratingSystem == 'Andromeda')
+			{
+				rankTxtType = 'Grade';
+			}
+
+			if (ratingFC == "" && ClientPrefs.ratingSystem == 'Psych'):
+				scoreTxt.text += divider + '${rankTxtType}: ?';
 			else
-				scoreTxt.text += divider + 'Rank: ${ratingName}';
+				scoreTxt.text += divider + '${rankTxtType}: ${ratingName}';
 
 			if (ClientPrefs.ratingSystem == "None")
 				scoreTxt.text = 'Score: ${songScore}' + divider + 'Misses: ${songMisses}';
 		}
-
 		else
 			scoreTxt.text = 'Score: ${botSong} ${divider} Misses: ${songMisses}';
 
