@@ -1,6 +1,5 @@
 package;
 
-import animateatlas.AtlasFrameMaker;
 import flixel.graphics.FlxGraphic;
 #if DISCORD_ALLOWED
 import Discord.DiscordClient;
@@ -45,6 +44,7 @@ import lime.utils.Assets;
 import openfl.Lib;
 import openfl.display.BlendMode;
 import openfl.display.StageQuality;
+import openfl.display.MovieClip;
 import openfl.filters.BitmapFilter;
 import openfl.utils.Assets as OpenFlAssets;
 import openfl.Assets;
@@ -56,13 +56,19 @@ import Note.EventNote;
 import openfl.events.KeyboardEvent;
 import flixel.util.FlxSave;
 import Achievements;
+import AddChildCutscene;
 import StageData;
 import FunkinLua;
 import DialogueBoxPsych;
 import animateatlas.JSONData.AtlasData;
 import openfl.display.BitmapData;
+import openfl.display.DisplayObjectContainer;
+import openfl.display.DisplayObject;
+import openfl.display.Sprite;
 import openfl.display.Tilemap;
 import openfl.display.Tileset;
+import animateAtlasPlayer.assets.AssetManager;
+import animateAtlasPlayer.core.Animation;
 import animateatlas.JSONData.AnimationData;
 import animateatlas.tilecontainer.TileAnimationLibrary;
 import animateatlas.tilecontainer.TileContainerMovieClip;
@@ -1381,21 +1387,23 @@ class PlayState extends MusicBeatState
 					if(daSong == 'roses') FlxG.sound.play(Paths.sound('ANGRY'));
 					schoolIntro(doof);
 
-				case "ugh":
+				case 'ugh':
 					if(ClientPrefs.lowQuality)
 						startVideo(Paths.getPreloadPath('week7/videos/ugh'));
 					else {
 						dadGroup.visible = false;
 
-						//var wellwellwell:FlxAtlasFrames = new FlxAtlasFrames.fromTexturePackerJson();
+						var assets:AssetManager = new AssetManager();
+						assets.enqueue('assets/images/spritemaps/skewTest'); 
+						assets.loadQueue(Cutscenezz.instance.start);
 
 						FlxG.sound.playMusic(Paths.music('DISTORTO', 'week7'));
 						FlxG.sound.play(Paths.sound('wellWellWell', 'week7'));
 					}
 					
-				case "guns":
+				case 'guns':
 					startVideo(Paths.getPreloadPath('week7/videos/guns'));
-				case "stress":
+				case 'stress':
 					startVideo(Paths.getPreloadPath('week7/videos/stress'));
 
 				default:
@@ -1432,7 +1440,7 @@ class PlayState extends MusicBeatState
 		Paths.clearUnusedMemory();
 		CustomFadeTransition.nextCamera = camOther;
 	}
-
+	
 	function set_songSpeed(value:Float):Float
 	{
 		if(generatedMusic)
@@ -5156,6 +5164,16 @@ class PlayState extends MusicBeatState
 				return notesOpacity - defaultValue;
 		else
 			return defaultValue;
+	}
+}
+
+class Cutscenezz extends Sprite
+{
+	public static var instance:Cutscenezz;
+
+	public function start(assetsMgr:AssetManager):Void {
+		var myAnimation:Animation = assetsMgr.createAnimation('tankman_fnf_lip_sync_back_ta_dave');
+		addChild(myAnimation);
 	}
 }
 

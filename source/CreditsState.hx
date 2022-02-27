@@ -233,6 +233,15 @@ class CreditsState extends MusicBeatState
 				'94FF8C'
 			],
 			[''],
+			['Original Haxe Libs'],
+			[
+				'Gamua',
+				'placeholder',
+				'OpenFL Animate Atlas Player',
+				'https://lib.haxe.org/p/OpenFl-Animate-Atlas-Player/',
+				'31B0D1'
+			],
+			[''],
 			['Engine Shoutouts'],
 			[
 				'Shubs',
