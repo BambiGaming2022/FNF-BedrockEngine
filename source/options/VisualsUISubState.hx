@@ -69,7 +69,7 @@ class VisualsUISubState extends BaseOptionsMenu
 			'scoreZoom', 'bool', true);
 		addOption(option);
 
-		var option:Option = new Option('Simply Judgements', "If checked, simplifies the judgement animations.",
+		var option:Option = new Option('Simply Judgements', "If checked, simplifies the judgement animations, displaying only one judgement / rating sprite at a time.",
 			'simplyJudgements', 'bool', false);
 		addOption(option);
 
