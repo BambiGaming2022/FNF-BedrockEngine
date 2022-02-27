@@ -81,6 +81,7 @@ class ClientPrefs {
 	#else
 	public static var autoPause:Bool = false;
 	#end
+	public static var simplyJudgements:Bool = false;
 
 	// Added by Bedrock (Judgement Counters)
 	public static var showtotalCombo:Bool = true;
@@ -178,6 +179,7 @@ class ClientPrefs {
 		FlxG.save.data.milliseconds = milliseconds;
 		FlxG.save.data.millisecondColor = millisecondColor;
 		FlxG.save.data.nothinglol = nothinglol;
+		FlxG.save.data.simplyJudgements = simplyJudgements;
 
 		// Added by Bedrock (Judgement Counters)
 		FlxG.save.data.showtotalCombo = showtotalCombo;
@@ -366,6 +368,9 @@ class ClientPrefs {
 		}
 		if (FlxG.save.data.nothinglol != "") {
 			nothinglol = FlxG.save.data.nothinglol;
+		}
+		if (FlxG.save.data.simplyJudgements != "") {
+			simplyJudgements = FlxG.save.data.simplyJudgements;
 		}
 		
 		// Added by Bedrock (Judgement Counters)

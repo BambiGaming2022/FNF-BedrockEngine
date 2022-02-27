@@ -3738,32 +3738,46 @@ class PlayState extends MusicBeatState
 		rating.screenCenter();
 		rating.x = coolText.x - 40;
 		rating.y -= 60;
-		rating.acceleration.y = 550;
-		rating.velocity.y -= FlxG.random.int(140, 175);
-		rating.velocity.x -= FlxG.random.int(0, 10);
+		if(!ClientPrefs.simplyJudgements)
+		{
+			rating.acceleration.y = 550;
+			rating.velocity.y -= FlxG.random.int(140, 175);
+			rating.velocity.x -= FlxG.random.int(0, 10);
+		}
 		rating.visible = !ClientPrefs.hideHud;
 		rating.x += ClientPrefs.comboOffset[0];
 		rating.y -= ClientPrefs.comboOffset[1];
 
-		if (lastRating != null) {
-				lastRating.kill();
-			}
-		add(rating);
-		lastRating = rating;
+		if(ClientPrefs.simplyJudgements) {
+			if (lastRating != null) {
+					lastRating.kill();
+				}
+			add(rating);
+			lastRating = rating;
+		}
+		else
+			add(rating);
 
 		msText.x = rating.x;
 		msText.y = rating.y;
 		msText.size = 20;
+		lastCombo.push(msText);
 
 		var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'combo' + pixelShitPart2));
 		comboSpr.cameras = [camHUD];
 		comboSpr.screenCenter();
 		comboSpr.x = coolText.x;
-		comboSpr.acceleration.y = 600;
-		comboSpr.velocity.y -= 150;
+		if(!ClientPrefs.simplyJudgements)
+		{
+			comboSpr.acceleration.y = 600;
+			comboSpr.velocity.y -= 150;
+		}
 		comboSpr.visible = !ClientPrefs.hideHud;
 		comboSpr.x += ClientPrefs.comboOffset[4];
 		comboSpr.y -= ClientPrefs.comboOffset[5];
+		if(ClientPrefs.simplyJudgements) {
+			lastCombo.push(comboSpr);
+		}
 		if (combo > 9 && !ClientPrefs.comboSpr)
 		{
 			add(comboSpr);
@@ -3818,7 +3832,9 @@ class PlayState extends MusicBeatState
 			numScore.x += ClientPrefs.comboOffset[2];
 			numScore.y -= ClientPrefs.comboOffset[3];
 
-			lastCombo.push(numScore);
+			if(ClientPrefs.simplyJudgements) {
+				lastCombo.push(numScore);
+			}
 
 			if (!PlayState.isPixelStage)
 			{
@@ -3831,21 +3847,23 @@ class PlayState extends MusicBeatState
 			}
 			numScore.updateHitbox();
 
-			numScore.acceleration.y = FlxG.random.int(200, 300);
-			numScore.velocity.y -= FlxG.random.int(140, 160);
-			numScore.velocity.x = FlxG.random.float(-5, 5);
+			if(!ClientPrefs.simplyJudgements)
+			{
+				numScore.acceleration.y = FlxG.random.int(200, 300);
+				numScore.velocity.y -= FlxG.random.int(140, 160);
+				numScore.velocity.x = FlxG.random.float(-5, 5);
+					FlxTween.tween(numScore, {alpha: 0}, 0.2, {
+					onComplete: function(tween:FlxTween)
+					{
+						numScore.destroy();
+					},
+					startDelay: Conductor.crochet * 0.002
+				});
+			}
 			numScore.visible = !ClientPrefs.hideHud;
 
 			//if (combo >= 10 || combo == 0)
 				insert(members.indexOf(strumLineNotes), numScore);
-
-			FlxTween.tween(numScore, {alpha: 0}, 0.2, {
-				onComplete: function(tween:FlxTween)
-				{
-					numScore.destroy();
-				},
-				startDelay: Conductor.crochet * 0.002
-			});
 
 			daLoop++;
 		}
@@ -3857,19 +3875,44 @@ class PlayState extends MusicBeatState
 		coolText.text = Std.string(seperatedScore);
 		// add(coolText);
 
-		FlxTween.tween(rating, {alpha: 0}, 0.2, {
-			startDelay: Conductor.crochet * 0.001
-		});
+		if(!ClientPrefs.simplyJudgements) {
+			FlxTween.tween(rating, {alpha: 0}, 0.2, {
+				startDelay: Conductor.crochet * 0.001
+			});
+		}
+		else
+			FlxTween.tween(rating, {y: rating.y + 20}, 0.2, {type: FlxTweenType.BACKWARD, ease: FlxEase.circOut});
+			FlxTween.tween(rating, {"scale.x": 0, "scale.y": 0}, 0.1, {
+				onComplete: function(tween:FlxTween)
+				{
+					rating.kill();
+				},
+				startDelay: Conductor.crochet * 0.00125
+			});
 
-		FlxTween.tween(comboSpr, {alpha: 0}, 0.2, {
-			onComplete: function(tween:FlxTween)
-			{
-				coolText.destroy();
-				comboSpr.destroy();
-				rating.destroy();
-			},
-			startDelay: Conductor.crochet * 0.001
-		});
+
+		if(ClientPrefs.simplyJudgements) {
+			FlxTween.tween(comboSpr, {y: rating.y + 20}, 0.2, {type: FlxTweenType.BACKWARD, ease: FlxEase.circOut});
+			FlxTween.tween(comboSpr, {"scale.x": 0, "scale.y": 0}, 0.1, {
+					onComplete: function(tween:FlxTween)
+					{
+						coolText.destroy();
+						comboSpr.destroy();
+						rating.destroy();
+					},
+					startDelay: Conductor.crochet * 0.00125
+				});
+		}
+		else
+			FlxTween.tween(comboSpr, {alpha: 0}, 0.2, {
+				onComplete: function(tween:FlxTween)
+				{
+					coolText.destroy();
+					comboSpr.destroy();
+					rating.destroy();
+				},
+				startDelay: Conductor.crochet * 0.001
+			});
 
 		FlxTween.tween(msText, {alpha: 0}, 0.1, {
 			onComplete: function(tween:FlxTween)

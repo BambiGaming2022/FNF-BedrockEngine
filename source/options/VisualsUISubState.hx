@@ -69,6 +69,10 @@ class VisualsUISubState extends BaseOptionsMenu
 			'scoreZoom', 'bool', true);
 		addOption(option);
 
+		var option:Option = new Option('Simply Judgements', "If checked, simplifies the judgement animations.",
+			'simplyJudgements', 'bool', false);
+		addOption(option);
+
 		var option:Option = new Option('Show Watermarks', "If unchecked, hides engine watermarks from the bottom right corner of the screen",
 			'showWatermarks', 'bool', true);
 		addOption(option);

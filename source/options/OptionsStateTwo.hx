@@ -29,15 +29,16 @@ using StringTools;
 
 class OptionsStateTwo extends MusicBeatState
 {
+	private var grpOptions:FlxTypedGroup<Alphabet>;
+	private static var curSelected:Int = 0;
+	public static var menuBG:FlxSprite;
+
 	var options:Array<String> =
 	[
 		'Page 2',
 		'Counter Preferences',
 		'MS Counter Preferences'
 	];
-	private var grpOptions:FlxTypedGroup<Alphabet>;
-	private static var curSelected:Int = 0;
-	public static var menuBG:FlxSprite;
 
 	function openSelectedSubstate(label:String) {
 		switch(label) {
@@ -94,9 +95,6 @@ class OptionsStateTwo extends MusicBeatState
 	override function update(elapsed:Float) {
 		super.update(elapsed);
 
-		if (controls.UI_UP_P) {
-			changeSelection(-1);
-		}
 		if (controls.UI_DOWN_P) {
 			changeSelection(1);
 		}
@@ -108,7 +106,7 @@ class OptionsStateTwo extends MusicBeatState
 
 		if (controls.BACK) {
 			FlxG.sound.play(Paths.sound('cancelMenu'));
-			MusicBeatState.switchState(new MainMenuState());
+			MusicBeatState.switchState(new OptionsStateTwo());
 		}
 
 		if (controls.ACCEPT) {
