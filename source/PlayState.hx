@@ -2554,6 +2554,7 @@ class PlayState extends MusicBeatState
 
 			//this is dumb but it's for consistency
 			var rankTxtType:String;
+			var rankTxtPsych:String;
 			rankTxtType = "";
 
 			if(ClientPrefs.ratingSystem == 'Psych')
@@ -2569,7 +2570,7 @@ class PlayState extends MusicBeatState
 				rankTxtType = 'Grade';
 			}
 
-			if (ratingFC == "" && ClientPrefs.ratingSystem == 'Psych'):
+			if(ClientPrefs.ratingSystem == 'Psych')
 				scoreTxt.text += divider + '${rankTxtType}: ?';
 			else
 				scoreTxt.text += divider + '${rankTxtType}: ${ratingName}';
