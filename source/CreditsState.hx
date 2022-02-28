@@ -91,23 +91,30 @@ class CreditsState extends MusicBeatState
 			[
 				'Gui iago',
 				'gui',
-				'Engine Coder and Publisher',
+				'Main Programmer and Publisher of Bedrock Engine',
 				'https://github.com/Gui-iago',
 				'26B65B'
 			],
 			[
 				'Luisinh010',
 				'luis',
-				'Engine Coder',
+				'Additional Programmer of Bedrock Engine',
 				'https://github.com/Luisinhi010',
 				'DBAC50'
 			],
 			[
 				'Stilic',
 				'stilic',
-				'Engine Coder.',
-				'https://github.com/ShadowMario/FNF-PsychEngine/pull/1809',
+				'Additional Programmer of Bedrock Engine.',
+				'https://github.com/Stilic',
 				'FF873C'
+			],
+			[
+				'CerBor',
+				'cerbor',
+				'Additional Programmer of Bedrock Engine',
+				'https://github.com/CerBor',
+				'C952E0'
 			],
 			[''],
 			['Bedrock Contributors'],
@@ -121,7 +128,7 @@ class CreditsState extends MusicBeatState
 			[
 				'Suok',
 				'suok',
-				'Title Screen Logo, Credits Icons',
+				'Title Screen Logo, Credits Screen Icons',
 				'https://twitter.com/oSuOk3',
 				'ff0062'
 			],
@@ -135,7 +142,7 @@ class CreditsState extends MusicBeatState
 			[
 				'Prynnho',
 				'prynn',
-				'Rich Presence Designer',
+				'Old Rich Presence Icon Artist',
 				'https://twitter.com/PrynnShilvaru',
 				'4253A2'
 			],
@@ -149,14 +156,14 @@ class CreditsState extends MusicBeatState
 			[
 				'Dex Dousky',
 				'dex',
-				'Main Menu Music, Game Over Music',
+				'Main Menu Song, Game Over Song',
 				'https://twitter.com/cachorro_sonico',
 				'58320D'
 			],
 			[
 				'LazyBudd',
 				'lazyb',
-				'Offset Song',
+				'Combo Offset Song',
 				'https://twitter.com/Lazy_Weeddy_boy',
 				'FF6200'
 			],
@@ -165,16 +172,9 @@ class CreditsState extends MusicBeatState
 			[
 				'BURGER76920',
 				'burger',
-				'Json-editable Menus',
+				'Json-editable Menus (Deprecated and Removed from the Engine, still worth a try though)',
 				'https://github.com/ShadowMario/FNF-PsychEngine/pull/3891',
 				'D78B50'
-			],
-			[
-				'CerBor',
-				'cerbor',
-				'Difficulty Drop Down on Chart Menu',
-				'https://github.com/ShadowMario/FNF-PsychEngine/pull/2896',
-				'C952E0'
 			],
 			[
 				'HiroMizuki',
@@ -207,7 +207,7 @@ class CreditsState extends MusicBeatState
 			[
 				'magnumsrtisswag',
 				'magnums',
-				'Credits Warning',
+				'Credits Warning Prompt',
 				'https://github.com/magnumsrtisswag',
 				'333333'
 			],
@@ -233,7 +233,7 @@ class CreditsState extends MusicBeatState
 				'94FF8C'
 			],
 			[''],
-			['Original Haxe Libs'],
+			['Original Haxe Libraries'],
 			[
 				'Gamua',
 				'placeholder',
@@ -253,7 +253,7 @@ class CreditsState extends MusicBeatState
 			[
 				'Verwex',
 				'verwex',
-				'Made Mic´d Up Engine, Winning Icons, Original Code for Menu Animations',
+				'Made Mic´d Up Engine, Old Winning Icons, Original Code for Menu Animations',
 				'https://github.com/Verwex/Funkin-Mic-d-Up-SC',
 				'F3B56B'
 			],
