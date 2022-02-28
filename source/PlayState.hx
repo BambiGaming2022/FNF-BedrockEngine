@@ -2566,21 +2566,25 @@ class PlayState extends MusicBeatState
 
 			if(ClientPrefs.ratingSystem == 'Psych')
 			{
-				rankTxtType = 'Rating';
+				rankTxtType = 'Rating:';
 			}
-			else if(ClientPrefs.ratingSystem == 'Bedrock' || ClientPrefs.ratingSystem == 'Forever' || ClientPrefs.ratingSystem == 'Etterna' || ClientPrefs.ratingSystem == 'Mania')
+			else if(ClientPrefs.ratingSystem == 'Bedrock' || ClientPrefs.ratingSystem == 'Forever')
 			{
-				rankTxtType = 'Rank';
+				rankTxtType = 'Rank:';
 			}
 			else if(ClientPrefs.ratingSystem == 'Andromeda')
 			{
-				rankTxtType = 'Grade';
+				rankTxtType = 'Grade:';
+			}
+			else if(ClientPrefs.ratingSystem == 'Etterna' || ClientPrefs.ratingSystem == 'Mania')
+			{
+				rankTxtType = '';
 			}
 
 			if(ClientPrefs.ratingSystem == 'Psych' && ratingFC == '')
-				scoreTxt.text += divider + '${rankTxtType}: ?';
+				scoreTxt.text += divider + '${rankTxtType} ?';
 			else
-				scoreTxt.text += divider + '${rankTxtType}: ${ratingName}';
+				scoreTxt.text += divider + '${rankTxtType} ${ratingName}';
 
 			if (ClientPrefs.ratingSystem == "None")
 				scoreTxt.text = 'Score: ${songScore}' + divider + 'Misses: ${songMisses}';
@@ -3732,7 +3736,7 @@ class PlayState extends MusicBeatState
 				totalNotesHit += 0.5;
 				score = 100;
 				bads++;
-				if (ClientPrefs.millisecondColor) {msText.color = orange;}
+				if (ClientPrefs.millisecondColor) {msText.color = red;}
 			case "good": // good
 				totalNotesHit += 0.75;
 				score = 200;
@@ -3745,6 +3749,9 @@ class PlayState extends MusicBeatState
 		}
 
 		msText.text = Std.string(Std.int(Conductor.ms)) + "ms" + (cpuControlled ? " (BOT)" : "");
+		msText.borderStyle = OUTLINE;
+		msText.borderSize = 1;
+		msText.borderColor = FlxColor.BLACK;
 
 		if(daRating == 'sick' && !note.noteSplashDisabled)
 		{
@@ -3888,8 +3895,11 @@ class PlayState extends MusicBeatState
 			seperatedScore.push(Std.parseInt(str));
 		}
 
-		msText.x = comboSpr.x;
-		msText.y = comboSpr.y;
+		msText.screenCenter();
+		msText.x = comboSpr.x + 100;
+		msText.y = rating.y + 100;
+		msText.acceleration.y = 600;
+		msText.velocity.y -= 150;
 		msText.size = 20;
 		lastCombo.push(msText);
 
