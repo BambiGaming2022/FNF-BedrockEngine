@@ -748,9 +748,7 @@ class PlayState extends MusicBeatState
 					add(bg);
 				}
 				
-			case 'tank': // Week 7
-				GameOverSubstate.characterName = 'bf-ugh-dead'; //idk if that shit in this line is a serious work but i'll just let it here
-				
+			case 'tank': // Week 7				
 				if (SONG.song.toLowerCase() == "stress") {
 					GameOverSubstate.characterName = 'bf-holding-gf-dead';
 
