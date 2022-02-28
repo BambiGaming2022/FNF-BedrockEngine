@@ -567,7 +567,7 @@ class TitleState extends MusicBeatState
 					#end
 				case 8:
 					#if PSYCH_WATERMARKS
-					addMoreText('Gui iago | Luis com S', 15);
+					addMoreText('Gui iago | Luisinh010', 15);
 					addMoreText('Hiro Mizuki | Gazozoz', 15);
 					addMoreText('Stilic | TahirArch | CerBor', 15);
 					#else
