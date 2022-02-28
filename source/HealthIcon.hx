@@ -9,6 +9,7 @@ using StringTools;
 class HealthIcon extends FlxSprite
 {
 	public var sprTracker:FlxSprite;
+
 	private var isOldIcon:Bool = false;
 	private var isSansMom:Bool = false;
 	private var isPlayer:Bool = false;
@@ -32,46 +33,55 @@ class HealthIcon extends FlxSprite
 			setPosition(sprTracker.x + sprTracker.width + 10, sprTracker.y - 30);
 	}
 
-	public function swapOldIcon() {
-		if(isOldIcon = !isOldIcon) changeIcon('bf-old');
-		else changeIcon('bf');
+	public function swapOldIcon()
+	{
+		if (isOldIcon = !isOldIcon)
+			changeIcon('bf-old');
+		else
+			changeIcon('bf');
 	}
 
-	public function swapMomIcon() {
-		if(isSansMom = !isSansMom) changeIcon('sans-mom');
-		else changeIcon('mom');
+	public function swapMomIcon()
+	{
+		if (isSansMom = !isSansMom)
+			changeIcon('sans-mom');
+		else
+			changeIcon('mom');
 	}
 
 	private var iconOffsets:Array<Float> = [0, 0, 0];
+
 	public var int:Int = 3;
 
-	public function changeIcon(char:String) {
+	public function changeIcon(char:String)
+	{
 		if (ClientPrefs.oldIcons)
 		{
 			iconOffsets = [0, 0];
 			int = 2;
 		}
-		if(this.char != char) {
+		if (this.char != char)
+		{
 			var name:String = 'icons/' + char;
 			if (ClientPrefs.oldIcons)
 				name = "icons/old/" + char;
-			if(!Paths.fileExists('images/' + name + '.png', IMAGE)) 
+			if (!Paths.fileExists('images/' + name + '.png', IMAGE))
 			{
-				name = 'icons/icon-' + char; //Older versions of psych engine's support
+				name = 'icons/icon-' + char; // Older versions of psych engine's support
 				if (ClientPrefs.oldIcons)
 					name = "icons/old/icon-" + char;
 			}
 
-			if(!Paths.fileExists('images/' + name + '.png', IMAGE))
-			{	 
-				name = 'icons/icon-face'; //Prevents crash from missing icon
-			 	if (ClientPrefs.oldIcons)
+			if (!Paths.fileExists('images/' + name + '.png', IMAGE))
+			{
+				name = 'icons/icon-face'; // Prevents crash from missing icon
+				if (ClientPrefs.oldIcons)
 					name = "icons/old/icon-face";
 			}
 			var file:Dynamic = Paths.image(name);
 
-			loadGraphic(file); //Load stupidly first for getting the file size
-			loadGraphic(file, true, Math.floor(width / int), Math.floor(height)); //Then load it fr
+			loadGraphic(file); // Load stupidly first for getting the file size
+			loadGraphic(file, true, Math.floor(width / int), Math.floor(height)); // Then load it fr
 			iconOffsets[0] = (width - 150) / 2;
 			iconOffsets[1] = (width - 150) / 2;
 			if (!ClientPrefs.oldIcons)
@@ -82,12 +92,13 @@ class HealthIcon extends FlxSprite
 				animation.add(char, [0, 1], 0, false, isPlayer);
 			else
 				animation.add(char, [0, 1, 2], 0, false, isPlayer);
-			
+
 			animation.play(char);
 			this.char = char;
 
 			antialiasing = ClientPrefs.globalAntialiasing;
-			if(char.endsWith('-pixel')) {
+			if (char.endsWith('-pixel'))
+			{
 				antialiasing = false;
 			}
 		}
@@ -100,7 +111,8 @@ class HealthIcon extends FlxSprite
 		offset.y = iconOffsets[1];
 	}
 
-	public function getCharacter():String {
+	public function getCharacter():String
+	{
 		return char;
 	}
 }

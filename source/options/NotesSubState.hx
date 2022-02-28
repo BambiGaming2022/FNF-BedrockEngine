@@ -47,8 +47,6 @@ class NotesSubState extends MusicBeatSubstate
 
 	var posX = 230;
 
-	var text:FlxText;
-
 	public function new()
 	{
 		super();
@@ -68,9 +66,9 @@ class NotesSubState extends MusicBeatSubstate
 		grpNumbers = new FlxTypedGroup<Alphabet>();
 		add(grpNumbers);
 
-		text = new FlxText(0, FlxG.height- 710, 0, "", 16);
+		var text:FlxText = new FlxText(5, FlxG.height - 25, 0, "", 16);
 		text.setFormat(Paths.font("vcr.ttf"), 18, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		text.text = "Press S to change your note skin";
+		text.text = "Press CONTROL to change your note skin";
 		add(text);
 
 		for (i in 0...ClientPrefs.arrowHSV.length)
@@ -165,6 +163,13 @@ class NotesSubState extends MusicBeatSubstate
 		}
 		else
 		{
+			if (FlxG.keys.justPressed.CONTROL)
+			{
+				var prompt = new NotesPromptSubState();
+				prompt.closeCallback = reloadNotes;
+				openSubState(prompt);
+			}
+
 			if (controls.UI_UP_P)
 			{
 				changeSelection(-shiftMult);
@@ -229,13 +234,6 @@ class NotesSubState extends MusicBeatSubstate
 				}
 				super.update(elapsed);
 				return;
-			}
-
-			if (FlxG.keys.justPressed.S)
-			{
-				var prompt = new NotesPromptSubState();
-				prompt.closeCallback = reloadNotes;
-				openSubState(prompt);
 			}
 		}
 

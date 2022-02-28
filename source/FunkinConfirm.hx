@@ -1,4 +1,5 @@
 package;
+
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.group.FlxSpriteGroup;
@@ -7,6 +8,7 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxAxes;
 import flixel.util.FlxColor;
+
 /**
  * Confirmation window for FNF.
  * Kinda based on @magnumsrtisswag PR to Psych Engine.
@@ -218,7 +220,7 @@ class FunkinConfirm extends FlxSpriteGroup
 	 * In case someone will spam with the bop
 	**/
 	private var isBopStarted:Bool = false;
-	
+
 	/**
 	 * Make dialog moves, like other elements (in credits state)
 	 * @return Did method get throught?
@@ -231,19 +233,31 @@ class FunkinConfirm extends FlxSpriteGroup
 
 		var contentInitialY = _content.y;
 
-		FlxTween.tween(_content, {y: contentInitialY / 1.1}, 0.2, {ease: FlxEase.sineInOut, onComplete: (twn:FlxTween) -> {
-			FlxTween.tween(_content, {y: contentInitialY}, 0.3, {ease: FlxEase.sineOut});
-		}});
+		FlxTween.tween(_content, {y: contentInitialY / 1.1}, 0.2, {
+			ease: FlxEase.sineInOut,
+			onComplete: (twn:FlxTween) ->
+			{
+				FlxTween.tween(_content, {y: contentInitialY}, 0.3, {ease: FlxEase.sineOut});
+			}
+		});
 
 		for (i in 0..._title.lettersArray.length)
 		{
 			var initialLetterAngle:Float = _title.lettersArray[i].angle;
-			FlxTween.angle(_title.lettersArray[i], initialLetterAngle, initialLetterAngle + FlxG.random.int(-10, 10), 0.3, {ease: FlxEase.sineInOut, onComplete: (twn:FlxTween) -> {
-				FlxTween.angle(_title.lettersArray[i], _title.lettersArray[i].angle, initialLetterAngle, 0.5, {ease: FlxEase.sineOut, onComplete: (twn2:FlxTween) -> {
-					if (i == _title.lettersArray.length - 1)
-						isBopStarted = false;
-				}});
-			}});
+			FlxTween.angle(_title.lettersArray[i], initialLetterAngle, initialLetterAngle + FlxG.random.int(-10, 10), 0.3, {
+				ease: FlxEase.sineInOut,
+				onComplete: (twn:FlxTween) ->
+				{
+					FlxTween.angle(_title.lettersArray[i], _title.lettersArray[i].angle, initialLetterAngle, 0.5, {
+						ease: FlxEase.sineOut,
+						onComplete: (twn2:FlxTween) ->
+						{
+							if (i == _title.lettersArray.length - 1)
+								isBopStarted = false;
+						}
+					});
+				}
+			});
 		}
 		return true;
 	}

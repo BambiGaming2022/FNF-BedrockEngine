@@ -6,12 +6,10 @@ import openfl.display.Sprite;
  * ...
  * @author Mathieu Anthoine
  */
-class Layer extends Sprite 
+class Layer extends Sprite
 {
-	
-	public function new() 
+	public function new()
 	{
-		super();		
+		super();
 	}
-	
 }

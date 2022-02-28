@@ -1,8 +1,9 @@
 package animateAtlasPlayer.utils;
 
-class ArrayUtil 
+class ArrayUtil
 {
-
-	public static function CASEINSENSITIVE (pA:String, pB:String) : Int { return pA.toLowerCase() < pB.toLowerCase() ? -1 : 1; }
-	
+	public static function CASEINSENSITIVE(pA:String, pB:String):Int
+	{
+		return pA.toLowerCase() < pB.toLowerCase() ? -1 : 1;
+	}
 }

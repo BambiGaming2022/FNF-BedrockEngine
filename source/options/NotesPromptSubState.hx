@@ -6,63 +6,71 @@ import flixel.FlxSprite;
 
 class NotesPromptSubState extends MusicBeatSubstate
 {
-	var noteSkinList:Array<String> = [];
+	var curSelected:Int = 0;
 
-	var dropDown:FlxUIDropDownMenuCustom;
+	var noteSkins:Array<String> = [];
+
+	var selectText:Alphabet;
 
 	override function create()
 	{
 		super.create();
 
 		BedrockUtil.reloadNoteSkinFiles();
-
 		for (skin in BedrockUtil.noteSkins.keys())
-			noteSkinList.push(skin);
+			noteSkins.push(skin);
 
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.WHITE);
 		bg.alpha = 0.3;
 		add(bg);
 
-		var text:Alphabet = new Alphabet(0, FlxG.height / 3, 'Choose your Noteskin', true);
-		text.screenCenter(X);
-		add(text);
+		var infoText:Alphabet = new Alphabet(0, FlxG.height / 3, 'Choose your Noteskin', true);
+		infoText.screenCenter(X);
+		add(infoText);
 
-		dropDown = new FlxUIDropDownMenuCustom(0, text.y + text.height * 1.5, FlxUIDropDownMenuCustom.makeStrIdLabelArray(noteSkinList, true),
-			function(skin:String)
-			{
-				ClientPrefs.noteSkin = noteSkinList[Std.parseInt(skin)];
-			});
-		dropDown.screenCenter(X);
-		add(dropDown);
+		selectText = new Alphabet(0, 0);
+		selectText.y = infoText.y + selectText.height + 50;
+		add(selectText);
 
-		FlxG.mouse.visible = true;
-	}
-
-	override function close()
-	{
-		FlxG.mouse.visible = false;
-		super.close();
+		changeSelection();
 	}
 
 	override function update(elasped)
 	{
 		super.update(elasped);
 
-		if (!dropDown.dropPanel.visible)
-		{
-			if (controls.ACCEPT)
-			{
-				ClientPrefs.saveSettings();
-				FlxG.sound.play(Paths.sound('confirmMenu'));
-				close();
-			}
+		if (controls.UI_LEFT_P)
+			changeSelection(-1);
+		if (controls.UI_RIGHT_P)
+			changeSelection(1);
 
-			if (controls.BACK)
-			{
-				ClientPrefs.saveSettings();
-				FlxG.sound.play(Paths.sound('cancelMenu'));
-				close();
-			}
+		if (controls.ACCEPT)
+		{
+			ClientPrefs.noteSkin = noteSkins[curSelected];
+			ClientPrefs.saveSettings();
+			FlxG.sound.play(Paths.sound('confirmMenu'));
+			close();
 		}
+
+		if (controls.BACK)
+		{
+			FlxG.sound.play(Paths.sound('cancelMenu'));
+			close();
+		}
+	}
+
+	function changeSelection(change:Int = 0)
+	{
+		curSelected += change;
+
+		if (curSelected < 0)
+			curSelected = noteSkins.length - 1;
+		if (curSelected >= noteSkins.length)
+			curSelected = 0;
+
+		selectText.changeText('< ' + noteSkins[curSelected] + ' >');
+		selectText.screenCenter(X);
+
+		FlxG.sound.play(Paths.sound('scrollMenu'));
 	}
 }

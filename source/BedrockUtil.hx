@@ -17,11 +17,7 @@ typedef NoteSkinFile =
 // Utils for Bedrock Engine
 class BedrockUtil
 {
-	public static var noteSkins:Map<String, String> = [
-		'normal' => 'NOTE_assets',
-		'circle' => 'NOTE_circle',
-		'bar' => 'NOTE_bar'
-	];
+	public static var noteSkins:Map<String, String> = ['normal' => 'NOTE_assets', 'circle' => 'NOTE_circle', 'bar' => 'NOTE_bar'];
 
 	// ayo actual helpers for note shitz????
 	public static function reloadNoteSkinFiles()
