@@ -493,6 +493,7 @@ class TitleState extends MusicBeatState
 		}
 	}
 
+	private var sickBeats:Int = 0; // Basically curBeat but won't be skipped if you hold the tab or resize the screen
 	public static var closedState:Bool = false;
 	override function beatHit()
 	{
@@ -510,17 +511,25 @@ class TitleState extends MusicBeatState
 				gfDance.animation.play('danceLeft');
 		}
 
-		if(!closedState) {
-			switch (curBeat)
+		if (!closedState) // so you might want to edit delays
+		{
+			sickBeats++;
+			switch (sickBeats)
 			{
 				case 1:
+					{
+						FlxG.sound.music.stop();
+						FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
+
+						FlxG.sound.music.fadeIn(5, 0, 0.7);
+					}
+				case 2:
 					#if PSYCH_WATERMARKS
 					createCoolText(['Psych Engine by'], 15);
 					#else
 					createCoolText(['ninjamuffin99', 'phantomArcade', 'kawaisprite', 'evilsk8er']);
 					#end
-				// credTextShit.visible = true;
-				case 3:
+				case 4:
 					#if PSYCH_WATERMARKS
 					addMoreText('Shadow Mario', 15);
 					addMoreText('RiverOaken', 15);
@@ -528,51 +537,40 @@ class TitleState extends MusicBeatState
 					#else
 					addMoreText('present');
 					#end
-				// credTextShit.text += '\npresent...';
-				// credTextShit.addText();
-				case 4:
-					deleteCoolText();
-				// credTextShit.visible = false;
-				// credTextShit.text = 'In association \nwith';
-				// credTextShit.screenCenter();
 				case 5:
+					deleteCoolText();
+				case 6:
 					#if PSYCH_WATERMARKS
-					createCoolText(['Not associated', 'with'], -40);
+					createCoolText(['Bedrock Engine by'], -40);
 					#else
 					createCoolText(['In association', 'with'], -40);
 					#end
-				case 7:
-					addMoreText('newgrounds', -40);
-					ngSpr.visible = true;
-				// credTextShit.text += '\nNewgrounds';
 				case 8:
+					#if PSYCH_WATERMARKS
+					addMoreText('Gui iago | Luis com S', 15);
+					addMoreText('Hiro Mizuki | Gazozoz', 15);
+					addMoreText('Stilic | TahirArch | CerBor', 15);
+					#else
+					addMoreText('Newgrounds')
+					ngSpr.visible = true;
+					#end
+				case 9:
 					deleteCoolText();
 					ngSpr.visible = false;
-				// credTextShit.visible = false;
-
-				// credTextShit.text = 'Shoutouts Tom Fulp';
-				// credTextShit.screenCenter();
-				case 9:
+				case 10:
 					createCoolText([curWacky[0]]);
-				// credTextShit.visible = true;
-				case 11:
-					addMoreText(curWacky[1]);
-				// credTextShit.text += '\nlmao';
 				case 12:
-					deleteCoolText();
-				// credTextShit.visible = false;
-				// credTextShit.text = "Friday";
-				// credTextShit.screenCenter();
+					addMoreText(curWacky[1]);
 				case 13:
-					addMoreText('Friday');
-				// credTextShit.visible = true;
+					deleteCoolText();
 				case 14:
-					addMoreText('Night');
-				// credTextShit.text += '\nNight';
+					addMoreText('Friday');
 				case 15:
-					addMoreText('Funkin'); // credTextShit.text += '\nFunkin';
-
+					addMoreText('Night');
 				case 16:
+					addMoreText('Funkin');
+
+				case 17:
 					skipIntro();
 			}
 		}
