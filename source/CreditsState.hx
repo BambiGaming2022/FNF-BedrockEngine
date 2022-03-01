@@ -119,14 +119,6 @@ class CreditsState extends MusicBeatState
 				'https://github.com/CerBor',
 				'C952E0'
 			],
-			['Former Bedrock Engine Members']
-			[
-				'TahirArch',
-				'lazyb', //placeholder
-				'Ex-Programmer of Bedrock Engine.',
-				'https://github.com/TahirArch',
-				'FF873C'
-			],
 			[''],
 			['Bedrock Contributors'],
 			[
@@ -177,6 +169,15 @@ class CreditsState extends MusicBeatState
 				'Combo Offset Song',
 				'https://twitter.com/Lazy_Weeddy_boy',
 				'FF6200'
+			],
+			[''],
+			['Former Bedrock Engine Members'],
+			[
+				'TahirArch',
+				'lazyb', //placeholder
+				'Ex-Programmer of Bedrock Engine.',
+				'https://github.com/TahirArch',
+				'FF873C'
 			],
 			[''],
 			['Original PRs'],
