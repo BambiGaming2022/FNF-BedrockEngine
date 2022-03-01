@@ -354,6 +354,23 @@ class AttachedAchievement extends FlxSprite
 		this.tag = tag;
 		reloadAchievementImage();
 	}
+	
+	public function forget():Bool
+	{
+		var willItWork:Bool = Achievements.isAchievementUnlocked(tag);
+		if (willItWork)
+		{
+			if (FlxG.save.data.achievementsMap != null)
+			{
+				var savedStuff:Map<String, Bool> = FlxG.save.data.achievementsMap;
+				if (savedStuff.exists(tag))
+					savedStuff.remove(tag);
+				FlxG.save.data.achievementsMap = savedStuff;
+				loadGraphic(Paths.image('lockedachievement'));
+			}
+		}
+		return willItWork;
+	}
 
 	public function reloadAchievementImage()
 	{
@@ -400,6 +417,7 @@ class AchievementObject extends FlxSpriteGroup
 	public var onFinish:Void->Void = null;
 
 	var alphaTween:FlxTween;
+	var rotationTween:FlxTween;
 
 	public function new(name:String, ?camera:FlxCamera = null)
 	{
@@ -470,7 +488,13 @@ class AchievementObject extends FlxSpriteGroup
 		achievementText.cameras = cam;
 		achievementIcon.cameras = cam;
 		alphaTween = FlxTween.tween(this, {alpha: 1}, 0.5, {
-			onComplete: function(twn:FlxTween)
+			onStart: function (twn:FlxTween)
+			{
+				rotationTween = FlxTween.angle(achievementIcon, achievementIcon.angle, achievementIcon.angle + 720, 2.0, {ease: FlxEase.quartOut, onComplete: function (twn:FlxTween)
+				{
+					rotationTween = null;
+				}});
+			}, onComplete: function (twn:FlxTween)
 			{
 				alphaTween = FlxTween.tween(this, {alpha: 0}, 0.5, {
 					startDelay: 2.5,
@@ -482,8 +506,7 @@ class AchievementObject extends FlxSpriteGroup
 							onFinish();
 					}
 				});
-			}
-		});
+		}});
 	}
 
 	override function destroy()
@@ -491,6 +514,10 @@ class AchievementObject extends FlxSpriteGroup
 		if (alphaTween != null)
 		{
 			alphaTween.cancel();
+		}
+		if (rotationTween != null)
+		{
+			rotationTween.cancel();
 		}
 		super.destroy();
 	}

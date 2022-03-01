@@ -77,6 +77,13 @@ class AchievementsMenuState extends MusicBeatState
 		descText.scrollFactor.set();
 		descText.borderSize = 2.4;
 		add(descText);
+		
+		var resetText:FlxText = new FlxText(0, 680, FlxG.width, "Press R to reset achievement", 12);
+		resetText.borderSize = 5;
+		resetText.setFormat(Paths.font("vcr.ttf"), 28, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		resetText.scrollFactor.set();
+		add(resetText);
+		
 		changeSelection();
 
 		super.create();
@@ -93,6 +100,14 @@ class AchievementsMenuState extends MusicBeatState
 		if (controls.UI_DOWN_P)
 		{
 			changeSelection(1);
+		}
+		
+		if(controls.RESET) {
+			if (achievementArray[curSelected].forget())
+			{
+				grpOptions.members[curSelected].changeText('?');
+				FlxG.sound.play(Paths.sound('confirmMenu'));
+			}
 		}
 
 		if (controls.BACK)

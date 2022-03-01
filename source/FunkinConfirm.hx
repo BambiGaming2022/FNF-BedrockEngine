@@ -227,7 +227,7 @@ class FunkinConfirm extends FlxSpriteGroup
 	**/
 	public function bop():Bool
 	{
-		if (isBopStarted)
+		if (isBopStarted || _title.lettersArray[_title.lettersArray.length - 1].angle != 0)
 			return false;
 		isBopStarted = true;
 
