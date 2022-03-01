@@ -2540,6 +2540,9 @@ class PlayState extends MusicBeatState
 
 	public var separator:String = ' | ';
 
+	if (ClientPrefs.ratingSystem == 'Forever' || ClientPrefs.ratingSystem == 'Bedrock')
+		separator = ' - ';
+
 	override public function update(elapsed:Float)
 	{
 		if (FlxG.keys.justPressed.NINE)
