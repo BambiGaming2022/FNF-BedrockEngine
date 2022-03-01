@@ -355,9 +355,10 @@ class AttachedAchievement extends FlxSprite
 		reloadAchievementImage();
 	}
 	
-	public function forget()
+	public function forget():Bool
 	{
-		if (Achievements.isAchievementUnlocked(tag))
+		var willItWork:Bool = Achievements.isAchievementUnlocked(tag);
+		if (willItWork)
 		{
 			if (FlxG.save.data.achievementsMap != null)
 			{
@@ -368,6 +369,7 @@ class AttachedAchievement extends FlxSprite
 				loadGraphic(Paths.image('lockedachievement'));
 			}
 		}
+		return willItWork;
 	}
 
 	public function reloadAchievementImage()
