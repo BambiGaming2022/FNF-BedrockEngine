@@ -103,8 +103,11 @@ class AchievementsMenuState extends MusicBeatState
 		}
 		
 		if(controls.RESET) {
-			achievementArray[curSelected].forget();
-			grpOptions.members[curSelected].changeText('?');
+			if (achievementArray[curSelected].forget())
+			{
+				grpOptions.members[curSelected].changeText('?');
+				FlxG.sound.play(Paths.sound('confirmMenu'));
+			}
 		}
 
 		if (controls.BACK)
