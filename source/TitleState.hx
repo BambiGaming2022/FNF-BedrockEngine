@@ -599,7 +599,7 @@ class TitleState extends MusicBeatState
 					#if PSYCH_WATERMARKS
 					addMoreText('Gui iago | Luisinh010', 15);
 					addMoreText('Hiro Mizuki | Gazozoz', 15);
-					addMoreText('Stilic | TahirArch | CerBor', 15);
+					addMoreText('Stilic | CerBor', 15);
 					#else
 					addMoreText('Newgrounds') ngSpr.visible = true;
 					#end
