@@ -119,6 +119,14 @@ class CreditsState extends MusicBeatState
 				'https://github.com/CerBor',
 				'C952E0'
 			],
+			['Former Bedrock Engine Members']
+			[
+				'TahirArch',
+				'lazyb', //placeholder
+				'Ex-Programmer of Bedrock Engine.',
+				'https://github.com/TahirArch',
+				'FF873C'
+			],
 			[''],
 			['Bedrock Contributors'],
 			[
@@ -283,7 +291,7 @@ class CreditsState extends MusicBeatState
 				'https://twitter.com/bbsub3',
 				'4494E6'
 			],
-			['Former Engine Members'],
+			['Former Psych Engine Members'],
 			[
 				'bb-panzu',
 				'bb-panzu',
@@ -292,7 +300,7 @@ class CreditsState extends MusicBeatState
 				'389A58'
 			],
 			[''],
-			['Engine Contributors'],
+			['Psych Engine Contributors'],
 			[
 				'SqirraRNG',
 				'gedehari',
