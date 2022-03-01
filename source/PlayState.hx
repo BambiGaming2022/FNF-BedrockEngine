@@ -2538,7 +2538,7 @@ class PlayState extends MusicBeatState
 	var canPause:Bool = true;
 	var limoSpeed:Float = 0;
 
-	public var divider:String = ' // ';
+	public var separator:String = ' | ';
 
 	override public function update(elapsed:Float)
 	{
@@ -2712,15 +2712,20 @@ class PlayState extends MusicBeatState
 
 		if (!cpuControlled)
 		{
+			var accuracyTxt:String;
+			accuracyTxt = 'Accuracy:';
+
+			if (ClientPrefs.ratingSystem == 'Andromeda')
+				accuracyTxt = 'Grade Points:';
 			scoreTxt.text = 'Score: ${songScore}';
-			scoreTxt.text += divider + 'Accuracy: ${Highscore.floorDecimal(ratingPercent * 100, 2)}%';
+			scoreTxt.text += separator + '${accuracyTxt} ${Highscore.floorDecimal(ratingPercent * 100, 2)}%';
 
 			if (ratingFC == "" || songMisses > 0)
 				scoreTxt.text += '';
 			else
 				scoreTxt.text += ' [' + ratingFC + ']';
 
-			scoreTxt.text += divider + 'Misses: ${songMisses}';
+			scoreTxt.text += separator + 'Misses: ${songMisses}';
 
 			// this is dumb but it's for consistency
 			var rankTxtType:String;
@@ -2734,25 +2739,23 @@ class PlayState extends MusicBeatState
 			{
 				rankTxtType = 'Rank:';
 			}
-			else if (ClientPrefs.ratingSystem == 'Andromeda')
+			else if (ClientPrefs.ratingSystem == 'Andromeda' || ClientPrefs.ratingSystem == 'Etterna' || ClientPrefs.ratingSystem == 'Mania')
 			{
-				rankTxtType = 'Grade:';
-			}
-			else if (ClientPrefs.ratingSystem == 'Etterna' || ClientPrefs.ratingSystem == 'Mania')
-			{
-				rankTxtType = '';
+				rankTxtType = ' |';
 			}
 
-			if (ClientPrefs.ratingSystem == 'Psych' && ratingFC == '')
-				scoreTxt.text += divider + '${rankTxtType} ?';
+			if (ClientPrefs.ratingSystem == 'Andromeda' || ClientPrefs.ratingSystem == 'Etterna' || ClientPrefs.ratingSystem == 'Mania')
+				scoreTxt.text += '${rankTxtType} ${ratingName}';
+			else if (ClientPrefs.ratingSystem == 'Psych' && ratingFC == '')
+				scoreTxt.text += separator + '${rankTxtType} ?';
 			else
-				scoreTxt.text += divider + '${rankTxtType} ${ratingName}';
+				scoreTxt.text += separator + '${rankTxtType} ${ratingName}';
 
 			if (ClientPrefs.ratingSystem == "None")
-				scoreTxt.text = 'Score: ${songScore}' + divider + 'Misses: ${songMisses}';
+				scoreTxt.text = 'Score: ${songScore}' + separator + 'Misses: ${songMisses}';
 		}
 		else
-			scoreTxt.text = 'Score: ${botSong} ${divider} Misses: ${songMisses}';
+			scoreTxt.text = 'Score: ${botSong} ${separator} Misses: ${songMisses}';
 
 		if (botplayTxt.visible)
 		{
