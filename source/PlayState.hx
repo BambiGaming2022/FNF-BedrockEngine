@@ -1231,7 +1231,7 @@ class PlayState extends MusicBeatState
 		reloadHealthBarColors();
 
 		scoreTxt = new FlxText(0, healthBarBG.y + 40, FlxG.width, "", 20);
-		scoreTxt.setFormat(Paths.font("vcr.ttf"), 18, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		scoreTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		scoreTxt.scrollFactor.set();
 		scoreTxt.visible = !ClientPrefs.hideHud;
 
@@ -2540,9 +2540,6 @@ class PlayState extends MusicBeatState
 
 	public var separator:String = ' | ';
 
-	if (ClientPrefs.ratingSystem == 'Forever' || ClientPrefs.ratingSystem == 'Bedrock')
-		separator = ' - ';
-
 	override public function update(elapsed:Float)
 	{
 		if (FlxG.keys.justPressed.NINE)
@@ -2736,10 +2733,12 @@ class PlayState extends MusicBeatState
 
 			if (ClientPrefs.ratingSystem == 'Psych')
 			{
+				scoreTxt.size = 20;
 				rankTxtType = 'Rating:';
 			}
 			else if (ClientPrefs.ratingSystem == 'Bedrock' || ClientPrefs.ratingSystem == 'Forever')
 			{
+				separator = ' - ';
 				rankTxtType = 'Rank:';
 			}
 			else if (ClientPrefs.ratingSystem == 'Andromeda' || ClientPrefs.ratingSystem == 'Etterna' || ClientPrefs.ratingSystem == 'Mania')
