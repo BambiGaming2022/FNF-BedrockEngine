@@ -56,6 +56,7 @@ class Main extends Sprite
 		}
 
 		setupGame();
+		options.GraphicsSettingsSubState.onChangeFilters();
 	}
 
 	private function setupGame():Void

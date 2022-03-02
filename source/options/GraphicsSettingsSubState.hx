@@ -26,6 +26,8 @@ import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
 import Controls;
 import openfl.Lib;
+import openfl.filters.ColorMatrixFilter;
+import openfl.filters.BitmapFilter;
 
 using StringTools;
 
@@ -67,17 +69,14 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 
 		#if desktop // only desktop can use these shits
 		var option:Option = new Option('Screen Resolution', 'Select your preferred screen resolution.\n(Goes from 240p to 8K)', 'screenRes', 'string',
-			'1280x720', [
-				'426x240',
-				'640x360',
-				'854x480',
-				'1280x720',
-				'1920x1080',
-				'3840x2160',
-				'7680x4320'
-			]);
+			'1280x720', ['426x240', '640x360', '854x480', '1280x720', '1920x1080', '3840x2160', '7680x4320']);
 		addOption(option);
 		option.onChange = onChangeScreenRes;
+
+		var option:Option = new Option('Filter:', "Choose a filter for colorblindness.", 'colorFilter', 'string', 'None',
+			['Deuteranopia', 'Protanopia', 'Tritanopia', 'None']);
+		option.onChange = onChangeFilters;
+		addOption(option);
 
 		var option:Option = new Option('Fullscreen', 'This option will activate the Flixel\'s fullscreen.', 'fullscreen', 'bool', false);
 		addOption(option);
@@ -137,4 +136,48 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 			FlxG.updateFramerate = ClientPrefs.framerate;
 		}
 	}
+
+	public static function onChangeFilters() //got from a FNF PR, link: https://github.com/ninjamuffin99/Funkin/pull/567/
+    {
+        var matrix:Array<Float> = [];
+        var filters:Array<BitmapFilter> = [];
+        
+        switch (ClientPrefs.colorFilter)
+        {
+            case 'None':
+                matrix = [
+                    1,    0,    0,   0,   0,
+                    0,    1,    0,   0,   0,
+                    0,    0,    1,   0,   0,
+                    0,    0,    0,   1,   0,
+                ];
+
+            case 'Deuteranopia':
+                matrix = [
+                    0.43, 0.72, -.15, 0, 0,
+                    0.34, 0.57, 0.09, 0, 0,
+                    -.02, 0.03,    1, 0, 0,
+                        0,    0,    0, 1, 0,
+                ];
+
+            case 'Protanopia':
+                matrix = [
+                    0.20, 0.99, -.19, 0, 0,
+                    0.16, 0.79, 0.04, 0, 0,
+                    0.01, -.01,    1, 0, 0,
+                        0,    0,    0, 1, 0,
+                ];
+
+            case 'Tritanopia':
+                matrix = [
+                    0.97, 0.11, -.08, 0, 0,
+                    0.02, 0.82, 0.16, 0, 0,
+                    0.06, 0.88, 0.18, 0, 0,
+                            0,    0,    0, 1, 0,
+                ];
+        }
+
+        filters.push(new ColorMatrixFilter(matrix));
+        FlxG.game.setFilters(filters);
+    }
 }
