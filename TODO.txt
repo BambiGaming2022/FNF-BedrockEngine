@@ -1,0 +1,5 @@
+- Find the cause of the Memory Leak and fix it
+- Move everything over to the main repository and (finally) finish the engine
+
+why? well, mostly because I lost interest on the engine, aside from the fact that
+pretty much every feature can be replicated on Psych Engine with Luas
