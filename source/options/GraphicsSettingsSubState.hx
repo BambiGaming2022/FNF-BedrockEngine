@@ -112,7 +112,7 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 
 	function onChangeFullscreen() // i hate to make a 1 line function
 	{
-		FlxG.fullscreen;
+		FlxG.fullscreen = ClientPrefs.fullscreen;
 	}
 
 	function onChangeScreenRes()
