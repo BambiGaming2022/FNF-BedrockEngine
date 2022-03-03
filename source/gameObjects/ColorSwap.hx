@@ -3,7 +3,8 @@ package gameObjects;
 import flixel.FlxG;
 import flixel.system.FlxAssets.FlxShader;
 
-class ColorSwap {
+class ColorSwap
+{
 	public var shader(default, null):ColorSwapShader = new ColorSwapShader();
 	public var hue(default, set):Float = 0;
 	public var saturation(default, set):Float = 0;
@@ -37,7 +38,8 @@ class ColorSwap {
 	}
 }
 
-class ColorSwapShader extends FlxShader {
+class ColorSwapShader extends FlxShader
+{
 	@:glFragmentSource('
 		varying float openfl_Alphav;
 		varying vec4 openfl_ColorMultiplierv;
@@ -212,7 +214,6 @@ class ColorSwapShader extends FlxShader {
 				openfl_ColorMultiplierv = colorMultiplier;
 			}
 		}')
-
 	public function new()
 	{
 		super();

@@ -18,6 +18,7 @@ class BackgroundDancer extends FlxSprite
 		animation.addByIndices('danceRight', 'bg dancer sketch PINK', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
 		animation.play('danceLeft');
 		antialiasing = ClientPrefs.globalAntialiasing;
+		alpha = ClientPrefs.bgOpacity;
 	}
 
 	var danceDir:Bool = false;
