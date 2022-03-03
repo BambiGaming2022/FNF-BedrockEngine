@@ -30,8 +30,6 @@ typedef AchievementFile =
 class Achievements
 {
 	public static var achievementShits:Array<Dynamic> = [
-		// Name, Description, Achievement save tag, Unlocks after, Hidden achievement
-		// Set unlock after to "null" if it doesnt unlock after a week!!
 		[
 			"Freaky on a Friday Night",
 			"Play on a Friday... Night.",
@@ -39,13 +37,15 @@ class Achievements
 			null,
 			true
 		],
+		//I recommend using this achievement as an example to make other achivements
 		[
-			"She Calls Me Daddy Too",
-			"Beat Week 1 on Hard with no Misses.",
-			'week1_nomiss',
-			'week1',
-			false
+			"She Calls Me Daddy Too", //Name
+			"Beat Week 1 on Hard with no Misses.", //Description
+			'week1_nomiss', //Achievement save tag
+			'week1', //Unlocks after
+			false //Hidden achievement
 		],
+		// Set unlock after to "null" if it doesnt unlock after a week!!
 		[
 			"No More Tricks",
 			"Beat Week 2 on Hard with no Misses.",
@@ -86,7 +86,7 @@ class Achievements
 			"Beat Week 7 on Hard with no Misses.",
 			'week7_nomiss',
 			'week7',
-			false
+			true
 		],
 		[
 			"What a Funkin' Disaster!",

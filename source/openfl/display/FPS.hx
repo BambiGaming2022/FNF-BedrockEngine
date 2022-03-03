@@ -12,6 +12,7 @@ import openfl.display._internal.stats.DrawCallContext;
 #if flash
 import openfl.Lib;
 #end
+
 #if openfl
 import openfl.system.System;
 #end
@@ -45,7 +46,7 @@ class FPS extends TextField
 		currentFPS = 0;
 		selectable = false;
 		mouseEnabled = false;
-		defaultTextFormat = new TextFormat("VCR OSD Mono", 14, color);
+		defaultTextFormat = new TextFormat("_sans", 14, color);
 		autoSize = LEFT;
 		multiline = true;
 		text = "FPS: ";
@@ -77,14 +78,13 @@ class FPS extends TextField
 
 		var currentCount = times.length;
 		currentFPS = Math.round((currentCount + cacheCount) / 2);
-		if (currentFPS > ClientPrefs.framerate)
-			currentFPS = ClientPrefs.framerate;
+		if (currentFPS > ClientPrefs.framerate) currentFPS = ClientPrefs.framerate;
 
 		if (currentCount != cacheCount /*&& visible*/)
 		{
 			text = "FPS: " + currentFPS;
 			var memoryMegas:Float = 0;
-
+			
 			#if openfl
 			memoryMegas = Math.abs(FlxMath.roundDecimal(System.totalMemory / 1000000, 1));
 			text += "\nMemory: " + memoryMegas + " MB";

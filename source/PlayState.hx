@@ -329,22 +329,6 @@ class PlayState extends MusicBeatState
 	var songDisplay:FlxText;
 	var rpcOpponentText:String;
 
-	// Week 7 Shit
-	var tower:BGSprite;
-	var tankRolling:BGSprite;
-	var tankmanRun:FlxTypedGroup<TankmenBG>;
-	var tankBop1:BGSprite;
-	var tankBop2:BGSprite;
-	var tankBop3:BGSprite;
-	var tankBop4:BGSprite;
-	var tankBop5:BGSprite;
-	var tankBop6:BGSprite;
-	var smokeRight:BGSprite;
-	var smokeLeft:BGSprite;
-
-	var picoStep:Ps;
-	var tankStep:Ts;
-
 	override public function create()
 	{
 		if (ClientPrefs.millisecondColor && !ClientPrefs.milliseconds)
@@ -459,8 +443,6 @@ class PlayState extends MusicBeatState
 					curStage = 'school';
 				case 'thorns':
 					curStage = 'schoolEvil';
-				case 'ugh' | 'guns' | 'stress':
-					curStage = 'tank';
 				default:
 					curStage = 'stage';
 			}
@@ -780,66 +762,6 @@ class PlayState extends MusicBeatState
 					bg.antialiasing = false;
 					add(bg);
 				}
-
-			case 'tank': // Week 7
-				if (SONG.song.toLowerCase() == "stress")
-				{
-					GameOverSubstate.characterName = 'bf-holding-gf-dead';
-
-					picoStep = Json.parse(openfl.utils.Assets.getText(Paths.json('stress/picospeaker')));
-					tankStep = Json.parse(openfl.utils.Assets.getText(Paths.json('stress/tankSpawn')));
-				}
-
-				var sky:BGSprite = new BGSprite('warzone/tankSky', -400, -400, 0, 0);
-				sky.setGraphicSize(Std.int(sky.width * 1.5));
-				add(sky);
-
-				var clouds:BGSprite = new BGSprite('warzone/tankClouds', FlxG.random.int(-700, -100), FlxG.random.int(-20, 20), 0.1, 0.1);
-				clouds.velocity.x = FlxG.random.float(5, 15);
-				clouds.updateHitbox();
-				add(clouds);
-
-				var mountains:BGSprite = new BGSprite('warzone/tankMountains', -300, -20, 0.2, 0.2);
-				mountains.setGraphicSize(Std.int(1.2 * mountains.width));
-				mountains.updateHitbox();
-				add(mountains);
-
-				var buildings:BGSprite = new BGSprite('warzone/tankBuildings', -200, 0, 0.3, 0.3);
-				buildings.setGraphicSize(Std.int(buildings.width * 1.1));
-				buildings.updateHitbox();
-				add(buildings);
-
-				var ruins:BGSprite = new BGSprite('warzone/tankRuins', -200, 0, 0.35, 0.35);
-				ruins.setGraphicSize(Std.int(ruins.width * 1.1));
-				ruins.updateHitbox();
-				add(ruins);
-
-				var smokeLeft:BGSprite = new BGSprite('warzone/smokeLeft', -200, -100, 0.4, 0.4, ['SmokeBlurLeft '], true);
-				add(smokeLeft);
-
-				var smokeRight:BGSprite = new BGSprite('warzone/smokeRight', 1100, -100, 0.4, 0.4, ['SmokeRight '], true);
-				add(smokeRight);
-
-				tower = new BGSprite('warzone/tankWatchtower', 100, 120, 1, 1, ['watchtower gradient color'], true);
-				add(tower);
-
-				tankRolling = new BGSprite('tankRolling', 300, 300, 0.5, 0.5, ['BG tank w lighting'], true);
-				add(tankRolling);
-
-				tankmanRun = new FlxTypedGroup<TankmenBG>();
-				add(tankmanRun);
-
-				var ground:BGSprite = new BGSprite('warzone/tankGround', -420, -150);
-				ground.setGraphicSize(Std.int(ground.width * 1.15));
-				ground.updateHitbox();
-				add(ground);
-
-				tankBop1 = new BGSprite('warzone/tank0', -500, 650, 1.7, 1.5, ['fg tankhead far right'], true);
-				tankBop2 = new BGSprite('warzone/tank1', -300, 750, 2.0, 0.2, ['fg tankhead 5'], true);
-				tankBop3 = new BGSprite('warzone/tank2', 450, 940, 1.5, 1.5, ['foreground man 3'], true);
-				tankBop4 = new BGSprite('warzone/tank3', 1300, 1200, 3.5, 2.5, ['fg tankhead 4'], true);
-				tankBop5 = new BGSprite('warzone/tank4', 1300, 900, 1.5, 1.5, ['fg tankman bobbin 3'], true);
-				tankBop6 = new BGSprite('warzone/tank5', 1620, 700, 1.5, 1.5, ['fg tankhead'], true);
 		}
 
 		if (isPixelStage)
@@ -855,16 +777,6 @@ class PlayState extends MusicBeatState
 
 		add(dadGroup);
 		add(boyfriendGroup);
-
-		if (curStage == 'tank')
-		{
-			add(tankBop1);
-			add(tankBop2);
-			add(tankBop3);
-			add(tankBop4);
-			add(tankBop5);
-			add(tankBop6);
-		}
 
 		if (curStage == 'spooky')
 		{
@@ -1423,26 +1335,6 @@ class PlayState extends MusicBeatState
 					if (daSong == 'roses')
 						FlxG.sound.play(Paths.sound('ANGRY'));
 					schoolIntro(doof);
-
-				case 'ugh':
-					if (ClientPrefs.lowQuality)
-						startVideo(Paths.getPreloadPath('week7/videos/ugh'));
-					else
-					{
-						dadGroup.visible = false;
-
-						var assets:AssetManager = new AssetManager();
-						assets.enqueue('assets/images/spritemaps/skewTest');
-						assets.loadQueue(Cutscenezz.instance.start);
-
-						FlxG.sound.playMusic(Paths.music('DISTORTO', 'week7'));
-						FlxG.sound.play(Paths.sound('wellWellWell', 'week7'));
-					}
-
-				case 'guns':
-					startVideo(Paths.getPreloadPath('week7/videos/guns'));
-				case 'stress':
-					startVideo(Paths.getPreloadPath('week7/videos/stress'));
 
 				default:
 					startCountdown();
@@ -2686,8 +2578,6 @@ class PlayState extends MusicBeatState
 						heyTimer = 0;
 					}
 				}
-			case 'tank':
-				moveTank();
 		}
 
 		if (!inCutscene)
@@ -4582,20 +4472,12 @@ class PlayState extends MusicBeatState
 					startAchievement(achieve);
 				}
 				#end
-			}
-			else if (!opponentChart
-				&& boyfriend.holdTimer > Conductor.stepCrochet * 0.001 * boyfriend.singDuration
-				&& boyfriend.animation.curAnim.name.startsWith('sing')
-				&& !boyfriend.animation.curAnim.name.endsWith('miss')
-				|| opponentChart
-				&& boyfriend.holdTimer > Conductor.stepCrochet * 0.002 * boyfriend.singDuration)
+			} else if (boyfriend.holdTimer > Conductor.stepCrochet * 0.001 * boyfriend.singDuration && boyfriend.animation.curAnim.name.startsWith('sing')
+			&& !boyfriend.animation.curAnim.name.endsWith('miss'))
 				boyfriend.dance();
 
-			if (controlHoldArray.contains(true) && !endingSong && opponentChart)
-			{/*bruh*/}
-			else if (dad.holdTimer > Conductor.stepCrochet * 0.001 * dad.singDuration
-				&& dad.animation.curAnim.name.startsWith('sing')
-				&& !dad.animation.curAnim.name.endsWith('miss'))
+			if (controlHoldArray.contains(true) && !endingSong && opponentChart) {/*bruh*/} else if (dad.holdTimer > Conductor.stepCrochet * 0.001 * dad.singDuration && dad.animation.curAnim.name.startsWith('sing')
+			&& !dad.animation.curAnim.name.endsWith('miss'))
 				dad.dance();
 		}
 
@@ -5216,48 +5098,6 @@ class PlayState extends MusicBeatState
 			resyncVocals();
 		}
 
-		if (SONG.song.toLowerCase() == 'stress')
-		{
-			// RIGHT
-			for (i in 0...picoStep.right.length)
-			{
-				if (curStep == picoStep.right[i])
-				{
-					gf.playAnim('shoot' + FlxG.random.int(1, 2), true);
-					// var tankmanRunner:TankmenBG = new TankmenBG();
-				}
-			}
-			// LEFT
-			for (i in 0...picoStep.left.length)
-			{
-				if (curStep == picoStep.left[i])
-				{
-					gf.playAnim('shoot' + FlxG.random.int(3, 4), true);
-				}
-			}
-			// Left tankspawn
-			for (i in 0...tankStep.left.length)
-			{
-				if (curStep == tankStep.left[i])
-				{
-					var tankmanRunner:TankmenBG = new TankmenBG();
-					tankmanRunner.resetShit(FlxG.random.int(630, 730) * -1, 255, true, 1, 1.5);
-					tankmanRun.add(tankmanRunner);
-				}
-			}
-
-			// Right spawn
-			for (i in 0...tankStep.right.length)
-			{
-				if (curStep == tankStep.right[i])
-				{
-					var tankmanRunner:TankmenBG = new TankmenBG();
-					tankmanRunner.resetShit(FlxG.random.int(1500, 1700) * 1, 275, false, 1, 1.5);
-					tankmanRun.add(tankmanRunner);
-				}
-			}
-		}
-
 		if (curStep == lastStepHit)
 		{
 			return;
@@ -5410,15 +5250,6 @@ class PlayState extends MusicBeatState
 					trainCooldown = FlxG.random.int(-4, 0);
 					trainStart();
 				}
-
-			case "tank":
-				tankBop1.animation.play('bop', true);
-				tankBop2.animation.play('bop', true);
-				tankBop3.animation.play('bop', true);
-				tankBop4.animation.play('bop', true);
-				tankBop5.animation.play('bop', true);
-				tankBop6.animation.play('bop', true);
-				tower.animation.play('idle', true);
 		}
 
 		if (curStage == 'spooky' && FlxG.random.bool(10) && curBeat > lightningStrikeBeat + lightningOffset)
@@ -5700,26 +5531,6 @@ class PlayState extends MusicBeatState
 	}
 	#end
 
-	var tankX = 400;
-	var tankAngle:Float = FlxG.random.int(-90, 45);
-	var tankSpeed:Float = FlxG.random.float(5, 7);
-
-	function moveTank()
-	{
-		tankAngle += FlxG.elapsed * tankSpeed;
-		tankRolling.angle = tankAngle - 90 + 15;
-		tankRolling.x = tankX + 1500 * FlxMath.fastCos(FlxAngle.asRadians(tankAngle + 180));
-		tankRolling.y = 1300 + 1100 * FlxMath.fastSin(FlxAngle.asRadians(tankAngle + 180));
-	}
-
-	function again()
-	{
-		tankRolling.x = 300;
-		tankRolling.y = 300;
-		tankRolling.angle = tankAngle - 90 + 15;
-		moveTank();
-	}
-
 	var curLight:Int = 0;
 	var curLightEvent:Int = 0;
 
@@ -5733,27 +5544,4 @@ class PlayState extends MusicBeatState
 		else
 			return defaultValue;
 	}
-} class Cutscenezz extends Sprite
-{
-	public static var instance:Cutscenezz;
-
-	public function start(assetsMgr:AssetManager):Void
-	{
-		var myAnimation:Animation = assetsMgr.createAnimation('tankman_fnf_lip_sync_back_ta_dave');
-		addChild(myAnimation);
-	}
-}
-
-// picoshoot
-typedef Ps =
-{
-	var right:Array<Int>;
-	var left:Array<Int>;
-}
-
-// tank spawns
-typedef Ts =
-{
-	var right:Array<Int>;
-	var left:Array<Int>;
 }

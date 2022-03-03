@@ -1,96 +1,231 @@
-# Friday Night Funkin' - Psych Engine
-Engine originally used on [Mind Games Mod](https://gamebanana.com/mods/301107), intended to be a fix for the vanilla version's many issues while keeping the casual play aspect of it. Also aiming to be an easier alternative to newbie coders.
+# Friday Night Funkin' - Bedrock Engine!
+> **Remember: this engine should be treated as nothing but a Mod/Fork of Psych Engine**
 
-## Installation:
-You must have [the most up-to-date version of Haxe](https://haxe.org/download/), seriously, stop using 4.1.5, it misses some stuff.
+a fork of Psych Engine which adds a bunch of features from Pull Requests around the Main Branch, and even other forks!
+Credits:
+* [BURGER76920](https://github.com/ShadowMario/FNF-PsychEngine/pull/3891) - Json-editable Menus
+* [CerBor](https://github.com/ShadowMario/FNF-PsychEngine/pull/2896) - Difficulty Drop Down on Chart Menu
+* [HiroMizuki](https://github.com/ShadowMario/FNF-PsychEngine/pull/1792) - Pixel Note Splashes
+* [i-winxd](https://github.com/ShadowMario/FNF-PsychEngine/discussions/2917) - Kade Engine (Complex) Accuracy
+* [lemz1](https://github.com/ShadowMario/FNF-PsychEngine/pull/2770) - Play as Opponent
+* [l1ttleO](https://github.com/l1ttleO/ProjectFNF) - Made ProjectFNF 2.X, Original Hit Sound Code, Miss Sounds Toggle
+* [magnumsrtisswag](https://github.com/ShadowMario/FNF-PsychEngine/pull/3502) - Credits Warning
+* [Starmapo](https://github.com/ShadowMario/FNF-PsychEngine/pull/3428) - Time Signatures
+* [Stilic](https://github.com/ShadowMario/FNF-PsychEngine/pull/1809) - Freeplay Bump, Max Optimization, Menu Animations, Automatic Controller Detection
+* [Verwex](https://github.com/Verwex/Funkin-Mic-d-Up-SC) - made Mic'd Up Engine, Old Winning Icons, Week 6's Winning Icons
+* [XtraXD1](https://github.com/ShadowMario/FNF-PsychEngine/pull/3192) - Show/Hide Weeks temporally + Getting/Setting on Source Code
+* [Yoshubs](https://github.com/Yoshubs/Forever-Engine-Legacy) - made Forever Engine, Main Inspiration
 
-Follow a Friday Night Funkin' source code compilation tutorial, after this you will need to install LuaJIT.
+# Sections:
 
-To install LuaJIT do this: `haxelib git linc_luajit https://github.com/AndreiRudenko/linc_luajit ` on a Command prompt/PowerShell
+* [How to](https://github.com/Gui-iago/FNF-BedrockEngine/blob/main/README.md#how-to-compile-the-game-and-what-is-needed-to-do-so)
+* [Compiling Dependencies](https://github.com/Gui-iago/FNF-BedrockEngine/blob/main/README.md#how-to-compile-the-game-and-what-is-needed-to-do-so)
+* [Terminal Setup & Commands](https://github.com/Gui-iago/FNF-BedrockEngine#terminal-setup--compiling-game)
+* [Features](https://github.com/Gui-iago/FNF-BedrockEngine#current-features)
 
-...Or if you don't want your mod to be able to run .lua scripts, delete the "LUA_ALLOWED" line on Project.xml
+# How to Compile the Game, and what is needed to do so
 
-## Credits:
-* Shadow Mario - Coding
-* RiverOaken - Arts and Animations
-* bbpanzu - Assistant Coding
+> ### Dependencies
 
-### Special Thanks
-* shubs - New Input System
-* SqirraRNG - Chart Editor's Sound Waveform base code
-* iFlicky - Delay/Combo Menu Song Composer + Dialogue Sounds
-* PolybiusProxy - .MP4 Loader Extension
-* Keoiki - Note Splash Animations
-* Smokey - Spritemap Texture Atlas support
-* Cary - OG Resolution code
-* Nebula_Zorua - VCR Shader code
-_____________________________________
+- Git
+- Haxe (LATEST VERSION ONLY, PLEASE, STOP USING 4.1.5!!!!)
+- Visual Studio Community (Windows Only)
 
-# Features
+> ### OPTIONAL Dependencies
 
-## Attractive animated dialogue boxes:
+- Visual Studio Code (for modifying the code itself)
 
-![](https://user-images.githubusercontent.com/44785097/127706669-71cd5cdb-5c2a-4ecc-871b-98a276ae8070.gif)
+> ### Recommended VS Code Extensions
+
+- Lime
+- Bracket Pair Colorizer 2
+- HXCPP Debugger
+- Tabnine
+
+> ### Optional Visual Studio Code Extensions
+
+- Haxe blocks
+- Haxe Checkstyle
+- Haxe JSX
+- Haxe Extension Pack
+- HaxeUI
+- indent-rainbow
+- Lua Extension by keyring
+
+# Compiling Dependencies
+
+### Git & Haxe
+
+Windows and macOS: 
+
+- https://git-scm.com/downloads
+- https://haxe.org/download
+
+macOS with homebrew:
+```
+brew install git
+brew install haxe
+```
+
+Ubuntu based Linux distros:
+```
+sudo add-apt-repository ppa:haxe/releases -y
+sudo apt update
+sudo apt install git haxe -y
+mkdir ~/haxelib && haxelib setup ~/haxelib
+```
+
+Debian based Linux distros:
+```
+sudo apt-get install git haxe -y
+mkdir ~/haxelib && haxelib setup ~/haxelib
+```
+
+Arch based Linux distros:
+```
+sudo pacman -S git haxe
+mkdir ~/haxelib && haxelib setup ~/haxelib
+```
+
+Redhat based Linux distros:
+```
+sudo dnf install git haxe -y
+mkdir ~/haxelib && haxelib setup ~/haxelib
+```
+
+openSuse based Linux distros: 
+```
+sudo zypper install git haxe
+mkdir ~/haxelib && haxelib setup ~/haxelib
+```
+
+### Post installation on all platforms, run
+```
+haxelib setup
+```
+
+### Visual Studio Community
+
+https://my.visualstudio.com/Downloads?q=visual%20studio%202017&wt.mc_id=o~msft~vscom~older-downloads
+
+> ### Visual Studo Community Setup
+
+Once you download and install VS Community, on the "Individual Components" tab, select:
+
+```
+MSVC v142 - VS 2019 C++ x64/x86 build tools
+Windows SDK (10.0.17763.0)
+```
 
 
-## Mod Support
-* Probably one of the main points of this engine, you can code in .lua files outside of the source code, making your own weeks without even messing with the source!
-* Comes with a Mod Organizing/Disabling Menu. 
+Desktop Development with C++
+Near the "Install" button, there's a Drop-Down menu, click on it, Select "Download first, then Install"
+Now wait until it finishes, it is recommended to reboot your PC once it finishes, but it's not needed at all
 
+# Terminal Setup & Compiling Game
 
-## Atleast one change to every week:
-### Week 1:
-  * New Dad Left sing sprite 
-  * Unused stage lights are now used
-### Week 2:
-  * Both BF and Skid & Pump does "Hey!" animations
-  * Thunders does a quick light flash and zooms the camera in slightly
-  * Added a quick transition/cutscene to Monster
-### Week 3:
-  * BF does "Hey!" during Philly Nice
-  * Blammed has a cool new colors flash during that sick part of the song
-### Week 4:
-  * Better hair physics for Mom/Boyfriend (Maybe even slightly better than Week 7's :eyes:)
-  * Henchmen die during all songs. Yeah :(
-### Week 5:
-  * Bottom Boppers and GF does "Hey!" animations during Cocoa and Eggnog
-  * On Winter Horrorland, GF bops her head slower in some parts of the song.
-### Week 6:
-  * On Thorns, the HUD is hidden during the cutscene
-  * Also there's the Background girls being spooky during the "Hey!" parts of the Instrumental
+Windows: Press "Windows + R" and type in "cmd", if you don't like cmd, or you just use something different, open that program instead
+cmd is usually faster, that's why I'm recommending it!
 
-## Cool new Chart Editor changes and countless bug fixes
-![](https://github.com/ShadowMario/FNF-PsychEngine/blob/main/docs/img/chart.png?raw=true)
-* You can now chart "Event" notes, which are bookmarks that trigger specific actions that usually were hardcoded on the vanilla version of the game.
-* Your song's BPM can now have decimal values
-* You can manually adjust a Note's strum time if you're really going for milisecond precision
-* You can change a note's type on the Editor, it comes with two example types:
-  * Alt Animation: Forces an alt animation to play, useful for songs like Ugh/Stress
-  * Hey: Forces a "Hey" animation instead of the base Sing animation, if Boyfriend hits this note, Girlfriend will do a "Hey!" too.
+Linux: press "CTRL + ALT + T" and a Terminal window should open -- although, if you are on linux, you probably know that already
 
-## Multiple editors to assist you in making your own Mod
-![Screenshot_3](https://user-images.githubusercontent.com/44785097/144629914-1fe55999-2f18-4cc1-bc70-afe616d74ae5.png)
-* Working both for Source code modding and Downloaded builds!
+### Type in these commands:
 
-## Story mode menu rework:
-![](https://i.imgur.com/UB2EKpV.png)
-* Added a different BG to every song (less Tutorial)
-* All menu characters are now in individual spritesheets, makes modding it easier.
+```bash
+haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
+haxelib git linc_luajit https://github.com/nebulazorua/linc_luajit.git
+haxelib git hxvm-luajit https://github.com/nebulazorua/hxvm-luajit
+haxelib git faxe https://github.com/uhrobots/faxe
+haxelib git polymod https://github.com/MasterEric/polymod.git
+haxelib git extension-webm https://github.com/KadeDev/extension-webm
+haxelib install lime 7.9.0
+haxelib install openfl
+haxelib install flixel
+haxelib install flixel-tools
+haxelib install flixel-ui
+haxelib install hscript
+haxelib install flixel-addons
+haxelib install actuate
+haxelib run lime setup
+haxelib run lime setup flixel
+haxelib run flixel-tools setup
+```
 
-## Credits menu
-![Screenshot_1](https://user-images.githubusercontent.com/44785097/144632635-f263fb22-b879-4d6b-96d6-865e9562b907.png)
-* You can add a head icon, name, description and a Redirect link for when the player presses Enter while the item is currently selected.
+**_Read Carefully:_** When it prompts for you to do anything (like: setup the lime command, setup flixel tools, etc)
 
-## Awards/Achievements
-* The engine comes with 16 example achievements that you can mess with and learn how it works (Check Achievements.hx and search for "checkForAchievement" on PlayState.hx)
+Compiling test version:
 
-## Options menu:
-* You can change Note colors, Delay and Combo Offset, Controls and Preferences there.
- * On Preferences you can toggle Downscroll, Middlescroll, Anti-Aliasing, Framerate, Low Quality, Note Splashes, Flashing Lights, etc.
+```
+lime test PLATFORM # linux, windows, mac
+```
 
-## Other gameplay features:
-* When the enemy hits a note, their strum note also glows.
-* Lag doesn't impact the camera movement and player icon scaling anymore.
-* Some stuff based on Week 7's changes has been put in (Background colors on Freeplay, Note splashes)
-* You can reset your Score on Freeplay/Story Mode by pressing Reset button.
-* You can listen to a song or adjust Scroll Speed/Damage taken/etc. on Freeplay by pressing Space.
+### for Debug Builds
+
+Append `-debug` at the end of `lime test PLATFORM`
+
+### Visual Studio Code Installation
+
+Windows and Mac: https://code.visualstudio.com/Download
+
+Linux: https://code.visualstudio.com/docs/setup/linux
+* Alternatively, you can use your distro's package manager to install Visual Studio Code
+
+In case you don't want your mod to be able to run .lua scripts, delete the `LUA_ALLOWED` line on `Project.xml`
+
+# Current Features
+
+## All Psych Engine Features!
+Being a [Psych Engine](https://github.com/ShadowMario/FNF-PsychEngine) fork has it's Perks
+
+## Menu Animations and Freeplay Bump
+
+https://user-images.githubusercontent.com/45212377/151045598-7311d0de-2dff-4217-96fa-11cc49cf6c1b.mp4
+
+## Hit Sounds
+
+https://user-images.githubusercontent.com/45212377/151046285-f91d5be4-4041-43ed-be69-9df23acaf2ce.mp4
+
+## Letter Grading System!
+
+![image](https://user-images.githubusercontent.com/45212377/151047810-9bb0c459-8714-41bd-b861-3d90e001ef9e.png)
+
+* SS   100% Accuracy.
+* S+   99% Accuracy.
+* A+   95% Accuracy
+* A    89% Accuracy.
+* B    79% Accuracy.
+* C    69% Accuracy.
+* D    40% Accuracy or below.
+
+* You can also change your Rating System on Options > Gameplay
+
+> ### Full Combo Ratings
+* SFC - Full Combo with at least 1 Sick/Only Sicks
+* GFC - Full Combo with at least 1 Good/Only Goods
+* FC - Full Combo with at least 1 Bad/Only Bads *(only works on Simple Accuracy)*
+
+## Opponent Mode
+
+https://user-images.githubusercontent.com/45212377/151046606-4d1465b8-93da-4b49-95be-c2ea1767513a.mp4
+
+can be enabled on the Gameplay Changers menu
+
+## Custom Note SKins
+
+![image](https://user-images.githubusercontent.com/45212377/156470964-274e388d-8f1f-4520-bc66-aa3e469f614e.png)
+
+* by pressing CTRL on the Note Preferences Menu, you can change your Note Skins, 
+
+## Winning Icons
+
+![image](https://user-images.githubusercontent.com/45212377/151046960-011d0af2-d638-4f30-9169-3e8dee41ba91.png)
+
+Template: ![icon-template](https://user-images.githubusercontent.com/45212377/151059381-3d366efc-65f8-42de-8cb1-dc90f65b1e9f.png)
+
+read the readme.txt file on the settings folder for information on how to disable winning icons
+
+## NOTICE
+This project is officially deprecated, which means that any existing bug or broken feature won't be fixed
+but eh! you can recreate pretty much every feature on regular Psych Engine with luas, just give it a try!
+
+Thanks for Everything!

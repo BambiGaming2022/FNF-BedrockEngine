@@ -92,32 +92,32 @@ class CreditsState extends MusicBeatState
 			// Name - Icon name - Description - Link - BG Color
 			['Bedrock Engine Team'],
 			[
-				'Gui iago',
+				'BeastlyGhost',
 				'gui',
 				'Main Programmer and Publisher of Bedrock Engine',
-				'https://github.com/Gui-iago',
-				'26B65B'
+				'https://github.com/BeastlyGhost',
+				'FFFFFF'
 			],
 			[
 				'Luisinh010',
 				'luis',
 				'Additional Programmer of Bedrock Engine',
 				'https://github.com/Luisinhi010',
-				'DBAC50'
+				'D7A968'
 			],
 			[
 				'Stilic',
 				'stilic',
 				'Additional Programmer of Bedrock Engine.',
 				'https://github.com/Stilic',
-				'FF873C'
+				'FF8C3F'
 			],
 			[
 				'CerBor',
 				'cerbor',
 				'Additional Programmer of Bedrock Engine',
 				'https://github.com/CerBor',
-				'C952E0'
+				'C039ED'
 			],
 			[''],
 			['Bedrock Contributors'],
@@ -126,28 +126,28 @@ class CreditsState extends MusicBeatState
 				'nxtvithor',
 				'Note Skins',
 				'https://twitter.com/NxtVithor',
-				'FF00E4'
+				'FF07D2'
 			],
 			[
 				'Suok',
 				'suok',
 				'Title Screen Logo, Credits Screen Icons',
 				'https://twitter.com/oSuOk3',
-				'ff0062'
+				'FF0062'
 			],
 			[
 				'Gazozoz',
 				'gazozoz',
 				'Camera Movement Code',
 				'https://twitter.com/Gazozoz_',
-				'982f2F'
+				'851A1A'
 			],
 			[
 				'Prynnho',
 				'prynn',
 				'Old Rich Presence Icon Artist',
 				'https://twitter.com/PrynnShilvaru',
-				'4253A2'
+				'3243AC'
 			],
 			[
 				'ShadowBowser',
@@ -161,23 +161,23 @@ class CreditsState extends MusicBeatState
 				'dex',
 				'Main Menu Song, Game Over Song',
 				'https://twitter.com/cachorro_sonico',
-				'58320D'
+				'47250A'
 			],
 			[
 				'LazyBudd',
 				'lazyb',
 				'Combo Offset Song',
 				'https://twitter.com/Lazy_Weeddy_boy',
-				'FF6200'
+				'FF249E'
 			],
 			[''],
 			['Former Bedrock Engine Members'],
 			[
 				'TahirArch',
-				'lazyb', //placeholder
+				'tahir-doll',
 				'Ex-Programmer of Bedrock Engine.',
 				'https://github.com/TahirArch',
-				'FF873C'
+				'FF6200'
 			],
 			[''],
 			['Original PRs'],
@@ -186,35 +186,35 @@ class CreditsState extends MusicBeatState
 				'burger',
 				'Json-editable Menus (Deprecated and Removed from the Engine, still worth a try though)',
 				'https://github.com/ShadowMario/FNF-PsychEngine/pull/3891',
-				'D78B50'
+				'D56D27'
 			],
 			[
 				'HiroMizuki',
 				'hirom',
 				'Pixel Note Splashes',
 				'https://github.com/ShadowMario/FNF-PsychEngine/pull/1792',
-				'31FF7C'
+				'00FF6A'
 			],
 			[
 				'i-winxd',
 				'i-winxd',
 				'Complex Accuracy (Old Lua)',
 				'https://github.com/ShadowMario/FNF-PsychEngine/discussions/2917',
-				'FFA6D2'
+				'FF99FF'
 			],
 			[
 				'lemz1',
 				'lemz1',
 				'Play as Opponent',
 				'https://github.com/ShadowMario/FNF-PsychEngine/pull/2770',
-				'48C7FF'
+				'00D4FF'
 			],
 			[
 				'l1ttleO',
 				'l1ttleO',
 				'OG Hit Sound, Miss Sounds Toggle',
 				'https://github.com/l1ttleO/ProjectFNF',
-				'CBFFEF'
+				'7FE2FF'
 			],
 			[
 				'magnumsrtisswag',
@@ -228,30 +228,21 @@ class CreditsState extends MusicBeatState
 				'starmapo',
 				'Time Signatures on Chart Editor',
 				'https://github.com/ShadowMario/FNF-PsychEngine/pull/3428',
-				'83FF87'
+				'80FF70'
 			],
 			[
 				'XtraXD1',
 				'xtraxd1',
 				'Show/Hide Weeks temporally + Getting/Setting on Source Code',
 				'https://github.com/ShadowMario/FNF-PsychEngine/pull/3192',
-				'91CBFF'
+				'99EAFF'
 			],
 			[
 				'tposejank',
 				'tposejank',
 				'Discord Client ID editable through lua',
 				'https://github.com/ShadowMario/FNF-PsychEngine/pull/3845',
-				'94FF8C'
-			],
-			[''],
-			['Original Haxe Libraries'],
-			[
-				'Gamua',
-				'placeholder',
-				'OpenFL Animate Atlas Player',
-				'https://lib.haxe.org/p/OpenFl-Animate-Atlas-Player/',
-				'31B0D1'
+				'5CFF62'
 			],
 			[''],
 			['Engine Shoutouts'],
@@ -267,7 +258,7 @@ class CreditsState extends MusicBeatState
 				'verwex',
 				'Made Mic´d Up Engine, Old Winning Icons, Original Code for Menu Animations',
 				'https://github.com/Verwex/Funkin-Mic-d-Up-SC',
-				'F3B56B'
+				'6666FF'
 			],
 			[''],
 			['Psych Engine Team'],
