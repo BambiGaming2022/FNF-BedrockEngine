@@ -9,7 +9,6 @@ import lime.utils.Assets;
 import openfl.utils.Assets as OpenFlAssets;
 import haxe.Json;
 import haxe.format.JsonParser;
-import sys.io.File;
 
 using StringTools;
 
@@ -272,7 +271,7 @@ class WeekData
 	public static function loadTheFirstEnabledMod()
 	{
 		Paths.currentModDirectory = '';
-		
+
 		#if MODS_ALLOWED
 		if (FileSystem.exists("modsList.txt"))
 		{
